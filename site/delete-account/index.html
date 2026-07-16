@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--
+  Planur — Delete your account (standalone page). Served at https://theplanur.co.uk/delete-account
+  This URL goes in Google Play Console → Data safety → Data deletion.
+
+  Deletion happens IN THE APP (Profile → Delete account), which is already
+  authenticated — so this page is instructions only. No login/auth on the
+  website (keeps the site cookie-free / auth-free, matching the privacy stance).
+  The in-app button calls the `delete-account` Edge Function, which permanently
+  deletes the account + all personal data via cascade, scrubs invitee PII,
+  deletes the RevenueCat customer, and keeps only a hashed deletion record.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Delete your account — Planur</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%234A7C59'/><text x='16' y='23' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='20' fill='white'>P</text></svg>" />
+<style>
+  @font-face{font-family:'DM Sans';font-style:normal;font-display:swap;font-weight:100 1000;
+    src:url('/fonts/dm-sans-latin-opsz-normal.woff2') format('woff2-variations');
+    unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+  :root{--sage:#4A7C59;--sage-faint:#EBF3EE;--neutral:#F8F9FA;--neutral-mid:#E9ECEF;
+    --text-dark:#1A2B22;--text-mid:#4A5E52;--text-light:#8A9E92;--radius:18px;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text-dark);line-height:1.7;background:#fff;}
+  .topbar{border-bottom:1px solid var(--neutral-mid);}
+  .topbar .inner{max-width:700px;margin:0 auto;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;}
+  .logo{font-size:1.4rem;font-weight:800;color:var(--sage);letter-spacing:-.5px;text-decoration:none;}
+  .back{font-size:.9rem;color:var(--text-mid);text-decoration:none;}
+  .back:hover{color:var(--sage);}
+  .wrap{max-width:700px;margin:0 auto;padding:36px 22px 80px;}
+  h1{font-size:1.8rem;letter-spacing:-.5px;margin:0 0 .15em;}
+  .lead{color:var(--text-light);font-size:.92rem;margin-bottom:1.6em;}
+  h2{font-size:1.1rem;margin:1.7em 0 .4em;}
+  p,li{font-size:.95rem;color:var(--text-mid);}
+  a{color:var(--sage);}
+  ol{padding-left:1.2em;}
+  ol li{margin-bottom:6px;}
+  .steps{background:var(--sage-faint);border-radius:var(--radius);padding:16px 20px 16px 22px;}
+  footer{border-top:1px solid var(--neutral-mid);margin-top:2.5em;padding-top:1.2em;color:var(--text-light);font-size:.82rem;}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="inner">
+  <a class="logo" href="/">Planur</a>
+  <a class="back" href="/privacy">Privacy Policy</a>
+</div></div>
+
+<div class="wrap">
+  <h1>Delete your Planur account</h1>
+  <p class="lead">You can permanently delete your account and all your personal data at any time,
+  from within the Planur app.</p>
+
+  <h2>How to delete your account</h2>
+  <div class="steps">
+    <ol>
+      <li><strong>Open the Planur app</strong> on your phone.<br>
+        <span style="color:var(--text-light);font-size:.88rem;">Don’t have it installed any more? Download Planur
+        from the App Store or Google Play and sign in with the account you want to delete.</span></li>
+      <li>Go to <strong>Profile</strong>.</li>
+      <li>Tap <strong>Delete account</strong> and confirm.</li>
+    </ol>
+  </div>
+  <p>This <strong>permanently and immediately</strong> deletes your account and all associated
+  personal data. It cannot be undone.</p>
+
+  <h2>Can’t access the app?</h2>
+  <p>If you’re unable to install or sign in to the app, contact us via the Contact form on
+  <a href="/">theplanur.co.uk</a> from the email address registered to your account. We’ll verify
+  it’s you and delete your account within 30 days.</p>
+
+  <h2>What gets deleted</h2>
+  <p>Your profile and school setup, timetable, assignments and to-dos, exams, sports fixtures, focus
+  sessions, friends and group-study/team data, your notification token, and your subscription record
+  with our payment provider.</p>
+
+  <h2>What we may keep</h2>
+  <p>Only a one-way <strong>hash</strong> of your email/phone (a deletion record with no readable
+  personal data, so we can confirm a deletion if legally required), and records we are legally required
+  to retain (e.g. billing records held by the app stores), for the minimum period required by law. We
+  also delete or anonymise data from accounts left inactive for 24 months.</p>
+
+  <p>Questions about deletion? Use the Contact form on <a href="/">theplanur.co.uk</a>.</p>
+
+  <footer>© <span id="y"></span> Planur Ltd. <a href="/privacy">Privacy Policy</a>
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script></footer>
+</div>
+
+</body>
+</html>
