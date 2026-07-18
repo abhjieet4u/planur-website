@@ -1,0 +1,5 @@
+# Serve the Android App Links verification file at its required path
+# (/.well-known/assetlinks.json) from a NON-hidden root file, so a drag-and-drop
+# deploy — which silently omits hidden dot-folders — still publishes it.
+# 200 = transparent rewrite (no HTTP redirect), which Android's verifier requires.
+/.well-known/assetlinks.json   /assetlinks.json   200

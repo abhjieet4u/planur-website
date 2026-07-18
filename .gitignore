@@ -8,3 +8,7 @@
 # Logs / deps (in case tooling is added later)
 *.log
 node_modules/
+
+# Netlify drag-and-drop deploy artifact
+site.zip
+*.zip
