@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!--
+  Planur for Tutors — browser sign-in, holding page.
+  Served at https://theplanur.co.uk/tutors/login
+
+  WHY THIS PAGE EXISTS
+  Every "Tutor log in" link on the site points HERE, not at
+  https://tutor.theplanur.co.uk. That subdomain has no DNS record yet, so linking
+  straight to it gives a browser-level "server not found" — a page we cannot
+  theme, cannot explain and cannot redirect. Pointing at our own path means we
+  control what a tutor sees, and flipping it later is one line.
+
+  ── WHEN THE TUTOR WEB APP GOES LIVE, do these three things ──────────────────
+  1. Add to site/_redirects (it already has the line, commented out):
+         /tutors/login   https://tutor.theplanur.co.uk   302
+     That takes over before this file is ever served, so nothing here needs
+     deleting.
+  2. Put the browser claims back on /tutors — the hero fact, the "Phone or
+     laptop" card — and in the /support FAQ. They were softened to "coming"
+     precisely because this page exists; see docs/tutor-web-deploy.md.
+  3. Delete this comment's step 2 once done, so the next person isn't confused.
+
+  Until then the page must NOT imply browser access works today.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tutor sign-in — coming to your browser | Planur</title>
+<meta name="description" content="Signing in to Planur for Tutors from a browser is on its way. Today you run your practice from the app." />
+<link rel="canonical" href="https://theplanur.co.uk/tutors/login" />
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%234A7C59'/><text x='16' y='23' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='20' fill='white'>P</text></svg>" />
+<script>document.documentElement.className += ' js';</script>
+<link rel="stylesheet" href="/assets/planur.css?v=20260819" />
+<style>
+  body{min-height:100vh;display:flex;flex-direction:column;
+    background:linear-gradient(160deg,#fff 0%,var(--mint) 60%,var(--lilac) 100%);}
+  .wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:56px 22px;}
+  .panel{max-width:620px;}
+  .badge{display:inline-flex;align-items:center;gap:8px;background:#fff;
+    border:1px solid rgba(181,130,14,.28);border-radius:var(--radius-pill);padding:6px 15px 6px 12px;
+    font-size:.8rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+    color:var(--amber);box-shadow:var(--shadow-sm);margin-bottom:22px;}
+  .badge svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;
+    stroke-linecap:round;stroke-linejoin:round;}
+  h1{font-size:clamp(1.9rem,4vw,2.7rem);font-weight:800;letter-spacing:-1.3px;
+    line-height:1.14;margin-bottom:16px;}
+  .lede{font-size:1.04rem;color:var(--text-mid);line-height:1.68;max-width:52ch;margin-bottom:28px;}
+  .card{background:#fff;border:1px solid rgba(74,124,89,.12);border-radius:var(--radius-lg);
+    padding:26px 26px 24px;box-shadow:var(--shadow-md);margin-bottom:26px;}
+  .card h2{font-size:1.05rem;font-weight:700;margin-bottom:8px;}
+  .card p{font-size:.94rem;color:var(--text-mid);line-height:1.68;}
+  .card p + p{margin-top:10px;}
+  .btns{display:flex;gap:12px;flex-wrap:wrap;}
+  .foot-note{font-size:.88rem;color:var(--text-mid);margin-top:24px;line-height:1.65;}
+  .foot-note a{color:var(--sage);font-weight:600;}
+  @media(max-width:520px){ .btns .btn{width:100%;} }
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-bar">
+      <a class="logo" href="/">Planur<span>.</span></a>
+      <div class="nav-tabs">
+        <a href="/">For students</a>
+        <a href="/tutors" class="current">For tutors</a>
+      </div>
+      <div class="nav-right">
+        <a class="btn btn-coral" href="/tutors#talk">Talk to us</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="panel">
+    <div class="badge">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 2"/></svg>
+      Not available yet
+    </div>
+
+    <h1>Signing in from a browser is<br />nearly ready.</h1>
+    <p class="lede">We're finishing browser access for Planur for Tutors — the same practice, the
+      same sign-in, on a laptop. It isn't switched on yet, so this page is standing in rather than
+      leaving you at a dead link.</p>
+
+    <div class="card">
+      <h2>What works today</h2>
+      <p>Everything, in the app: your batches and sessions, the register, class materials, practice
+        papers and fees. You sign in there with the same email and one-time code you'd use here.</p>
+      <p>The app is with a small number of tutors while we finish it, so getting on it is a
+        conversation with us rather than a download. Nothing changes when the browser version
+        arrives — same practice, same data, just with a keyboard.</p>
+    </div>
+
+    <div class="btns">
+      <a class="btn btn-coral btn-lg" href="/tutors#talk">Talk to us about early access</a>
+      <a class="btn btn-sage-outline btn-lg" href="/tutors">What Planur for Tutors does</a>
+    </div>
+
+    <p class="foot-note">Want to know the moment it's live — or need a laptop today?
+      <a href="/tutors#talk">Tell us</a> and we'll come back to you personally. If working from a
+      laptop matters to your practice, saying so moves it up the list.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom" style="padding-top:0;">
+      <p class="footer-copy">© <span id="y">2026</span> Planur. Made for students, by people who remember being one.</p>
+      <p class="footer-copy"><a href="/support?app=tutor" style="color:rgba(255,255,255,.55);text-decoration:none;">Support</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/planur.js?v=20260819"></script>
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>

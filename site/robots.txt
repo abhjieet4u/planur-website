@@ -1,0 +1,6 @@
+# theplanur.co.uk
+# Everything here is public marketing, legal and support content — crawl it all.
+User-agent: *
+Allow: /
+
+Sitemap: https://theplanur.co.uk/sitemap.xml

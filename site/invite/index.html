@@ -4,14 +4,22 @@
   Same behaviour as /download but with invite framing. Preserves ?ref= (the inviter's code)
   as the Play install referrer for attribution once the Install Referrer API is wired.
 
-  BEFORE PUBLIC LAUNCH, fill in {{APPSTORE_ID}} (numeric Apple App Store ID).
-  While the app is on Play internal testing the Play listing is not public.
+  ── CURRENT STATE: STORES ARE OFF ───────────────────────────────────────────
+  The app is on Play INTERNAL TESTING and iOS isn't submitted, so a store link
+  404s for anyone who isn't a listed tester — and an invited friend certainly
+  isn't. The "not available yet" state is the STATIC HTML and there is NO
+  automatic redirect. The ?ref= code is still preserved for when stores open.
+
+  TO GO LIVE: set STORES_LIVE = true and fill {{APPSTORE_ID}}. Do the same in
+  /download and /tutors/download. iPhone and Android launch together.
 -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>You're invited to Planur</title>
+<meta name="description" content="A friend has invited you to Planur — the student planner for assignments, exams, fixtures and revision." />
+<link rel="canonical" href="https://theplanur.co.uk/invite" />
 <meta name="robots" content="all">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%234A7C59'/><text x='16' y='23' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='20' fill='white'>P</text></svg>" />
 <style>
@@ -33,6 +41,10 @@
     text-decoration:none;padding:14px 22px;border-radius:var(--radius);font-weight:600;font-size:.98rem;}
   .store-btn.secondary{background:#fff;color:var(--text-dark);border:1px solid var(--neutral-mid);}
   .store-btn small{display:block;font-weight:400;font-size:.72rem;opacity:.75;}
+  .store-btn.waiting{background:#fff;color:var(--text-light);border:1px dashed var(--neutral-mid);
+    cursor:default;}
+  .cta{display:inline-block;margin-top:24px;background:#E8845C;color:#fff;text-decoration:none;
+    padding:13px 26px;border-radius:100px;font-weight:700;font-size:.96rem;}
   .note{margin-top:26px;font-size:.85rem;color:var(--text-light);}
   .note a{color:var(--sage);}
 </style>
@@ -45,34 +57,34 @@
     deadlines organised. Install the app to accept the invite.</p>
 
   <div class="stores">
-    <a class="store-btn" id="play" href="#">Google Play <small>Android</small></a>
-    <a class="store-btn secondary" id="appstore" href="#">App&nbsp;Store <small>iPhone &amp; iPad</small></a>
+    <span class="store-btn waiting">App&nbsp;Store <small>at launch</small></span>
+    <span class="store-btn waiting">Google&nbsp;Play <small>at launch</small></span>
   </div>
+  <p style="margin-top:18px;">Planur isn't in the stores yet — iPhone and Android launch together.
+    Put your name down and we'll email you the moment it opens, with your friend's invite waiting.</p>
+  <a class="cta" href="/#waitlist">Join the waitlist →</a>
 
   <p class="note">By continuing you agree to our <a href="/terms">Terms</a> and
     <a href="/privacy">Privacy Policy</a>.</p>
 
 <script>
   (function () {
-    var APPSTORE_ID = '{{APPSTORE_ID}}'; // TODO: fill the numeric Apple App Store ID at iOS launch
-    var params = new URLSearchParams(location.search);
-    var ref = params.get('ref');
+    // ── The switch. See the comment at the top of this file. ────────────────
+    var STORES_LIVE = false;
+    var APPSTORE_ID = '{{APPSTORE_ID}}';
 
+    if (!STORES_LIVE) return;   // stay on the honest static state
+
+    var ref  = new URLSearchParams(location.search).get('ref');
     var play = 'https://play.google.com/store/apps/details?id=app.planur.student';
     if (ref) play += '&referrer=' + encodeURIComponent('ref=' + ref);
+    var idReady = APPSTORE_ID && APPSTORE_ID.indexOf('{{') === -1;
     var appstore = 'https://apps.apple.com/app/planur/id' + APPSTORE_ID;
 
-    document.getElementById('play').href = play;
-    document.getElementById('appstore').href = appstore;
-
     var ua = navigator.userAgent || navigator.vendor || '';
-    var isAndroid = /android/i.test(ua);
-    var isIOS = /iphone|ipad|ipod/i.test(ua);
-    var idReady = APPSTORE_ID && APPSTORE_ID.indexOf('{{') === -1;
-
-    if (isAndroid) {
+    if (/android/i.test(ua)) {
       location.replace(play);
-    } else if (isIOS && idReady) {
+    } else if (/iphone|ipad|ipod/i.test(ua) && idReady) {
       location.replace(appstore);
     }
   })();

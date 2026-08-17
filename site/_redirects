@@ -1,5 +1,38 @@
-# Serve the Android App Links verification file at its required path
-# (/.well-known/assetlinks.json) from a NON-hidden root file, so a drag-and-drop
-# deploy — which silently omits hidden dot-folders — still publishes it.
+# ── Android App Links verification ──────────────────────────────────────────
+# Serve the verification file at its required path (/.well-known/assetlinks.json)
+# from a NON-hidden root file, so a drag-and-drop deploy — which silently omits
+# hidden dot-folders — still publishes it.
 # 200 = transparent rewrite (no HTTP redirect), which Android's verifier requires.
 /.well-known/assetlinks.json   /assetlinks.json   200
+
+# ── Tidy per-app URLs ───────────────────────────────────────────────────────
+# Privacy, terms, deletion and support are ONE page each covering both apps, with
+# a ?app= selector. These aliases mean the nested form works too, so a store
+# listing, an email or an old link can use either shape:
+#     /tutors/privacy  ==  /privacy?app=tutor
+/tutors/privacy          /privacy?app=tutor          301
+/tutors/terms            /terms?app=tutor            301
+/tutors/delete-account   /delete-account?app=tutor   301
+/tutors/support          /support?app=tutor          301
+/tutors/contact          /support?app=tutor          301
+
+# Singular and near-miss spellings of the tutor page — cheap to support, and these
+# are the URLs people type after hearing the name said out loud.
+/tutor        /tutors   301
+/tutoring     /tutors   301
+/for-tutors   /tutors   301
+
+# Common aliases for the support page.
+/contact   /support   301
+/help      /support   301
+
+# ── Tutor browser sign-in ───────────────────────────────────────────────────
+# Every "Tutor log in" link points at /tutors/login, which is currently a holding
+# page ("not available yet"). tutor.theplanur.co.uk has no DNS record, so linking
+# straight to it would give a browser-level "server not found" we cannot theme.
+#
+# WHEN THE TUTOR WEB APP IS LIVE: uncomment the line below. It takes effect
+# before the holding page is ever served, so nothing needs deleting — but do put
+# the browser claims back on /tutors and /support at the same time (see the
+# comment at the top of tutors/login/index.html).
+# /tutors/login   https://tutor.theplanur.co.uk   302

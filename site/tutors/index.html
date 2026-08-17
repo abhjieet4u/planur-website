@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<!--
+  Planur for Tutors — product page. Served at https://theplanur.co.uk/tutors
+
+  DELIBERATELY SLIM (owner's decision, 2026-08-17). A short public introduction,
+  not the product documentation. This is NOT a web copy of
+  docs/sales/exec-summary.html — that is handed over in a conversation, where the
+  detail can be discussed and corrected. Keep this page at roughly the depth and
+  length of the student home page.
+
+  WHAT MUST NOT COME BACK without the owner asking:
+    · A full feature list. Some features may be dropped after tutor
+      conversations, and announcing them publicly first makes that expensive.
+    · The roadmap / "what we're building next".
+    · Plan bands, student caps, storage limits, AI allowances — all still moving.
+    · Prices. Never on this page.
+    · Time-saving figures — the "~11½ hours a month" model, the task table and
+      the "<1 min per paper" figure. Not validated; they stay in the deck.
+    · The detailed diagrams (three-sides architecture, consent decision lanes,
+      the six-step loop). Design concepts, not customer-facing material.
+    · Invented users, counts or testimonials.
+
+  AVAILABILITY: iPhone and Android launch TOGETHER (owner, 2026-08-17). Do not
+  write "Android today" or "iOS later" anywhere — commercially they arrive at the
+  same time.
+
+  BROWSER ACCESS: NOT claimed as available. The tutor web build works (verified
+  2026-08-17) but nothing is deployed and tutor.theplanur.co.uk has no DNS record,
+  so the hero fact says "coming", the "Phone or laptop" card says "nearly ready",
+  and every Tutor log in link goes to /tutors/login — a holding page we control.
+  When the web app is live, see the switch-on steps in tutors/login/index.html.
+
+  ICONS: one inline <symbol> sprite at the top of <body>. No icon fonts, no
+  external requests. Stroke icons only — emoji read as amateur next to a page
+  asking a business to hand over its fees.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Planur for Tutors — teaching, not admin.</title>
+<meta name="description" content="Run your batches, register, class materials and fees in one app — and your students get a planner of their own instead of a portal they'll never open." />
+<link rel="canonical" href="https://theplanur.co.uk/tutors" />
+<meta property="og:title" content="Planur for Tutors — teaching, not admin." />
+<meta property="og:description" content="Your batches, register, materials and fees in one place. And your students get a planner of their own, not a portal." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://theplanur.co.uk/tutors" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%234A7C59'/><text x='16' y='23' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='20' fill='white'>P</text></svg>" />
+<script>document.documentElement.className += ' js';</script>
+<link rel="stylesheet" href="/assets/planur.css?v=20260819" />
+<style>
+  /* ── Page-specific: /tutors ───────────────────────────────────────────── */
+  .t-hero{padding:64px 0 60px;background:linear-gradient(160deg,#fff 0%,var(--mint) 58%,var(--lilac) 100%);
+    position:relative;overflow:hidden;}
+  .t-hero::before{content:'';position:absolute;top:-140px;right:-90px;width:520px;height:520px;
+    background:radial-gradient(circle,rgba(155,142,196,.14) 0%,transparent 70%);border-radius:50%;}
+  .t-hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.08fr .92fr;
+    gap:52px;align-items:center;}
+  .t-hero-copy{max-width:620px;}
+  .t-hero h1{font-size:clamp(2.2rem,4.8vw,3.5rem);font-weight:800;line-height:1.1;
+    letter-spacing:-1.6px;margin-bottom:18px;}
+  .t-hero h1 em{font-style:normal;color:var(--sage);}
+  .t-hero-sub{font-size:1.08rem;color:var(--text-mid);line-height:1.66;max-width:56ch;
+    margin-bottom:28px;}
+  .t-hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px;}
+  .hero-badge{display:inline-flex;align-items:center;gap:7px;background:#fff;
+    border:1px solid rgba(74,124,89,.2);border-radius:var(--radius-pill);padding:6px 14px 6px 11px;
+    font-size:.82rem;font-weight:600;color:var(--sage);margin-bottom:20px;box-shadow:var(--shadow-sm);}
+  .facts{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px;max-width:560px;}
+  .fact{display:flex;align-items:center;gap:9px;font-size:.88rem;color:var(--text-mid);
+    font-weight:500;}
+  .fact .ic{color:var(--sage);flex-shrink:0;}
+
+  /* ── Icons ─────────────────────────────────────────────────────────────── */
+  .ic{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6;
+    stroke-linecap:round;stroke-linejoin:round;display:block;}
+  .ic-sm{width:18px;height:18px;}
+  .ic-tile{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;
+    justify-content:center;margin-bottom:16px;}
+  .ic-tile .ic{width:23px;height:23px;}
+  .tile-sage{background:var(--sage-faint);color:var(--sage-deep);}
+  .tile-lav{background:var(--lavender-faint);color:#6B5CA0;}
+  .tile-coral{background:var(--coral-faint);color:var(--coral-dark);}
+
+  /* Stylised illustration — a drawing, not a screenshot. */
+  .t-mock{background:#fff;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);
+    border:1px solid rgba(74,124,89,.1);padding:20px;animation:tfloat 6s ease-in-out infinite;}
+  @keyframes tfloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+  @media(prefers-reduced-motion:reduce){.t-mock{animation:none;}}
+  .t-mock-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+    padding-bottom:14px;border-bottom:1px solid var(--neutral-mid);}
+  .t-mock-title{font-size:1rem;font-weight:800;letter-spacing:-.2px;}
+  .t-mock-sub{font-size:.78rem;color:var(--text-light);margin-top:2px;}
+  .t-mock-chip{background:var(--sage-faint);color:var(--sage-deep);font-size:.7rem;font-weight:700;
+    padding:4px 10px;border-radius:var(--radius-pill);white-space:nowrap;}
+  .t-mock-rows{display:flex;flex-direction:column;gap:8px;padding:14px 0;}
+  .t-mock-row{display:flex;align-items:center;gap:10px;}
+  .t-mock-row .av{width:26px;height:26px;border-radius:50%;background:var(--lavender-faint);
+    color:#6B5CA0;font-size:.62rem;font-weight:700;display:flex;align-items:center;
+    justify-content:center;flex-shrink:0;}
+  .t-mock-row .nm{font-size:.84rem;color:var(--text-mid);flex:1;}
+  .t-mock-row .mk{font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:var(--radius-pill);}
+  .mk.present{background:var(--sage-faint);color:var(--sage-deep);}
+  .mk.late{background:var(--amber-faint);color:var(--amber);}
+  .mk.absent{background:var(--coral-faint);color:var(--coral-dark);}
+  .t-mock-foot{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:14px;
+    border-top:1px solid var(--neutral-mid);}
+  .t-mock-tile{background:var(--neutral);border-radius:var(--radius-sm);padding:10px 12px;}
+  .t-mock-tile b{display:block;font-size:.78rem;font-weight:700;color:var(--text-dark);}
+  .t-mock-tile span{display:block;font-size:.7rem;color:var(--text-light);margin-top:2px;}
+
+  section.band{padding:74px 0;}
+  section.band.tint{background:var(--neutral);}
+  section.band.mint{background:var(--mint);}
+  section.band.sky{background:var(--sky-faint);}
+  .band-head{max-width:58ch;margin-bottom:36px;}
+
+  /* problem — four one-liners */
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  .prob{background:#fff;border:1px solid var(--neutral-mid);border-radius:var(--radius-md);
+    padding:22px 20px;}
+  .prob .ic{color:var(--coral-dark);margin-bottom:12px;}
+  .prob h4{font-size:.96rem;font-weight:700;margin-bottom:3px;}
+  .prob .prob-now{font-size:.79rem;font-weight:700;color:var(--coral);text-transform:uppercase;
+    letter-spacing:.7px;}
+
+  /* planner illustration */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;}
+  .planner-art{background:#fff;border-radius:var(--radius-lg);padding:26px;
+    box-shadow:var(--shadow-lg);border:1px solid rgba(74,124,89,.08);}
+  .planner-art svg{width:100%;height:auto;display:block;}
+
+  /* AI boundary */
+  .ai-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .ai-col{border-radius:var(--radius-md);padding:24px;border:1px solid transparent;}
+  .ai-col.out{background:var(--sage-faint);border-color:rgba(74,124,89,.22);}
+  .ai-col.never{background:#fff;border-color:var(--neutral-mid);}
+  .ai-col h4{font-size:.76rem;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;
+    margin-bottom:4px;}
+  .ai-col.out h4{color:var(--sage-deep);} .ai-col.never h4{color:var(--coral-dark);}
+  .ai-col .ai-sub{font-size:.98rem;font-weight:700;color:var(--text-dark);margin-bottom:16px;}
+  .ai-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+  .ai-col li{font-size:.9rem;color:var(--text-mid);display:flex;align-items:center;gap:10px;}
+  .ai-col li .ic{flex-shrink:0;}
+  .ai-col.out li .ic{color:var(--sage);} .ai-col.never li .ic{color:#D0714A;}
+
+  /* ── "What it does" — click a card to expand it ───────────────────────────
+     Native <details>: works with JavaScript off, keyboard-operable for free,
+     and the text is always in the DOM for search engines. */
+  .acc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start;}
+  .acc{background:#fff;border:1px solid var(--neutral-mid);border-radius:var(--radius-lg);
+    transition:box-shadow var(--transition),border-color var(--transition);}
+  .acc:hover{border-color:rgba(74,124,89,.35);box-shadow:var(--shadow-md);}
+  .acc[open]{border-color:transparent;box-shadow:var(--shadow-lg);}
+  .acc summary{list-style:none;cursor:pointer;padding:26px 24px;}
+  .acc summary::-webkit-details-marker{display:none;}
+  .acc summary:focus-visible{outline:3px solid var(--lavender);outline-offset:-3px;
+    border-radius:var(--radius-lg);}
+  .acc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+  .acc-top .ic-tile{margin-bottom:0;}
+  .acc h3{font-size:1.05rem;font-weight:700;color:var(--text-dark);line-height:1.32;
+    margin-top:16px;}
+  .acc .chev{color:var(--text-light);flex-shrink:0;margin-top:11px;
+    transition:transform var(--transition),color var(--transition);}
+  .acc:hover .chev{color:var(--sage);}
+  .acc[open] .chev{transform:rotate(180deg);color:var(--sage);}
+  .acc-body{padding:0 24px 26px;}
+  .acc-body p{font-size:.93rem;color:var(--text-mid);line-height:1.68;}
+  .acc[open] .acc-body{animation:accIn .3s ease;}
+  @keyframes accIn{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:none;}}
+  @media(prefers-reduced-motion:reduce){.acc[open] .acc-body{animation:none;}}
+
+  /* ── "The fair question" — flip a card for the detail ─────────────────────
+     Hover on a pointer device; tap or Enter everywhere else. Deliberately the
+     other interaction from the section above. Both faces stay in the DOM. */
+  .flip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .flip{perspective:1400px;}
+  .flip-btn{display:block;width:100%;padding:0;border:0;background:none;font:inherit;
+    text-align:left;cursor:pointer;}
+  .flip-card{position:relative;min-height:238px;transform-style:preserve-3d;
+    transition:transform .6s cubic-bezier(.4,0,.2,1);}
+  .flip:hover .flip-card,.flip.is-flipped .flip-card,
+  .flip-btn:focus-visible .flip-card{transform:rotateY(180deg);}
+  .flip-face{position:absolute;inset:0;backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;border-radius:var(--radius-lg);padding:26px 24px;
+    display:flex;flex-direction:column;background:#fff;border:1px solid var(--neutral-mid);
+    box-shadow:var(--shadow-sm);}
+  .flip-front h3{font-size:1.05rem;font-weight:700;color:var(--text-dark);line-height:1.32;
+    margin-top:16px;}
+  .flip-hint{margin-top:auto;display:flex;align-items:center;gap:7px;font-size:.72rem;
+    font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text-light);
+    transition:color var(--transition);}
+  .flip:hover .flip-hint{color:var(--sage);}
+  .flip-back{transform:rotateY(180deg);background:var(--sage-faint);
+    border-color:rgba(74,124,89,.28);justify-content:center;}
+  .flip-back .back-label{font-size:.68rem;font-weight:700;letter-spacing:.9px;
+    text-transform:uppercase;color:var(--sage);margin-bottom:9px;}
+  .flip-back p{font-size:.92rem;color:var(--text-mid);line-height:1.68;}
+  @media(prefers-reduced-motion:reduce){
+    .flip-card{transition:none;}
+    .flip-face{backface-visibility:visible;transition:opacity .2s ease;}
+    .flip:hover .flip-card,.flip.is-flipped .flip-card,
+    .flip-btn:focus-visible .flip-card{transform:none;}
+    .flip-back{transform:none;opacity:0;}
+    .flip:hover .flip-back,.flip.is-flipped .flip-back,
+    .flip-btn:focus-visible .flip-back{opacity:1;}
+    .flip:hover .flip-front,.flip.is-flipped .flip-front,
+    .flip-btn:focus-visible .flip-front{opacity:0;}
+  }
+
+  /* CTA */
+  .cta-band{padding:80px 0;background:linear-gradient(160deg,var(--lilac) 0%,var(--mint) 100%);}
+  .cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+  .ask{display:flex;flex-direction:column;gap:16px;}
+  .ask-item{display:flex;gap:12px;align-items:flex-start;}
+  .ask-item .n{width:26px;height:26px;border-radius:50%;background:var(--sage);color:#fff;
+    font-size:.78rem;font-weight:700;display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;margin-top:2px;}
+  .ask-item h4{font-size:.98rem;font-weight:700;margin-bottom:3px;}
+  .ask-item p{font-size:.89rem;color:var(--text-mid);line-height:1.6;}
+
+  @media(max-width:980px){
+    .t-hero-inner,.split{grid-template-columns:1fr;gap:38px;}
+    .acc-grid,.flip-grid{grid-template-columns:1fr 1fr;}
+    .t-mock{max-width:420px;}
+    .grid-4{grid-template-columns:1fr 1fr;}
+    .cta-grid{grid-template-columns:1fr;gap:36px;}
+  }
+  @media(max-width:760px){ .ai-cols,.acc-grid,.flip-grid{grid-template-columns:1fr;}
+    .facts{grid-template-columns:1fr;} .flip-card{min-height:210px;} }
+  @media(max-width:560px){
+    .grid-4{grid-template-columns:1fr;}
+    section.band{padding:54px 0;}
+    .t-hero{padding:44px 0 50px;}
+    .t-hero-btns .btn{width:100%;}
+  }
+</style>
+</head>
+<body>
+
+<!-- Icon sprite — inline, same-origin, no icon font. -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true" focusable="false">
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18.5h2"/></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="2"/><path d="M2 19h20"/></symbol>
+  <symbol id="i-cap" viewBox="0 0 24 24"><path d="M12 4L2 9l10 5 10-5-10-5z"/><path d="M6 11.5V16c0 1.4 2.7 3 6 3s6-1.6 6-3v-4.5"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 14a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M7 3h11a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H7z"/><path d="M7 3v18"/><path d="M4 6.5h3M4 12h3M4 17.5h3"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M21 3L10.5 13.5"/><path d="M21 3l-6.8 18-3.7-7.5L3 9.8z"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+  <symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="8.5" y="2.5" width="7" height="4" rx="1.2"/><path d="M15.5 4.5H18a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-13a2 2 0 0 1 2-2h2.5"/><path d="M9 13.5l2 2 4-4"/></symbol>
+  <symbol id="i-clip" viewBox="0 0 24 24"><path d="M20.5 11.5l-8.6 8.6a5.5 5.5 0 0 1-7.8-7.8l8.6-8.6a3.7 3.7 0 0 1 5.2 5.2l-8.6 8.6a1.8 1.8 0 0 1-2.6-2.6l7.9-7.9"/></symbol>
+  <symbol id="i-filepen" viewBox="0 0 24 24"><path d="M13 2H6.5A1.5 1.5 0 0 0 5 3.5v17A1.5 1.5 0 0 0 6.5 22H12"/><path d="M13 2l5 5v3"/><path d="M13 2v5h5"/><path d="M20.4 13.6a1.4 1.4 0 0 1 0 2L16.5 19.5 14 20l.5-2.5 3.9-3.9a1.4 1.4 0 0 1 2 0z"/></symbol>
+  <symbol id="i-note" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 12h.01M18 12h.01"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2.2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2.5"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.2c0 4.6-3.1 8.6-7.5 10.3C7.6 19.8 4.5 15.8 4.5 11.2V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="i-eyeoff" viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M10.6 5.2A9.9 9.9 0 0 1 12 5c5 0 9 4.6 9 7a11 11 0 0 1-2.3 3.4"/><path d="M6.5 6.6C4.3 8.1 3 10.4 3 12c0 2.4 4 7 9 7a9.4 9.4 0 0 0 4.2-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
+  <symbol id="i-split" viewBox="0 0 24 24"><rect x="3" y="4" width="7.5" height="16" rx="2"/><rect x="13.5" y="4" width="7.5" height="16" rx="2"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13"/><path d="M13 6.5l5.5 5.5L13 17.5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9.5l6 6 6-6"/></symbol>
+  <symbol id="i-rotate" viewBox="0 0 24 24"><path d="M20.5 12a8.5 8.5 0 1 1-2.6-6.1"/><path d="M20.5 4v5h-5"/></symbol>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- NAV — row 1 picks the audience, row 2 holds that audience's actions.
+     They used to share a line, which put "Log in" next to "For tutors" and
+     invited a student to try signing in to the tutor app. -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-bar">
+      <a class="logo" href="/">Planur<span>.</span></a>
+      <div class="nav-tabs">
+        <a href="/">For students</a>
+        <a href="/tutors" class="current" aria-current="page">For tutors</a>
+      </div>
+      <div class="nav-right">
+        <a class="nav-link" href="/tutors/login">Tutor log in</a>
+        <a class="btn btn-coral" href="#talk">Talk to us</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="t-hero">
+  <div class="container">
+    <div class="t-hero-inner">
+      <div class="t-hero-copy fade-in">
+        <div class="hero-badge"><svg class="ic ic-sm"><use href="#i-cap"/></svg> For private tutors and small practices</div>
+        <h1>Teaching,<br /><em>not admin.</em></h1>
+        <p class="t-hero-sub">Your batches, register, class materials and fees in one place — and
+          your students get a planner of their own, instead of a portal they'll never open twice.</p>
+        <div class="t-hero-btns">
+          <a class="btn btn-coral btn-lg" href="#talk">Talk to us</a>
+          <a class="btn btn-sage-outline btn-lg" href="#what">See what it does</a>
+        </div>
+        <div class="facts">
+          <span class="fact"><svg class="ic ic-sm"><use href="#i-phone"/></svg> iPhone and Android at launch</span>
+          <span class="fact"><svg class="ic ic-sm"><use href="#i-laptop"/></svg> Browser access coming</span>
+          <span class="fact"><svg class="ic ic-sm"><use href="#i-cap"/></svg> Your students never pay to connect</span>
+          <span class="fact"><svg class="ic ic-sm"><use href="#i-chat"/></svg> Support answered within 24 hours</span>
+        </div>
+      </div>
+
+      <div class="fade-in delay-2">
+        <div class="t-mock" role="img" aria-label="Illustration of the tutor app: a Year 11 Maths session with the register marked, a practice paper and the month's fees">
+          <div class="t-mock-head">
+            <div>
+              <div class="t-mock-title">Year 11 · Maths</div>
+              <div class="t-mock-sub">Tuesday · 5:00pm · In person</div>
+            </div>
+            <span class="t-mock-chip">12 students</span>
+          </div>
+          <div class="t-mock-rows">
+            <div class="t-mock-row"><span class="av">AR</span><span class="nm">Aarav R.</span><span class="mk present">Present</span></div>
+            <div class="t-mock-row"><span class="av">SP</span><span class="nm">Sofia P.</span><span class="mk present">Present</span></div>
+            <div class="t-mock-row"><span class="av">JT</span><span class="nm">Jamie T.</span><span class="mk late">Late</span></div>
+            <div class="t-mock-row"><span class="av">MK</span><span class="nm">Maya K.</span><span class="mk absent">Absent</span></div>
+          </div>
+          <div class="t-mock-foot">
+            <div class="t-mock-tile"><b>Quadratics · 20 Q</b><span>Paper ready to edit</span></div>
+            <div class="t-mock-tile"><b>This month's fees</b><span>9 of 12 marked paid</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="band">
+  <div class="container">
+    <div class="band-head fade-in">
+      <span class="section-label">The problem</span>
+      <h2 class="section-title">How much of this still runs on WhatsApp?</h2>
+      <p class="section-lede">A practice your size already has a system. It's just spread across
+        tools that don't talk to each other — and each one only answers the question you asked it at
+        the time. That isn't disorganisation; those tools got you here.</p>
+    </div>
+    <div class="grid-4 fade-in delay-1">
+      <div class="prob">
+        <svg class="ic"><use href="#i-book"/></svg>
+        <h4>The register</h4><div class="prob-now">A notebook</div>
+      </div>
+      <div class="prob">
+        <svg class="ic"><use href="#i-send"/></svg>
+        <h4>Worksheets</h4><div class="prob-now">Sent four times</div>
+      </div>
+      <div class="prob">
+        <svg class="ic"><use href="#i-grid"/></svg>
+        <h4>Fees</h4><div class="prob-now">A spreadsheet, or your head</div>
+      </div>
+      <div class="prob">
+        <svg class="ic"><use href="#i-moon"/></svg>
+        <h4>Practice papers</h4><div class="prob-now">Written at 11pm</div>
+      </div>
+    </div>
+    <div class="callout fade-in delay-2" style="margin-top:26px;">
+      <p>The software that does exist was built for agencies and learning centres: desktop-first,
+        admin-heavy, and it hands the student a <strong>portal</strong> no fifteen-year-old opens
+        twice. So the tutor does the admin anyway, and the student stays on WhatsApp.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY DIFFERENT -->
+<section class="band mint">
+  <div class="container">
+    <div class="split">
+      <div class="fade-in">
+        <span class="section-label">Why this one is different</span>
+        <h2 class="section-title">Your students get a planner of their own — not a login to your
+          admin system.</h2>
+        <p class="section-lede">Planur started as a <strong>student planner</strong>: a teenager's
+          own app for organising their week, their homework and their revision. Nothing to do with
+          tutoring. Connect a student with a join code and your classes and materials land inside
+          that — which is why the material you share actually gets read. It's sitting where they
+          already look.</p>
+        <div class="callout warn" style="margin-top:22px;">
+          <p><strong>Said plainly.</strong> The student app is
+            <span class="tag tag-testing">Testing</span> — in final testing, not yet publicly
+            released. It launches alongside this, and your students would be among the first on it.
+            We'd rather tell you now than let you find out later.</p>
+        </div>
+      </div>
+
+      <div class="fade-in delay-2">
+        <div class="planner-art">
+          <svg viewBox="0 0 380 300" xmlns="http://www.w3.org/2000/svg" role="img"
+               aria-label="A student's own planner for the week, with the tutor's class sitting among their homework, exam and club">
+            <defs>
+              <linearGradient id="pg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#EBF3EE"/><stop offset="100%" stop-color="#F0EEF9"/>
+              </linearGradient>
+            </defs>
+            <rect width="380" height="300" rx="18" fill="url(#pg)"/>
+
+            <!-- phone frame -->
+            <rect x="96" y="22" width="188" height="256" rx="22" fill="#fff" stroke="#DCE7DF" stroke-width="1.5"/>
+            <rect x="158" y="34" width="64" height="7" rx="3.5" fill="#E4EAE6"/>
+
+            <!-- header -->
+            <text x="116" y="70" font-family="DM Sans,sans-serif" font-size="13" font-weight="700" fill="#1A2B22">This week</text>
+            <text x="116" y="86" font-family="DM Sans,sans-serif" font-size="9" fill="#8A9E92">Their planner · not your portal</text>
+
+            <!-- row: homework -->
+            <rect x="112" y="98" width="156" height="34" rx="9" fill="#F8F9FA"/>
+            <rect x="120" y="106" width="4" height="18" rx="2" fill="#9B8EC4"/>
+            <text x="132" y="113" font-family="DM Sans,sans-serif" font-size="9" font-weight="600" fill="#4A5E52">History essay</text>
+            <text x="132" y="125" font-family="DM Sans,sans-serif" font-size="8" fill="#8A9E92">Homework · due Friday</text>
+
+            <!-- row: tutor class (highlighted) -->
+            <rect x="112" y="138" width="156" height="38" rx="9" fill="#EBF3EE" stroke="#4A7C59" stroke-width="1.4"/>
+            <rect x="120" y="146" width="4" height="22" rx="2" fill="#4A7C59"/>
+            <text x="132" y="153" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#2F5C3F">Year 11 Maths</text>
+            <text x="132" y="165" font-family="DM Sans,sans-serif" font-size="8" fill="#4A7C59">Your class · Tue 5:00pm</text>
+            <circle cx="256" cy="150" r="7" fill="#4A7C59" opacity="0.16"/>
+            <path d="M252.5 150l2.5 2.5 4.5-4.5" stroke="#4A7C59" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="222" y="170" font-family="DM Sans,sans-serif" font-size="7" font-weight="700" fill="#4A7C59">+ worksheet</text>
+
+            <!-- row: exam -->
+            <rect x="112" y="182" width="156" height="34" rx="9" fill="#F8F9FA"/>
+            <rect x="120" y="190" width="4" height="18" rx="2" fill="#E8845C"/>
+            <text x="132" y="197" font-family="DM Sans,sans-serif" font-size="9" font-weight="600" fill="#4A5E52">Maths mock</text>
+            <text x="132" y="209" font-family="DM Sans,sans-serif" font-size="8" fill="#8A9E92">Exam · Wednesday</text>
+
+            <!-- row: club -->
+            <rect x="112" y="222" width="156" height="34" rx="9" fill="#F8F9FA"/>
+            <rect x="120" y="230" width="4" height="18" rx="2" fill="#5BA4CF"/>
+            <text x="132" y="237" font-family="DM Sans,sans-serif" font-size="9" font-weight="600" fill="#4A5E52">Football fixture</text>
+            <text x="132" y="249" font-family="DM Sans,sans-serif" font-size="8" fill="#8A9E92">Club · Thursday 4:30pm</text>
+
+            <!-- connector from tutor side -->
+            <path d="M60 157h44" stroke="#4A7C59" stroke-width="1.6" stroke-dasharray="4 4" fill="none"/>
+            <path d="M99 153l5 4-5 4" stroke="#4A7C59" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="14" y="132" width="46" height="46" rx="12" fill="#fff" stroke="#DCE7DF" stroke-width="1.4"/>
+            <path d="M28 148h18M28 155h18M28 162h11" stroke="#4A7C59" stroke-width="1.8" stroke-linecap="round"/>
+            <text x="10" y="192" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#4A7C59">You publish</text>
+
+            <!-- what stays private -->
+            <rect x="292" y="132" width="74" height="46" rx="12" fill="#fff" stroke="#EADFE0" stroke-width="1.4"/>
+            <path d="M303 149l10 10M313 149l-10 10" stroke="#D0714A" stroke-width="1.8" stroke-linecap="round"/>
+            <text x="320" y="151" font-family="DM Sans,sans-serif" font-size="7.5" font-weight="600" fill="#8A9E92">Their own</text>
+            <text x="320" y="161" font-family="DM Sans,sans-serif" font-size="7.5" font-weight="600" fill="#8A9E92">planner</text>
+            <text x="298" y="192" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#B4715A">Never reaches you</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IT DOES — the core, not an inventory -->
+<section class="band" id="what">
+  <div class="container">
+    <div class="band-head fade-in">
+      <span class="section-label">What it does</span>
+      <h2 class="section-title">The parts that cost you evenings.</h2>
+    </div>
+    <div class="acc-grid fade-in delay-1">
+      <details class="acc">
+        <summary>
+          <div class="acc-top">
+            <div class="ic-tile tile-sage"><svg class="ic"><use href="#i-clipboard"/></svg></div>
+            <svg class="ic chev" aria-hidden="true"><use href="#i-chev"/></svg>
+          </div>
+          <h3>Your classes and your register</h3>
+        </summary>
+        <div class="acc-body"><p>Batches, sessions and attendance — marked in seconds, and still answerable six weeks later when a parent asks how many their child missed.</p></div>
+      </details>
+      <details class="acc">
+        <summary>
+          <div class="acc-top">
+            <div class="ic-tile tile-lav"><svg class="ic"><use href="#i-clip"/></svg></div>
+            <svg class="ic chev" aria-hidden="true"><use href="#i-chev"/></svg>
+          </div>
+          <h3>Materials, shared once</h3>
+        </summary>
+        <div class="acc-body"><p>Upload a worksheet to a batch and everyone enrolled has it — including whoever joins in week three. Sharing to thirty is the same work as sharing to three.</p></div>
+      </details>
+      <details class="acc">
+        <summary>
+          <div class="acc-top">
+            <div class="ic-tile tile-coral"><svg class="ic"><use href="#i-filepen"/></svg></div>
+            <svg class="ic chev" aria-hidden="true"><use href="#i-chev"/></svg>
+          </div>
+          <h3>Practice papers, written for you</h3>
+        </summary>
+        <div class="acc-body"><p>Give it the topic, level and difficulty; the AI drafts the questions and the answer key. You edit anything you like — nothing reaches a student until you publish it.</p></div>
+      </details>
+      <details class="acc">
+        <summary>
+          <div class="acc-top">
+            <div class="ic-tile tile-sage"><svg class="ic"><use href="#i-note"/></svg></div>
+            <svg class="ic chev" aria-hidden="true"><use href="#i-chev"/></svg>
+          </div>
+          <h3>Fees without the spreadsheet</h3>
+        </summary>
+        <div class="acc-body"><p>Fee on the batch, overridable per student, invoiced per cycle and tracked to paid — with a reminder you send by WhatsApp or SMS in one tap. We track and chase; we don't collect.</p></div>
+      </details>
+      <details class="acc">
+        <summary>
+          <div class="acc-top">
+            <div class="ic-tile tile-lav"><svg class="ic"><use href="#i-lock"/></svg></div>
+            <svg class="ic chev" aria-hidden="true"><use href="#i-chev"/></svg>
+          </div>
+          <h3>Fees stay yours alone</h3>
+        </summary>
+        <div class="acc-body"><p>Bring in a teacher and they genuinely cannot read your fee data — a permission enforced in the database, not a screen we hide.</p></div>
+      </details>
+      <details class="acc">
+        <summary>
+          <div class="acc-top">
+            <div class="ic-tile tile-coral"><svg class="ic"><use href="#i-laptop"/></svg></div>
+            <svg class="ic chev" aria-hidden="true"><use href="#i-chev"/></svg>
+          </div>
+          <h3>Phone or laptop</h3>
+        </summary>
+        <div class="acc-body"><p>Run your practice from the app today. Browser access — the same practice, the same sign-in, on a laptop — is <a href="/tutors/login" style="color:var(--sage);font-weight:600;">nearly ready</a>, because an evening of invoicing is easier with a keyboard.</p></div>
+      </details>
+    </div>
+    <div class="callout fade-in delay-2">
+      <p>That's the core of it, and it all works today. We're deliberately not listing everything
+        else yet — we're still shaping this with the tutors using it, and we'd rather change our
+        minds in a conversation with you than defend a feature list.
+        <strong>Ask us about anything that isn't here.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- AI BOUNDARY -->
+<section class="band sky">
+  <div class="container">
+    <div class="band-head fade-in">
+      <span class="section-label">AI, and where we draw the line</span>
+      <h2 class="section-title">It writes your papers. It is not given your children.</h2>
+      <p class="section-lede">Plenty of education apps have bolted AI on and quietly started feeding
+        student records into it. We took the opposite decision, and it's worth being precise about
+        what that means.</p>
+    </div>
+    <div class="ai-cols fade-in delay-1">
+      <div class="ai-col out">
+        <h4>Sent to the AI</h4>
+        <div class="ai-sub">Only what you typed</div>
+        <ul>
+          <li><svg class="ic ic-sm"><use href="#i-arrow"/></svg> The topic</li>
+          <li><svg class="ic ic-sm"><use href="#i-arrow"/></svg> The subject</li>
+          <li><svg class="ic ic-sm"><use href="#i-arrow"/></svg> The difficulty</li>
+          <li><svg class="ic ic-sm"><use href="#i-arrow"/></svg> How many questions</li>
+        </ul>
+      </div>
+      <div class="ai-col never">
+        <h4>Never leaves Planur</h4>
+        <div class="ai-sub">Everything about a child</div>
+        <ul>
+          <li><svg class="ic ic-sm"><use href="#i-x"/></svg> Student names</li>
+          <li><svg class="ic ic-sm"><use href="#i-x"/></svg> Results and attendance</li>
+          <li><svg class="ic ic-sm"><use href="#i-x"/></svg> Fees and invoices</li>
+          <li><svg class="ic ic-sm"><use href="#i-x"/></svg> Parent names and contacts</li>
+          <li><svg class="ic ic-sm"><use href="#i-x"/></svg> Your uploaded materials</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout fade-in delay-2">
+      <p>Four short pieces of text go out. Nothing about a child does — and that isn't a policy we
+        wrote down, it's the whole of what the app sends. No provider we use trains on it, and we
+        re-check that rather than assuming it stays true.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="band tint">
+  <div class="container">
+    <div class="band-head fade-in">
+      <span class="section-label">The fair question</span>
+      <h2 class="section-title">You'd be handing us your roster, your register and your fees.</h2>
+      <p class="section-lede">Rather than asking for faith, here is what's already decided and
+        enforced — a layer below the app, where a bug in a screen can't undo it.</p>
+    </div>
+    <div class="flip-grid fade-in delay-1">
+      <div class="flip">
+        <button type="button" class="flip-btn" aria-expanded="false">
+          <div class="flip-card">
+            <div class="flip-face flip-front">
+              <div class="ic-tile tile-sage"><svg class="ic"><use href="#i-shield"/></svg></div>
+              <h3>A parent approves the connection</h3>
+              <span class="flip-hint"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-rotate"/></svg> How</span>
+            </div>
+            <div class="flip-face flip-back"><span class="back-label">Parent approval</span><p>A student under the age of consent for their country — or with no date of birth on file — sees nothing of your classes until a parent approves. Age is decided on our servers, and an unknown age is treated as under-age.</p></div>
+          </div>
+        </button>
+      </div>
+      <div class="flip">
+        <button type="button" class="flip-btn" aria-expanded="false">
+          <div class="flip-card">
+            <div class="flip-face flip-front">
+              <div class="ic-tile tile-lav"><svg class="ic"><use href="#i-eyeoff"/></svg></div>
+              <h3>You never see a student’s own planner</h3>
+              <span class="flip-hint"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-rotate"/></svg> How</span>
+            </div>
+            <div class="flip-face flip-back"><span class="back-label">Their planner stays theirs</span><p>You see the classes you teach and the results of tests you set. Their homework, revision and private notes stay theirs.</p></div>
+          </div>
+        </button>
+      </div>
+      <div class="flip">
+        <button type="button" class="flip-btn" aria-expanded="false">
+          <div class="flip-card">
+            <div class="flip-face flip-front">
+              <div class="ic-tile tile-coral"><svg class="ic"><use href="#i-split"/></svg></div>
+              <h3>Nothing crosses between practices</h3>
+              <span class="flip-hint"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-rotate"/></svg> How</span>
+            </div>
+            <div class="flip-face flip-back"><span class="back-label">Practice isolation</span><p>A student who also studies with another tutor cannot carry your batches, materials or fees across to them.</p></div>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="callout fade-in delay-2">
+      <p>Those rules are covered by an automated test suite that tries to break them against the
+        real database before anything ships. And if you stop paying, <strong>nothing is
+        deleted</strong> — you simply can't add more until you're back on a plan.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE ASK + FORM -->
+<section class="cta-band" id="talk">
+  <div class="container">
+    <div class="cta-grid">
+      <div class="fade-in">
+        <span class="section-label">The ask</span>
+        <h2 class="section-title">Try it with one real batch. For one month.</h2>
+        <div class="ask">
+          <div class="ask-item"><div class="n">1</div><div>
+            <h4>One batch you actually teach</h4>
+            <p>Real students, real fees, real materials. Fake data teaches us nothing and wastes
+              your time.</p></div></div>
+          <div class="ask-item"><div class="n">2</div><div>
+            <h4>Tell us where we've got it wrong</h4>
+            <p>You have run this business for years. We have run it for none — and we'd rather hear
+              it now, while it's still cheap to change.</p></div></div>
+          <div class="ask-item"><div class="n">3</div><div>
+            <h4>If it earns it, tell another tutor</h4>
+            <p>That is our entire go-to-market. We'd rather earn it than buy it.</p></div></div>
+        </div>
+        <p style="font-size:.9rem;color:var(--text-mid);margin-top:22px;line-height:1.65;">
+          We're not quoting prices yet, and one subscription covers your practice — never per
+          student. How you'd rather buy it is one of the things we want to ask you.</p>
+      </div>
+
+      <div class="form-card fade-in delay-1" id="tutor-form-card">
+        <form id="tutor-form" data-live-clear novalidate>
+          <div class="form-row">
+            <div class="form-group" id="tgrp-name">
+              <label for="tname">Your name <span style="color:var(--coral)">*</span></label>
+              <input type="text" id="tname" name="name" autocomplete="name" placeholder="e.g. Priya Sharma" required />
+              <span class="error-msg">Please enter your name.</span>
+            </div>
+            <div class="form-group" id="tgrp-email">
+              <label for="temail">Email address <span style="color:var(--coral)">*</span></label>
+              <input type="email" id="temail" name="email" autocomplete="email" placeholder="you@example.com" required />
+              <span class="error-msg">Please enter a valid email address.</span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group" id="tgrp-practice">
+              <label for="tpractice">Your practice <span class="form-hint">optional</span></label>
+              <input type="text" id="tpractice" placeholder="e.g. Sharma Tuition" />
+            </div>
+            <div class="form-group" id="tgrp-country">
+              <label for="tcountry">Country</label>
+              <select id="tcountry">
+                <option value="" disabled selected>Select country</option>
+                <option>United Kingdom</option><option>Ireland</option><option>India</option>
+                <option>Germany</option><option>France</option><option>Netherlands</option>
+                <option>Spain</option><option>Italy</option><option>Poland</option>
+                <option>United Arab Emirates</option><option>Singapore</option>
+                <option>United States</option><option>Canada</option><option>Australia</option>
+                <option>New Zealand</option><option>South Africa</option><option>Nigeria</option>
+                <option>Other</option>
+              </select>
+              <span class="error-msg">Please select your country.</span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group" id="tgrp-students">
+              <label for="tstudents">Roughly how many students</label>
+              <select id="tstudents">
+                <option value="" disabled selected>Select</option>
+                <option>1–5</option><option>6–20</option><option>21–50</option>
+                <option>51–100</option><option>More than 100</option>
+              </select>
+              <span class="error-msg">Please choose a range.</span>
+            </div>
+            <div class="form-group" id="tgrp-subjects">
+              <label for="tsubjects">Subjects you teach <span class="form-hint">optional</span></label>
+              <input type="text" id="tsubjects" placeholder="e.g. Maths, Physics, 11+" />
+            </div>
+          </div>
+          <div class="form-group" id="tgrp-notes">
+            <label for="tnotes">Anything you'd like us to know <span class="form-hint">optional</span></label>
+            <textarea id="tnotes" placeholder="How you handle fees and materials today, what you'd want it to do, what you're sceptical about."></textarea>
+          </div>
+          <!-- Honeypot: never shown to a person, never in the tab order. -->
+          <div class="hp" aria-hidden="true">
+            <label for="turl">Website</label>
+            <input type="text" id="turl" name="website" tabindex="-1" autocomplete="off" />
+          </div>
+          <button type="submit" class="btn-submit" id="tutor-submit">Talk to us →</button>
+          <p class="form-footnote">We read every message and reply personally, usually within one
+            working day. No newsletter, no list — see our <a href="/privacy?app=tutor">privacy
+            notice</a>.</p>
+        </form>
+        <div class="success-msg" id="tutor-success">
+          <div class="success-emoji">💚</div>
+          <h3>Thanks — that's with us.</h3>
+          <p>We'll come back to you within one working day, from a real person. If it's urgent,
+            email <a href="mailto:support@theplanur.co.uk" style="color:var(--sage)">support@theplanur.co.uk</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="/">Planur<span>.</span></a>
+        <p>Your academic life, organised — and your teaching, without the paperwork.</p>
+      </div>
+      <div class="footer-col">
+        <h4>For students</h4>
+        <ul>
+          <li><a href="/">Planur student app</a></li>
+          <li><a href="/download">Get the app</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>For tutors</h4>
+        <ul>
+          <li><a href="/tutors">Planur for Tutors</a></li>
+          <li><a href="/tutors/download">Get the tutor app</a></li>
+          <li><a href="/tutors/login">Tutor log in</a></li>
+          <li><a href="/tutors#talk">Talk to us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/support?app=tutor">Support</a></li>
+          <li><a href="/privacy?app=tutor">Privacy</a></li>
+          <li><a href="/terms?app=tutor">Terms for tutors</a></li>
+          <li><a href="/delete-account?app=tutor">Delete account</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Planur. Made for students, by people who remember being one.</p>
+      <p class="footer-copy">theplanur.co.uk</p>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/planur.js?v=20260819"></script>
+<script>
+  // ── Flip cards: hover is CSS; this is for touch and keyboard ─────────────
+  document.querySelectorAll('.flip-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var card = btn.closest('.flip');
+      btn.setAttribute('aria-expanded', String(card.classList.toggle('is-flipped')));
+    });
+  });
+</script>
+<script>
+  // ── Tutor enquiry → the deployed `contact-submit` edge function ───────────
+  // Reuses the existing contact pipeline rather than adding a new table, so this
+  // works the day it deploys. The subject carries the practice, size and country
+  // so tutor enquiries are filterable from ordinary contact messages.
+  (function () {
+    var form    = document.getElementById('tutor-form');
+    var btn     = document.getElementById('tutor-submit');
+    var success = document.getElementById('tutor-success');
+    if (!form) return;
+
+    function val(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
+
+    function showSuccess() {
+      form.style.cssText = 'opacity:0;transform:scale(0.97);transition:0.4s ease;';
+      setTimeout(function () {
+        form.style.display = 'none';
+        success.classList.add('show');
+      }, 420);
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var name = document.getElementById('tname'),
+          mail = document.getElementById('temail'),
+          ctry = document.getElementById('tcountry'),
+          size = document.getElementById('tstudents');
+
+      var ok = true;
+      if (!name.value.trim()) { Planur.setErr('tgrp-name', name, true); ok = false; }
+      if (!Planur.validEmail(mail.value.trim())) { Planur.setErr('tgrp-email', mail, true); ok = false; }
+      if (!ctry.value) { Planur.setErr('tgrp-country', ctry, true); ok = false; }
+      if (!size.value) { Planur.setErr('tgrp-students', size, true); ok = false; }
+      if (!ok) {
+        var firstBad = form.querySelector('.has-error input, .has-error select');
+        if (firstBad) firstBad.focus();
+        return;
+      }
+
+      // Silent drop for automated submissions — the sender still sees success.
+      if (Planur.looksAutomated(form)) { showSuccess(); return; }
+
+      var practice = val('tpractice') || 'practice not given';
+      var subject  = 'Tutor early access — ' + practice + ' · ' + size.value +
+                     ' students · ' + ctry.value;
+
+      var message = [
+        'Name: '     + val('tname'),
+        'Email: '    + val('temail').toLowerCase(),
+        'Practice: ' + (val('tpractice') || '—'),
+        'Country: '  + ctry.value,
+        'Students: ' + size.value,
+        'Subjects: ' + (val('tsubjects') || '—'),
+        '',
+        'Notes:',
+        val('tnotes') || '—',
+        '',
+        'Sent from /tutors'
+      ].join('\n');
+
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      Planur.callEdgeFunction('contact-submit', {
+        name:    val('tname'),
+        email:   val('temail').toLowerCase(),
+        subject: subject,
+        message: message
+      }).then(showSuccess).catch(function (err) {
+        console.error('Tutor enquiry error:', err);
+        btn.disabled = false;
+        btn.textContent = 'Talk to us →';
+        alert('Something went wrong sending that — please try again, or email support@theplanur.co.uk directly.');
+      });
+    });
+  })();
+</script>
+</body>
+</html>

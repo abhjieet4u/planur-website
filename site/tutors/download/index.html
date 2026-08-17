@@ -1,35 +1,33 @@
 <!DOCTYPE html>
 <!--
-  Planur (student) — app download landing. Served at https://theplanur.co.uk/download
+  Planur for Tutors — app download landing.
+  Served at https://theplanur.co.uk/tutors/download
 
-  This URL is SHIPPED INSIDE THE APP (share links use /download?ref=…) and will be
-  the install link on both store listings. Never rename the folder.
+  The tutor app's own install link (app.planur.tutor). The student app has its
+  own at /download — keep them separate; each page names one app.
 
   ── CURRENT STATE: STORES ARE OFF ───────────────────────────────────────────
-  The Android app is on Play INTERNAL TESTING and iOS isn't submitted, so a store
-  link 404s for anyone who isn't a listed tester. Sending people there is worse
-  than telling them plainly, so:
+  The tutor app is on Play INTERNAL TESTING and iOS isn't submitted, so a store
+  link 404s for anyone who isn't a listed tester. The "not available yet" state
+  is therefore the STATIC HTML (what you see with JavaScript off, and what
+  everyone sees today), and there is NO automatic redirect to a store.
 
-    · the "not available yet" state is the STATIC HTML — it is what a visitor
-      sees with JavaScript off, and what everyone sees today;
-    · there is NO automatic redirect to a store;
-    · STORES_LIVE below is the single switch.
+  For tutors this is not a dead end: getting into the test is a conversation with
+  us, so the page sends them to /tutors#talk rather than a waitlist.
 
   ── TO GO LIVE ──────────────────────────────────────────────────────────────
-  1. Set STORES_LIVE = true.
-  2. Fill {{APPSTORE_ID}} with the numeric Apple App Store ID.
-     (Leave it unfilled and the iOS button stays disabled even when live — a
-     broken store link is worse than a button that waits.)
-  3. Do the same in /invite and /tutors/download.
+  1. Set STORES_LIVE = true below.
+  2. Fill {{TUTOR_APPSTORE_ID}} with the numeric Apple App Store ID.
+  3. Do the same in /download and /invite.
   iPhone and Android launch together, so don't switch one on early.
 -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Get Planur</title>
-<meta name="description" content="Planur — your academic life, organised. Launching on iPhone and Android." />
-<link rel="canonical" href="https://theplanur.co.uk/download" />
+<title>Get Planur for Tutors</title>
+<meta name="description" content="Planur for Tutors — batches, register, class materials and fees in one app. Launching on iPhone and Android." />
+<link rel="canonical" href="https://theplanur.co.uk/tutors/download" />
 <meta name="robots" content="all">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%234A7C59'/><text x='16' y='23' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='20' fill='white'>P</text></svg>" />
 <script>document.documentElement.className += ' js';</script>
@@ -38,7 +36,7 @@
   body{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
     text-align:center;padding:48px 22px;
     background:linear-gradient(160deg,#fff 0%,var(--mint) 60%,var(--lilac) 100%);}
-  .panel{max-width:560px;}
+  .panel{max-width:580px;}
   .logo{font-size:2rem;font-weight:800;color:var(--sage);text-decoration:none;
     letter-spacing:-.5px;display:inline-block;margin-bottom:22px;}
   .logo span{color:var(--lavender);}
@@ -50,8 +48,8 @@
     stroke-linecap:round;stroke-linejoin:round;}
   h1{font-size:clamp(1.7rem,3.6vw,2.3rem);font-weight:800;letter-spacing:-1px;
     line-height:1.18;margin-bottom:14px;}
-  .lead{color:var(--text-mid);font-size:1rem;line-height:1.68;max-width:44ch;margin:0 auto 28px;}
-  .stores{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:26px;}
+  .lead{color:var(--text-mid);font-size:1rem;line-height:1.68;max-width:46ch;margin:0 auto 26px;}
+  .stores{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:24px;}
   .store-btn{display:inline-flex;align-items:center;gap:10px;background:var(--text-dark);
     color:#fff;text-decoration:none;padding:13px 22px;border-radius:var(--radius-md);
     font-weight:600;font-size:.95rem;transition:transform var(--transition);}
@@ -64,18 +62,22 @@
     cursor:default;box-shadow:none;}
   .store-btn.waiting:hover{transform:none;}
   .store-btn.waiting small{color:var(--text-light);}
-  .note{font-size:.86rem;color:var(--text-light);max-width:40ch;margin:0 auto;line-height:1.6;}
+  .cta{margin-bottom:22px;}
+  .note{font-size:.86rem;color:var(--text-light);max-width:44ch;margin:0 auto;line-height:1.6;}
   .note a{color:var(--sage);font-weight:600;}
+  .back{margin-top:22px;font-size:.88rem;}
+  .back a{color:var(--sage);font-weight:600;text-decoration:none;}
   @media(max-width:520px){ .stores{flex-direction:column;} .store-btn{justify-content:center;} }
 </style>
 </head>
 <body>
   <div class="panel">
-    <a class="logo" href="/">Planur<span>.</span></a>
+    <a class="logo" href="/tutors">Planur<span>.</span></a>
 
-    <h1 id="headline">Planur isn't in the stores yet.</h1>
-    <p class="lead" id="lead">We're finishing it, and iPhone and Android launch together — so there's nothing
-        to install today, on either. Join the waitlist and we'll email you the moment it opens.</p>
+    <h1 id="headline">Planur for Tutors isn't in the stores yet.</h1>
+    <p class="lead" id="lead">It's with a small number of tutors while we finish it, and iPhone and Android
+        launch together — so there's nothing to install from a store today. Getting in early is a
+        conversation rather than a download.</p>
 
     <!-- Static default = the honest one. JS only ever upgrades this. -->
     <div id="waiting">
@@ -88,8 +90,10 @@
         <span class="store-btn waiting">Google&nbsp;Play <small>at launch</small></span>
       </div>
 
-      <p class="note"><a href="/#waitlist">Join the waitlist →</a><br />
-        No spam, and nothing else — just the launch.</p>
+      <div class="cta"><a class="btn btn-coral btn-lg" href="/tutors#talk">Talk to us about early access</a></div>
+
+      <p class="note">We'll get you set up ourselves — including loading your roster, so you're not
+        typing in fifty students before you've taught anything.</p>
     </div>
 
     <!-- Shown only once STORES_LIVE is true. -->
@@ -98,29 +102,31 @@
         <a class="store-btn secondary" id="appstore" href="#">App&nbsp;Store <small>iPhone &amp; iPad</small></a>
         <a class="store-btn" id="play" href="#">Google&nbsp;Play <small>Android</small></a>
       </div>
-      <p class="note">By continuing you agree to our <a href="/terms">Terms</a> and
-        <a href="/privacy">Privacy Notice</a>.</p>
+      <p class="note">By continuing you agree to our <a href="/terms?app=tutor">Terms for tutors</a>
+        and <a href="/privacy?app=tutor">Privacy Notice</a>.</p>
     </div>
+
+    <p class="back"><a href="/tutors">← What Planur for Tutors does</a></p>
   </div>
 
 <script>
   (function () {
     // ── The switch. See the comment at the top of this file. ────────────────
     var STORES_LIVE = false;
-    var APPSTORE_ID = '{{APPSTORE_ID}}';
+    var APPSTORE_ID = '{{TUTOR_APPSTORE_ID}}';
 
     if (!STORES_LIVE) return;   // stay on the honest static state
 
     var ref  = new URLSearchParams(location.search).get('ref');
-    var play = 'https://play.google.com/store/apps/details?id=app.planur.student';
+    var play = 'https://play.google.com/store/apps/details?id=app.planur.tutor';
     if (ref) play += '&referrer=' + encodeURIComponent('ref=' + ref);
     var idReady  = APPSTORE_ID && APPSTORE_ID.indexOf('{{') === -1;
-    var appstore = 'https://apps.apple.com/app/planur/id' + APPSTORE_ID;
+    var appstore = 'https://apps.apple.com/app/planur-for-tutors/id' + APPSTORE_ID;
 
     document.getElementById('waiting').hidden = true;
     document.getElementById('live').hidden = false;
-    document.getElementById('headline').textContent = 'Get Planur';
-    document.getElementById('lead').textContent = 'Your academic life, organised. Download Planur to get started.';
+    document.getElementById('headline').textContent = 'Get Planur for Tutors';
+    document.getElementById('lead').textContent = 'Your batches, register, class materials and fees in one app — with practice papers drafted for you, ready to edit.';
     document.getElementById('play').href = play;
 
     var ios = document.getElementById('appstore');

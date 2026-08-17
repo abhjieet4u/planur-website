@@ -1,109 +1,159 @@
 <!DOCTYPE html>
 <!--
-  Planur — Privacy Policy (standalone page). Served at https://theplanur.co.uk/privacy
+  Planur — Privacy Notice. Served at https://theplanur.co.uk/privacy
+  ONE document covering BOTH products, with a Student / Tutor selector:
+      /privacy            → opens on the student app
+      /privacy?app=tutor  → opens on Planur for Tutors   ← the tutor store listing URL
+      /privacy?app=student→ the student store listing URL
+
+  The selector only HIDES the other side. With JavaScript off — which is how some
+  store reviewers and crawlers read it — every section of both products is visible
+  and complete. Never move content into JavaScript.
+
   Scope: GLOBAL / worldwide. Named regimes are EXAMPLES, not a closed list — UK & EU (GDPR),
   US (COPPA / CCPA-CPRA & state laws), India (DPDP Act 2023), Canada (PIPEDA / Quebec Law 25),
   Brazil & LatAm (LGPD), Africa (e.g. South Africa POPIA, Nigeria NDPA), and APAC (e.g. Australia
-  Privacy Act / APPs, Singapore PDPA). Covers BOTH the Planur app and this website. Fill before
-  final publish: provider list. (India Grievance Officer / Privacy Contact now filled: A Chandel,
-  support@theplanur.co.uk — see §13.)
-  Not legal advice — have the Children and region-specific sections reviewed per market
-  (esp. India DPDP verifiable-parental-consent for under-18, and US COPPA for under-13).
+  Privacy Act / APPs, Singapore PDPA). Covers both apps and this website.
+
+  NOT LEGAL ADVICE. Have reviewed per market before public launch, especially:
+    · India DPDP verifiable parental consent for under-18s
+    · US COPPA for under-13s
+    · §11 — the controller/processor split for tutor-held student data, and whether a
+      separate written processing agreement (DPA) is needed with each practice
 -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Privacy Policy — Planur</title>
+<title>Privacy Notice — Planur</title>
+<meta name="description" content="How Planur collects, uses and protects your data — for the student app and for Planur for Tutors." />
+<link rel="canonical" href="https://theplanur.co.uk/privacy" />
 <meta name="robots" content="all">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%234A7C59'/><text x='16' y='23' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='20' fill='white'>P</text></svg>" />
-<style>
-  @font-face{font-family:'DM Sans';font-style:normal;font-display:swap;font-weight:100 1000;
-    src:url('/fonts/dm-sans-latin-opsz-normal.woff2') format('woff2-variations');
-    unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
-  @font-face{font-family:'DM Sans';font-style:normal;font-display:swap;font-weight:100 1000;
-    src:url('/fonts/dm-sans-latin-ext-opsz-normal.woff2') format('woff2-variations');
-    unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
-  :root{--sage:#4A7C59;--sage-faint:#EBF3EE;--neutral:#F8F9FA;--neutral-mid:#E9ECEF;
-    --text-dark:#1A2B22;--text-mid:#4A5E52;--text-light:#8A9E92;--radius:18px;}
-  *{box-sizing:border-box;}
-  body{margin:0;font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text-dark);line-height:1.7;background:#fff;}
-  .topbar{border-bottom:1px solid var(--neutral-mid);}
-  .topbar .inner{max-width:780px;margin:0 auto;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;}
-  .logo{font-size:1.4rem;font-weight:800;color:var(--sage);letter-spacing:-.5px;text-decoration:none;}
-  .back{font-size:.9rem;color:var(--text-mid);text-decoration:none;}
-  .back:hover{color:var(--sage);}
-  .wrap{max-width:780px;margin:0 auto;padding:36px 22px 80px;}
-  h1{font-size:1.9rem;letter-spacing:-.5px;margin:0 0 .15em;}
-  .date{color:var(--text-light);font-size:.85rem;margin-bottom:1.4em;}
-  h2{font-size:1.12rem;margin:1.9em 0 .4em;padding-top:.5em;border-top:1px solid var(--neutral-mid);}
-  p,li{font-size:.95rem;color:var(--text-mid);}
-  a{color:var(--sage);}
-  ul{padding-left:1.15em;margin:.5em 0;}
-  table{border-collapse:collapse;width:100%;margin:.6em 0;font-size:.92rem;}
-  th,td{border:1px solid var(--neutral-mid);padding:8px 10px;text-align:left;vertical-align:top;color:var(--text-mid);}
-  th{background:var(--neutral);color:var(--text-dark);}
-  .highlight{background:var(--sage-faint);border-radius:var(--radius);padding:16px 20px;font-size:.95rem;color:var(--text-dark);margin:.4em 0 .2em;}
-  footer{border-top:1px solid var(--neutral-mid);margin-top:2.5em;padding-top:1.2em;color:var(--text-light);font-size:.82rem;}
-</style>
+<script>
+  document.documentElement.className += ' js';
+  // Resolve the student/tutor view before first paint, so neither side flashes
+  // in before the other is hidden. planur.js re-applies the same value and wires
+  // the buttons; this is only about the first frame.
+  (function () {
+    var q = new URLSearchParams(location.search).get('app');
+    var h = (location.hash || '').toLowerCase();
+    var app = (q === 'tutor' || q === 'tutors' || (!q && h.indexOf('tutor') !== -1))
+      ? 'tutor' : 'student';
+    document.documentElement.setAttribute('data-app', app);
+  })();
+</script>
+<link rel="stylesheet" href="/assets/planur.css?v=20260819" />
 </head>
 <body>
 
-<div class="topbar"><div class="inner">
-  <a class="logo" href="/">Planur</a>
-  <a class="back" href="/">← Back to home</a>
-</div></div>
+<a class="skip-link" href="#main">Skip to content</a>
 
-<div class="wrap">
-  <h1>Privacy Policy</h1>
-  <p class="date">Last updated: 2 August 2026</p>
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-bar">
+      <a class="logo" href="/">Planur<span>.</span></a>
+      <div class="nav-tabs">
+        <a href="/">For students</a>
+        <a href="/tutors">For tutors</a>
+      </div>
+    </div>
+  </div>
+</nav>
 
-  <div class="highlight">
-    Planur is designed for students aged 13 and over. We collect only what we need, never sell your
-    data, and never show you ads. This policy applies <strong>wherever in the world</strong> you use
-    Planur — and explains what we collect, why, your rights, and the extra protections that apply in your
-    country (see “Your rights &amp; regional protections”).
+<main id="main" class="doc">
+<div class="container-narrow">
+
+  <h1>Privacy Notice</h1>
+  <p class="doc-date">Last updated: 17 August 2026</p>
+
+  <div class="switch-row">
+    <div class="app-switch" role="group" aria-label="Choose which Planur product this applies to">
+      <button type="button" data-app="student" aria-pressed="true">Student app</button>
+      <button type="button" data-app="tutor" aria-pressed="false">Planur for Tutors</button>
+    </div>
+    <span class="switch-hint">Everything unmarked applies to both.</span>
+  </div>
+
+  <div class="callout">
+    <p>We collect only what we need, never sell your data, and never show you ads. This notice applies
+    <strong>wherever in the world</strong> you use Planur, and covers the <strong>Planur student
+    app</strong>, <strong>Planur for Tutors</strong> and this <strong>website</strong>.</p>
   </div>
 
   <h2>1. Who we are</h2>
   <p>Planur is operated by <strong>Planur Ltd</strong>, a company registered in England and Wales. We
   are the data controller (and, where applicable, the “data fiduciary” or “business”) for your personal
-  data. This policy covers both the <strong>Planur app</strong> and this <strong>website</strong>, and
-  applies <strong>worldwide</strong>. Depending on where you live it is governed by your local
+  data — with one important exception for tutors, set out in §11. This notice applies
+  <strong>worldwide</strong>. Depending on where you live it is governed by your local
   data-protection law — for example the UK GDPR, the EU GDPR, US federal and state privacy laws
   (including COPPA and the California CCPA/CPRA), India’s Digital Personal Data Protection Act 2023
   (DPDP), Canada’s PIPEDA and Quebec’s Law 25, Brazil’s LGPD and other Latin American laws, African laws
   such as South Africa’s POPIA and Nigeria’s NDPA, and APAC laws such as Australia’s Privacy Act and
   Singapore’s PDPA. These are examples; whichever law applies to you, we honour it. For any privacy
-  question, use the Contact form on this website.</p>
+  question, use the <a href="/support">contact form</a> on this website.</p>
 
   <h2>2. What we collect and why</h2>
-  <p><strong>In the app, when you create an account and use Planur:</strong></p>
-  <table>
-    <tr><th>Data</th><th>Why</th></tr>
-    <tr><td>Email and/or phone number</td><td>Sign-in via one-time code</td></tr>
-    <tr><td>Display name, and optionally date of birth / age band, gender, school, year group, subjects</td><td>Set up your planner and tailor it to you</td></tr>
-    <tr><td>Your content — timetable, assignments, to-dos, exams, sports fixtures, focus sessions, group-study plans</td><td>The core features of the app</td></tr>
-    <tr><td>Friends &amp; contacts</td><td>If you choose to find friends, contacts are matched as one-way <strong>hashes</strong> — we never store your raw contacts. Connections and invites you create are stored.</td></tr>
-    <tr><td>Device push token</td><td>To send reminders and invites (Firebase Cloud Messaging)</td></tr>
-    <tr><td>Subscription status</td><td>To unlock paid plans (via RevenueCat and the app store). We never receive your card details.</td></tr>
-    <tr><td>Country of registration</td><td>The country you select when you sign up. Used to apply the correct age and parental-consent rules for you.</td></tr>
-    <tr><td>Approximate location — city and country, derived from your IP address</td><td>Shown to you on your own profile as your “last used location”. It is stored <strong>only on your device</strong> — we do <strong>not</strong> upload it to our servers, use it for any other purpose, or share it with anyone (including parents). To look up the city name, your device sends your IP address to our geolocation provider (see “Who we share data with”).</td></tr>
-  </table>
-  <p><strong>On this website, when you join the waitlist or contact us:</strong> first name, email,
-  year group and country (waitlist), and the content of any message you send via the Contact form.</p>
+
+  <div data-app-only="student">
+    <span class="app-scope">Student app</span>
+    <p>When you create an account and use the Planur student app:</p>
+    <div class="table-scroll">
+      <table class="data">
+        <tr><th>Data</th><th>Why</th></tr>
+        <tr><td>Email and/or phone number</td><td>Sign-in via one-time code</td></tr>
+        <tr><td>Display name, and optionally date of birth / age band, gender, school, year group, subjects</td><td>Set up your planner and tailor it to you</td></tr>
+        <tr><td>Your content — timetable, assignments, to-dos, exams, sports fixtures, focus sessions, group-study plans</td><td>The core features of the app</td></tr>
+        <tr><td>Friends &amp; contacts</td><td>If you choose to find friends, contacts are matched as one-way <strong>hashes</strong> — we never store your raw contacts. Connections and invites you create are stored.</td></tr>
+        <tr><td>Device push token</td><td>To send reminders and invites (Firebase Cloud Messaging)</td></tr>
+        <tr><td>Subscription status</td><td>To unlock paid plans (via RevenueCat and the app store). We never receive your card details.</td></tr>
+        <tr><td>Country of registration</td><td>The country you select when you sign up. Used to apply the correct age and parental-consent rules for you.</td></tr>
+        <tr><td>Approximate location — city and country, derived from your IP address</td><td>Shown to you on your own profile as your “last used location”. It is stored <strong>only on your device</strong> — we do <strong>not</strong> upload it to our servers, use it for any other purpose, or share it with anyone (including parents). To look up the city name, your device sends your IP address to our geolocation provider (see §6).</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div data-app-only="tutor">
+    <span class="app-scope tutor">Planur for Tutors</span>
+    <p>When you sign up as a tutor and run your practice in Planur:</p>
+    <div class="table-scroll">
+      <table class="data">
+        <tr><th>Data</th><th>Why</th></tr>
+        <tr><td>Your email and/or phone number</td><td>Sign-in via one-time code</td></tr>
+        <tr><td>Your name, your practice name, and the roles of anyone you add to the practice</td><td>To run the practice and apply the correct permissions</td></tr>
+        <tr><td><strong>Your students’ details</strong> — name, year, class, and a parent or guardian contact you enter</td><td>To build your roster, mark attendance and raise invoices. See §11: for this data you are the controller and we act on your instructions.</td></tr>
+        <tr><td>Batches, sessions, attendance marks, class materials you upload, and practice tests you generate</td><td>The core features of the tutor app</td></tr>
+        <tr><td>Fees and invoices you record</td><td>To track billing. We do <strong>not</strong> take payments from parents on your behalf, and we never see their card details.</td></tr>
+        <tr><td>Your subscription status and plan band</td><td>To apply your plan’s limits (via the app store). We never receive your card details.</td></tr>
+        <tr><td>Device push token</td><td>To send you app notifications</td></tr>
+      </table>
+    </div>
+    <div class="callout">
+      <p><strong>What we never send to the AI.</strong> When you generate a practice test, the only
+      things that leave Planur are the <strong>topic</strong>, the <strong>subject</strong>, the
+      <strong>difficulty</strong> and the <strong>number of questions</strong> you typed. No student
+      names, results, attendance, fees, parent contacts or uploaded materials are included — see §5.</p>
+    </div>
+  </div>
+
+  <p><strong>On this website</strong>, when you join the waitlist or contact us: first name, email,
+  year group and country (waitlist); and your name, email, subject and message (contact form, including
+  tutor enquiries, where we also store the practice details you choose to give us).</p>
   <p>We do <strong>not</strong> collect your <strong>precise (GPS) location</strong> or your home/postal
-  address, and we do not profile you or show third-party advertising.</p>
+  address, and we do not profile you or show third-party advertising in either app.</p>
 
   <h2>3. Legal bases for processing (UK/EU GDPR)</h2>
   <ul>
     <li><strong>Providing the app</strong> and your account — performance of a contract.</li>
-    <li><strong>AI study/revision plans</strong> — when you request one, the exam/subject details you
-      provide are sent to our AI processing provider(s) (Mistral AI, Groq, Anthropic and Google (Gemini)) to generate the plan —
-      contract / legitimate interests.</li>
+    <li><strong>AI features</strong> — when you request a study plan, revision quiz or practice test,
+      the subject/topic details you provide are sent to our AI processing provider(s) (Mistral AI,
+      Groq, Anthropic and Google (Gemini)) to generate it — contract / legitimate interests.</li>
     <li><strong>Reminders &amp; invites</strong> (push) — contract / consent.</li>
     <li><strong>Waitlist &amp; enquiries</strong> — legitimate interests (Article 6(1)(f)).</li>
     <li><strong>Security, safety &amp; fraud prevention</strong> — legitimate interests / legal obligation.</li>
+    <li data-app-only="tutor"><strong>Running your practice</strong> — performance of our contract with
+      you. For the personal data you enter about your students, your own lawful basis as controller
+      applies; see §11.</li>
   </ul>
   <p>Where consent is the basis, you can withdraw it at any time.</p>
 
@@ -132,21 +182,44 @@
   guardian and believe your child has provided us data without the required consent, contact us and we
   will delete it.</p>
 
-  <h2>5. How we store and protect your data</h2>
-  <p>Your data is stored securely in <strong>Supabase</strong> (EU region), which is GDPR-compliant and
-  SOC 2 Type II certified. Data is encrypted <strong>in transit</strong> (HTTPS/TLS) and the app’s
-  on-device database is encrypted <strong>at rest</strong> (AES-256). Backend access is restricted by
-  authentication and row-level security. We do not store payment information.</p>
+  <div class="callout">
+    <p><strong>Connecting a student to a tutor is gated on age.</strong> When a join code is entered,
+    we decide on our servers — from the account’s date of birth and the age of consent for that
+    country, never from the app — whether the connection can complete. A parent connects immediately.
+    A student at or over the age of consent connects immediately. A student under it, <em>or with no
+    date of birth on file</em>, is held: nothing about the tutor’s classes or materials is visible
+    until a parent approves through a link they open in any browser. An unknown age is treated as
+    under-age, because that is the safe assumption rather than the convenient one.</p>
+  </div>
 
-  <h2>6. Who we share data with</h2>
+  <h2>5. AI features, and what is never sent</h2>
+  <p>Our AI features generate academic content only. We use providers whose terms exclude using our
+  content to train their models, and we re-check that on a schedule rather than assuming it stays
+  true. If a provider is unavailable, you are told — we do not silently substitute something worse.</p>
+  <ul>
+    <li data-app-only="student">In the <strong>student app</strong>, a study plan or revision quiz is
+      generated from the subject, topic and exam details you enter. Your friends, your messages and
+      your personal notes are not part of the request.</li>
+    <li data-app-only="tutor">In <strong>Planur for Tutors</strong>, a practice test is generated from
+      four fields: topic, subject, difficulty and number of questions. <strong>Nothing about a child
+      is included</strong> — not names, results, attendance, fees, parent contacts, or the materials
+      you have uploaded. That is not a policy statement; it is the entire content of the request.</li>
+  </ul>
+
+  <h2>6. How we store and protect your data, and who we share it with</h2>
+  <p>Your data is stored securely in <strong>Supabase</strong> (EU region), which is GDPR-compliant and
+  SOC 2 Type II certified. Data is encrypted <strong>in transit</strong> (HTTPS/TLS) and the student
+  app’s on-device database is encrypted <strong>at rest</strong> (AES-256). Backend access is restricted
+  by authentication and row-level security rules enforced in the database itself. We do not store
+  payment information.</p>
   <p>We do not sell, rent or trade your personal data. We share it only with service providers
   (sub-processors) acting on our instructions:</p>
   <ul>
     <li><strong>Supabase Inc.</strong> — database, authentication and sync (EU servers)</li>
     <li><strong>Google Firebase</strong> — push notifications</li>
     <li><strong>AI provider(s)</strong> — <strong>Mistral AI</strong> (EU servers), Groq, Anthropic and
-      Google (Gemini) — to generate study/revision plans and practice questions. None of them use your
-      prompts or answers to train their models.</li>
+      Google (Gemini) — to generate study plans, revision quizzes and practice tests. None of them use
+      your prompts or answers to train their models.</li>
     <li><strong>RevenueCat</strong> and <strong>Google Play / Apple</strong> — subscriptions and payment</li>
     <li><strong>Geolocation provider</strong> — <strong>ipapi.co</strong> (over HTTPS) — receives your IP
       address to return an approximate (city-level) location, which is then shown only on your own device.
@@ -163,10 +236,10 @@
 
   <h2>8. Your rights &amp; regional protections</h2>
   <p>Whoever and wherever you are, you can <strong>access</strong>, <strong>correct</strong> and
-  <strong>delete</strong> your data, and <strong>withdraw consent</strong>, using the app (Profile) or
-  the Contact form on this website. We do <strong>not</strong> sell your personal data or share it for
-  cross-context behavioural advertising. Depending on where you live, you also have these specific
-  rights:</p>
+  <strong>delete</strong> your data, and <strong>withdraw consent</strong>, using the app or the
+  <a href="/support">contact form</a> on this website. We do <strong>not</strong> sell your personal
+  data or share it for cross-context behavioural advertising. Depending on where you live, you also
+  have these specific rights:</p>
   <ul>
     <li><strong>UK &amp; EU/EEA (GDPR)</strong> — access, rectification, erasure, restriction, objection,
       data portability, and withdrawal of consent. You can complain to the UK
@@ -192,24 +265,71 @@
       can exercise them with us.</li>
   </ul>
   <p>To exercise any right, email our Privacy Contact at
-  <a href="mailto:support@theplanur.co.uk">support@theplanur.co.uk</a> or use the Contact form on this
-  website. We acknowledge within 30 days and complete data-rights requests within one month (extendable
-  by up to two further months for complex requests) — see “Contact &amp; complaints” below.</p>
+  <a href="mailto:support@theplanur.co.uk">support@theplanur.co.uk</a> or use the
+  <a href="/support">contact form</a>. We acknowledge within 30 days and complete data-rights requests
+  within one month (extendable by up to two further months for complex requests) — see §13.</p>
+  <div class="callout" data-app-only="tutor">
+    <p><strong>If your request concerns a student on a tutor’s roster</strong> — for example a parent
+    asking to see or delete what a tutor holds about their child — that data belongs to the practice,
+    not to us. We will pass the request to the tutor and support them in answering it. See §11.</p>
+  </div>
 
   <h2>9. Deleting your account and data</h2>
-  <p>You can delete your account and all associated data at any time — in the app via
-  <strong>Profile → Delete account</strong>, or see
+  <p data-app-only="student">You can delete your account and all associated data at any time — in the
+  app via <strong>Profile → Delete account</strong>, or see
   <a href="/delete-account">theplanur.co.uk/delete-account</a> for full instructions.</p>
+  <p data-app-only="tutor">You can delete your tutor account and your practice at any time — see
+  <a href="/delete-account?app=tutor">theplanur.co.uk/delete-account</a> for what happens to your
+  roster, register, invoices and uploaded materials, and what your students see afterwards.</p>
 
   <h2>10. Cookies &amp; tracking</h2>
   <p>This website uses <strong>no</strong> tracking cookies, advertising cookies, or third-party
   analytics (no Google Analytics or similar). Fonts are self-hosted — no requests to Google Fonts or
-  any external font service. Only strictly necessary browser storage is used.</p>
+  any external font service, and in fact the site makes no external requests at all. Only strictly
+  necessary browser storage is used.</p>
 
-  <h2>11. How long we keep your data</h2>
+  <h2 data-app-only="tutor">11. Tutors: who controls your students’ data</h2>
+  <div data-app-only="tutor">
+    <span class="app-scope tutor">Planur for Tutors</span>
+    <p>This is the most important section for a tutor to read, because the answer is not the same for
+    all the data in your account.</p>
+    <ul>
+      <li><strong>Your own data</strong> — your name, email, practice details and subscription. We are
+        the <strong>controller</strong>. Everything else in this notice applies to it as normal.</li>
+      <li><strong>Your students’ data</strong> — the names, year groups, parent contacts, attendance
+        marks, fees and results you enter or record. <strong>You (your practice) are the
+        controller</strong> and <strong>we are the processor</strong>: we hold and process that data on
+        your instructions, to provide the app to you, and for no purpose of our own. We do not use it
+        to market to your students or their parents, we do not sell it, and we never send it to an AI
+        provider.</li>
+    </ul>
+    <p>Because you are the controller of that data, some responsibilities are yours rather than ours:
+    you need a lawful basis for entering a student’s and a parent’s details into Planur, and the
+    parents you record should know that you use a third-party app to run your teaching. This notice
+    is written so you can point them at it.</p>
+    <p><strong>What we enforce for you, in the database rather than on screen:</strong></p>
+    <ul>
+      <li>A tutor <strong>never sees a student’s own planner</strong> — their homework, revision and
+        private notes. You see the classes you teach and the results of tests you set.</li>
+      <li><strong>No practice can read another practice’s data.</strong> A student who studies with two
+        tutors cannot carry your batches, materials or fees across to the other.</li>
+      <li><strong>Fee data is invisible below the owner tier.</strong> A teacher you add to your
+        practice genuinely cannot read it — a separate permission at the database level, not a hidden
+        screen.</li>
+      <li><strong>No student account can reach an answer key.</strong></li>
+    </ul>
+    <p>These rules are covered by an automated test suite that runs against the real database before
+    any change ships.</p>
+  </div>
+
+  <h2>12. How long we keep your data</h2>
   <ul>
     <li><strong>Account &amp; app data</strong> — kept while your account is active; deleted when you
       delete your account, and deleted or anonymised after 24 months of inactivity.</li>
+    <li data-app-only="tutor"><strong>Practice data</strong> — your roster, register, invoices and
+      uploaded materials are kept for as long as your practice exists, including if you drop to a
+      free plan or stop paying: plan limits stop you <em>adding</em>, they never delete what is
+      already there. It is removed when you delete the practice.</li>
     <li><strong>Waitlist signups</strong> — kept until you have had the chance to create an account, or
       until you request deletion.</li>
     <li><strong>Contact messages</strong> — up to 12 months after your enquiry is resolved, then deleted.</li>
@@ -218,16 +338,12 @@
   no readable personal data) and records we are legally required to retain (e.g. billing records held
   by the app stores).</p>
 
-  <h2>12. Changes to this policy</h2>
-  <p>We may update this policy as Planur develops. If we make material changes we will update the date
-  above and, where appropriate, notify you.</p>
-
-  <h2>13. Contact &amp; complaints</h2>
+  <h2>13. Contact, complaints, and changes</h2>
   <p>For any privacy question, to exercise your rights, or to raise a complaint, contact our
   <strong>Privacy Contact</strong>, <strong>A Chandel</strong> — email
-  <a href="mailto:support@theplanur.co.uk">support@theplanur.co.uk</a> — or use the Contact form on this
-  website. If you are in <strong>India</strong>, the same person is our <strong>Grievance Officer</strong>
-  under the DPDP Act 2023 and can be reached at the same address.</p>
+  <a href="mailto:support@theplanur.co.uk">support@theplanur.co.uk</a> — or use the
+  <a href="/support">contact form</a>. If you are in <strong>India</strong>, the same person is our
+  <strong>Grievance Officer</strong> under the DPDP Act 2023 and can be reached at the same address.</p>
   <p><strong>How quickly we respond.</strong> We acknowledge every privacy request or complaint within
   <strong>30 days</strong>. Where you are exercising a data-protection right (such as access, correction,
   erasure or portability), we complete it within <strong>one month</strong>, and may extend this by up to
@@ -240,10 +356,52 @@
   India</strong>; Canada’s <strong>OPC</strong>; Brazil’s <strong>ANPD</strong>; South Africa’s
   <strong>Information Regulator</strong>; Australia’s <strong>OAIC</strong>; Singapore’s
   <strong>PDPC</strong>; or <strong>your local data-protection authority wherever you live</strong>.</p>
+  <p>We may update this notice as Planur develops. If we make material changes we will update the date
+  at the top and, where appropriate, notify you.</p>
 
-  <footer>© <span id="y"></span> Planur Ltd. <a href="/">theplanur.co.uk</a>
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script></footer>
 </div>
+</main>
 
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="/">Planur<span>.</span></a>
+        <p>Your academic life, organised — and your teaching, without the paperwork.</p>
+      </div>
+      <div class="footer-col">
+        <h4>For students</h4>
+        <ul>
+          <li><a href="/">Planur student app</a></li>
+          <li><a href="/download">Get the app</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>For tutors</h4>
+        <ul>
+          <li><a href="/tutors">Planur for Tutors</a></li>
+          <li><a href="/tutors/download">Get the tutor app</a></li>
+          <li><a href="/tutors/login">Tutor log in</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/support">Support &amp; contact</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+          <li><a href="/delete-account">Delete account</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© <span id="y">2026</span> Planur Ltd. All rights reserved.</p>
+      <p class="footer-copy">theplanur.co.uk</p>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/planur.js?v=20260819"></script>
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
 </html>

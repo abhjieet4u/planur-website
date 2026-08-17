@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<!--
+  Planur — support & contact. Served at https://theplanur.co.uk/support
+
+  This is the URL for the "Support" field of both store listings:
+      /support             → student app   ← student listing's support URL
+      /support?app=tutor   → tutor app     ← tutor listing's support URL
+
+  The form posts to the deployed `contact-submit` edge function. Its contract is
+  fixed at { name, email, subject, message } — the function's source is not in any
+  local repo, so do not add fields to the payload. Extra detail goes in `message`,
+  and the audience goes in `subject` as a prefix so enquiries stay filterable.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support &amp; contact — Planur</title>
+<meta name="description" content="Get help with Planur — the student app or Planur for Tutors. Contact a real person; we reply within one working day." />
+<link rel="canonical" href="https://theplanur.co.uk/support" />
+<meta name="robots" content="all">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%234A7C59'/><text x='16' y='23' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='20' fill='white'>P</text></svg>" />
+<script>
+  document.documentElement.className += ' js';
+  // Resolve the student/tutor view before first paint, so neither side flashes
+  // in before the other is hidden. planur.js re-applies the same value and wires
+  // the buttons; this is only about the first frame.
+  (function () {
+    var q = new URLSearchParams(location.search).get('app');
+    var h = (location.hash || '').toLowerCase();
+    var app = (q === 'tutor' || q === 'tutors' || (!q && h.indexOf('tutor') !== -1))
+      ? 'tutor' : 'student';
+    document.documentElement.setAttribute('data-app', app);
+  })();
+</script>
+<link rel="stylesheet" href="/assets/planur.css?v=20260819" />
+<style>
+  .support-hero{padding:56px 0 8px;}
+  .support-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start;
+    padding:8px 0 76px;}
+  .faq{border-top:1px solid var(--neutral-mid);}
+  .faq details{border-bottom:1px solid var(--neutral-mid);padding:14px 0;}
+  .faq summary{font-size:.96rem;font-weight:700;color:var(--text-dark);cursor:pointer;
+    list-style:none;display:flex;align-items:center;justify-content:space-between;gap:14px;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary::after{content:'+';color:var(--sage);font-weight:700;font-size:1.15rem;flex-shrink:0;}
+  .faq details[open] summary::after{content:'–';}
+  .faq p{font-size:.91rem;color:var(--text-mid);line-height:1.7;margin:10px 0 2px;}
+  .faq a{color:var(--sage);}
+  .contact-side{position:sticky;top:88px;}
+  @media(max-width:900px){
+    .support-grid{grid-template-columns:1fr;gap:36px;}
+    .contact-side{position:static;}
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-bar">
+      <a class="logo" href="/">Planur<span>.</span></a>
+      <div class="nav-tabs">
+        <a href="/">For students</a>
+        <a href="/tutors">For tutors</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<section class="support-hero">
+  <div class="container">
+    <h1 class="section-title" style="margin-bottom:12px;">Support &amp; contact</h1>
+    <p class="section-lede">A real person reads every message and replies — usually within one working
+      day. There is no ticket queue, because there is no call centre.</p>
+    <div class="switch-row" style="margin-top:22px;">
+      <div class="app-switch" role="group" aria-label="Choose which Planur product you need help with">
+        <button type="button" data-app="student" aria-pressed="true">Student app</button>
+        <button type="button" data-app="tutor" aria-pressed="false">Planur for Tutors</button>
+      </div>
+      <span class="switch-hint">So we can point you at the right answer.</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="support-grid">
+
+      <!-- ── Answers ──────────────────────────────────────────────────── -->
+      <div>
+        <div data-app-only="student">
+          <span class="app-scope">Student app</span>
+          <h2 style="font-size:1.2rem;font-weight:800;margin:6px 0 14px;">Common questions</h2>
+          <div class="faq">
+            <details>
+              <summary>I can't sign in</summary>
+              <p>Planur signs you in with a one-time code sent to your email or phone — there is no
+                password to forget. If the code doesn't arrive, check your spam folder, make sure you
+                typed the same address you registered with, and try again after a minute. Still
+                stuck? Message us below from that same address.</p>
+            </details>
+            <details>
+              <summary>How do I delete my account and data?</summary>
+              <p>In the app: <strong>Profile → Delete account</strong>. It is permanent and immediate.
+                Full details, including what we keep, are on
+                <a href="/delete-account">the deletion page</a>.</p>
+            </details>
+            <details>
+              <summary>What can my parent see?</summary>
+              <p>Only what you agree to share, and you can change your mind. Parent mode gives a
+                guardian a calm overview of upcoming deadlines and events — it is not a surveillance
+                tool, and it never shows your private notes or messages.</p>
+            </details>
+            <details>
+              <summary>How do I cancel a subscription or get a refund?</summary>
+              <p>Subscriptions are billed by the App Store or Google Play, so you cancel in your
+                <strong>app store account settings</strong>, not inside Planur. Refunds are handled by
+                Apple or Google under their policies — see <a href="/terms">our terms</a>.</p>
+            </details>
+            <details>
+              <summary>My tutor gave me a join code</summary>
+              <p>Enter it in Planur and their classes, schedule and materials appear in your planner.
+                If you are under the age of digital consent in your country — or we don't have your
+                date of birth — nothing appears until a parent approves it through a link we send
+                them. Your own planner stays private from your tutor either way.</p>
+            </details>
+          </div>
+        </div>
+
+        <div data-app-only="tutor">
+          <span class="app-scope tutor">Planur for Tutors</span>
+          <h2 style="font-size:1.2rem;font-weight:800;margin:6px 0 14px;">Common questions</h2>
+          <div class="faq">
+            <details>
+              <summary>How fast will you reply?</summary>
+              <p>Within <strong>24 hours</strong>. That's the standard we set ourselves rather than a
+                guaranteed service level — we'd rather say it plainly than promise something we can't
+                always hit. Reporting from inside the app is fastest: it carries the app version and
+                screen automatically, so we aren't debugging from a description.</p>
+            </details>
+            <details>
+              <summary>Can you help me get my roster in?</summary>
+              <p>Yes, and we'd rather do it than watch you type fifty students in by hand. Spreadsheet
+                import is on the roadmap; until it lands, send us your list in whatever shape it
+                exists and we'll have students, batches and fees in place before you start.</p>
+            </details>
+            <details>
+              <summary>What happens if I hit a plan limit, or stop paying?</summary>
+              <p><strong>Nothing is deleted.</strong> Limits stop you adding — another student,
+                another upload — they never remove what's already there. Your roster, register,
+                invoices and files all stay until you delete them.</p>
+            </details>
+            <details>
+              <summary>Can a teacher I add see my fees?</summary>
+              <p>No. Fee data is restricted to the owner tier, enforced in the database rather than
+                hidden on a screen, so it holds regardless of what any part of the app shows. The flow
+                for <em>inviting</em> a colleague is the next thing we're building — until then, adding
+                someone is something we do with you.</p>
+            </details>
+            <details>
+              <summary>Can I get my data out?</summary>
+              <p>A one-tap export is on the roadmap and isn't there yet. In the meantime, ask us and
+                we'll get your roster, register and invoices out for you — before you delete anything,
+                because deletion is immediate. See <a href="/delete-account?app=tutor">the deletion
+                page</a>.</p>
+            </details>
+            <details>
+              <summary>Can I work from a laptop?</summary>
+              <p>Not yet — it's close. Browser access is built and being finished off; today you run
+                your practice from the app. There's a <a href="/tutors/login">holding page</a> with
+                the detail, and if working from a laptop matters to you, tell us below — that moves
+                it up the list.</p>
+              <p>When it lands it'll be the same sign-in and the same data. Two things will behave
+                differently in a browser: no local class reminders (those are phone notifications),
+                and saving a marks sheet may need the phone app.</p>
+            </details>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top:26px;">
+          <p><strong>Privacy or data requests</strong> — including access, correction, erasure and
+          complaints — go to <a href="mailto:support@theplanur.co.uk">support@theplanur.co.uk</a> or
+          use the form. We acknowledge within 30 days and complete data-rights requests within one
+          month. See the <a href="/privacy">Privacy Notice</a>.</p>
+        </div>
+      </div>
+
+      <!-- ── Contact form ─────────────────────────────────────────────── -->
+      <div class="contact-side">
+        <div class="form-card">
+          <h2 style="font-size:1.25rem;font-weight:800;margin-bottom:6px;">Send us a message</h2>
+          <p style="font-size:.9rem;color:var(--text-mid);margin-bottom:20px;">Question, bug, idea or
+            complaint — all of it reaches the same small team.</p>
+
+          <form id="contact-form" data-live-clear novalidate>
+            <div class="form-row">
+              <div class="form-group" id="cgrp-name">
+                <label for="cname">Your name <span style="color:var(--coral)">*</span></label>
+                <input type="text" id="cname" autocomplete="name" placeholder="Alex" required />
+                <span class="error-msg">Please enter your name.</span>
+              </div>
+              <div class="form-group" id="cgrp-email">
+                <label for="cemail">Email address <span style="color:var(--coral)">*</span></label>
+                <input type="email" id="cemail" autocomplete="email" placeholder="you@example.com" required />
+                <span class="error-msg">Please enter a valid email address.</span>
+              </div>
+            </div>
+            <div class="form-group" id="cgrp-topic">
+              <label for="ctopic">What's it about?</label>
+              <select id="ctopic">
+                <option value="" disabled selected>Select a topic</option>
+                <option>A problem or bug</option>
+                <option>A question</option>
+                <option>An idea or feature request</option>
+                <option>Privacy or my data</option>
+                <option>Billing or subscription</option>
+                <option>Something else</option>
+              </select>
+              <span class="error-msg">Please choose a topic.</span>
+            </div>
+            <div class="form-group" id="cgrp-subject">
+              <label for="csubject">Subject <span style="color:var(--coral)">*</span></label>
+              <input type="text" id="csubject" placeholder="One line on what's happening" required />
+              <span class="error-msg">Please enter a subject.</span>
+            </div>
+            <div class="form-group" id="cgrp-message">
+              <label for="cmessage">Message <span style="color:var(--coral)">*</span></label>
+              <textarea id="cmessage" placeholder="What happened, and what you expected instead. If it's a bug, the screen you were on helps a lot."></textarea>
+              <span class="error-msg">Please enter a message.</span>
+            </div>
+            <!-- Honeypot: never shown to a person, never in the tab order. -->
+            <div class="hp" aria-hidden="true">
+              <label for="curl">Website</label>
+              <input type="text" id="curl" name="website" tabindex="-1" autocomplete="off" />
+            </div>
+            <button type="submit" class="btn-submit" id="contact-submit">Send message →</button>
+            <p class="form-footnote">We typically reply within one working day. Your message and email
+              are kept for up to 12 months after it's resolved — see the
+              <a href="/privacy">Privacy Notice</a>.</p>
+          </form>
+
+          <div class="success-msg" id="contact-success">
+            <div class="success-emoji">💚</div>
+            <h3>Message sent!</h3>
+            <p>Thanks for reaching out — we'll get back to you, usually within one working day.</p>
+          </div>
+        </div>
+
+        <p style="font-size:.86rem;color:var(--text-light);text-align:center;margin-top:16px;">
+          Prefer email? <a href="mailto:support@theplanur.co.uk" style="color:var(--sage);font-weight:600;">support@theplanur.co.uk</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="/">Planur<span>.</span></a>
+        <p>Your academic life, organised — and your teaching, without the paperwork.</p>
+      </div>
+      <div class="footer-col">
+        <h4>For students</h4>
+        <ul>
+          <li><a href="/">Planur student app</a></li>
+          <li><a href="/download">Get the app</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>For tutors</h4>
+        <ul>
+          <li><a href="/tutors">Planur for Tutors</a></li>
+          <li><a href="/tutors/download">Get the tutor app</a></li>
+          <li><a href="/tutors/login">Tutor log in</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/support">Support &amp; contact</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+          <li><a href="/delete-account">Delete account</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© <span id="y">2026</span> Planur Ltd. All rights reserved.</p>
+      <p class="footer-copy">theplanur.co.uk</p>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/planur.js?v=20260819"></script>
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+
+  // ── Contact form → the deployed `contact-submit` edge function ──────────
+  (function () {
+    var form = document.getElementById('contact-form');
+    var btn  = document.getElementById('contact-submit');
+    var done = document.getElementById('contact-success');
+    if (!form) return;
+
+    function showSuccess() {
+      form.style.cssText = 'opacity:0;transform:scale(0.97);transition:0.4s ease;';
+      setTimeout(function () { form.style.display = 'none'; done.classList.add('show'); }, 420);
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var n = document.getElementById('cname'),
+          em = document.getElementById('cemail'),
+          tp = document.getElementById('ctopic'),
+          sj = document.getElementById('csubject'),
+          ms = document.getElementById('cmessage');
+
+      var ok = true;
+      if (!n.value.trim()) { Planur.setErr('cgrp-name', n, true); ok = false; }
+      if (!Planur.validEmail(em.value.trim())) { Planur.setErr('cgrp-email', em, true); ok = false; }
+      if (!tp.value) { Planur.setErr('cgrp-topic', tp, true); ok = false; }
+      if (!sj.value.trim()) { Planur.setErr('cgrp-subject', sj, true); ok = false; }
+      if (!ms.value.trim()) { Planur.setErr('cgrp-message', ms, true); ok = false; }
+      if (!ok) {
+        var firstBad = form.querySelector('.has-error input, .has-error select, .has-error textarea');
+        if (firstBad) firstBad.focus();
+        return;
+      }
+
+      // Silent drop for automated submissions — the sender still sees success.
+      if (Planur.looksAutomated(form)) { showSuccess(); return; }
+
+      // Which side of the site they were reading, so replies get routed right.
+      var app = document.documentElement.getAttribute('data-app') === 'tutor' ? 'Tutor' : 'Student';
+      var subject = '[' + app + '] ' + tp.value + ' — ' + sj.value.trim();
+      var message = ms.value.trim() + '\n\n—\nSent from /support (' + app.toLowerCase() +
+                    '), topic: ' + tp.value;
+
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      Planur.callEdgeFunction('contact-submit', {
+        name:    n.value.trim(),
+        email:   em.value.trim().toLowerCase(),
+        subject: subject,
+        message: message
+      }).then(showSuccess).catch(function (err) {
+        console.error('Contact error:', err);
+        btn.disabled = false;
+        btn.textContent = 'Send message →';
+        alert('Something went wrong sending that — please try again, or email support@theplanur.co.uk directly.');
+      });
+    });
+  })();
+</script>
+</body>
+</html>

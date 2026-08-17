@@ -1,0 +1,33 @@
+# Planur website — cache headers (Netlify / Cloudflare Pages syntax).
+#
+# The problem this solves: /assets/planur.css and planur.js are shared by every
+# page and their filenames never change. Without this, a returning visitor can
+# hold an old stylesheet against new markup — and because the class names change
+# with the design, the result is not a slightly-stale page but a broken one
+# (the nav collapses into a stack of plain links).
+#
+# Two halves, and both are needed:
+#   · the HTML is never cached, so a visitor always gets the current markup and
+#     the current ?v= stamp on the asset URLs;
+#   · the assets are cached hard, because the ?v= stamp in the HTML is what
+#     busts them. Bump that stamp in the pages whenever you edit planur.css or
+#     planur.js — it is the only thing that forces a refetch.
+
+/*.html
+  Cache-Control: no-cache
+
+/
+  Cache-Control: no-cache
+
+/assets/*
+  Cache-Control: public, max-age=31536000
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Modest hardening. No CSP here: the pages carry inline <style> and <script>,
+# and a policy loose enough to allow them would not be worth the false comfort.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!--
+  Planur — 404. Served at https://theplanur.co.uk/404.html
+
+  Netlify serves this automatically for any path that doesn't exist, so it has to
+  cover two quite different visitors:
+    · someone who mistyped or followed an old link
+    · someone who reached for a page we haven't built yet
+  It says both without blaming either, and always offers a way onward. No
+  "Error 404" shouting, no stack-trace language.
+
+  Uses the shared stylesheet, so it inherits the site's palette and type. Keep
+  the ?v= stamp in step with the other pages when planur.css changes.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found — Planur</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%234A7C59'/><text x='16' y='23' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='20' fill='white'>P</text></svg>" />
+<script>document.documentElement.className += ' js';</script>
+<link rel="stylesheet" href="/assets/planur.css?v=20260819" />
+<style>
+  body{min-height:100vh;display:flex;flex-direction:column;
+    background:linear-gradient(160deg,#fff 0%,var(--mint) 60%,var(--lilac) 100%);}
+  .wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:60px 22px;}
+  .panel{max-width:600px;text-align:center;}
+  .mark{display:inline-flex;align-items:center;justify-content:center;width:74px;height:74px;
+    border-radius:22px;background:#fff;box-shadow:var(--shadow-md);margin-bottom:26px;}
+  .mark svg{width:32px;height:32px;fill:none;stroke:var(--sage);stroke-width:1.5;
+    stroke-linecap:round;stroke-linejoin:round;}
+  h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;letter-spacing:-1.2px;
+    line-height:1.15;margin-bottom:14px;}
+  .lede{font-size:1.02rem;color:var(--text-mid);line-height:1.68;max-width:46ch;margin:0 auto 30px;}
+  .paths{display:grid;grid-template-columns:1fr 1fr;gap:14px;text-align:left;margin-bottom:26px;}
+  .path{background:#fff;border:1px solid rgba(74,124,89,.12);border-radius:var(--radius-md);
+    padding:18px 20px;text-decoration:none;display:block;transition:all var(--transition);}
+  .path:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:transparent;}
+  .path b{display:block;font-size:.97rem;font-weight:700;color:var(--text-dark);margin-bottom:3px;}
+  .path span{font-size:.86rem;color:var(--text-mid);line-height:1.55;}
+  .more{font-size:.9rem;color:var(--text-mid);}
+  .more a{color:var(--sage);font-weight:600;}
+  @media(max-width:560px){ .paths{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="panel">
+    <div class="mark">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3" y="4" width="18" height="17" rx="3"/>
+        <path d="M3 9h18M8 2v4M16 2v4"/>
+        <path d="M9.5 14.5l5 3M14.5 14.5l-5 3"/>
+      </svg>
+    </div>
+
+    <h1>That page isn't here.</h1>
+    <p class="lede">Either the link is wrong, or it's something we haven't built yet — we're adding
+      to Planur steadily, and not everything has a page. Here's where most people are heading:</p>
+
+    <div class="paths">
+      <a class="path" href="/">
+        <b>Planur for students →</b>
+        <span>Assignments, exams, timetable and revision in one calm app.</span>
+      </a>
+      <a class="path" href="/tutors">
+        <b>Planur for Tutors →</b>
+        <span>Batches, register, class materials and fees in one place.</span>
+      </a>
+    </div>
+
+    <p class="more">Looking for something specific? Try
+      <a href="/support">support</a>, the
+      <a href="/privacy">privacy notice</a> or the
+      <a href="/terms">terms</a> — or just
+      <a href="/support#main">ask us</a> and we'll point you at it.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom" style="padding-top:0;">
+      <p class="footer-copy">© <span id="y">2026</span> Planur. Made for students, by people who remember being one.</p>
+      <p class="footer-copy">theplanur.co.uk</p>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/planur.js?v=20260819"></script>
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>

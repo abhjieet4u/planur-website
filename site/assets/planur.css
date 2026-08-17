@@ -1,0 +1,376 @@
+/* ============================================================================
+   Planur — shared stylesheet for theplanur.co.uk
+   ----------------------------------------------------------------------------
+   Same-origin only: no CDN, no Google Fonts, no external requests of any kind.
+   The palette, type and shapes are unchanged from the original single-page
+   site — this file only stops them being copy-pasted into every page.
+
+   Page-specific styles stay inline in each page, after this file.
+   ========================================================================== */
+
+/* ── DM Sans Variable — self-hosted ──────────────────────────────────────── */
+/* Absolute /fonts/ paths so pages in subfolders (/tutors, /privacy) resolve. */
+/* latin-ext (accented characters for European languages) */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 1000;
+  src: url('/fonts/dm-sans-latin-ext-opsz-normal.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+@font-face {
+  font-family: 'DM Sans';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 100 1000;
+  src: url('/fonts/dm-sans-latin-ext-opsz-italic.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+/* latin (standard English + punctuation) */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 1000;
+  src: url('/fonts/dm-sans-latin-opsz-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: 'DM Sans';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 100 1000;
+  src: url('/fonts/dm-sans-latin-opsz-italic.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+/* ── Tokens ──────────────────────────────────────────────────────────────── */
+:root {
+  --sage:#4A7C59; --sage-light:#6A9E78; --sage-faint:#EBF3EE; --sage-deep:#3A6246;
+  --lavender:#9B8EC4; --lavender-faint:#F0EEF9;
+  --coral:#E8845C; --coral-dark:#D4714A; --coral-faint:#FDF0EA;
+  --sky-faint:#EEF7FC; --peach:#FDECD8; --mint:#DFF2E8;
+  --butter:#FFF8E6; --lilac:#EDE9F8;
+  --amber:#96690A; --amber-faint:#FDF4E0;   /* 4.9:1 on white; was #B5820E at 3.4:1 */
+  --neutral:#F8F9FA; --neutral-mid:#E9ECEF;
+  --text-dark:#1A2B22; --text-mid:#4A5E52;
+  /* --text-light carries real copy (dates, hints, footnotes, captions), so it
+     has to be legible, not just decorative. The original #8A9E92 measured
+     2.8:1 on white — well under the 4.5:1 needed for body text. #627A6D is
+     4.6:1 and still reads as the lightest tone in the palette. */
+  --text-light:#627A6D;
+  --white:#FFFFFF;
+  --radius-sm:10px; --radius-md:18px; --radius-lg:28px; --radius-pill:100px;
+  --shadow-sm:0 2px 12px rgba(74,124,89,0.08);
+  --shadow-md:0 8px 32px rgba(74,124,89,0.12);
+  --shadow-lg:0 20px 60px rgba(74,124,89,0.16);
+  --transition:0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ── Base ────────────────────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+
+/* The nav is sticky, so an in-page jump would otherwise land with the heading
+   hidden underneath it. Fallback, for any anchor with no padding of its own:
+   reserve the whole nav height. */
+:target,[id]{scroll-margin-top:86px;}
+@media(max-width:720px){ :target,[id]{scroll-margin-top:132px;} }
+
+/* …but every link target on this site is a full-width band carrying 74–96px of
+   its OWN top padding. Reserving the nav height on top of that left about a
+   line of dead space above the heading. These need only enough to clear the nav
+   once their padding is counted — ids beat [id] on specificity, so this wins.
+   Measured nav: 68px desktop, 116px once the tabs wrap at 720px. */
+#talk,#what,#features,#waitlist{scroll-margin-top:10px;}
+@media(max-width:720px){ #talk,#what,#features,#waitlist{scroll-margin-top:72px;} }
+body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text-dark);
+  line-height:1.6;overflow-x:hidden;background:#fff;-webkit-font-smoothing:antialiased;}
+img,svg{max-width:100%;}
+.container{max-width:1120px;margin:0 auto;padding:0 24px;}
+.container-narrow{max-width:760px;margin:0 auto;padding:0 24px;}
+
+/* Respect a reader who has asked for less motion. */
+.fade-in{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+.delay-1{transition-delay:.1s;} .delay-2{transition-delay:.2s;}
+.delay-3{transition-delay:.3s;} .delay-4{transition-delay:.4s;}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  .fade-in{opacity:1;transform:none;transition:none;}
+  *{animation-duration:.001s !important;animation-iteration-count:1 !important;}
+}
+/* Without JS the observer never runs, so never hide content behind it. */
+html:not(.js) .fade-in{opacity:1;transform:none;}
+
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--sage);color:#fff;
+  padding:10px 16px;border-radius:0 0 var(--radius-sm) 0;z-index:200;font-weight:600;}
+.skip-link:focus{left:0;}
+:focus-visible{outline:3px solid var(--lavender);outline-offset:2px;}
+
+/* ── Nav (shared across every page) ──────────────────────────────────────────
+   One row, split by meaning rather than stacked:
+
+     Planur. │ For students  For tutors        Tutor log in   [ Talk to us ]
+     └──────── WHERE AM I ────────┘            └──── DO A THING ────┘
+
+   The product tabs belong to the brand, so they sit against it behind a
+   divider — a product switcher, not a call to action. The actions sit at the
+   far right, separated by the whole width of the bar.
+
+   Three different treatments, so nothing reads as a sibling of anything else:
+     · tabs        — plain text, active one underlined
+     · log in      — a quiet text link
+     · primary CTA — the ONLY button in the bar
+
+   That is what stops a student clicking "For tutors" and then reaching for a
+   tutor login: the two are at opposite ends and look nothing alike.
+
+   No JavaScript — each page renders its own actions. Pages serving both
+   audiences (privacy, terms, support, deletion) show the tabs with neither
+   active, and no actions.                                                    */
+#navbar{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.9);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(74,124,89,0.08);padding:13px 0;
+  transition:box-shadow var(--transition);}
+#navbar.scrolled{box-shadow:var(--shadow-sm);}
+.nav-bar{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.logo{font-size:1.5rem;font-weight:800;color:var(--sage);letter-spacing:-.5px;
+  text-decoration:none;flex-shrink:0;}
+.logo span{color:var(--lavender);}
+
+/* Product tabs — attached to the brand, divider between. */
+.nav-tabs{display:flex;align-items:center;gap:24px;padding-left:20px;
+  border-left:1px solid var(--neutral-mid);}
+.nav-tabs a{position:relative;font-size:.92rem;font-weight:600;color:var(--text-light);
+  text-decoration:none;padding:4px 0;white-space:nowrap;transition:color var(--transition);}
+.nav-tabs a:hover{color:var(--sage);}
+.nav-tabs a.current{color:var(--text-dark);}
+.nav-tabs a.current::after{content:'';position:absolute;left:0;right:0;bottom:-6px;height:2px;
+  border-radius:2px;background:var(--sage);}
+
+/* Actions — pushed to the far right. */
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:18px;}
+.nav-link{font-size:.88rem;font-weight:600;color:var(--text-mid);text-decoration:none;
+  display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
+  transition:color var(--transition);}
+.nav-link:hover{color:var(--sage);}
+.nav-link .ic{width:15px;height:15px;}
+.nav-right .btn{padding:9px 20px;font-size:.88rem;}
+
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:inherit;font-size:.95rem;font-weight:600;border-radius:var(--radius-pill);
+  padding:11px 24px;cursor:pointer;border:none;text-decoration:none;
+  transition:all var(--transition);white-space:nowrap;}
+.btn-coral{background:var(--coral);color:#fff;box-shadow:0 4px 16px rgba(232,132,92,.3);}
+.btn-coral:hover{background:var(--coral-dark);transform:translateY(-1px);
+  box-shadow:0 6px 20px rgba(232,132,92,.4);}
+.btn-sage{background:var(--sage);color:#fff;box-shadow:0 4px 16px rgba(74,124,89,.25);}
+.btn-sage:hover{background:var(--sage-deep);transform:translateY(-1px);
+  box-shadow:0 6px 20px rgba(74,124,89,.34);}
+.btn-sage-outline{background:transparent;color:var(--sage);border:2px solid var(--sage);}
+.btn-sage-outline:hover{background:var(--sage-faint);transform:translateY(-1px);}
+.btn-quiet{background:var(--white);color:var(--text-mid);border:1px solid var(--neutral-mid);}
+.btn-quiet:hover{color:var(--sage);border-color:var(--sage);}
+.btn-lg{padding:14px 30px;font-size:1rem;}
+
+/* ── Section furniture ───────────────────────────────────────────────────── */
+/* Small uppercase text, so it needs contrast: --lavender itself is 3.0:1 on
+   white. This darker tone is the same hue at 5.7:1. The brand lavender stays
+   as-is everywhere it is used as a FILL rather than as text. */
+.section-label{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:#6B5CA0;margin-bottom:12px;}
+.section-title{font-size:clamp(1.8rem,3vw,2.5rem);font-weight:800;letter-spacing:-.8px;
+  color:var(--text-dark);margin-bottom:20px;line-height:1.18;}
+.section-lede{font-size:1.02rem;color:var(--text-mid);line-height:1.7;max-width:56ch;}
+
+/* ── Cards ───────────────────────────────────────────────────────────────── */
+.card{background:var(--white);border:1px solid var(--neutral-mid);border-radius:var(--radius-lg);
+  padding:32px 26px;transition:all var(--transition);}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:transparent;}
+.card h3{font-size:1.12rem;font-weight:700;margin-bottom:10px;color:var(--text-dark);}
+.card p{font-size:.93rem;color:var(--text-mid);line-height:1.65;}
+.card-icon{font-size:2rem;margin-bottom:14px;display:block;line-height:1;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+
+/* ── Status tags: LIVE / TESTING / NEXT ──────────────────────────────────── */
+/* Honesty markers. LIVE = works today. TESTING = in final testing, not released.
+   NEXT = designed and scheduled, not built. Never blur the three.            */
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:.68rem;font-weight:700;
+  letter-spacing:.8px;text-transform:uppercase;padding:3px 9px;border-radius:var(--radius-pill);
+  border:1px solid transparent;white-space:nowrap;vertical-align:middle;}
+.tag-live{background:var(--sage-faint);color:var(--sage-deep);border-color:rgba(74,124,89,.24);}
+.tag-testing{background:var(--amber-faint);color:var(--amber);border-color:rgba(181,130,14,.24);}
+.tag-next{background:var(--lavender-faint);color:#6B5CA0;border-color:rgba(155,142,196,.3);}
+.tag::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;}
+
+/* ── Forms ───────────────────────────────────────────────────────────────── */
+.form-card{background:var(--white);border-radius:var(--radius-lg);padding:36px;
+  box-shadow:var(--shadow-lg);border:1px solid rgba(74,124,89,.08);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;text-align:left;}
+.form-group label{font-size:.82rem;font-weight:600;color:var(--text-mid);}
+.form-group input,.form-group select,.form-group textarea{
+  font-family:inherit;font-size:.95rem;color:var(--text-dark);background:var(--neutral);
+  border:1.5px solid var(--neutral-mid);border-radius:var(--radius-sm);padding:12px 14px;
+  outline:none;transition:border-color var(--transition),box-shadow var(--transition);
+  width:100%;appearance:none;-webkit-appearance:none;}
+.form-group textarea{resize:vertical;min-height:110px;max-height:260px;}
+.form-group select{cursor:pointer;padding-right:36px;background-repeat:no-repeat;
+  background-position:right 14px center;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234A5E52' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  border-color:var(--sage);box-shadow:0 0 0 3px rgba(74,124,89,.12);background:#fff;}
+.form-group input.error,.form-group select.error,.form-group textarea.error{
+  border-color:#E55353;box-shadow:0 0 0 3px rgba(229,83,83,.1);}
+.form-group .error-msg{font-size:.78rem;color:#E55353;font-weight:500;display:none;}
+.form-group.has-error .error-msg{display:block;}
+.form-hint{font-size:.78rem;color:var(--text-light);font-weight:400;}
+.btn-submit{width:100%;padding:15px;font-size:1rem;font-weight:700;
+  border-radius:var(--radius-sm);background:var(--coral);color:#fff;border:none;cursor:pointer;
+  font-family:inherit;transition:all var(--transition);
+  box-shadow:0 4px 20px rgba(232,132,92,.35);margin-top:8px;}
+.btn-submit:hover{background:var(--coral-dark);transform:translateY(-2px);
+  box-shadow:0 8px 28px rgba(232,132,92,.4);}
+.btn-submit:disabled{opacity:.7;cursor:not-allowed;transform:none;}
+.form-footnote{font-size:.78rem;color:var(--text-light);text-align:center;margin-top:14px;
+  line-height:1.55;}
+.form-footnote a{color:var(--sage);}
+/* Honeypot: hidden from people, tempting to bots. Never display:none — some
+   bots skip those. Kept out of the tab order and off-screen instead. */
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
+.success-msg{display:none;text-align:center;padding:20px 10px;}
+.success-msg.show{display:block;}
+.success-emoji{font-size:3rem;margin-bottom:12px;}
+.success-msg h3{font-size:1.3rem;font-weight:700;color:var(--text-dark);margin-bottom:8px;}
+.success-msg p{color:var(--text-mid);font-size:.95rem;}
+
+/* ── Student / Tutor selector (privacy, terms, delete-account, support) ───── */
+/* Both versions are always in the DOM. The switch only HIDES the other one, so
+   with JS off everything is readable and indexable — which is what a store
+   reviewer and a search engine both need. Hiding-only also preserves each
+   element's own display type (list-item, table-row, flex…).                  */
+.app-switch{display:none;align-items:center;gap:4px;background:var(--neutral);
+  border:1px solid var(--neutral-mid);border-radius:var(--radius-pill);padding:4px;}
+html.js .app-switch{display:inline-flex;}
+.app-switch button{font-family:inherit;font-size:.86rem;font-weight:600;color:var(--text-mid);
+  background:transparent;border:none;border-radius:var(--radius-pill);padding:8px 18px;
+  cursor:pointer;transition:all var(--transition);}
+.app-switch button:hover{color:var(--sage);}
+.app-switch button[aria-pressed="true"]{background:var(--white);color:var(--sage);
+  box-shadow:var(--shadow-sm);}
+.switch-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:6px 0 26px;}
+.switch-row .switch-hint{font-size:.84rem;color:var(--text-light);}
+html.js[data-app="student"] [data-app-only="tutor"],
+html.js[data-app="tutor"]   [data-app-only="student"]{display:none;}
+/* A heading that names its app when both are shown, quiet when filtered. */
+.app-scope{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:700;
+  letter-spacing:.8px;text-transform:uppercase;color:var(--sage);
+  background:var(--sage-faint);border-radius:var(--radius-pill);padding:3px 10px;
+  margin-bottom:8px;}
+.app-scope.tutor{color:#6B5CA0;background:var(--lavender-faint);}
+
+/* ── Long-form document pages (privacy, terms, delete-account, support) ───── */
+.doc{padding:44px 0 72px;}
+.doc-header{padding:40px 0 24px;border-bottom:1px solid var(--neutral-mid);margin-bottom:32px;}
+.doc h1{font-size:clamp(1.8rem,3.4vw,2.4rem);font-weight:800;letter-spacing:-.8px;
+  margin-bottom:8px;}
+.doc .doc-date{font-size:.85rem;color:var(--text-light);}
+.doc h2{font-size:1.18rem;font-weight:700;color:var(--text-dark);margin:36px 0 10px;
+  letter-spacing:-.2px;}
+.doc h3{font-size:1rem;font-weight:700;color:var(--text-dark);margin:22px 0 8px;}
+.doc p,.doc li{font-size:.94rem;color:var(--text-mid);line-height:1.75;}
+.doc p{margin-bottom:12px;}
+.doc ul,.doc ol{padding-left:20px;margin:8px 0 14px;}
+.doc li{margin-bottom:6px;}
+.doc a{color:var(--sage);text-decoration:underline;}
+.doc strong{color:var(--text-dark);}
+.callout{background:var(--sage-faint);border-left:3px solid var(--sage);
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:14px 18px;margin:18px 0;
+  font-size:.9rem;color:var(--text-mid);line-height:1.7;}
+.callout.warn{background:var(--amber-faint);border-left-color:var(--amber);}
+.callout p:last-child{margin-bottom:0;}
+.table-scroll{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch;}
+table.data{width:100%;border-collapse:collapse;font-size:.9rem;min-width:520px;}
+table.data th,table.data td{text-align:left;padding:11px 14px;
+  border-bottom:1px solid var(--neutral-mid);color:var(--text-mid);vertical-align:top;}
+table.data th{font-weight:700;color:var(--text-dark);font-size:.82rem;
+  letter-spacing:.4px;text-transform:uppercase;background:var(--neutral);}
+table.data tr:last-child td{border-bottom:none;}
+table.data td strong{color:var(--text-dark);}
+
+/* ── Modal (contact) ─────────────────────────────────────────────────────── */
+.modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(26,43,34,.55);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;
+  align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;
+  transition:opacity .3s ease;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal-box{background:#fff;border-radius:var(--radius-lg);max-width:520px;width:100%;
+  max-height:90vh;display:flex;flex-direction:column;overflow:hidden;
+  box-shadow:var(--shadow-lg);position:relative;transform:translateY(24px) scale(.97);
+  transition:transform .35s cubic-bezier(.4,0,.2,1);}
+.modal-overlay.open .modal-box{transform:translateY(0) scale(1);}
+.modal-header{padding:28px 36px 20px;border-bottom:1px solid var(--neutral-mid);
+  flex-shrink:0;position:relative;}
+.modal-body{overflow-y:auto;padding:24px 36px 32px;flex:1;-webkit-overflow-scrolling:touch;}
+.modal-close{position:absolute;top:16px;right:16px;background:var(--neutral);border:none;
+  width:36px;height:36px;border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;
+  align-items:center;justify-content:center;color:var(--text-mid);
+  transition:all var(--transition);}
+.modal-close:hover{background:var(--neutral-mid);color:var(--text-dark);}
+.modal-title{font-size:1.5rem;font-weight:800;letter-spacing:-.5px;color:var(--text-dark);}
+.modal-sub{font-size:.9rem;color:var(--text-mid);line-height:1.6;margin-top:6px;}
+
+/* ── Footer (shared) ─────────────────────────────────────────────────────── */
+footer{background:var(--text-dark);padding:52px 0 30px;position:relative;z-index:1;}
+.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:32px;
+  padding-bottom:30px;border-bottom:1px solid rgba(255,255,255,.1);}
+.footer-brand .logo{color:#fff;}
+.footer-brand .logo span{color:var(--coral);}
+.footer-brand p{font-size:.86rem;color:rgba(255,255,255,.5);margin-top:10px;
+  line-height:1.65;max-width:30ch;}
+.footer-col h4{font-size:.76rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
+  color:rgba(255,255,255,.85);margin-bottom:12px;}
+.footer-col ul{list-style:none;}
+.footer-col li{margin-bottom:9px;}
+.footer-col a{font-size:.88rem;color:rgba(255,255,255,.55);text-decoration:none;
+  transition:color var(--transition);cursor:pointer;}
+.footer-col a:hover{color:#fff;}
+.footer-bottom{padding-top:22px;display:flex;align-items:center;justify-content:space-between;
+  gap:16px;flex-wrap:wrap;}
+.footer-copy{font-size:.82rem;color:rgba(255,255,255,.45);}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media(max-width:900px){
+  .grid-3,.grid-2{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:28px;}
+  .footer-brand{grid-column:1 / -1;}
+}
+@media(max-width:720px){
+  /* Tabs drop to their own full-width line under the brand and actions. */
+  .nav-bar{gap:10px 14px;}
+  .nav-tabs{order:3;width:100%;padding-left:0;border-left:0;gap:22px;
+    padding-top:9px;border-top:1px solid rgba(74,124,89,.08);}
+  .nav-tabs a.current::after{bottom:-4px;}
+  .nav-right{order:2;gap:14px;}
+}
+@media(max-width:640px){
+  .container,.container-narrow{padding:0 20px;}
+  .nav-right .btn{padding:8px 16px;font-size:.84rem;}
+  .form-row{grid-template-columns:1fr;}
+  .form-card{padding:26px 20px;}
+  .modal-header{padding:20px 20px 16px;}
+  .modal-body{padding:16px 20px 24px;}
+  .doc{padding:28px 0 56px;}
+  .footer-grid{grid-template-columns:1fr;gap:26px;}
+  .footer-bottom{flex-direction:column;align-items:flex-start;}
+}
+/* Very narrow: drop the "Tutor log in" text link, keep the primary button.
+   The same link is in the footer of every page. */
+@media(max-width:420px){
+  .nav-right .nav-link{display:none;}
+  .logo{font-size:1.35rem;}
+}
