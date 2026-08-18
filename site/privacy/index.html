@@ -65,7 +65,7 @@
 <div class="container-narrow">
 
   <h1>Privacy Notice</h1>
-  <p class="doc-date">Last updated: 17 August 2026</p>
+  <p class="doc-date">Last updated: 18 August 2026</p>
 
   <div class="switch-row">
     <div class="app-switch" role="group" aria-label="Choose which Planur product this applies to">
@@ -124,7 +124,7 @@
         <tr><td><strong>Your students’ details</strong> — name, year, class, and a parent or guardian contact you enter</td><td>To build your roster, mark attendance and raise invoices. See §11: for this data you are the controller and we act on your instructions.</td></tr>
         <tr><td>Batches, sessions, attendance marks, class materials you upload, and practice tests you generate</td><td>The core features of the tutor app</td></tr>
         <tr><td>Fees and invoices you record</td><td>To track billing. We do <strong>not</strong> take payments from parents on your behalf, and we never see their card details.</td></tr>
-        <tr><td>Your subscription status and plan band</td><td>To apply your plan’s limits (via the app store). We never receive your card details.</td></tr>
+        <tr><td>Your subscription status and plan band</td><td>To apply your plan’s limits. Tutor plans are billed by <strong>Stripe</strong> on a page in your browser, not through an app store. We never receive or store your card details.</td></tr>
         <tr><td>Device push token</td><td>To send you app notifications</td></tr>
       </table>
     </div>
@@ -220,7 +220,11 @@
     <li><strong>AI provider(s)</strong> — <strong>Mistral AI</strong> (EU servers), Groq, Anthropic and
       Google (Gemini) — to generate study plans, revision quizzes and practice tests. None of them use
       your prompts or answers to train their models.</li>
-    <li><strong>RevenueCat</strong> and <strong>Google Play / Apple</strong> — subscriptions and payment</li>
+    <li><strong>RevenueCat</strong> and <strong>Google Play / Apple</strong> — student app subscriptions
+      and payment</li>
+    <li><strong>Stripe</strong> — tutor subscriptions and payment. Tutors subscribe on a Stripe-hosted
+      page in a browser rather than through an app store, so Stripe receives the tutor’s name, email
+      address and payment details directly. We never receive or store card details.</li>
     <li><strong>Geolocation provider</strong> — <strong>ipapi.co</strong> (over HTTPS) — receives your IP
       address to return an approximate (city-level) location, which is then shown only on your own device.
       It is not given any other data.</li>

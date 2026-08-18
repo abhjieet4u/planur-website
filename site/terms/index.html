@@ -60,7 +60,7 @@
 <div class="container-narrow">
 
   <h1>Terms of Service</h1>
-  <p class="doc-date">Last updated: 17 August 2026</p>
+  <p class="doc-date">Last updated: 18 August 2026</p>
 
   <div class="switch-row">
     <div class="app-switch" role="group" aria-label="Choose which Planur product these terms apply to">
@@ -132,31 +132,60 @@
   their limits are shown in the app and may change as the Service develops; see §22.</p>
 
   <h2>6. Subscriptions, billing and renewals</h2>
-  <p>Paid plans are sold as auto-renewing subscriptions through the <strong>Apple App Store</strong> or
-  <strong>Google Play</strong>, managed via our billing provider <strong>RevenueCat</strong>. When you
-  subscribe:</p>
-  <ul>
-    <li>Payment is charged to your app store account at confirmation of purchase.</li>
-    <li>Your subscription <strong>renews automatically</strong> for the same period at the then-current
-      price unless you cancel at least 24 hours before the end of the current period.</li>
-    <li>You manage and cancel your subscription in your <strong>app store account settings</strong> —
-      not inside Planur. Cancelling stops future renewals; you keep access until the end of the period
-      already paid for.</li>
-    <li>Any free trial converts to a paid subscription at the end of the trial unless you cancel before
-      it ends. If we offer an introductory or promotional price, it applies only for the stated period,
-      after which the standard price applies.</li>
-    <li>We never receive or store your card details — payment is handled entirely by the app store.</li>
-  </ul>
+  <div data-app-only="student">
+    <p>Paid plans are sold as auto-renewing subscriptions through the <strong>Apple App Store</strong> or
+    <strong>Google Play</strong>, managed via our billing provider <strong>RevenueCat</strong>. When you
+    subscribe:</p>
+    <ul>
+      <li>Payment is charged to your app store account at confirmation of purchase.</li>
+      <li>Your subscription <strong>renews automatically</strong> for the same period at the then-current
+        price unless you cancel at least 24 hours before the end of the current period.</li>
+      <li>You manage and cancel your subscription in your <strong>app store account settings</strong> —
+        not inside Planur. Cancelling stops future renewals; you keep access until the end of the period
+        already paid for.</li>
+      <li>Any free trial converts to a paid subscription at the end of the trial unless you cancel before
+        it ends. If we offer an introductory or promotional price, it applies only for the stated period,
+        after which the standard price applies.</li>
+      <li>We never receive or store your card details — payment is handled entirely by the app store.</li>
+    </ul>
+  </div>
+
+  <div data-app-only="tutor">
+    <span class="app-scope tutor">Planur for Tutors</span>
+    <p><strong>Tutor plans are not sold through an app store.</strong> You buy them directly from us on a
+    secure page hosted by <strong>Stripe</strong>, our payment provider, which opens in your browser.
+    When you subscribe:</p>
+    <ul>
+      <li>Payment is charged to the card you give Stripe, and your plan starts as soon as it succeeds.</li>
+      <li>A subscription covers <strong>one practice</strong>. If you run more than one, each carries its
+        own subscription.</li>
+      <li>Your subscription <strong>renews automatically</strong> — monthly or yearly, whichever you
+        chose — at the then-current price until you cancel.</li>
+      <li>You manage your plan, update your card or cancel from <strong>“Manage plan” in the tutor
+        app</strong>, which opens the Stripe customer portal. Stripe signs you in by emailing you a
+        link, so use the same address as your Planur account. Cancelling stops future renewals; you keep
+        access until the end of the period already paid for.</li>
+      <li>Any free trial converts to a paid subscription when it ends unless you cancel first.</li>
+      <li>We never receive or store your card details — payment is handled entirely by Stripe.</li>
+    </ul>
+  </div>
 
   <h2>7. Cancellations and refunds</h2>
-  <p>Because subscriptions are billed by the app stores, <strong>refunds are handled by Apple or
-  Google</strong> under their respective policies, and refund requests should be made to them. Where you
-  have statutory rights as a consumer (for example under UK/EU consumer law), those rights are not
-  affected by these Terms. Note that by starting to use paid digital features immediately, you may
-  acknowledge that your statutory “cooling-off” cancellation right can end once the digital service has
-  begun.</p>
-  <p data-app-only="tutor">Consumer cooling-off rights generally do not apply to a subscription bought
-  for a business. Your app store’s refund policy still does.</p>
+  <p data-app-only="student">Because subscriptions are billed by the app stores, <strong>refunds are
+  handled by Apple or Google</strong> under their respective policies, and refund requests should be made
+  to them. Where you have statutory rights as a consumer (for example under UK/EU consumer law), those
+  rights are not affected by these Terms. Note that by starting to use paid digital features
+  immediately, you may acknowledge that your statutory “cooling-off” cancellation right can end once the
+  digital service has begun.</p>
+  <div data-app-only="tutor">
+    <p>Because tutor plans are billed by us through Stripe rather than by an app store,
+    <strong>refund requests come to us</strong>, not to Apple or Google — use the
+    <a href="/support">contact form</a> on this website. You can cancel at any time from “Manage plan”
+    in the app; cancelling stops the next renewal and you keep access until the end of the period you
+    have already paid for.</p>
+    <p>Consumer cooling-off rights generally do not apply to a subscription bought for a business.
+    Where you do have statutory rights as a consumer, those rights are not affected by these Terms.</p>
+  </div>
 
   <h2>8. Acceptable use</h2>
   <p>When using Planur you agree not to:</p>
@@ -199,9 +228,10 @@
   the Service except as allowed by law.</p>
 
   <h2>13. Third-party services</h2>
-  <p>The Service relies on third parties including the Apple App Store, Google Play, RevenueCat, Supabase,
-  Google Firebase and our AI processing providers. Your use of the app stores is also subject to their
-  terms. We are not responsible for third-party services we do not control.</p>
+  <p>The Service relies on third parties including the Apple App Store, Google Play, RevenueCat,
+  <strong>Stripe</strong> (tutor subscriptions), Supabase, Google Firebase and our AI processing
+  providers. Your use of the app stores, and of Stripe’s payment pages, is also subject to their terms.
+  We are not responsible for third-party services we do not control.</p>
 
   <h2>14. Availability and changes</h2>
   <p>We work to keep Planur available and reliable, but we provide the Service “as is” and do not promise
