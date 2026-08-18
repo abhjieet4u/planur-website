@@ -86,6 +86,59 @@ the app.
 - **Stroke SVG icons, not emoji**, on the tutor pages. One inline `<symbol>` sprite per page, no
   icon fonts, no external requests.
 
+## The design system
+
+Recorded here so the look survives losing `assets/planur.css`. The tokens are
+defined at the top of that file and everything else derives from them.
+
+**Type** — DM Sans Variable, **self-hosted** in `fonts/` as four `.woff2` files
+(latin and latin-ext × normal and italic), `font-weight: 100 1000`, referenced by
+absolute `/fonts/…` paths so pages in subfolders resolve. There is no second
+face. Never swap this for a Google Fonts link: it would become the site's only
+external request, and the absence of those is a privacy claim we make.
+
+**Palette** — sage green primary, lavender secondary, coral accent, on
+warm-neutral grounds.
+
+| Role | Token | Hex |
+|---|---|---|
+| Primary | `--sage` / `--sage-light` / `--sage-deep` / `--sage-faint` | `#4A7C59` / `#6A9E78` / `#3A6246` / `#EBF3EE` |
+| Secondary | `--lavender` / `--lavender-faint` | `#9B8EC4` / `#F0EEF9` |
+| Accent | `--coral` / `--coral-dark` / `--coral-faint` | `#E8845C` / `#D4714A` / `#FDF0EA` |
+| Warning | `--amber` / `--amber-faint` | `#96690A` / `#FDF4E0` |
+| Tints | `--sky-faint` `--peach` `--mint` `--butter` `--lilac` | `#EEF7FC` `#FDECD8` `#DFF2E8` `#FFF8E6` `#EDE9F8` |
+| Neutrals | `--neutral` / `--neutral-mid` | `#F8F9FA` / `#E9ECEF` |
+| Text | `--text-dark` / `--text-mid` / `--text-light` | `#1A2B22` / `#4A5E52` / `#627A6D` |
+
+⚠️ **Two of these are contrast fixes, not preferences.** `--amber` was `#B5820E`
+(3.4:1 on white) and `--text-light` was `#8A9E92` (2.8:1). Both carry real copy —
+dates, hints, footnotes — so both needed 4.5:1. If the palette is ever re-picked,
+run the numbers again rather than restoring the prettier originals.
+
+## Backend — two edge functions, no keys in the browser
+
+The site is static but not inert. Both forms POST to Supabase Edge Functions on
+project `uvhcnikrlhfwbkdzbntb`, through `Planur.callEdgeFunction(name, payload)`
+in `assets/planur.js`:
+
+| Function | Used by | Carries |
+|---|---|---|
+| `waitlist-signup` | student home `/` | waitlist sign-ups |
+| `contact-submit` | `/support`, and the tutor lead form on `/tutors` (structured subject) | support and sales enquiries |
+
+**No anon key, no service key, no credentials of any kind are in the page.** The
+functions hold their own; the browser posts plain JSON to an unauthenticated
+endpoint. Keep it that way — a key in `planur.js` is a key published to the world.
+
+**Spam is handled without a captcha**, in `isLikelyBot()`:
+
+1. a **honeypot** input inside `.hp`, hidden from people and expected to stay empty, and
+2. a **time-on-page floor** — anything submitted within **3 seconds** of load is
+   treated as automated.
+
+That is why there is no reCAPTCHA and no third-party request. If a real person
+ever reports "my message didn't send", the 3-second floor is the first suspect.
+
 ## Nav, and the one coupling to remember
 
 One row, split by meaning:
