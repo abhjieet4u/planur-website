@@ -31,3 +31,19 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: SAMEORIGIN
+
+# ── Tutor web app (/tutors/app/) ────────────────────────────────────────────
+# Flutter fingerprints most of its output but NOT these three. If a CDN caches
+# them, tutors keep running an old build after a deploy — and a stale index.html
+# can reference JS chunks that no longer exist, which looks like a broken app
+# rather than an old one.
+/tutors/app/index.html
+  Cache-Control: no-cache
+/tutors/app/flutter_bootstrap.js
+  Cache-Control: no-cache
+/tutors/app/flutter_service_worker.js
+  Cache-Control: no-cache
+
+# It is an application, not a page to be found in search.
+/tutors/app/*
+  X-Robots-Tag: noindex, nofollow

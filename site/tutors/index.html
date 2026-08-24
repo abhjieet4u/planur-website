@@ -24,11 +24,10 @@
   write "Android today" or "iOS later" anywhere — commercially they arrive at the
   same time.
 
-  BROWSER ACCESS: NOT claimed as available. The tutor web build works (verified
-  2026-08-17) but nothing is deployed and tutor.theplanur.co.uk has no DNS record,
-  so the hero fact says "coming", the "Phone or laptop" card says "nearly ready",
-  and every Tutor log in link goes to /tutors/login — a holding page we control.
-  When the web app is live, see the switch-on steps in tutors/login/index.html.
+  BROWSER ACCESS: LIVE. The tutor web app is served from this same site at
+  /tutors/app/ — assembled by tools/build_site.sh, which copies the Flutter build
+  in. It is NOT a subdomain: one domain, one Netlify site, one thing to drag.
+  ⚠️ Always publish dist/, never site/ on its own — see tools/build_site.sh.
 
   ICONS: one inline <symbol> sprite at the top of <body>. No icon fonts, no
   external requests. Stroke icons only — emoji read as amateur next to a page
@@ -278,7 +277,7 @@
         <a href="/tutors" class="current" aria-current="page">For tutors</a>
       </div>
       <div class="nav-right">
-        <a class="nav-link" href="/tutors/login">Tutor log in</a>
+        <a class="nav-link" href="/tutors/app/">Tutor log in</a>
         <a class="btn btn-coral" href="#talk">Talk to us</a>
       </div>
     </div>
@@ -302,7 +301,7 @@
         </div>
         <div class="facts">
           <span class="fact"><svg class="ic ic-sm"><use href="#i-phone"/></svg> iPhone and Android at launch</span>
-          <span class="fact"><svg class="ic ic-sm"><use href="#i-laptop"/></svg> Browser access coming</span>
+          <span class="fact"><svg class="ic ic-sm"><use href="#i-laptop"/></svg> Works in a laptop browser</span>
           <span class="fact"><svg class="ic ic-sm"><use href="#i-cap"/></svg> Your students never pay to connect</span>
           <span class="fact"><svg class="ic ic-sm"><use href="#i-chat"/></svg> Support answered within 24 hours</span>
         </div>
@@ -522,7 +521,7 @@
           </div>
           <h3>Phone or laptop</h3>
         </summary>
-        <div class="acc-body"><p>Run your practice from the app today. Browser access — the same practice, the same sign-in, on a laptop — is <a href="/tutors/login" style="color:var(--sage);font-weight:600;">nearly ready</a>, because an evening of invoicing is easier with a keyboard.</p></div>
+        <div class="acc-body"><p>The same practice in your browser at <a href="/tutors/app/" style="color:var(--sage);font-weight:600;">theplanur.co.uk/tutors/app</a> — same sign-in, same data. An evening of invoicing is easier with a keyboard.</p></div>
       </details>
     </div>
     <div class="callout fade-in delay-2">
@@ -751,7 +750,7 @@
         <ul>
           <li><a href="/tutors">Planur for Tutors</a></li>
           <li><a href="/tutors/download">Get the tutor app</a></li>
-          <li><a href="/tutors/login">Tutor log in</a></li>
+          <li><a href="/tutors/app/">Tutor log in</a></li>
           <li><a href="/tutors#talk">Talk to us</a></li>
         </ul>
       </div>

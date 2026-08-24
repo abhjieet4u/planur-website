@@ -12,3 +12,7 @@ node_modules/
 # Netlify drag-and-drop deploy artifact
 site.zip
 *.zip
+
+# Assembled publish folder — built by tools/build_site.sh from site/ plus the
+# tutor web app. 42 MB of Flutter output that is reproducible from source.
+dist/

@@ -27,12 +27,11 @@
 /help      /support   301
 
 # ── Tutor browser sign-in ───────────────────────────────────────────────────
-# Every "Tutor log in" link points at /tutors/login, which is currently a holding
-# page ("not available yet"). tutor.theplanur.co.uk has no DNS record, so linking
-# straight to it would give a browser-level "server not found" we cannot theme.
+# The tutor web app is served from this same site at /tutors/app/ (assembled by
+# tools/build_site.sh). /tutors/login is kept as a stable alias because it is
+# already linked from elsewhere and reads better when said out loud.
 #
-# WHEN THE TUTOR WEB APP IS LIVE: uncomment the line below. It takes effect
-# before the holding page is ever served, so nothing needs deleting — but do put
-# the browser claims back on /tutors and /support at the same time (see the
-# comment at the top of tutors/login/index.html).
-# /tutors/login   https://tutor.theplanur.co.uk   302
+# No SPA rewrite is needed: the app uses hash routing (/tutors/app/#/practice/…),
+# so deep links never reach the server.
+/tutors/login    /tutors/app/    301
+/tutor-login     /tutors/app/    301
