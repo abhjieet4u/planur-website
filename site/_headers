@@ -47,3 +47,17 @@
 # It is an application, not a page to be found in search.
 /tutors/app/*
   X-Robots-Tag: noindex, nofollow
+
+# ── Student web app (/app/) ─────────────────────────────────────────────────
+# Same three unfingerprinted files, same reason: a cached index.html can point
+# at JS chunks that no longer exist, which reads as a broken app rather than an
+# old one.
+/app/index.html
+  Cache-Control: no-cache
+/app/flutter_bootstrap.js
+  Cache-Control: no-cache
+/app/flutter_service_worker.js
+  Cache-Control: no-cache
+
+/app/*
+  X-Robots-Tag: noindex, nofollow
