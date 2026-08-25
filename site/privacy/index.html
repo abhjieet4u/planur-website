@@ -65,7 +65,7 @@
 <div class="container-narrow">
 
   <h1>Privacy Notice</h1>
-  <p class="doc-date">Last updated: 18 August 2026</p>
+  <p class="doc-date">Last updated: 25 August 2026</p>
 
   <div class="switch-row">
     <div class="app-switch" role="group" aria-label="Choose which Planur product this applies to">
@@ -103,7 +103,8 @@
         <tr><th>Data</th><th>Why</th></tr>
         <tr><td>Email and/or phone number</td><td>Sign-in via one-time code</td></tr>
         <tr><td>Display name, and optionally date of birth / age band, gender, school, year group, subjects</td><td>Set up your planner and tailor it to you</td></tr>
-        <tr><td>Your content — timetable, assignments, to-dos, exams, sports fixtures, focus sessions, group-study plans</td><td>The core features of the app</td></tr>
+        <tr><td>Your content — timetable, assignments, to-dos, exams, sports fixtures, group-study plans</td><td>The core features of the app, and the copy that restores your planner on a new phone (see §6)</td></tr>
+        <tr><td>Your <strong>focus sessions</strong> and any <strong>calendar sources</strong> you connect</td><td>Kept <strong>only on your device</strong>. These are never uploaded to us — which also means they do not come back if you move to a new phone.</td></tr>
         <tr><td>Friends &amp; contacts</td><td>If you choose to find friends, contacts are matched as one-way <strong>hashes</strong> — we never store your raw contacts. Connections and invites you create are stored.</td></tr>
         <tr><td>Device push token</td><td>To send reminders and invites (Firebase Cloud Messaging)</td></tr>
         <tr><td>Subscription status</td><td>To unlock paid plans (via RevenueCat and the app store). We never receive your card details.</td></tr>
@@ -212,6 +213,17 @@
   app’s on-device database is encrypted <strong>at rest</strong> (AES-256). Backend access is restricted
   by authentication and row-level security rules enforced in the database itself. We do not store
   payment information.</p>
+  <p><strong>Why we keep a copy, and what comes back.</strong> The student app works from a database
+  on your own phone, and each change is also saved to your Planur account. That copy is what your
+  planner is restored from when you sign in on a <strong>new phone</strong>: your assignments and
+  their sub-steps, exams, AI revision plans and their blocks, timetable and to-dos. It happens by
+  itself, once, on a phone that has no planner on it yet — we never overwrite a planner you are
+  already using. Some things are <strong>not</strong> restored: your friends list, group sessions and
+  invites have to be set up again; focus history and connected calendar sources never leave your
+  device in the first place; and a photo attached to an assignment stays on the phone that took it,
+  so a restored assignment has no photo. If you delete your account (§9) or it is removed after 24
+  months of inactivity (§12), there is nothing left to restore from.</p>
+
   <p>We do not sell, rent or trade your personal data. We share it only with service providers
   (sub-processors) acting on our instructions:</p>
   <ul>
