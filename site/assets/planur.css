@@ -264,8 +264,12 @@ html.js .app-switch{display:inline-flex;}
   box-shadow:var(--shadow-sm);}
 .switch-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:6px 0 26px;}
 .switch-row .switch-hint{font-size:.84rem;color:var(--text-light);}
-html.js[data-app="student"] [data-app-only="tutor"],
-html.js[data-app="tutor"]   [data-app-only="student"]{display:none;}
+/* A block may name more than one app: data-app-only="tutor school". The rule is
+   "hide anything that does not name the app currently selected", which keeps the
+   old single-value markup working unchanged. */
+html.js[data-app="student"] [data-app-only]:not([data-app-only~="student"]),
+html.js[data-app="tutor"]   [data-app-only]:not([data-app-only~="tutor"]),
+html.js[data-app="school"]  [data-app-only]:not([data-app-only~="school"]){display:none;}
 /* A heading that names its app when both are shown, quiet when filtered. */
 .app-scope{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:700;
   letter-spacing:.8px;text-transform:uppercase;color:var(--sage);
@@ -368,9 +372,13 @@ footer{background:var(--text-dark);padding:52px 0 30px;position:relative;z-index
   .footer-grid{grid-template-columns:1fr;gap:26px;}
   .footer-bottom{flex-direction:column;align-items:flex-start;}
 }
-/* Very narrow: drop the "Tutor log in" text link, keep the primary button.
-   The same link is in the footer of every page. */
+/* Very narrow: drop the quiet text link ("Log in" / "Tutor log in"), keep the
+   primary button. Both are in the footer, which is where they are found on a
+   phone anyway — and a student on a phone should be using the app, not the
+   read-only browser view. */
 @media(max-width:420px){
   .nav-right .nav-link{display:none;}
   .logo{font-size:1.35rem;}
 }
+
+.app-scope.school{background:var(--sky-faint);color:#3B6E8F;border-color:rgba(59,110,143,.28);}

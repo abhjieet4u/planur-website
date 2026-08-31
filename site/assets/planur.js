@@ -108,13 +108,26 @@
     var buttons = [].slice.call(sw.querySelectorAll('button[data-app]'));
     if (!buttons.length) return;
 
+    /* Which audiences does THIS page actually have? Only the ones with a button.
+       ⚠️ Without this check, ?app=school on a page that has no school variant
+       (/support, /terms) would hide every app-specific block and leave the page
+       looking empty — the show/hide rule in planur.css hides anything that does
+       not name the selected app. Resolve, then fall back to something real. */
+    function has(app) {
+      return buttons.some(function (b) { return b.dataset.app === app; });
+    }
+
     function wanted() {
       var q = new URLSearchParams(location.search).get('app');
-      if (q === 'tutor' || q === 'tutors') return 'tutor';
-      if (q === 'student') return 'student';
       var h = (location.hash || '').toLowerCase();
-      if (h.indexOf('tutor') !== -1) return 'tutor';
-      return 'student';
+      var want = 'student';
+      if (q === 'school' || q === 'schools') want = 'school';
+      else if (q === 'tutor' || q === 'tutors') want = 'tutor';
+      else if (q === 'student') want = 'student';
+      else if (h.indexOf('school') !== -1) want = 'school';
+      else if (h.indexOf('tutor') !== -1) want = 'tutor';
+      if (has(want)) return want;
+      return has('student') ? 'student' : buttons[0].dataset.app;
     }
 
     function apply(app, pushUrl) {

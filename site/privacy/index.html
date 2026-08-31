@@ -38,8 +38,9 @@
   (function () {
     var q = new URLSearchParams(location.search).get('app');
     var h = (location.hash || '').toLowerCase();
-    var app = (q === 'tutor' || q === 'tutors' || (!q && h.indexOf('tutor') !== -1))
-      ? 'tutor' : 'student';
+    var app = 'student';
+    if (q === 'school' || q === 'schools' || (!q && h.indexOf('school') !== -1)) app = 'school';
+    else if (q === 'tutor' || q === 'tutors' || (!q && h.indexOf('tutor') !== -1)) app = 'tutor';
     document.documentElement.setAttribute('data-app', app);
   })();
 </script>
@@ -56,6 +57,7 @@
       <div class="nav-tabs">
         <a href="/">For students</a>
         <a href="/tutors">For tutors</a>
+        <a href="/schools">For schools</a>
       </div>
     </div>
   </div>
@@ -65,12 +67,13 @@
 <div class="container-narrow">
 
   <h1>Privacy Notice</h1>
-  <p class="doc-date">Last updated: 25 August 2026</p>
+  <p class="doc-date">Last updated: 31 August 2026</p>
 
   <div class="switch-row">
     <div class="app-switch" role="group" aria-label="Choose which Planur product this applies to">
       <button type="button" data-app="student" aria-pressed="true">Student app</button>
       <button type="button" data-app="tutor" aria-pressed="false">Planur for Tutors</button>
+      <button type="button" data-app="school" aria-pressed="false">Schools</button>
     </div>
     <span class="switch-hint">Everything unmarked applies to both.</span>
   </div>
@@ -84,7 +87,7 @@
   <h2>1. Who we are</h2>
   <p>Planur is operated by <strong>Planur Ltd</strong>, a company registered in England and Wales. We
   are the data controller (and, where applicable, the “data fiduciary” or “business”) for your personal
-  data — with one important exception for tutors, set out in §11. This notice applies
+  data — with one important exception for tutors and schools, set out in §11. This notice applies
   <strong>worldwide</strong>. Depending on where you live it is governed by your local
   data-protection law — for example the UK GDPR, the EU GDPR, US federal and state privacy laws
   (including COPPA and the California CCPA/CPRA), India’s Digital Personal Data Protection Act 2023
@@ -114,7 +117,7 @@
     </div>
   </div>
 
-  <div data-app-only="tutor">
+  <div data-app-only="tutor school">
     <span class="app-scope tutor">Planur for Tutors</span>
     <p>When you sign up as a tutor and run your practice in Planur:</p>
     <div class="table-scroll">
@@ -152,7 +155,7 @@
     <li><strong>Reminders &amp; invites</strong> (push) — contract / consent.</li>
     <li><strong>Waitlist &amp; enquiries</strong> — legitimate interests (Article 6(1)(f)).</li>
     <li><strong>Security, safety &amp; fraud prevention</strong> — legitimate interests / legal obligation.</li>
-    <li data-app-only="tutor"><strong>Running your practice</strong> — performance of our contract with
+    <li data-app-only="tutor school"><strong>Running your practice</strong> — performance of our contract with
       you. For the personal data you enter about your students, your own lawful basis as controller
       applies; see §11.</li>
   </ul>
@@ -201,7 +204,7 @@
     <li data-app-only="student">In the <strong>student app</strong>, a study plan or revision quiz is
       generated from the subject, topic and exam details you enter. Your friends, your messages and
       your personal notes are not part of the request.</li>
-    <li data-app-only="tutor">In <strong>Planur for Tutors</strong>, a practice test is generated from
+    <li data-app-only="tutor school">In <strong>Planur for Tutors</strong>, a practice test is generated from
       four fields: topic, subject, difficulty and number of questions. <strong>Nothing about a child
       is included</strong> — not names, results, attendance, fees, parent contacts, or the materials
       you have uploaded. That is not a policy statement; it is the entire content of the request.</li>
@@ -302,7 +305,7 @@
   <p data-app-only="student">You can delete your account and all associated data at any time — in the
   app via <strong>Profile → Delete account</strong>, or see
   <a href="/delete-account">theplanur.co.uk/delete-account</a> for full instructions.</p>
-  <p data-app-only="tutor">You can delete your tutor account and your practice at any time — see
+  <p data-app-only="tutor school">You can delete your tutor account and your practice at any time — see
   <a href="/delete-account?app=tutor">theplanur.co.uk/delete-account</a> for what happens to your
   roster, register, invoices and uploaded materials, and what your students see afterwards.</p>
 
@@ -346,14 +349,133 @@
     any change ships.</p>
   </div>
 
+
+  <h2 data-app-only="school">11. Schools: who is responsible for what</h2>
+  <div data-app-only="school">
+    <span class="app-scope school">Planur for Schools</span>
+
+    <div class="callout">
+      <p><strong>This is the public summary.</strong> The full <strong>Data Processing Agreement</strong>
+      — the one your legal team will want, with the Article 28 / DPDP processor terms in full, the
+      sub-processor list as an annex and the security schedule — is signed with you at onboarding. Ask
+      and we will send you the current draft <em>before</em> you commit to anything.</p>
+    </div>
+
+    <p>Your school is set up in Planur as a <strong>practice</strong> — the same structure a tutoring
+    business uses, at school scale. The answer to “who is responsible for this data” is not the same
+    for everything in your account.</p>
+
+    <ul>
+      <li><strong>Your school’s own account data</strong> — the names and email addresses of the staff
+        who administer the account, and your subscription. <strong>We are the controller</strong>
+        (“Data Fiduciary” under India’s DPDP Act 2023). The rest of this notice applies to it
+        normally.</li>
+      <li><strong>Everything you record about students, guardians and staff</strong> — names, classes,
+        guardian contacts, attendance, marks, fees, and staff records such as joining dates, presence
+        and leave. <strong>Your school is the controller / Data Fiduciary. We are the processor / Data
+        Processor.</strong> We hold and process that data on your documented instructions, to provide
+        the service to you, and for no purpose of our own. We do not market to your students, their
+        parents or your staff, we do not sell it, and we never send it to an AI provider.</li>
+    </ul>
+
+    <h3>What being your processor commits us to</h3>
+    <p>These are the obligations a processor owes a controller under UK/EU GDPR Article 28, and the
+    equivalent duties of a Data Processor under the DPDP Act. Stated here in plain words; stated in
+    full in the agreement.</p>
+    <ul>
+      <li>Process the data <strong>only on your documented instructions</strong>, including for any
+        transfer out of your country.</li>
+      <li>Keep everyone we allow near it under a <strong>duty of confidentiality</strong>.</li>
+      <li>Apply the <strong>security measures</strong> described in §6, and keep them appropriate to
+        the risk.</li>
+      <li><strong>Not add or change a sub-processor without telling you first</strong> — the current
+        list is in §6 — and give you a fair opportunity to object.</li>
+      <li><strong>Help you answer requests</strong> from a student, parent or employee to access,
+        correct, export or delete their data.</li>
+      <li><strong>Tell you without undue delay</strong> if there is a personal data breach affecting
+        your data, with what you need in order to notify your regulator — the ICO in the UK, the Data
+        Protection Board of India under DPDP — and, where required, the people affected.</li>
+      <li>Help you with a <strong>Data Protection Impact Assessment</strong> and any prior consultation
+        that follows from it. Most schools will need one before deploying software of this kind; we
+        will give you what we hold.</li>
+      <li>At the end of the contract, <strong>return or delete the data at your choice</strong>. Plan
+        limits never delete what is already there — see §12.</li>
+      <li>Make available the information you reasonably need to <strong>verify all of the above</strong>,
+        and submit to audits on the terms set out in the agreement.</li>
+    </ul>
+
+    <h3>Children</h3>
+    <p>Every student record a school holds is a child’s record, and two things follow.</p>
+    <ul>
+      <li><strong>India (DPDP Act 2023).</strong> Anyone under <strong>18</strong> is a child.
+        <strong>Your school obtains the verifiable parental or guardian consent</strong> for its own
+        processing — that duty sits with the Data Fiduciary, which is you. We provide the technical
+        controls and the records to support it, and we will not knowingly work around them. Tracking,
+        behavioural monitoring and targeted advertising directed at children are prohibited under the
+        Act; Planur does none of them anywhere in the world.</li>
+      <li><strong>UK &amp; EU/EEA.</strong> We follow the ICO’s Age Appropriate Design Code and
+        equivalent EU rules, and default to high-privacy settings — see §4.</li>
+      <li><strong>The student’s own connection is separately gated.</strong> If a student links their
+        personal Planur planner to your school, and they are under the age of digital consent for their
+        country — or we hold no date of birth — they see nothing of your classes until a parent
+        approves. Age is decided on our servers, and an unknown age is treated as under-age.</li>
+      <li><strong>Nothing about a child is sent to an AI provider.</strong> See §5. A practice paper is
+        generated from the topic, subject, difficulty and question count you type — and nothing
+        else.</li>
+    </ul>
+
+    <h3>Staff records</h3>
+    <p>Where you record employment information — joining dates, daily presence, lateness, leave — we are
+    your processor for that too, on the same terms. Employment records usually have to be kept longer
+    than student records; the retention period is <strong>yours to set</strong>, not ours, and we will
+    hold them for as long as you instruct.</p>
+
+    <div class="callout warn">
+      <p><strong>Sensitive documents: not yet, and please do not.</strong> Planur does
+      <strong>not</strong> currently provide secure storage for caste, income, disability, Aadhaar or
+      other government certificates, and those documents <strong>should not be uploaded</strong> into
+      class materials, which are ordinary shared files. Secure document storage is a separate planned
+      feature, encrypted with a key <em>your school</em> holds, so that we cannot read the files even if
+      asked to. Until it exists, please keep that paperwork in your own systems.</p>
+    </div>
+
+    <h3>When records leave us</h3>
+    <p>If you take a year-end export of your records into your own storage, <strong>your school becomes
+    their sole custodian from that moment</strong>. We can no longer action an erasure or correction
+    request against exported files, because we no longer hold them — that responsibility passes to you,
+    and the agreement says so explicitly.</p>
+
+    <h3>What we enforce in the database, not on a screen</h3>
+    <ul>
+      <li><strong>No school can read another school’s data.</strong> A student who also studies
+        elsewhere cannot carry your classes, materials or fees across.</li>
+      <li><strong>Fee and staff data are permission-gated.</strong> A class teacher cannot read the fee
+        ledger or another member of staff’s leave record — a separate permission at the database level,
+        not a hidden screen.</li>
+      <li><strong>Students keep a planner of their own.</strong> You see the classes you teach and the
+        results of tests you set. Their homework, revision and private notes stay theirs.</li>
+      <li><strong>No student account can reach an answer key.</strong></li>
+    </ul>
+    <p>These rules are covered by an automated test suite that runs against the real database before any
+    change ships.</p>
+
+    <p><strong>Where your data is held, and transfers.</strong> See §6 and §7. Data is stored in
+    Supabase’s EU region; where data crosses a border we rely on the UK International Data Transfer
+    Agreement, the EU Standard Contractual Clauses, or the equivalent mechanism recognised by the law
+    that applies to you.</p>
+  </div>
+
   <h2>12. How long we keep your data</h2>
   <ul>
     <li><strong>Account &amp; app data</strong> — kept while your account is active; deleted when you
       delete your account, and deleted or anonymised after 24 months of inactivity.</li>
-    <li data-app-only="tutor"><strong>Practice data</strong> — your roster, register, invoices and
+    <li data-app-only="tutor school"><strong>Practice data</strong> — your roster, register, invoices and
       uploaded materials are kept for as long as your practice exists, including if you drop to a
       free plan or stop paying: plan limits stop you <em>adding</em>, they never delete what is
       already there. It is removed when you delete the practice.</li>
+    <li data-app-only="school"><strong>Staff and employment records</strong> — kept for as long as your
+      school instructs. Employment law in your country usually requires longer than student records;
+      that period is yours to set and we follow it.</li>
     <li><strong>Waitlist signups</strong> — kept until you have had the chance to create an account, or
       until you request deletion.</li>
     <li><strong>Contact messages</strong> — up to 12 months after your enquiry is resolved, then deleted.</li>

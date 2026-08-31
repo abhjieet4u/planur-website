@@ -35,3 +35,16 @@
 # so deep links never reach the server.
 /tutors/login    /tutors/app/    301
 /tutor-login     /tutors/app/    301
+
+# Student web app. Same courtesy as the tutor ones above: /app/ is the real
+# path, but nobody types a trailing slash and "login" is what people guess.
+/login           /app/           301
+/log-in          /app/           301
+/student-login   /app/           301
+
+# Schools. Same app as tutors — a school is a large practice, not a second
+# product — so every school entry point lands in the one tutor bundle.
+/school          /schools        301
+/schools/login   /tutors/app/    301
+/school-login    /tutors/app/    301
+/schools/app/*   /tutors/app/:splat  301
