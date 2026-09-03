@@ -4,9 +4,16 @@
 
   NEW 2026-08-31. Third audience tab alongside / (students) and /tutors.
 
-  SAME APP, DIFFERENT DOOR. "School log in" points at /tutors/app/ — a school is
-  a large practice, not a second product. There is no separate build, and there
-  must never be one. (docs/portal-redesign-plan.md §7, planur-app repo.)
+  SAME APP, DIFFERENT DOOR. "School log in" points at /tutors/app/?for=school —
+  a school is a large practice, not a second product. There is no separate
+  build, and there must never be one. (docs/portal-redesign-plan.md §7,
+  planur-app repo.)
+
+  The ?for=school flag only changes the wording of the SIGN-IN SCREEN, so a head
+  teacher is not asked to sign in to "Planur for Tutors". It is cosmetic by
+  design and nothing may be gated on it — it is a query parameter, and anyone
+  can set it. After sign-in the shell shows the school's own name, which is
+  better branding than any flag could carry.
 
   WHAT MUST NOT COME BACK without the owner asking:
     · Prices. Never on this page — same rule as /tutors.
@@ -164,7 +171,7 @@
         <a href="/schools" class="current" aria-current="page">For schools</a>
       </div>
       <div class="nav-right">
-        <a class="nav-link" href="/tutors/app/">School log in</a>
+        <a class="nav-link" href="/tutors/app/?for=school">School log in</a>
         <a class="btn btn-coral" href="#talk">Talk to us</a>
       </div>
     </div>
@@ -486,7 +493,7 @@
         <h4>For schools</h4>
         <ul>
           <li><a href="/schools">Planur for Schools</a></li>
-          <li><a href="/tutors/app/">School log in</a></li>
+          <li><a href="/tutors/app/?for=school">School log in</a></li>
           <li><a href="/schools#talk">Talk to us</a></li>
         </ul>
       </div>

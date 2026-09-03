@@ -44,7 +44,18 @@
 
 # Schools. Same app as tutors — a school is a large practice, not a second
 # product — so every school entry point lands in the one tutor bundle.
-/school          /schools        301
-/schools/login   /tutors/app/    301
-/school-login    /tutors/app/    301
-/schools/app/*   /tutors/app/:splat  301
+#
+# `?for=school` is read by the app to word its SIGN-IN SCREEN as "Planur for
+# Schools". It is cosmetic and must stay that way: it is a query parameter, so
+# anyone can set it, and nothing may ever be gated on it. See
+# tutor_app/lib/core/config/entry_point.dart.
+#
+# ⚠️ A school-flavoured URL in the ADDRESS BAR is not achievable this way. The
+# base href is compiled into the bundle, so keeping /schools/app/ visible needs
+# a second Flutter build — and on one origin a second build shares the stored
+# session unless it also carries its own persistSessionKey. Owner chose one
+# door, 2026-09-03.
+/school          /schools                       301
+/schools/login   /tutors/app/?for=school        301
+/school-login    /tutors/app/?for=school        301
+/schools/app/*   /tutors/app/:splat?for=school  301
