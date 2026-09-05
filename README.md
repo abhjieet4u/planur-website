@@ -218,6 +218,64 @@ var STORES_LIVE = false;   // top of the <script> in each of the three pages
 broken store link is worse than a button that waits. **iPhone and Android launch together, so don't
 switch one on early.**
 
+## Subdomains, parked — `tutor.` and `school.` go together
+
+**Owner, 2026-09-05: park both until a school is actually being onboarded, then
+build them together.** Recorded here so the work is not re-derived.
+
+`tutor.theplanur.co.uk` has been half-planned for weeks (see the section below).
+`schools.theplanur.co.uk` was built and then parked the same day. They are the
+same job: one Netlify **domain alias** each on this one site, one `dist/`, no
+second deploy. Doing them together is one DNS session instead of two.
+
+### ⚠️ Decide the name before the DNS record exists
+
+The request said **`schools.`** and then **`school.`**. `tutor.` is already
+singular. Changing it afterwards means a second DNS record, a second
+certificate, and a redirect kept forever — so pick once.
+
+**Recommendation: singular, `school.theplanur.co.uk`**, to match `tutor.`. Every
+rule below currently says `schools.` and must be rewritten if the singular is
+chosen.
+
+### What is already written, and where
+
+| | |
+|---|---|
+| `site/_redirects` | three commented rules — the alias root, the catch-all back to the apex, and `/schools` → the subdomain |
+| `site/schools/index.html` | the two **"School log in"** links are already absolute to the apex — deliberately, and they should stay that way. Nothing else is: absolute content links break the `localhost:8080` preview for no benefit, since the catch-all rule returns those paths to the apex anyway. |
+
+### 🔴 Why those links are absolute, and must not be "tidied" back
+
+A domain alias serves the **whole** site on both hosts, so
+`school.theplanur.co.uk/tutors/app/` would happily serve the tutor app. That is
+not harmless: a different host is a different **origin**, so the app gets its own
+`localStorage`, and a tutor signed in on `theplanur.co.uk` appears **signed
+out** on the subdomain. Two sessions, silently — the same class of bug
+`tutor_app`'s `_webSessionKey` exists to fix, arriving by a different route.
+
+The absolute links and the catch-all rule are two independent defences against
+that. Keep both.
+
+### The order, which is the part that goes wrong
+
+1. Add the domain alias on the host.
+2. Add the DNS record — `CNAME  school  <site>.netlify.app`. ⚠️ **Not** a CNAME
+   to the apex.
+3. Confirm the certificate covers the new host, or visitors get a certificate
+   warning rather than a 404 — which looks worse.
+4. `curl -sI https://school.theplanur.co.uk/` and get *any* response.
+5. **Only then** uncomment the rules, repoint the "For schools" tab in
+   `site/index.html` and `site/tutors/index.html`, move the canonical tag in
+   `site/schools/index.html`, and update `site/sitemap.xml`.
+6. Rebuild and deploy — `_redirects` only takes effect on a new deploy.
+7. Check `theplanur.co.uk/schools` redirects **without looping**. Netlify rule
+   evaluation cannot be tested locally; this is the one to watch.
+
+🔴 **Steps 1–4 before step 5.** Publishing links to a host that does not resolve
+gives a browser-level "server not found" — a page we cannot theme, explain or
+redirect. That is precisely where `tutor.theplanur.co.uk` has been stuck.
+
 ## Tutor browser sign-in — the switch waiting to be flipped
 
 `tutor.theplanur.co.uk` has **no DNS record**, so linking to it gives a browser-level "server not

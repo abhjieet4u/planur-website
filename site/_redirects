@@ -42,6 +42,39 @@
 /log-in          /app/           301
 /student-login   /app/           301
 
+# ═══════════════════════════════════════════════════════════════════════════
+# schools.theplanur.co.uk — the school presence on its own host
+#
+# It is a DOMAIN ALIAS of this same Netlify site, not a second deploy: one
+# dist/, one drag, no duplicated CSS or fonts. Netlify matches absolute URLs in
+# this file, so the host can be routed without a second project.
+#
+# 🔴 ORDER MATTERS. The root rule must come before the catch-all, because `/*`
+# matches `/` as well.
+#
+# 🔴 WHY EVERY OTHER PATH IS SENT BACK TO THE APEX — this is the important one.
+# An alias serves the WHOLE site on both hosts, so `schools.theplanur.co.uk`
+# would happily serve /tutors/app/ too. That looks harmless and is not: a
+# different host is a different ORIGIN, so the app would get its own
+# localStorage and a tutor signed in on theplanur.co.uk would appear signed out
+# on schools.theplanur.co.uk. Two sessions, silently — the same class of bug
+# tutor_app's _webSessionKey exists to fix, arriving by a different route.
+#
+# Sending everything but the school page back to the apex means the app, the
+# privacy notice and the terms exist in exactly ONE place. It also removes the
+# duplicate-content problem an alias would otherwise create.
+# ⏸️ PARKED 2026-09-05 — owner: build this WITH tutor.theplanur.co.uk, once a
+# school is actually being onboarded. Uncomment all three lines together, and
+# only AFTER the DNS record resolves and the certificate covers the host.
+# Deploying these against a host that does not resolve gives a browser-level
+# "server not found" — the same trap tutor.theplanur.co.uk is already stuck in.
+# See README → "Subdomains, parked".
+#
+# https://schools.theplanur.co.uk/     /schools/index.html                200!
+# https://schools.theplanur.co.uk/*    https://theplanur.co.uk/:splat     301!
+# /schools                             https://schools.theplanur.co.uk/   301!
+# ═══════════════════════════════════════════════════════════════════════════
+
 # Schools. Same app as tutors — a school is a large practice, not a second
 # product — so every school entry point lands in the one tutor bundle.
 #
@@ -55,7 +88,7 @@
 # a second Flutter build — and on one origin a second build shares the stored
 # session unless it also carries its own persistSessionKey. Owner chose one
 # door, 2026-09-03.
-/school          /schools                       301
+/school          /schools                           301
 /schools/login   /tutors/app/?for=school        301
 /school-login    /tutors/app/?for=school        301
 /schools/app/*   /tutors/app/:splat?for=school  301
