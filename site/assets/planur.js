@@ -16,24 +16,39 @@
   /* ── Supabase Edge Functions ───────────────────────────────────────────────
      No keys here — credentials live server-side inside the functions.
 
-     🔴 THE LIVE SITE MUST POST TO PROD. Until 2026-09-12 this file named the
-     STAGING project unconditionally, so every "Talk to us" from theplanur.co.uk
-     — the only conversion path on /schools and /tutors — landed in the test
-     database, where nothing triages it. The sender still saw "we'll come back
-     within one working day".
+     🔴 EVERYTHING IS ON STAGING UNTIL THE CUTOVER — AND THAT IS DELIBERATE.
+     Owner, 2026-09-12: the soft launch runs on staging for the first two
+     schools; once they confirm the features, Planur launches and migrates to
+     prod. Prod is empty and nobody is watching it, so an enquiry sent there
+     would be worse than one sent to staging: the team would never see it.
 
-     Chosen by HOSTNAME rather than by a build-time swap, because dist/ is
-     assembled by tools/build_site.sh from these exact files and a constant
-     edited at deploy time is a constant somebody eventually forgets. The real
-     host posts to prod; localhost, Netlify previews and anything else keep
-     using staging, so the preview the README prescribes cannot write to the
-     live enquiry table.
+     The tutor portal served from this same site at /tutors/app/ is built with
+     the staging dart-defines, so pointing this file at prod would also split
+     the site in half — a visitor enquiring in one project and signing in to
+     another.
+
+     ⚠️ For a few hours on 2026-09-12 this DID point at prod. It was written to
+     fix the opposite bug (the file named staging unconditionally, with no way
+     to ever change it) before the staging soft launch was known here. The
+     mechanism was right and the target was wrong.
+
+     ── AT CUTOVER: FLIP ONE BOOLEAN ─────────────────────────────────────────
+     Set GO_LIVE_ON_PROD = true, rebuild, redeploy. Do it in the same change as
+     the tutor web rebuild against config/prod.json — the two must move
+     together or the split above is exactly what you get.
+
+     Kept as a hostname switch rather than a bare constant because dist/ is
+     assembled by tools/build_site.sh from these exact files: after the flip,
+     localhost and Netlify previews still write to staging, so the preview the
+     README prescribes can never touch the live enquiry table.
 
      Project refs, not keys: both already ship inside the published apps and in
      every request URL they make. `contact-submit` is deployed on both projects
      with verify_jwt off, which is what lets an anonymous visitor call it.     */
+  var GO_LIVE_ON_PROD = false;
+
   var LIVE_HOSTS = ['theplanur.co.uk', 'www.theplanur.co.uk'];
-  var IS_LIVE = LIVE_HOSTS.indexOf(location.hostname) !== -1;
+  var IS_LIVE = GO_LIVE_ON_PROD && LIVE_HOSTS.indexOf(location.hostname) !== -1;
 
   var PROJECT_ID = IS_LIVE ? 'hjjgbqkvhaqamkkrvvvc' : 'uvhcnikrlhfwbkdzbntb';
   var FN_BASE = 'https://' + PROJECT_ID + '.supabase.co/functions/v1';
