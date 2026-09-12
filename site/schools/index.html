@@ -438,8 +438,17 @@
         <p><b>Staff, and who sees what.</b> Teachers reach their own classes. The office reaches
           students. Whoever keeps the books reaches the money, not the children.</p>
 
+        <!-- 🔴 DO NOT PUT "students see their own copy on their phone" BACK until
+             the student app actually reads it. Migration 119's RLS does let a
+             student read timetable_period / timetable_slot — but nothing reads
+             them. The student app's only timetable path is
+             StudentReadRepository.upcomingEvents(), which reads that student's
+             own `events` table, and 119's own comment puts the student read RPC
+             in "Phase 3". A permission is not a feature, and of everything on
+             this page it is the claim a head teacher is likeliest to test in a
+             demo. Moved to the being-built paragraph below. -->
         <p><b>The week and the year.</b> A timetable per class, exams beside it, holidays that stop a
-          closed day showing as a lesson. Students see their own copy on their phone.</p>
+          closed day showing as a lesson.</p>
 
         <p><b>It looks like your school.</b> Your crest, your name, your typeface — on every screen a
           teacher opens and every receipt a parent is handed.</p>
@@ -454,10 +463,10 @@
          been misled, whatever the tone was. Said plainly, in place, once. -->
     <div class="still-building fade-in delay-2">
       <p><b>Being built with the schools joining now:</b> printed report cards on your board's grading
-        scale, and records that carry forward so a class is promoted in one action rather than rebuilt
-        every June. These are the parts that only make sense once a full year has run through the
-        system, and we would rather shape them with a school than guess. Everything above is working
-        today.</p>
+        scale, records that carry forward so a class is promoted in one action rather than rebuilt
+        every June, and the class timetable appearing in each student's own planner. These are the
+        parts that only make sense once a full year has run through the system, and we would rather
+        shape them with a school than guess. Everything above is working today.</p>
     </div>
   </div>
 </section>
@@ -539,8 +548,17 @@
           Nothing begins charging on its own.</p></div></div>
       <div class="ask-item"><div class="n">3</div><div>
         <h4>If it does not suit you, you leave with your records</h4>
-        <p>Your data is not the thing keeping you here. Export it in full and go — that is a
-          commitment worth reading our <a href="/privacy?app=school">privacy notice</a> against.</p></div></div>
+        <!-- 🔴 "Export it in full and go" was a promise this page CONTRADICTED
+             four sections above, where "Year-end export and custody" sits in the
+             list marked "not available today" — and there is no export anywhere
+             in the product: no screen in tutor_app/lib/features/, no script in
+             supabase/ops/. Doing it by hand is honest and, at this number of
+             schools, true. A self-serve button is not, and this is the sentence
+             a school's DPA counsel reads. Restore the stronger wording when the
+             export ships, not before. -->
+        <p>Your data is not the thing keeping you here. Ask, and we hand your records back as files —
+          today we do that for you rather than hand you a button, and it is a commitment worth
+          reading our <a href="/privacy?app=school">privacy notice</a> against.</p></div></div>
     </div>
   </div>
 </section>

@@ -14,8 +14,28 @@
   var LOADED_AT = Date.now();
 
   /* ── Supabase Edge Functions ───────────────────────────────────────────────
-     No keys here — credentials live server-side inside the functions.        */
-  var PROJECT_ID = 'uvhcnikrlhfwbkdzbntb';
+     No keys here — credentials live server-side inside the functions.
+
+     🔴 THE LIVE SITE MUST POST TO PROD. Until 2026-09-12 this file named the
+     STAGING project unconditionally, so every "Talk to us" from theplanur.co.uk
+     — the only conversion path on /schools and /tutors — landed in the test
+     database, where nothing triages it. The sender still saw "we'll come back
+     within one working day".
+
+     Chosen by HOSTNAME rather than by a build-time swap, because dist/ is
+     assembled by tools/build_site.sh from these exact files and a constant
+     edited at deploy time is a constant somebody eventually forgets. The real
+     host posts to prod; localhost, Netlify previews and anything else keep
+     using staging, so the preview the README prescribes cannot write to the
+     live enquiry table.
+
+     Project refs, not keys: both already ship inside the published apps and in
+     every request URL they make. `contact-submit` is deployed on both projects
+     with verify_jwt off, which is what lets an anonymous visitor call it.     */
+  var LIVE_HOSTS = ['theplanur.co.uk', 'www.theplanur.co.uk'];
+  var IS_LIVE = LIVE_HOSTS.indexOf(location.hostname) !== -1;
+
+  var PROJECT_ID = IS_LIVE ? 'hjjgbqkvhaqamkkrvvvc' : 'uvhcnikrlhfwbkdzbntb';
   var FN_BASE = 'https://' + PROJECT_ID + '.supabase.co/functions/v1';
 
   function callEdgeFunction(name, payload) {
