@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 80" role="img" aria-label="Planur — online planner and admin software">
+  <!-- The full lockup: mark, wordmark, tagline.
+       Owner, 2026-09-12: "logo only, keep sage and sky". So the supplied navy
+       (#0B2545) is replaced by the site's sage; only the gold accent survives
+       from the original palette.
+
+       INLINE THIS, DO NOT USE IT AS AN img src. The wordmark is set in DM Sans,
+       which the site self-hosts and which an externally-referenced SVG cannot
+       reach: a browser renders an img-loaded SVG in its own document, with no
+       access to the host page's fonts, so the wordmark would silently fall back
+       to a different face on every machine. Inlined in the page, it is the same
+       DM Sans as the rest of the site.
+
+       The header does NOT use this file. It uses planur-mark.svg beside the
+       existing text wordmark, so the logo follows each page's own colour
+       (sage, sky on the schools page, white in the footer). This lockup is for
+       places that need the whole thing as one object: print, a slide, an
+       email signature, a store listing.
+
+       Tagline colour is the site's amber token, not the swoosh gold. #D4AF37
+       measures 2.10:1 on white and fails AA for text; #96690A measures 4.86:1
+       and is already the value planur.css uses for exactly this reason. The
+       swoosh keeps #D4AF37 because it is a graphic, not text. -->
+
+  <g transform="translate(10, 10)">
+    <rect x="35" y="10" width="42" height="42" rx="8" fill="#4A7C59" opacity="0.12"/>
+    <path d="M42 22 H70 M42 30 H70 M42 38 H70 M51 16 V44 M61 16 V44"
+          stroke="#4A7C59" stroke-width="2" stroke-linecap="round" opacity="0.25"/>
+
+    <path d="M 12 50 C 12 22, 28 10, 44 10 C 60 10, 68 22, 58 36 C 48 50, 24 50, 14 38 C 9 32, 12 20, 26 14 C 40 8, 54 18, 48 30"
+          fill="none" stroke="#4A7C59" stroke-width="7"
+          stroke-linecap="round" stroke-linejoin="round"/>
+
+    <path d="M 14 38 C 24 50, 48 50, 58 36"
+          fill="none" stroke="#D4AF37" stroke-width="7" stroke-linecap="round"/>
+  </g>
+
+  <text x="100" y="48"
+        font-family="'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif"
+        font-weight="800" font-size="38" fill="#4A7C59" letter-spacing="1">PLANUR</text>
+
+  <text x="102" y="64"
+        font-family="'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif"
+        font-weight="600" font-size="10" fill="#96690A" letter-spacing="2">ONLINE PLANNER &amp; ADMIN SOFTWARE</text>
+</svg>

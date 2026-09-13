@@ -22,7 +22,9 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://theplanur.co.uk/" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%234A7C59'/><text x='16' y='23' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='20' fill='white'>P</text></svg>" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png" />
+  <link rel="apple-touch-icon" href="/assets/planur-apple-touch-icon.png" />
   <script>document.documentElement.className += ' js';</script>
   <link rel="stylesheet" href="/assets/planur.css?v=20260819" />
   <style>
@@ -82,7 +84,40 @@
     .feature-card:nth-child(3n+3)::before{background:var(--coral);}
     .feature-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:transparent;}
     .feature-card:hover::before{opacity:1;}
-    .feature-icon{font-size:2.2rem;margin-bottom:16px;display:block;line-height:1;}
+    /* ── Icons ────────────────────────────────────────────────────────────
+       Owner, 2026-09-06: *"add simple icons which will add some colour than
+       mono tone theme"*. This page was the one that needed it — /tutors and
+       /schools already carry 41 and 20 inline SVGs between them, and this one
+       had four, marking every section with an emoji instead.
+
+       🔴 Emoji were not a neutral choice. They render in a different typeface
+       per platform, carry each vendor's own drawing and skin tones, are read
+       aloud by a screen reader as their CLDR name mid-sentence, and cannot take
+       the page's colour. The three pages now share one sprite, drawn in
+       currentColor, and each tile takes a tint from the palette already in
+       planur.css — so the colour is the product's, not Apple's.
+
+       Shape and sizes match /schools exactly; the TODO there about lifting
+       .ic / .ic-tile into planur.css now covers three copies rather than two. */
+    .ic{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6;
+        stroke-linecap:round;stroke-linejoin:round;display:block;}
+    .ic-sm{width:17px;height:17px;}
+    .ic-tile{width:46px;height:46px;border-radius:14px;display:flex;
+             align-items:center;justify-content:center;margin-bottom:16px;}
+    .ic-tile .ic{width:23px;height:23px;}
+    /* Six cards, six tints, cycling the palette rather than repeating one —
+       a grid in a single hue is the monotone the owner was describing. */
+    .tile-sage{background:var(--sage-faint);color:var(--sage-deep);}
+    .tile-lav{background:var(--lavender-faint);color:#6B5CA0;}
+    .tile-coral{background:var(--coral-faint);color:var(--coral-dark);}
+    .tile-sky{background:var(--sky-faint);color:#1F6FA8;}
+    .tile-amber{background:var(--amber-faint);color:var(--amber);}
+    .tile-mint{background:var(--mint);color:var(--sage-deep);}
+    /* The pills under the hero. `.inside-item` is ALREADY `display:flex` with
+       `gap:7px`, so the icon needs neither a margin nor a vertical-align — the
+       first would double the gap and the second does nothing to a flex item,
+       which is blockified. Colour only. */
+    .inside-item .ic{color:var(--sage);flex-shrink:0;}
     .feature-card h3{font-size:1.15rem;font-weight:700;margin-bottom:10px;color:var(--text-dark);}
     .feature-card p{font-size:.93rem;color:var(--text-mid);line-height:1.65;}
 
@@ -119,13 +154,43 @@
 </head>
 <body>
 
+<!-- The shared icon sprite, identical to the copy on /tutors and /schools.
+     Brought here 2026-09-12: this page was the only one of the three still
+     marking its sections with emoji, which read as a different product from
+     the two pages one click away. Duplicated inline rather than fetched —
+     the site makes no external requests, and an <img src> sprite cannot be
+     recoloured by currentColor. -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true" focusable="false">
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18.5h2"/></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="2"/><path d="M2 19h20"/></symbol>
+  <symbol id="i-cap" viewBox="0 0 24 24"><path d="M12 4L2 9l10 5 10-5-10-5z"/><path d="M6 11.5V16c0 1.4 2.7 3 6 3s6-1.6 6-3v-4.5"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 14a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M7 3h11a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H7z"/><path d="M7 3v18"/><path d="M4 6.5h3M4 12h3M4 17.5h3"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M21 3L10.5 13.5"/><path d="M21 3l-6.8 18-3.7-7.5L3 9.8z"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+  <symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="8.5" y="2.5" width="7" height="4" rx="1.2"/><path d="M15.5 4.5H18a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-13a2 2 0 0 1 2-2h2.5"/><path d="M9 13.5l2 2 4-4"/></symbol>
+  <symbol id="i-clip" viewBox="0 0 24 24"><path d="M20.5 11.5l-8.6 8.6a5.5 5.5 0 0 1-7.8-7.8l8.6-8.6a3.7 3.7 0 0 1 5.2 5.2l-8.6 8.6a1.8 1.8 0 0 1-2.6-2.6l7.9-7.9"/></symbol>
+  <symbol id="i-filepen" viewBox="0 0 24 24"><path d="M13 2H6.5A1.5 1.5 0 0 0 5 3.5v17A1.5 1.5 0 0 0 6.5 22H12"/><path d="M13 2l5 5v3"/><path d="M13 2v5h5"/><path d="M20.4 13.6a1.4 1.4 0 0 1 0 2L16.5 19.5 14 20l.5-2.5 3.9-3.9a1.4 1.4 0 0 1 2 0z"/></symbol>
+  <symbol id="i-note" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 12h.01M18 12h.01"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2.2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2.5"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.2c0 4.6-3.1 8.6-7.5 10.3C7.6 19.8 4.5 15.8 4.5 11.2V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="i-eyeoff" viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M10.6 5.2A9.9 9.9 0 0 1 12 5c5 0 9 4.6 9 7a11 11 0 0 1-2.3 3.4"/><path d="M6.5 6.6C4.3 8.1 3 10.4 3 12c0 2.4 4 7 9 7a9.4 9.4 0 0 0 4.2-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
+  <symbol id="i-split" viewBox="0 0 24 24"><rect x="3" y="4" width="7.5" height="16" rx="2"/><rect x="13.5" y="4" width="7.5" height="16" rx="2"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13"/><path d="M13 6.5l5.5 5.5L13 17.5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9.5l6 6 6-6"/></symbol>
+  <symbol id="i-rotate" viewBox="0 0 24 24"><path d="M20.5 12a8.5 8.5 0 1 1-2.6-6.1"/><path d="M20.5 4v5h-5"/></symbol>
+</svg>
+
 <a class="skip-link" href="#main">Skip to content</a>
 
 <!-- NAV -->
 <nav id="navbar">
   <div class="container">
     <div class="nav-bar">
-      <a class="logo" href="/">Planur<span>.</span></a>
+      <a class="logo" href="/"><img class="logo-mark" src="/assets/planur-mark.png" alt="" width="96" height="96" />Planur<span>.</span></a>
       <div class="nav-tabs">
         <a href="/" class="current" aria-current="page">For students</a>
         <a href="/tutors">For tutors</a>
@@ -178,15 +243,15 @@
 <section class="inside-strip" data-bg="#FDECD8">
   <div class="container">
     <div class="inside-inner fade-in">
-      <span class="inside-item">📚 Assignments &amp; exams</span>
+      <span class="inside-item"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-clipboard"/></svg>Assignments &amp; exams</span>
       <span class="inside-dot"></span>
-      <span class="inside-item">📅 Your timetable</span>
+      <span class="inside-item"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-grid"/></svg>Your timetable</span>
       <span class="inside-dot"></span>
-      <span class="inside-item">⚽ Fixtures &amp; clubs</span>
+      <span class="inside-item"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-cap"/></svg>Fixtures &amp; clubs</span>
       <span class="inside-dot"></span>
-      <span class="inside-item">🤖 AI revision plans</span>
+      <span class="inside-item"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-note"/></svg>AI revision plans</span>
       <span class="inside-dot"></span>
-      <span class="inside-item">🚫 No ads, ever</span>
+      <span class="inside-item"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-shield"/></svg>No ads, ever</span>
     </div>
   </div>
 </section>
@@ -434,38 +499,38 @@
     </div>
     <div class="grid-3">
       <div class="feature-card fade-in delay-1">
-        <span class="feature-icon">📚</span>
+        <div class="ic-tile tile-sage"><svg class="ic" aria-hidden="true"><use href="#i-grid"/></svg></div>
         <h3>Everything in one place</h3>
         <p>Timetable, assignments, exams and sports fixtures — sorted automatically, on one screen.
           No more lost planners or forgotten deadlines.</p>
       </div>
       <div class="feature-card fade-in delay-2">
-        <span class="feature-icon">🤖</span>
+        <div class="ic-tile tile-lav"><svg class="ic" aria-hidden="true"><use href="#i-filepen"/></svg></div>
         <h3>AI that actually helps</h3>
         <p>Generate a revision plan for any exam in one tap, built around your existing schedule —
           not a generic one-size-fits-all template.</p>
       </div>
       <div class="feature-card fade-in delay-3">
-        <span class="feature-icon">✍️</span>
+        <div class="ic-tile tile-coral"><svg class="ic" aria-hidden="true"><use href="#i-clipboard"/></svg></div>
         <h3>Revise, then test yourself</h3>
         <p>Turn a topic into a quick practice quiz and find out what you actually know before the
           exam does.</p>
       </div>
       <div class="feature-card fade-in delay-1">
-        <span class="feature-icon">👪</span>
+        <div class="ic-tile tile-sky"><svg class="ic" aria-hidden="true"><use href="#i-eyeoff"/></svg></div>
         <h3>Parent mode, on your terms</h3>
         <p>You decide what a parent can see, and you can change your mind. Enough visibility to be
           useful, never a surveillance app.</p>
       </div>
       <div class="feature-card fade-in delay-2">
-        <span class="feature-icon">🔒</span>
+        <div class="ic-tile tile-amber"><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg></div>
         <h3>Yours, on your device</h3>
         <p>Your planner lives encrypted on your device and keeps working offline — on the bus, in a
           lesson, anywhere with no signal. Your work is backed up to your account too, so signing in
           on a new phone brings it back.</p>
       </div>
       <div class="feature-card fade-in delay-3">
-        <span class="feature-icon">🌱</span>
+        <div class="ic-tile tile-mint"><svg class="ic" aria-hidden="true"><use href="#i-moon"/></svg></div>
         <h3>No ads. No streaks.</h3>
         <p>Nothing nagging you to come back, nothing selling you anything. A calm, honest tool that's
           actually on your side.</p>

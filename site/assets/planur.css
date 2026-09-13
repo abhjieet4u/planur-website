@@ -137,8 +137,29 @@ html:not(.js) .fade-in{opacity:1;transform:none;}
 #navbar.scrolled{box-shadow:var(--shadow-sm);}
 .nav-bar{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
 .logo{font-size:1.5rem;font-weight:800;color:var(--sage);letter-spacing:-.5px;
-  text-decoration:none;flex-shrink:0;}
+  text-decoration:none;flex-shrink:0;
+  display:inline-flex;align-items:center;gap:.4em;}
 .logo span{color:var(--lavender);}
+
+/* The mark, 2026-09-12 — PlanurFevicon-12Sep2026.jpeg, served at 96px for 2x
+   displays and drawn at 1.15em.
+
+   ⚠️ HEADER ONLY, and that is a constraint of the source file rather than a
+   design choice. The mark is a JPEG, so it has no alpha and carries its own
+   pale background. `footer{background:var(--text-dark)}` is nearly black, so
+   the same image down there would sit in a glaring light rectangle — the
+   footer keeps the text wordmark alone. A transparent PNG or an SVG export
+   would remove that restriction and the footer could match.
+
+   Sized in `em` so it tracks the wordmark through the 1.35rem mobile override
+   further down rather than needing a breakpoint of its own. */
+.logo-mark{width:1.15em;height:1.15em;flex-shrink:0;
+  /* The artwork has a little built-in padding; a hair of negative margin keeps
+     the optical gap to the wordmark the same as the `gap` above intends. */
+  margin-right:-.08em;
+  /* Mixes the pale JPEG ground into the header rather than showing a seam
+     against it. Harmless where the two already match. */
+  mix-blend-mode:multiply;}
 
 /* Product tabs — attached to the brand, divider between. */
 .nav-tabs{display:flex;align-items:center;gap:24px;padding-left:20px;

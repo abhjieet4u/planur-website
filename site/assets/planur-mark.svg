@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="5 3 68 56" role="img" aria-label="Planur">
+  <!-- The loop takes currentColor so one file serves every context: sage in the
+       header, sky on the schools page (which overrides the sage token), white
+       in the footer. Only the gold accent is fixed.
+       NB: no double hyphen anywhere in this comment, which is illegal in XML
+       and silently turns the whole file into a parse error. -->
+  <path d="M 12 50 C 12 22, 28 10, 44 10 C 60 10, 68 22, 58 36 C 48 50, 24 50, 14 38 C 9 32, 12 20, 26 14 C 40 8, 54 18, 48 30"
+        fill="none" stroke="currentColor" stroke-width="7"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 14 38 C 24 50, 48 50, 58 36"
+        fill="none" stroke="#D4AF37" stroke-width="7" stroke-linecap="round"/>
+</svg>
