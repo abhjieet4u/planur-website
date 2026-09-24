@@ -92,3 +92,33 @@
 /schools/login   /tutors/app/?for=school        301
 /school-login    /tutors/app/?for=school        301
 /schools/app/*   /tutors/app/:splat?for=school  301
+
+# ═════════════════════════════════════════════════════════════════════════════
+# 🔴 SPA FALLBACKS — WITHOUT THESE, EVERY DEEP LINK INTO EITHER APP 404s.
+#
+# Both apps are single-page apps using PATH-based URLs, so
+# /tutors/app/practice/<id>/staff/<id> is a route the bundle resolves in the
+# browser — there is no file at that path for Netlify to serve. Navigating
+# INSIDE the app never asks the server and always worked; everything else did
+# not:
+#
+#   · "Open in a new tab" on a student or staff profile
+#   · a hard reload of any screen below the app's root
+#   · a bookmark — entry_point.dart treats a bookmarked
+#     /practice/<id>/students as a real case
+#
+# Found 2026-09-24 by serving dist/ locally before a deploy and requesting a
+# profile URL: 404. It had been true for as long as the apps have been
+# deployed; the new-tab control is simply the first feature that walks into it
+# every time rather than occasionally.
+#
+# ⚠️ THESE DO NOT SHADOW REAL FILES. Netlify serves an existing file before
+# applying a non-forced rule, so main.dart.js, flutter_bootstrap.js and the
+# assets still resolve. A `!` (force) here WOULD break them.
+#
+# ⚠️ AND THEY MUST STAY LAST. First match wins, so placing them above the
+# /tutors/login and /schools/login rules above would swallow those 301s and
+# send a head teacher to the tutor door.
+# ═════════════════════════════════════════════════════════════════════════════
+/tutors/app/*  /tutors/app/index.html  200
+/app/*         /app/index.html         200
