@@ -273,15 +273,22 @@
 <nav id="navbar">
   <div class="container">
     <div class="nav-bar">
-      <a class="logo" href="/"><img class="logo-mark" src="/assets/planur-mark.png" alt="" width="96" height="96" />Planur<span>.</span></a>
-      <div class="nav-tabs">
-        <a href="/">For students</a>
-        <a href="/tutors" class="current" aria-current="page">For tutors</a>
-        <a href="/schools">For schools</a>
-      </div>
+      <a class="logo" href="/tutors"><img class="logo-mark" src="/assets/planur-mark.png" alt="" width="96" height="96" />Planur<span>.</span></a>
+      <!-- Below 420px both of these collapse to icons rather than one being
+           dropped (owner, 2026-10-10). Most phones in use are narrower than
+           that — 360 to 412 covers the common Android and iPhone sizes — so the
+           old rule hid "Tutor log in" on nearly all of them, leaving a
+           returning tutor with only the button written for strangers.
+           `aria-label` carries the name once the text is visually hidden. -->
       <div class="nav-right">
-        <a class="nav-link" href="/tutors/app/">Tutor log in</a>
-        <a class="btn btn-coral" href="#talk">Talk to us</a>
+        <a class="nav-link" href="/tutors/app/" aria-label="Tutor log in" title="Tutor log in">
+          <svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg>
+          <span class="nav-label">Tutor log in</span>
+        </a>
+        <a class="btn btn-coral" href="#talk" aria-label="Talk to us" title="Talk to us">
+          <svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg>
+          <span class="nav-label">Talk to us</span>
+        </a>
       </div>
     </div>
   </div>
@@ -628,6 +635,44 @@
       <p>An automated test suite tries to break those rules against the real database before anything
         ships. And if you stop paying, <strong>nothing is deleted</strong>.</p>
     </div>
+
+    <!-- Owner, 2026-10-10, after reviewing a free competitor holding safeguarding
+         and EHCP records with no privacy policy, no terms and no company named:
+         warn tutors that free is not the same as free of cost.
+
+         🔴 WRITTEN AS QUESTIONS, NOT AS AN ACCUSATION, and deliberately not
+         sarcastic. Three reasons, in order of how much they would cost us:
+           1. naming or sneering at an identifiable competitor over data
+              protection is where comparative advertising turns into a legal
+              problem — the questions are unarguable, a jibe is not;
+           2. "and that includes us" is what makes it land. A sarcastic version
+              is a product with no customers mocking a free tool, which reads as
+              nervous rather than confident;
+           3. it is the same voice as the rest of this section, which is called
+              "The fair question" for a reason.
+
+         ⚠️ THIS SETS A STANDARD WE HAVE TO MEET. Every question below links to
+         our own answer. Before this ships, check those answers are still true —
+         see docs/competitor-my-register.md §8, which lists the two that are
+         currently awkward. -->
+    <div class="callout fade-in delay-3">
+      <p><strong>Ask us this. Then ask it of everything else you're considering.</strong></p>
+      <p>There are good free tools about, and some of them are better than what they cost.
+        But a register holds real children's names, and free has to be paid for somehow — so
+        it is worth knowing by whom, and how, before a term's data is sitting in it:</p>
+      <ul>
+        <li><b>Who is accountable?</b> A named company, somewhere you can write to — not an
+          anonymous site.</li>
+        <li><b>Is there a written agreement covering the data?</b> Under UK GDPR, if a tool
+          processes your students' details on your behalf, that is supposed to exist. Ask to see it.</li>
+        <li><b>Where is it kept, and for how long after you leave?</b> Our answer is in the
+          <a href="/privacy?app=tutor">privacy notice</a>, with dates.</li>
+        <li><b>What happens to your register if the people behind it move on?</b> Can you get
+          everything out, in a format you can actually use?</li>
+      </ul>
+      <p>If a product can't answer those, the cost isn't zero. It is deferred — and it is the
+        families in your register who end up paying it.</p>
+    </div>
   </div>
 </section>
 
@@ -734,13 +779,13 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a class="logo" href="/">Planur<span>.</span></a>
+        <a class="logo" href="/tutors">Planur<span>.</span></a>
         <p>Your academic life, organised — and your teaching, without the paperwork.</p>
       </div>
       <div class="footer-col">
         <h4>For students</h4>
         <ul>
-          <li><a href="/">Planur student app</a></li>
+          <li><a href="/students">Planur student app</a></li>
           <li><a href="/download">Get the app</a></li>
         </ul>
       </div>

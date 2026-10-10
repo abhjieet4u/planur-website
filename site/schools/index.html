@@ -238,11 +238,6 @@
            "Planur." is unchanged on purpose: it is the anchor, and this IS
            Planur. Only the lockup after it says which product. -->
       <a class="logo logo-school" href="/schools"><img class="logo-mark" src="/assets/planur-mark.png" alt="" width="96" height="96" />Planur<span>.</span><b>Schools</b></a>
-      <div class="nav-tabs">
-        <a href="/">For students</a>
-        <a href="/tutors">For tutors</a>
-        <a href="/schools" class="current" aria-current="page">For schools</a>
-      </div>
       <!-- No call to action in the nav, deliberately. A head teacher reading
            this page is evaluating, not buying, and a nav pushing two buttons
            reads like a SaaS trial rather than a system you would hand children's
@@ -250,8 +245,14 @@
            to send them to. "School log in" stays only in the footer, where a
            returning user looks for it — offering it up here is what sent a
            principal into a sign-in screen they had no account for. -->
+      <!-- One control here, by the decision above: no nav CTA on this page.
+           It still takes the icon treatment below 420px so the three products'
+           headers behave the same way on a phone. -->
       <div class="nav-right">
-        <a class="nav-link" href="/tutors/app/?for=school">School log in</a>
+        <a class="nav-link" href="/tutors/app/?for=school" aria-label="School log in" title="School log in">
+          <svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg>
+          <span class="nav-label">School log in</span>
+        </a>
       </div>
     </div>
   </div>
@@ -621,7 +622,7 @@
       <div class="footer-col">
         <h4>For students</h4>
         <ul>
-          <li><a href="/">Planur student app</a></li>
+          <li><a href="/students">Planur student app</a></li>
           <li><a href="/download">Get the app</a></li>
         </ul>
       </div>

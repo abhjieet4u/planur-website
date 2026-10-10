@@ -393,13 +393,37 @@ footer{background:var(--text-dark);padding:52px 0 30px;position:relative;z-index
   .footer-grid{grid-template-columns:1fr;gap:26px;}
   .footer-bottom{flex-direction:column;align-items:flex-start;}
 }
-/* Very narrow: drop the quiet text link ("Log in" / "Tutor log in"), keep the
-   primary button. Both are in the footer, which is where they are found on a
-   phone anyway — and a student on a phone should be using the app, not the
-   read-only browser view. */
+/* Very narrow: KEEP BOTH CONTROLS, drop their words. Owner, 2026-10-10:
+   "if the screen is less than 420 px then change talk to us and log in both to
+   logo button than text".
+
+   🔴 THIS REPLACES A RULE THAT HID THE LOG-IN LINK ENTIRELY, and the width is
+   why it mattered: 420px is not an edge case. 360 (Galaxy S), 375 (iPhone SE),
+   390 (iPhone 14/15) and 412 (Pixel) are all under it, so "Tutor log in"
+   was missing from the header on nearly every phone in use — on the page that
+   is now the site's front door, for the visitor most likely to be returning.
+
+   An icon with no text needs its name from somewhere, so every control in
+   .nav-right carries `aria-label`; `.nav-label` is only visually hidden, and
+   `title` gives a pointer user the tooltip. */
 @media(max-width:420px){
-  .nav-right .nav-link{display:none;}
+  .nav-right .nav-label{display:none;}
+
+  /* Square it off so an icon alone still reads as a target, and keep both
+     comfortably above the 44px minimum once padding is counted. */
+  .nav-right .nav-link,
+  .nav-right .btn{display:inline-flex;align-items:center;justify-content:center;
+    width:40px;height:40px;padding:0;border-radius:10px;}
+  .nav-right .nav-link{border:1px solid var(--neutral-mid);}
+  .nav-right .ic{width:18px;height:18px;}
+  .nav-right{gap:10px;}
+
   .logo{font-size:1.35rem;}
 }
+
+/* The icon is decoration beside the words at every other width — the label is
+   what is read. Spacing only. */
+.nav-right .nav-link{display:inline-flex;align-items:center;gap:6px;}
+.nav-right .btn .ic{width:15px;height:15px;margin-right:6px;vertical-align:-2px;}
 
 .app-scope.school{background:var(--sky-faint);color:#3B6E8F;border-color:rgba(59,110,143,.28);}

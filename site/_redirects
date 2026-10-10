@@ -16,6 +16,40 @@
 /tutors/support          /support?app=tutor          301
 /tutors/contact          /support?app=tutor          301
 
+# ── The front door, 2026-10-10 ───────────────────────────────────────────────
+# Owner: three separate products, tutor promoted — "the main website actually
+# opens /tutors automatically".
+#
+# 🔴 There is deliberately NO site/index.html any more. The student page moved
+# to /students, which is what lets this rule fire without a force flag: Netlify
+# serves a matching static file in preference to a redirect, so a root
+# index.html would quietly win over this line and the whole change would look
+# like it had not applied.
+#
+# A 200 REWRITE, not a 301 — owner, 2026-10-10: "keep the cleaner looking
+# address for now". The bare domain stays in the address bar and serves the
+# tutor page from it.
+#
+# The duplicate that a rewrite would otherwise create is already handled:
+# tutors/index.html carries <link rel="canonical" href=".../tutors">, so a
+# crawler arriving at / is told which URL is the real one and consolidates the
+# ranking there rather than splitting it. sitemap.xml lists /tutors and not /,
+# for the same reason.
+#
+# ⚠️ The target must be the FILE, not the pretty path. `/  /tutors  200` makes
+# Netlify re-enter its own rules and the request can loop; naming index.html
+# ends it in one hop.
+#
+# To go back to a visible redirect, this line becomes `/  /tutors  301` and
+# nothing else has to change.
+/             /tutors/index.html    200
+
+# The student page used to be the root. These are the shapes people type or
+# have bookmarked for it.
+/student      /students  301
+/for-students /students  301
+/students/    /students  301
+
 # Singular and near-miss spellings of the tutor page — cheap to support, and these
 # are the URLs people type after hearing the name said out loud.
 /tutor        /tutors   301
