@@ -28,13 +28,29 @@ to satisfy both, with the DPDP-specific points called out.
 **The School** is the **Controller** (UK/EU GDPR) and **Data Fiduciary** (DPDP
 Act 2023) of the student and staff personal data it enters into Planur.
 
-**Planur** is the **Processor** (UK/EU) and **Data Processor** (DPDP). Planur
-processes that data **only on the School's documented instructions**, and use of
-the Planur software constitutes those instructions for the purposes described in
-Annex A.
+**Planur Ltd** is the **Processor** (UK/EU) and **Data Processor** (DPDP):
 
-⚠️ Planur is a trading name of a UK entity; the legal name, company number and
-registered address must be inserted before signature.
+| | |
+|---|---|
+| **Legal name** | Planur Ltd |
+| **Registered in** | England and Wales |
+| **Company number** | 17350438 |
+| **Registered office** | Unit 29, Highcroft Industrial Estate, Enterprise Road, Horndean, Waterlooville, PO8 0BT, United Kingdom |
+| **Contact for this agreement** | support@theplanur.co.uk |
+
+Planur processes that data **only on the School's documented instructions**, and
+use of the Planur software constitutes those instructions for the purposes
+described in Annex A.
+
+> Party details inserted 2026-10-11, once the company was confirmed registered.
+> ⚠️ This does **not** make the document signable — the header still stands: it
+> has not been reviewed by a solicitor, and it allocates liability for
+> children's personal data. Knowing who the parties are was simply a
+> precondition, not the remaining work.
+>
+> ⚠️ **Check the name and number against the register before signature.** They
+> were taken from the owner rather than from Companies House, and a wrong
+> company number on an executed contract is worth catching now.
 
 ## 2. Subject matter, duration, nature and purpose
 
