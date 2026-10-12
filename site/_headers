@@ -12,6 +12,13 @@
 #   · the assets are cached hard, because the ?v= stamp in the HTML is what
 #     busts them. Bump that stamp in the pages whenever you edit planur.css or
 #     planur.js — it is the only thing that forces a refetch.
+#
+# 🔴 THE STAMP IS NOT JUST FOR CSS AND JS. Every file under /assets is cached
+# for a year, images included, and the logo and favicon URLs carried NO stamp
+# at all until 2026-10-11. Replacing the artwork under the same filenames would
+# therefore have left every returning visitor on the old logo until 2027, with
+# nothing to show for the deploy. All of them are stamped now; stamp any new
+# one you add, and bump them all together when the artwork changes.
 
 /*.html
   Cache-Control: no-cache

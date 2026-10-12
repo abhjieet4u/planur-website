@@ -45,11 +45,13 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://theplanur.co.uk/tutors" />
 <meta name="twitter:card" content="summary_large_image" />
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png" />
-  <link rel="apple-touch-icon" href="/assets/planur-apple-touch-icon.png" />
+<!-- planur:brand-icons:start -->
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png?v=20261011" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png?v=20261011" />
+  <link rel="apple-touch-icon" href="/assets/planur-apple-touch-icon.png?v=20261011" />
+  <!-- planur:brand-icons:end -->
 <script>document.documentElement.className += ' js';</script>
-<link rel="stylesheet" href="/assets/planur.css?v=20260819" />
+<link rel="stylesheet" href="/assets/planur.css?v=20261011" />
 <style>
   /* ── Page-specific: /tutors ───────────────────────────────────────────── */
   .t-hero{padding:64px 0 60px;background:linear-gradient(160deg,#fff 0%,var(--mint) 58%,var(--lilac) 100%);
@@ -273,7 +275,7 @@
 <nav id="navbar">
   <div class="container">
     <div class="nav-bar">
-      <a class="logo" href="/tutors"><img class="logo-mark" src="/assets/planur-mark.png" alt="" width="96" height="96" />Planur<span>.</span></a>
+      <a class="logo" href="/tutors"><img class="logo-lockup" src="/assets/planur-lockup-tutors.png?v=20261011" alt="Planur for Tutors" width="499" height="160" /></a>
       <!-- Below 420px both of these collapse to icons rather than one being
            dropped (owner, 2026-10-10). Most phones in use are narrower than
            that — 360 to 412 covers the common Android and iPhone sizes — so the
@@ -737,8 +739,20 @@
               <label for="tstudents">Roughly how many students</label>
               <select id="tstudents">
                 <option value="" disabled selected>Select</option>
-                <option>1–5</option><option>6–20</option><option>21–50</option>
-                <option>51–100</option><option>More than 100</option>
+                <!-- 🔴 THE BANDS ARE THE PLAN BANDS, and they moved. Until
+                     2026-10-11 this read 1–5 / 6–20 / 21–50 / 51–100 / 100+,
+                     which were the caps BEFORE migration 146 reset them to
+                     10 / 30 / 75 / 150. An enquiry form whose ranges do not
+                     line up with the plans makes every reply an arithmetic
+                     exercise, and tells a tutor with 60 students nothing about
+                     which plan they are looking at.
+
+                     ⚠️ No prices here — standing rule. The bands describe
+                     CAPACITY, which is the thing the enquiry needs to route on.
+                     "More than 150" is the bespoke band, and it reaches us
+                     through this same form rather than a second one. -->
+                <option>1–10</option><option>11–30</option><option>31–75</option>
+                <option>76–150</option><option>More than 150</option>
               </select>
               <span class="error-msg">Please choose a range.</span>
             </div>
@@ -796,6 +810,7 @@
           <li><a href="/tutors/download">Get the tutor app</a></li>
           <li><a href="/tutors/app/">Tutor log in</a></li>
           <li><a href="/tutors#talk">Talk to us</a></li>
+          <li><a href="/tools">Free tools</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -809,13 +824,16 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="footer-copy">© 2026 Planur. Made for students, by people who remember being one.</p>
+      <p class="footer-copy">© 2026 Planur. Made for the people who teach, and the students they teach.</p>
       <p class="footer-copy">theplanur.co.uk</p>
+      <!-- planur:footer-legal:start -->
+      <p class="footer-legal">Planur Ltd is a company registered in England and Wales, company number 17350438. Registered office: Unit 29 Highcroft Industrial Estate, Enterprise Road, Horndean, Waterlooville, PO8 0BT, United Kingdom.</p>
+      <!-- planur:footer-legal:end -->
     </div>
   </div>
 </footer>
 
-<script src="/assets/planur.js?v=20260819"></script>
+<script src="/assets/planur.js?v=20261011"></script>
 <script>
   // ── Flip cards: hover is CSS; this is for touch and keyboard ─────────────
   document.querySelectorAll('.flip-btn').forEach(function (btn) {

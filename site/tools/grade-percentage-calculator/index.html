@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<!--
+  Free tool — grade percentage calculator.
+  https://theplanur.co.uk/tools/grade-percentage-calculator
+
+  🔴 THIS PAGE DOES NOT PRINT GRADE BOUNDARIES. They move every year, differ by
+  board and by tier, and are published after the papers are sat. A page that
+  said "70% is a grade 7" would be wrong for most people reading it, and wrong
+  in the direction that matters — somebody deciding they have passed.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grade percentage calculator — Planur</title>
+<meta name="description" content="Turn marks into a percentage, and work out the marks still needed to reach a target. Free, instant, no sign-up." />
+<link rel="canonical" href="https://theplanur.co.uk/tools/grade-percentage-calculator" />
+<meta name="robots" content="all">
+<!-- planur:brand-icons:start -->
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png?v=20261011" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png?v=20261011" />
+  <link rel="apple-touch-icon" href="/assets/planur-apple-touch-icon.png?v=20261011" />
+  <!-- planur:brand-icons:end -->
+<script>document.documentElement.className += ' js';</script>
+<link rel="stylesheet" href="/assets/planur.css?v=20261011" />
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-bar">
+      <a class="logo" href="/tutors"><img class="logo-mark" src="/assets/planur-mark.png?v=20261011" alt="" width="192" height="192" />Planur<span>.</span></a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+<div class="tool-wrap">
+
+  <header class="tool-head">
+    <h1>Grade percentage calculator</h1>
+    <p class="tool-lede">Marks into a percentage, and — the question people usually ask second —
+    what is still needed on the paper to come.</p>
+  </header>
+
+  <section class="calc" aria-labelledby="calc-h">
+    <h2 id="calc-h" class="sr-only">Calculator</h2>
+    <div class="calc-row">
+      <div class="calc-field">
+        <label for="marks">Marks achieved</label>
+        <input id="marks" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 47" />
+      </div>
+      <div class="calc-field">
+        <label for="outof">Out of</label>
+        <input id="outof" type="number" inputmode="decimal" min="1" step="any" placeholder="e.g. 60" />
+      </div>
+    </div>
+
+    <div class="calc-out" aria-live="polite">
+      <div id="figure" class="calc-figure calc-empty">Enter both numbers</div>
+      <p id="verdict" class="calc-verdict"></p>
+    </div>
+  </section>
+
+  <section class="calc" aria-labelledby="need-h">
+    <h2 id="need-h" style="margin:0 0 .6rem;font-size:1.02rem;">What do I need on the next paper?</h2>
+    <div class="calc-row">
+      <div class="calc-field">
+        <label for="nextout">Next paper is out of</label>
+        <input id="nextout" type="number" inputmode="decimal" min="1" step="any" placeholder="e.g. 80" />
+      </div>
+      <div class="calc-field">
+        <label for="goal">Target overall (%)</label>
+        <input id="goal" type="number" inputmode="decimal" min="1" max="100" step="0.1" placeholder="e.g. 70" />
+      </div>
+    </div>
+    <div class="calc-out" aria-live="polite">
+      <div id="needfig" class="calc-figure calc-empty">—</div>
+      <p id="needverdict" class="calc-verdict"></p>
+    </div>
+  </section>
+
+  <div class="tool-body">
+    <h2>How a grade percentage is worked out</h2>
+    <p>Divide the marks achieved by the marks available and multiply by a hundred.
+    <strong>47 ÷ 60 × 100 = 78.3%.</strong></p>
+
+    <h2>Why this page will not tell you the grade</h2>
+    <p>Because it would be guessing. Grade boundaries are set <em>after</em> the papers are marked, so
+    that the standard stays the same year to year even when a paper turns out harder than intended.
+    They differ by exam board, by subject, by tier and by series.</p>
+    <p>Any page that claims a fixed percentage equals a fixed grade is describing one paper from one
+    year, and quietly applying it to yours. Check the boundaries your board published for your series
+    — they are the only ones that count.</p>
+
+    <h2>Combining more than one paper</h2>
+    <p>Add the marks, then add the totals, then divide — do not average the two percentages. A paper
+    out of 100 and a paper out of 20 do not count equally, and averaging their percentages pretends
+    they do.</p>
+    <p><strong>Right:</strong> (45 + 16) ÷ (100 + 20) = 50.8%.<br>
+    <strong>Wrong:</strong> (45% + 80%) ÷ 2 = 62.5%.</p>
+
+    <h2>When a target is out of reach</h2>
+    <p>The second calculator will tell you if the marks required exceed the marks available. That is
+    worth knowing early and plainly, rather than after the paper.</p>
+  </div>
+
+  <aside class="tool-cta">
+    <h2>Keeping this for a whole class</h2>
+    <p>Planur for Tutors records marks per student per paper, keeps the totals honest when papers are
+    worth different amounts, and shows the class distribution without putting one child&rsquo;s mark
+    in front of another.</p>
+    <p><a class="btn btn-sage" href="/tutors">See Planur for Tutors →</a></p>
+  </aside>
+
+  <nav class="tool-more" aria-label="Other free tools">
+    <h2>Other free tools</h2>
+    <ul>
+      <li><a href="/tools/attendance-percentage-calculator">Attendance percentage calculator</a></li>
+      <li><a href="/tools/attendance-days-calculator">How many days can I miss?</a></li>
+      <li><a href="/tools/group-generator">Random group generator</a></li>
+    </ul>
+  </nav>
+
+</div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom">
+      <p class="footer-copy">© <span id="y">2026</span> Planur Ltd. All rights reserved.</p>
+      <p class="footer-copy">theplanur.co.uk</p>
+      <!-- planur:footer-legal:start -->
+      <p class="footer-legal">Planur Ltd is a company registered in England and Wales, company number 17350438. Registered office: Unit 29 Highcroft Industrial Estate, Enterprise Road, Horndean, Waterlooville, PO8 0BT, United Kingdom.</p>
+      <!-- planur:footer-legal:end -->
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/planur.js?v=20261011"></script>
+<script>
+  (function () {
+    var m = document.getElementById('marks');
+    var o = document.getElementById('outof');
+    var fig = document.getElementById('figure');
+    var verdict = document.getElementById('verdict');
+    var nx = document.getElementById('nextout');
+    var gl = document.getElementById('goal');
+    var nfig = document.getElementById('needfig');
+    var nver = document.getElementById('needverdict');
+
+    function pct(n) {
+      var r = Math.round(n * 10) / 10;
+      return (r === Math.round(r) ? r.toFixed(0) : r.toFixed(1)) + '%';
+    }
+    function num(el) { return el.value === '' ? null : parseFloat(el.value); }
+
+    function show() {
+      var a = num(m), b = num(o);
+      fig.className = 'calc-figure';
+      if (a === null || b === null) {
+        fig.className = 'calc-figure calc-empty';
+        fig.textContent = 'Enter both numbers';
+        verdict.textContent = '';
+      } else if (!isFinite(a) || !isFinite(b) || a < 0 || b <= 0) {
+        fig.className = 'calc-figure calc-empty';
+        fig.textContent = '—';
+        verdict.textContent = 'Enter a mark of zero or more, out of a total above zero.';
+      } else if (a > b) {
+        fig.className = 'calc-figure calc-empty';
+        fig.textContent = '—';
+        verdict.textContent = 'The mark is higher than the total — check the two numbers.';
+      } else {
+        fig.textContent = pct((a / b) * 100);
+        verdict.textContent = a.toLocaleString() + ' out of ' + b.toLocaleString() + '.';
+      }
+      need();
+    }
+
+    function need() {
+      var a = num(m), b = num(o), n = num(nx), t = num(gl);
+      nfig.className = 'calc-figure';
+      if (a === null || b === null || n === null || t === null) {
+        nfig.className = 'calc-figure calc-empty';
+        nfig.textContent = '—';
+        nver.textContent = 'Fill in the marks above, then the next paper and your target.';
+        return;
+      }
+      if (!isFinite(n) || !isFinite(t) || n <= 0 || t <= 0 || t > 100 || b <= 0 || a < 0 || a > b) {
+        nfig.className = 'calc-figure calc-empty';
+        nfig.textContent = '—';
+        nver.textContent = 'Check the numbers above.';
+        return;
+      }
+      // Marks needed ACROSS BOTH papers, minus what is already banked. Rounded
+      // up: a fraction of a mark is not awarded.
+      var required = Math.ceil(((b + n) * (t / 100)) - a);
+      if (required <= 0) {
+        nfig.textContent = 'Already there';
+        nfig.className = 'calc-figure band-good';
+        nver.textContent = 'The marks already banked reach ' + pct(t) + ' of the combined total.';
+        return;
+      }
+      if (required > n) {
+        nfig.textContent = 'Not reachable';
+        nfig.className = 'calc-figure band-risk';
+        nver.textContent = 'It would take ' + required.toLocaleString() + ' marks from a paper worth ' +
+          n.toLocaleString() + '. The highest now possible is ' + pct(((a + n) / (b + n)) * 100) + '.';
+        return;
+      }
+      nfig.textContent = required.toLocaleString() + ' of ' + n.toLocaleString();
+      nfig.className = 'calc-figure ' + (required / n >= 0.9 ? 'band-watch' : 'band-good');
+      nver.textContent = 'That is ' + pct((required / n) * 100) + ' on the next paper to reach ' +
+        pct(t) + ' overall.';
+    }
+
+    [m, o, nx, gl].forEach(function (el) { el.addEventListener('input', show); });
+  })();
+</script>
+</body>
+</html>

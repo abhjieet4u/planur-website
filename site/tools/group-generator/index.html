@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<!--
+  Free tool — random group generator.
+  https://theplanur.co.uk/tools/group-generator
+
+  🔴 NOTHING LEAVES THE BROWSER. The input is a list of children's names, so
+  there is no form post, no analytics event carrying the text, and no storage.
+  The page says so plainly, because a teacher pasting a class list deserves to
+  know that rather than to assume it.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Random group generator — Planur</title>
+<meta name="description" content="Paste a class list and split it into random groups, evenly. Works in your browser — the names are never sent anywhere." />
+<link rel="canonical" href="https://theplanur.co.uk/tools/group-generator" />
+<meta name="robots" content="all">
+<!-- planur:brand-icons:start -->
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png?v=20261011" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png?v=20261011" />
+  <link rel="apple-touch-icon" href="/assets/planur-apple-touch-icon.png?v=20261011" />
+  <!-- planur:brand-icons:end -->
+<script>document.documentElement.className += ' js';</script>
+<link rel="stylesheet" href="/assets/planur.css?v=20261011" />
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-bar">
+      <a class="logo" href="/tutors"><img class="logo-mark" src="/assets/planur-mark.png?v=20261011" alt="" width="192" height="192" />Planur<span>.</span></a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+<div class="tool-wrap">
+
+  <header class="tool-head">
+    <h1>Random group generator</h1>
+    <p class="tool-lede">Paste a class list, choose how to split it, and get even groups. It runs in
+    your browser — <strong>the names are never sent anywhere</strong>.</p>
+  </header>
+
+  <section class="calc" aria-labelledby="calc-h">
+    <h2 id="calc-h" class="sr-only">Group generator</h2>
+
+    <div class="calc-field" style="margin-bottom:14px;">
+      <label for="names">Names, one per line</label>
+      <textarea id="names" rows="7" placeholder="Aisha&#10;Ben&#10;Chloe&#10;Dev&#10;Esme&#10;Finn"
+        style="font:inherit;font-size:1rem;padding:11px 12px;border-radius:9px;border:1px solid var(--neutral-mid);resize:vertical;"></textarea>
+      <span class="calc-hint" id="count">No names yet.</span>
+    </div>
+
+    <div class="calc-row">
+      <div class="calc-field">
+        <label for="mode">Split by</label>
+        <select id="mode" style="font:inherit;font-size:1rem;padding:11px 12px;border-radius:9px;border:1px solid var(--neutral-mid);background:#fff;">
+          <option value="groups">Number of groups</option>
+          <option value="size">People per group</option>
+        </select>
+      </div>
+      <div class="calc-field">
+        <label for="n" id="nlabel">How many groups</label>
+        <input id="n" type="number" inputmode="numeric" min="1" step="1" value="4" />
+      </div>
+    </div>
+
+    <p style="margin:16px 0 0;">
+      <button id="go" class="btn btn-sage" type="button">Make groups →</button>
+      <button id="again" class="btn" type="button" hidden style="margin-left:8px;">Shuffle again</button>
+    </p>
+
+    <div class="calc-out" aria-live="polite">
+      <div id="out"></div>
+    </div>
+  </section>
+
+  <div class="tool-body">
+    <h2>How the split works</h2>
+    <p>The list is shuffled, then dealt out one at a time — like dealing cards — so the groups come out
+    as even as the numbers allow. Nineteen children into four groups gives you five, five, five and
+    four, never six and three.</p>
+
+    <h2>Nothing is uploaded</h2>
+    <p>The shuffle happens in the page. There is no account, no form submission and nothing stored, so
+    a class list pasted here does not leave the device it was typed on. You can confirm that by
+    switching off the network and using the page anyway.</p>
+
+    <h2>Why dealing beats slicing</h2>
+    <p>The obvious way to split a list is to cut it into equal chunks. That is fine until the number
+    does not divide, at which point the last group is short by everything the others rounded up. Dealing
+    spreads the remainder one person at a time, so the difference between the biggest and smallest
+    group is never more than one.</p>
+  </div>
+
+  <aside class="tool-cta">
+    <h2>If the same class comes back every week</h2>
+    <p>Planur for Tutors keeps your classes, so there is no list to paste — the register, the marks and
+    the attendance all hang off the same roster.</p>
+    <p><a class="btn btn-sage" href="/tutors">See Planur for Tutors →</a></p>
+  </aside>
+
+  <nav class="tool-more" aria-label="Other free tools">
+    <h2>Other free tools</h2>
+    <ul>
+      <li><a href="/tools/attendance-percentage-calculator">Attendance percentage calculator</a></li>
+      <li><a href="/tools/attendance-days-calculator">How many days can I miss?</a></li>
+      <li><a href="/tools/grade-percentage-calculator">Grade percentage calculator</a></li>
+    </ul>
+  </nav>
+
+</div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom">
+      <p class="footer-copy">© <span id="y">2026</span> Planur Ltd. All rights reserved.</p>
+      <p class="footer-copy">theplanur.co.uk</p>
+      <!-- planur:footer-legal:start -->
+      <p class="footer-legal">Planur Ltd is a company registered in England and Wales, company number 17350438. Registered office: Unit 29 Highcroft Industrial Estate, Enterprise Road, Horndean, Waterlooville, PO8 0BT, United Kingdom.</p>
+      <!-- planur:footer-legal:end -->
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/planur.js?v=20261011"></script>
+<script>
+  (function () {
+    var names = document.getElementById('names');
+    var mode = document.getElementById('mode');
+    var n = document.getElementById('n');
+    var nlabel = document.getElementById('nlabel');
+    var go = document.getElementById('go');
+    var again = document.getElementById('again');
+    var out = document.getElementById('out');
+    var count = document.getElementById('count');
+
+    function list() {
+      return names.value.split('\n')
+        .map(function (s) { return s.trim(); })
+        .filter(function (s) { return s.length > 0; });
+    }
+
+    function updateCount() {
+      var k = list().length;
+      count.textContent = k === 0 ? 'No names yet.'
+        : k + (k === 1 ? ' name' : ' names') + '.';
+    }
+
+    // Fisher–Yates. 🔴 Not `sort(() => Math.random() - 0.5)`, which is the
+    // version everyone writes and is measurably biased — some orderings come up
+    // far more often than others, which for a classroom means the same pairs
+    // keep landing together.
+    function shuffle(arr) {
+      var a = arr.slice();
+      for (var i = a.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = a[i]; a[i] = a[j]; a[j] = t;
+      }
+      return a;
+    }
+
+    function esc(s) {
+      return s.replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+
+    function build() {
+      var people = shuffle(list());
+      if (people.length === 0) {
+        out.innerHTML = '<p class="calc-empty">Add some names first.</p>';
+        again.hidden = true;
+        return;
+      }
+      var k = parseInt(n.value, 10);
+      if (!isFinite(k) || k < 1) {
+        out.innerHTML = '<p class="calc-empty">Enter a number of 1 or more.</p>';
+        again.hidden = true;
+        return;
+      }
+
+      var groupCount = mode.value === 'groups'
+        ? Math.min(k, people.length)
+        : Math.ceil(people.length / k);
+
+      var groups = [];
+      for (var i = 0; i < groupCount; i++) groups.push([]);
+      // Deal round-robin, so the remainder is spread rather than dumped on the
+      // last group. See "Why dealing beats slicing" on the page.
+      people.forEach(function (p, i) { groups[i % groupCount].push(p); });
+
+      out.innerHTML = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-top:4px;">' +
+        groups.map(function (g, i) {
+          return '<div style="border:1px solid var(--neutral-mid);border-radius:10px;padding:12px;">' +
+            '<strong style="display:block;margin-bottom:6px;font-size:.9rem;">Group ' + (i + 1) +
+            ' <span style="color:var(--text-light);font-weight:400;">(' + g.length + ')</span></strong>' +
+            '<ul style="list-style:none;padding:0;margin:0;font-size:.95rem;line-height:1.7;">' +
+            g.map(function (p) { return '<li>' + esc(p) + '</li>'; }).join('') +
+            '</ul></div>';
+        }).join('') + '</div>';
+      again.hidden = false;
+    }
+
+    mode.addEventListener('change', function () {
+      nlabel.textContent = mode.value === 'groups' ? 'How many groups' : 'People per group';
+    });
+    names.addEventListener('input', updateCount);
+    go.addEventListener('click', build);
+    again.addEventListener('click', build);
+    updateCount();
+  })();
+</script>
+</body>
+</html>

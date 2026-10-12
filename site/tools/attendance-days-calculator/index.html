@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<!--
+  Free tool — how many days can be missed at a target attendance.
+  https://theplanur.co.uk/tools/attendance-days-calculator
+
+  The query behind this page is "how many days can I miss and still get 90%",
+  which people ask because the percentage is abstract and days are not. The
+  honest answer includes the bit nobody likes: 90% is about four weeks.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How many days can you miss? — attendance calculator — Planur</title>
+<meta name="description" content="Work out how many sessions or days can be missed and still reach a target attendance percentage. Free, instant, no sign-up." />
+<link rel="canonical" href="https://theplanur.co.uk/tools/attendance-days-calculator" />
+<meta name="robots" content="all">
+<!-- planur:brand-icons:start -->
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png?v=20261011" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png?v=20261011" />
+  <link rel="apple-touch-icon" href="/assets/planur-apple-touch-icon.png?v=20261011" />
+  <!-- planur:brand-icons:end -->
+<script>document.documentElement.className += ' js';</script>
+<link rel="stylesheet" href="/assets/planur.css?v=20261011" />
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-bar">
+      <a class="logo" href="/tutors"><img class="logo-mark" src="/assets/planur-mark.png?v=20261011" alt="" width="192" height="192" />Planur<span>.</span></a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+<div class="tool-wrap">
+
+  <header class="tool-head">
+    <h1>How many days can you miss?</h1>
+    <p class="tool-lede">Percentages are abstract; days are not. Enter the length of the year or term
+    and the attendance you want to hold, and this says how much you can afford to miss.</p>
+  </header>
+
+  <section class="calc" aria-labelledby="calc-h">
+    <h2 id="calc-h" class="sr-only">Calculator</h2>
+    <div class="calc-row">
+      <div class="calc-field">
+        <label for="total">Sessions in the period</label>
+        <input id="total" type="number" inputmode="numeric" min="1" step="1" value="380" />
+        <span class="calc-hint">380 = a 190-day school year, two sessions a day.</span>
+      </div>
+      <div class="calc-field">
+        <label for="target">Target attendance (%)</label>
+        <input id="target" type="number" inputmode="decimal" min="1" max="100" step="0.1" value="95" />
+      </div>
+    </div>
+
+    <div class="calc-out" aria-live="polite">
+      <div id="figure" class="calc-figure">—</div>
+      <p id="verdict" class="calc-verdict"></p>
+    </div>
+  </section>
+
+  <div class="tool-body">
+    <h2>How this is worked out</h2>
+    <p>Multiply the sessions in the period by the target percentage, round <em>up</em> to the next whole
+    session — you cannot attend four fifths of a registration — and subtract that from the total. What
+    is left is how many sessions can be missed.</p>
+    <p>Rounding up matters: it is the difference between hitting your target and just missing it.</p>
+
+    <h2>Sessions, days and weeks</h2>
+    <p>English schools register twice a day, so a day is two sessions and a 190-day year is 380.
+    This page shows the answer in sessions, days and school weeks, because a figure like
+    &ldquo;nineteen sessions&rdquo; means very little until you hear it as &ldquo;about two
+    weeks&rdquo;.</p>
+
+    <h2>The numbers people are usually surprised by</h2>
+    <table class="tool-table">
+      <thead><tr><th>Attendance over a full year</th><th>Days missed</th></tr></thead>
+      <tbody>
+        <tr><td>95%</td><td>9.5 days — about two school weeks</td></tr>
+        <tr><td>90%</td><td>19 days — about four school weeks</td></tr>
+        <tr><td>85%</td><td>28.5 days — about six school weeks</td></tr>
+        <tr><td>80%</td><td>38 days — about eight school weeks</td></tr>
+      </tbody>
+    </table>
+    <p>Ninety per cent sounds respectable and is the line the Department for Education calls
+    <strong>persistent absence</strong>. Four weeks of a year is what it buys.</p>
+
+    <h2>Authorised days count too</h2>
+    <p>A day signed off as illness still comes out of this allowance. Authorising an absence records
+    that the reason was accepted; it does not put the day back.</p>
+  </div>
+
+  <aside class="tool-cta">
+    <h2>Watching this across a whole register</h2>
+    <p>Planur for Tutors tracks it per student without the spreadsheet — including which absences were
+    authorised, and who is drifting toward the line before they cross it.</p>
+    <p><a class="btn btn-sage" href="/tutors">See Planur for Tutors →</a></p>
+  </aside>
+
+  <nav class="tool-more" aria-label="Other free tools">
+    <h2>Other free tools</h2>
+    <ul>
+      <li><a href="/tools/attendance-percentage-calculator">Attendance percentage calculator</a></li>
+      <li><a href="/tools/grade-percentage-calculator">Grade percentage calculator</a></li>
+      <li><a href="/tools/group-generator">Random group generator</a></li>
+      <li><a href="/tools/what-is-persistent-absence">What persistent absence means</a></li>
+    </ul>
+  </nav>
+
+</div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom">
+      <p class="footer-copy">© <span id="y">2026</span> Planur Ltd. All rights reserved.</p>
+      <p class="footer-copy">theplanur.co.uk</p>
+      <!-- planur:footer-legal:start -->
+      <p class="footer-legal">Planur Ltd is a company registered in England and Wales, company number 17350438. Registered office: Unit 29 Highcroft Industrial Estate, Enterprise Road, Horndean, Waterlooville, PO8 0BT, United Kingdom.</p>
+      <!-- planur:footer-legal:end -->
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/planur.js?v=20261011"></script>
+<script>
+  (function () {
+    var t = document.getElementById('total');
+    var g = document.getElementById('target');
+    var fig = document.getElementById('figure');
+    var verdict = document.getElementById('verdict');
+
+    function tidy(n) {
+      return (n === Math.round(n) ? n.toFixed(0) : n.toFixed(1));
+    }
+
+    function show() {
+      var total = parseFloat(t.value);
+      var target = parseFloat(g.value);
+
+      fig.className = 'calc-figure';
+      if (t.value === '' || g.value === '') {
+        fig.className = 'calc-figure calc-empty';
+        fig.textContent = 'Enter both numbers';
+        verdict.textContent = '';
+        return;
+      }
+      if (!isFinite(total) || !isFinite(target) || total <= 0 || target <= 0 || target > 100) {
+        fig.className = 'calc-figure calc-empty';
+        fig.textContent = '—';
+        verdict.textContent = 'Enter a positive number of sessions and a target between 1 and 100.';
+        return;
+      }
+
+      // 🔴 Round the REQUIRED attendance up, not the allowance down. You cannot
+      // attend a fraction of a registration, and rounding the other way quietly
+      // hands back a session you have not earned.
+      var needed = Math.ceil(total * (target / 100));
+      var canMiss = Math.max(total - needed, 0);
+      var days = canMiss / 2;
+      var weeks = days / 5;
+
+      fig.textContent = canMiss.toLocaleString() + (canMiss === 1 ? ' session' : ' sessions');
+      fig.className = 'calc-figure ' + (target >= 95 ? 'band-good' : target >= 90 ? 'band-watch' : 'band-risk');
+
+      var parts = 'That is about ' + tidy(days) + (days === 1 ? ' school day' : ' school days');
+      if (weeks >= 1) parts += ', or roughly ' + tidy(weeks) + (weeks < 2 ? ' school week' : ' school weeks');
+      parts += ' — and you would need to attend ' + needed.toLocaleString() + ' of ' + total.toLocaleString() + '.';
+      verdict.textContent = parts;
+
+      if (target < 90) {
+        verdict.textContent += ' ⚠️ Below 90% is persistent absence.';
+      }
+    }
+
+    t.addEventListener('input', show);
+    g.addEventListener('input', show);
+    show();
+  })();
+</script>
+</body>
+</html>

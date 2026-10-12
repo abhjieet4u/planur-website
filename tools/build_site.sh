@@ -30,6 +30,18 @@ TUTOR_BUILD="${TUTOR_BUILD:-../planur-app/tutor_app/build/web}"
 STUDENT_BUILD="${STUDENT_BUILD:-../planur-app/build/web}"
 DIST="dist"
 
+# 🔴 A drifted page must not be deployable. Every page shares its favicon links,
+# its statutory footer line and the ?v= cache stamp; `sync_partials.py --check`
+# proves they are all in step before anything is assembled. Deploys are a
+# metered, finite resource here — spending one on a site where a single page
+# still points at last month's logo is the failure this prevents.
+echo "▸ Checking shared blocks"
+python3 tools/sync_partials.py --check || {
+  echo
+  echo "✗ Refusing to assemble. Run tools/sync_partials.py and rebuild."
+  exit 1
+}
+
 echo "▸ Assembling $DIST"
 rm -rf "$DIST"
 mkdir -p "$DIST"

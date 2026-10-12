@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<!--
+  Free tool — attendance percentage calculator.
+  https://theplanur.co.uk/tools/attendance-percentage-calculator
+
+  🔴 THE ANSWER IS NOT GATED. No email, no sign-up, no "see your full result".
+  These pages earn links by being the thing somebody wanted; a calculator that
+  withholds its own output is the reason people stop linking to calculators.
+
+  The product is mentioned ONCE, below the answer, and only claims what is
+  actually built: the register records authorised vs unauthorised absence (146)
+  and the at-risk list reads runs and percentages back out (146/147).
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Attendance percentage calculator — Planur</title>
+<meta name="description" content="Work out an attendance percentage from sessions attended and sessions possible. Free, instant, no sign-up — with what the figure means against the thresholds English schools use." />
+<link rel="canonical" href="https://theplanur.co.uk/tools/attendance-percentage-calculator" />
+<meta name="robots" content="all">
+<!-- planur:brand-icons:start -->
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png?v=20261011" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png?v=20261011" />
+  <link rel="apple-touch-icon" href="/assets/planur-apple-touch-icon.png?v=20261011" />
+  <!-- planur:brand-icons:end -->
+<script>document.documentElement.className += ' js';</script>
+<link rel="stylesheet" href="/assets/planur.css?v=20261011" />
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-bar">
+      <a class="logo" href="/tutors"><img class="logo-mark" src="/assets/planur-mark.png?v=20261011" alt="" width="192" height="192" />Planur<span>.</span></a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+<div class="tool-wrap">
+
+  <header class="tool-head">
+    <h1>Attendance percentage calculator</h1>
+    <p class="tool-lede">Enter how many sessions were attended and how many were possible. The
+    percentage appears as you type — and below it, what that figure actually means.</p>
+  </header>
+
+  <!-- The instrument, above the prose, because that is what the visitor came for. -->
+  <section class="calc" aria-labelledby="calc-h">
+    <h2 id="calc-h" class="sr-only">Calculator</h2>
+    <div class="calc-row">
+      <div class="calc-field">
+        <label for="attended">Sessions attended</label>
+        <input id="attended" type="number" inputmode="numeric" min="0" step="1" placeholder="e.g. 171" />
+      </div>
+      <div class="calc-field">
+        <label for="possible">Sessions possible</label>
+        <input id="possible" type="number" inputmode="numeric" min="1" step="1" placeholder="e.g. 190" />
+        <span class="calc-hint">In English schools a full day is two sessions.</span>
+      </div>
+    </div>
+
+    <div class="calc-out" aria-live="polite">
+      <div id="figure" class="calc-figure calc-empty">Enter both numbers</div>
+      <p id="verdict" class="calc-verdict"></p>
+    </div>
+  </section>
+
+  <div class="tool-body">
+    <h2>How attendance percentage is worked out</h2>
+    <p>Divide the sessions attended by the sessions possible, then multiply by a hundred.</p>
+    <p><strong>171 ÷ 190 × 100 = 90%.</strong> A pupil who missed nineteen sessions out of a
+    possible hundred and ninety attended ninety per cent of the time.</p>
+
+    <h2>What counts as a session</h2>
+    <p>English schools register twice a day — once in the morning and once in the afternoon — so one
+    school day is <strong>two sessions</strong>, and a 190-day school year is 380 sessions. If you are
+    working in days rather than sessions the arithmetic is identical; just be consistent, because
+    mixing the two is the most common way these figures come out wrong.</p>
+    <p>A tutor running one lesson a week should count lessons, not days. The percentage means
+    &ldquo;of the times you were expected, how often did you come&rdquo;, whatever the unit.</p>
+
+    <h2>What the figure means</h2>
+    <table class="tool-table">
+      <thead><tr><th>Attendance</th><th>How it is usually read</th></tr></thead>
+      <tbody>
+        <tr><td>97% and above</td><td>Excellent</td></tr>
+        <tr><td>95% to 96.9%</td><td>At or above the usual expectation</td></tr>
+        <tr><td>90% to 94.9%</td><td>Below expectation — worth a conversation</td></tr>
+        <tr><td>Below 90%</td><td><strong>Persistent absence</strong></td></tr>
+      </tbody>
+    </table>
+    <p>Below ninety per cent is the line the Department for Education calls
+    <strong>persistent absence</strong>. It sounds like a lot of attendance, and it is not: ninety per
+    cent across a school year is about <strong>four school weeks missed</strong>.
+    <a href="/tools/what-is-persistent-absence">What persistent absence means →</a></p>
+
+    <h2>Authorised absence still counts as absence</h2>
+    <p>This is the part people most often get wrong. Authorising an absence records that you
+    <em>accepted the reason</em> — illness, a medical appointment, approved leave. It does not remove
+    the absence from the calculation, and the attendance percentage is the same either way.</p>
+    <p>What the authorised mark changes is what gets <em>noticed</em>. A run of absences nobody
+    authorised is worth a conversation today; the same run with reasons attached usually is not.
+    <a href="/tools/authorised-vs-unauthorised-absence">More on what the distinction changes →</a></p>
+
+    <h2>A percentage needs enough sessions to mean anything</h2>
+    <p>One missed session out of one is nought per cent, and nought per cent is not evidence of
+    anything. Before a percentage can be below ninety without a single absence dragging it there, you
+    need at least <strong>ten sessions</strong> — one absence in ten is exactly ninety per cent.</p>
+    <p>So treat a percentage from a handful of lessons as noise. Early in a year, a <em>run</em> of
+    consecutive absences tells you far more than the figure does.</p>
+  </div>
+
+  <aside class="tool-cta">
+    <h2>If you are working this out by hand every term</h2>
+    <p>Planur for Tutors keeps the register for you: it records whether each absence was authorised,
+    works out every student&rsquo;s percentage from the sessions they were actually enrolled for, and
+    flags runs of absence before they become a pattern.</p>
+    <p><a class="btn btn-sage" href="/tutors">See Planur for Tutors →</a></p>
+  </aside>
+
+  <nav class="tool-more" aria-label="Other free tools">
+    <h2>Other free tools</h2>
+    <ul>
+      <li><a href="/tools/attendance-days-calculator">How many days can I miss?</a></li>
+      <li><a href="/tools/grade-percentage-calculator">Grade percentage calculator</a></li>
+      <li><a href="/tools/group-generator">Random group generator</a></li>
+      <li><a href="/tools/authorised-vs-unauthorised-absence">Authorised vs unauthorised absence</a></li>
+    </ul>
+  </nav>
+
+</div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom">
+      <p class="footer-copy">© <span id="y">2026</span> Planur Ltd. All rights reserved.</p>
+      <p class="footer-copy">theplanur.co.uk</p>
+      <!-- planur:footer-legal:start -->
+      <p class="footer-legal">Planur Ltd is a company registered in England and Wales, company number 17350438. Registered office: Unit 29 Highcroft Industrial Estate, Enterprise Road, Horndean, Waterlooville, PO8 0BT, United Kingdom.</p>
+      <!-- planur:footer-legal:end -->
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/planur.js?v=20261011"></script>
+<script>
+  (function () {
+    var a = document.getElementById('attended');
+    var p = document.getElementById('possible');
+    var fig = document.getElementById('figure');
+    var verdict = document.getElementById('verdict');
+
+    // One decimal, and no trailing ".0" — a whole number reads as a percentage
+    // rather than as a measurement.
+    function pct(n) {
+      var r = Math.round(n * 10) / 10;
+      return (r === Math.round(r) ? r.toFixed(0) : r.toFixed(1)) + '%';
+    }
+
+    function band(v) {
+      if (v >= 97)  return ['band-good',  'Excellent.'];
+      if (v >= 95)  return ['band-good',  'At or above the usual expectation.'];
+      if (v >= 90)  return ['band-watch', 'Below the usual expectation — worth a conversation.'];
+      return ['band-risk',
+        'Below 90%, which the Department for Education calls persistent absence.'];
+    }
+
+    function show() {
+      var att = parseFloat(a.value);
+      var pos = parseFloat(p.value);
+
+      fig.className = 'calc-figure';
+      verdict.className = 'calc-verdict';
+
+      if (a.value === '' || p.value === '') {
+        fig.className = 'calc-figure calc-empty';
+        fig.textContent = 'Enter both numbers';
+        verdict.textContent = '';
+        return;
+      }
+      // Each of these is a real typo somebody makes, and each deserves a
+      // sentence rather than "NaN%".
+      if (!isFinite(att) || !isFinite(pos) || att < 0 || pos < 0) {
+        fig.className = 'calc-figure calc-empty';
+        fig.textContent = '—';
+        verdict.textContent = 'Please enter positive numbers.';
+        return;
+      }
+      if (pos === 0) {
+        fig.className = 'calc-figure calc-empty';
+        fig.textContent = '—';
+        verdict.textContent = 'With no sessions possible there is no percentage to work out.';
+        return;
+      }
+      if (att > pos) {
+        fig.className = 'calc-figure calc-empty';
+        fig.textContent = '—';
+        verdict.textContent = 'Attended cannot be more than possible — check the two numbers.';
+        return;
+      }
+
+      var v = (att / pos) * 100;
+      var b = band(v);
+      fig.textContent = pct(v);
+      fig.className = 'calc-figure ' + b[0];
+      var missed = pos - att;
+      verdict.textContent = b[1] + ' ' + missed.toLocaleString() +
+        (missed === 1 ? ' session missed' : ' sessions missed') + ' out of ' +
+        pos.toLocaleString() + '.';
+      if (pos < 10) {
+        verdict.textContent += ' ⚠️ Fewer than ten sessions — too few for the percentage to mean much.';
+      }
+    }
+
+    a.addEventListener('input', show);
+    p.addEventListener('input', show);
+  })();
+</script>
+</body>
+</html>
