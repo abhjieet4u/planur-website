@@ -10,11 +10,11 @@
 # a ?app= selector. These aliases mean the nested form works too, so a store
 # listing, an email or an old link can use either shape:
 #     /tutors/privacy  ==  /privacy?app=tutor
-/tutors/privacy          /privacy?app=tutor          301
-/tutors/terms            /terms?app=tutor            301
-/tutors/delete-account   /delete-account?app=tutor   301
-/tutors/support          /support?app=tutor          301
-/tutors/contact          /support?app=tutor          301
+/tutors/privacy          /privacy/?app=tutor         301
+/tutors/terms            /terms/?app=tutor           301
+/tutors/delete-account   /delete-account/?app=tutor  301
+/tutors/support          /support/?app=tutor         301
+/tutors/contact          /support/?app=tutor         301
 
 # ── The front door, 2026-10-10 ───────────────────────────────────────────────
 # Owner: three separate products, tutor promoted — "the main website actually
@@ -46,19 +46,25 @@
 
 # The student page used to be the root. These are the shapes people type or
 # have bookmarked for it.
-/student      /students  301
-/for-students /students  301
-/students/    /students  301
+/student      /students/  301
+/for-students /students/  301
+# ⚠️ COMMENTED OUT 2026-10-12, not deleted. It was `/students/ -> /students`,
+# written when the canonical had no trailing slash. Now that the canonical IS
+# the slash form the rule would be a self-redirect, i.e. a loop if it ever
+# fired. It does not fire — Netlify serves the real file before applying a
+# non-forced rule — but a self-redirect sitting in the file is a trap for
+# whoever reads it next. Delete it once somebody is confident; it does nothing.
+# /students/    /students/  301
 
 # Singular and near-miss spellings of the tutor page — cheap to support, and these
 # are the URLs people type after hearing the name said out loud.
-/tutor        /tutors   301
-/tutoring     /tutors   301
-/for-tutors   /tutors   301
+/tutor        /tutors/   301
+/tutoring     /tutors/   301
+/for-tutors   /tutors/   301
 
 # Common aliases for the support page.
-/contact   /support   301
-/help      /support   301
+/contact   /support/   301
+/help      /support/   301
 
 # ── Tutor browser sign-in ───────────────────────────────────────────────────
 # The tutor web app is served from this same site at /tutors/app/ (assembled by
@@ -122,7 +128,7 @@
 # a second Flutter build — and on one origin a second build shares the stored
 # session unless it also carries its own persistSessionKey. Owner chose one
 # door, 2026-09-03.
-/school          /schools                           301
+/school          /schools/                          301
 /schools/login   /tutors/app/?for=school        301
 /school-login    /tutors/app/?for=school        301
 /schools/app/*   /tutors/app/:splat?for=school  301

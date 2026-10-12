@@ -1,5 +1,16 @@
 """Derive every brand asset from the master logo.
 
+    PYTHONPATH=../planur-app/docs/sales/pylibs python3 tools/make_logo_assets.py \
+        docs/brand/Planur-Logo_Oct2026.jpeg site/assets
+
+⚠️ Pillow is NOT installed in the system python on this machine. It lives in
+`../planur-app/docs/sales/pylibs` (vendored there for the deck build), so the
+PYTHONPATH above is part of the command, not an optional nicety — without it
+this fails on the import line and nothing is written.
+
+🔴 After re-running: bump STAMP in tools/sync_partials.py and re-run that too,
+or `_headers` caches the OLD artwork for a year and the deploy shows nothing.
+
 🔴 Kept in the repo so the next logo arrives as a re-run rather than an
 archaeology exercise. Source: docs/brand/Planur-Logo_Oct2026.jpeg.
 
@@ -60,9 +71,21 @@ for y in range(TAG_Y0 - WORD[1], word.height):
 tag = unmatte(im.crop(TAG))
 
 # ── The mark, and the tab icons ──────────────────────────────────────────
+# 🔴 THE HEADER MARK IS TRANSPARENT; EVERY TAB ICON IS NOT. Found 2026-10-12:
+# the mark's ink is dark navy, so a transparent favicon on a DARK tab strip —
+# Chrome and Safari in dark mode, which is most people — left nothing visible
+# at all. A browser paints the tab's own background behind a favicon and never
+# a page colour, so the icon has to carry its own ground. The apple-touch icon
+# already did, for the same reason on iOS.
+#
+# ⚠️ Do NOT "tidy" these onto the transparent path. planur-mark.png sits in the
+# nav of a page whose own background is light or dark by theme, and THAT one
+# must stay transparent or it renders as a white box in dark mode. The two
+# cases genuinely differ: one composites over a page we control, the other over
+# chrome we do not.
 square(glyph, 192).save(OUT + 'planur-mark.png')
-square(glyph, 192).save(OUT + 'planur-favicon-192.png')
-square(glyph, 512).save(OUT + 'planur-favicon-512.png')
+square(glyph, 192, pad=0.14, white=True).convert('RGB').save(OUT + 'planur-favicon-192.png')
+square(glyph, 512, pad=0.14, white=True).convert('RGB').save(OUT + 'planur-favicon-512.png')
 # iOS composites this on an opaque tile, so it keeps a white ground.
 square(glyph, 180, pad=0.14, white=True).convert('RGB').save(OUT + 'planur-apple-touch-icon.png')
 
@@ -71,7 +94,8 @@ square(glyph, 180, pad=0.14, white=True).convert('RGB').save(OUT + 'planur-apple
 # icon nobody can read is not an updated tab icon. Larger sizes keep the whole
 # mark, which is ordinary responsive-favicon practice.
 p = glyph.crop((0, 0, 152, glyph.height))
-square(p.crop(p.getbbox()), 32, pad=0.06).save(OUT + 'planur-favicon-32.png')
+square(p.crop(p.getbbox()), 32, pad=0.06, white=True).convert('RGB').save(
+    OUT + 'planur-favicon-32.png')
 
 # ── The tutor lockup, re-set horizontally ────────────────────────────────
 H = 160                                   # 4x its ~40px display height
@@ -85,5 +109,38 @@ top = (H - (wd.height + lead + tg.height)) // 2
 lock.alpha_composite(wd, (g.width + gap, top))
 lock.alpha_composite(tg, (g.width + gap, top + wd.height + lead))
 lock.crop(lock.getbbox()).save(OUT + 'planur-lockup-tutors.png')
+
+# ── The share card (og:image) ────────────────────────────────────────────
+# 1200x630 is the size every platform crops from, and a page without one is
+# shared as a bare grey rectangle. These /tools pages exist to BE shared — a
+# calculator passed between teachers in a staffroom chat is the whole
+# acquisition model — so the card is not decoration here.
+#
+# It carries the plain mark and wordmark, never "FOR TUTORS": one card serves
+# every page, and the tutor lockup is reserved for the tutor page (owner,
+# 2026-10-11). No strapline either, because the platforms draw the page title
+# directly beneath the image and a second one reads as a stutter.
+CARD_W, CARD_H = 1200, 630
+card = Image.new('RGB', (CARD_W, CARD_H), (255, 255, 255))
+ch = 150                                   # mark height on the card
+cg = glyph.resize((round(glyph.width * ch / glyph.height), ch), Image.LANCZOS)
+cwh = round(ch * 0.62)
+cwd = word.resize((round(word.width * cwh / word.height), cwh), Image.LANCZOS)
+cgap = round(ch * 0.16)
+row_w = cg.width + cgap + cwd.width
+x0 = (CARD_W - row_w) // 2
+card.paste(cg, (x0, (CARD_H - cg.height) // 2), cg)
+card.paste(cwd, (x0 + cg.width + cgap, (CARD_H - cwd.height) // 2), cwd)
+card.save(OUT + 'planur-og-card.png')
+
+# The tutor page gets the tagline lockup, and ONLY the tutor page — owner,
+# 2026-10-11: "just keep the logo with Planur, and use Planur for Tutors only
+# for tutor page." Same rule as the nav, applied to the share card.
+lk = Image.open(OUT + 'planur-lockup-tutors.png')
+tcard = Image.new('RGB', (CARD_W, CARD_H), (255, 255, 255))
+th2 = 190
+lk = lk.resize((round(lk.width * th2 / lk.height), th2), Image.LANCZOS)
+tcard.paste(lk, ((CARD_W - lk.width) // 2, (CARD_H - lk.height) // 2), lk)
+tcard.save(OUT + 'planur-og-card-tutors.png')
 
 print('written to', OUT)
