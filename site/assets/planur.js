@@ -45,7 +45,7 @@
      Project refs, not keys: both already ship inside the published apps and in
      every request URL they make. `contact-submit` is deployed on both projects
      with verify_jwt off, which is what lets an anonymous visitor call it.     */
-  var GO_LIVE_ON_PROD = false;
+  var GO_LIVE_ON_PROD = true;   // flipped 2026-10-14, with the prod web cutover
 
   var LIVE_HOSTS = ['theplanur.co.uk', 'www.theplanur.co.uk'];
   var IS_LIVE = GO_LIVE_ON_PROD && LIVE_HOSTS.indexOf(location.hostname) !== -1;

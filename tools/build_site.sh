@@ -2,7 +2,9 @@
 # =============================================================================
 # Planur website — assemble the publishable folder
 # -----------------------------------------------------------------------------
-#   ./tools/build_site.sh
+#   ./tools/build_site.sh                    → dist/          (the LIVE site)
+#   FLAVOUR=staging ./tools/build_site.sh    → dist-staging/  (the staging copy,
+#                                               marked noindex)
 #
 # Output: dist/  — drag the CONTENTS of THIS folder into Netlify. Never drag
 # site/ on its own again.
@@ -28,7 +30,23 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 TUTOR_BUILD="${TUTOR_BUILD:-../planur-app/tutor_app/build/web}"
 STUDENT_BUILD="${STUDENT_BUILD:-../planur-app/build/web}"
-DIST="dist"
+
+# ── Two sites, two folders ──────────────────────────────────────────────────
+# FLAVOUR=staging assembles the STAGING site into dist-staging/ and marks the
+# whole thing noindex. Anything else assembles the live site into dist/ as
+# before, so every existing instruction still works unchanged.
+#
+# 🔴 WHY A SEPARATE FOLDER AND NOT A REBUILD EACH TIME: both sites are deployed
+# by dragging a folder. One folder for both means the second drag ships whatever
+# the first build left behind, and Netlify reports success either way — which is
+# precisely how four deploys in a row shipped the same stale bundle on
+# 2026-09-08. Two folders cannot be confused with each other.
+FLAVOUR="${FLAVOUR:-prod}"
+if [[ "$FLAVOUR" == "staging" ]]; then
+  DIST="dist-staging"
+else
+  DIST="dist"
+fi
 
 # 🔴 A drifted page must not be deployable. Every page shares its favicon links,
 # its statutory footer line and the ?v= cache stamp; `sync_partials.py --check`
@@ -118,6 +136,33 @@ else
   STUDENT_LINE="    student web app →  $DIST/app/"
 fi
 
+# ── 🔴 The staging site must never be indexed ───────────────────────────────
+# It is a BYTE-FOR-BYTE copy of the marketing pages on a second host. Left
+# crawlable, it competes with the real site for its own search terms — two of
+# our pages fighting over one query suppresses both, which is the same reason
+# the third attendance article was dropped. The canonical tags already point at
+# theplanur.co.uk, which helps, but noindex is what actually settles it.
+#
+# Netlify reads _headers only from the publish root, so writing it here is
+# enough — and it is written AFTER site/ is copied, so it overwrites rather
+# than merges.
+if [[ "$FLAVOUR" == "staging" ]]; then
+  printf '# Staging copy — not for search engines.\nUser-agent: *\nDisallow: /\n' \
+    > "$DIST/robots.txt"
+  cat >> "$DIST/_headers" <<'HDR'
+
+# ── Staging build (FLAVOUR=staging) ─────────────────────────────────────────
+# Added by tools/build_site.sh. A header, not just robots.txt: robots.txt asks
+# a crawler not to FETCH a page, which leaves it able to list a URL it has
+# merely heard about. X-Robots-Tag is the one that keeps it out of results.
+/*
+  X-Robots-Tag: noindex, nofollow
+HDR
+  # Android App Links: the live host claims the app. A staging copy claiming it
+  # too would let staging URLs open the real installed app.
+  rm -f "$DIST/assetlinks.json"
+fi
+
 echo
 echo "✓ $DIST ready  ($(du -sh "$DIST" | cut -f1))"
 echo "    marketing site  →  $DIST/"
@@ -125,5 +170,12 @@ echo "    tutor web app   →  $DIST/tutors/app/"
 echo "$STUDENT_LINE"
 echo
 echo "  Drag the CONTENTS of $DIST into Netlify."
-echo "  Then check: theplanur.co.uk loads, /tutors/app/ shows the tutor sign-in,"
-echo "  and /app/ shows the student sign-in."
+if [[ "$FLAVOUR" == "staging" ]]; then
+  echo "  → the STAGING Netlify site, not the live one. This folder is marked"
+  echo "    noindex and its apps talk to the STAGING database."
+  echo "  Then check on the staging host: the pages load, /tutors/app/ shows the"
+  echo "  tutor sign-in, and the amber STAGING banner is visible in the app."
+else
+  echo "  → the LIVE site. Then check: theplanur.co.uk loads, /tutors/app/ shows"
+  echo "  the tutor sign-in, and /app/ shows the student sign-in."
+fi
