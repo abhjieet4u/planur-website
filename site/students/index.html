@@ -198,10 +198,13 @@
       <!-- Icons below 420px rather than dropping the log-in link — see the
            same block on /tutors for the reasoning. -->
       <div class="nav-right">
+        <!-- d5b 2026-10-16 — the student web app IS published at /app/ and works, but is not advertised yet: the student product is still in testing and new sign-ups are off on the prod project (d6), so a visitor following this link would reach a sign-in they cannot complete. It is kept serving so prod demos to tutors can show a real student linking by claim code — the Play build points at STAGING and can never reach a prod practice. RESTORE with d7. -->
+        <!--
         <a class="nav-link" href="/app/" aria-label="Log in" title="Log in">
           <svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg>
           <span class="nav-label">Log in</span>
         </a>
+        -->
         <a class="btn btn-coral" href="/students/#waitlist" aria-label="Join the waitlist" title="Join the waitlist">
           <svg class="ic" aria-hidden="true"><use href="#i-send"/></svg>
           <span class="nav-label">Join the waitlist</span>
@@ -651,7 +654,7 @@
         <ul>
           <li><a href="/students/#features">What's inside</a></li>
           <li><a href="/download/">Get the app</a></li>
-          <li><a href="/app/">Log in on the web</a></li>
+          <!-- d5b 2026-10-16 — see the nav block above. RESTORE with d7. -->
           <li><a href="/students/#waitlist">Join the waitlist</a></li>
         </ul>
       </div>
@@ -660,7 +663,7 @@
         <ul>
           <li><a href="/tutors/">Planur for Tutors</a></li>
           <li><a href="/tutors/download/">Get the tutor app</a></li>
-          <li><a href="/tutors/app/">Tutor log in</a></li>
+          <!-- d5 2026-10-16 — tutor log-in hidden until the founding partners are set up. RESTORE THIS BLOCK at d7 (before 2 Nov). Hiding the link stops DISCOVERY only; /tutors/app/ still answers, which is why new sign-ups are also off on the prod project (d6). -->
           <li><a href="/tutors/#talk">Talk to us</a></li>
         </ul>
       </div>

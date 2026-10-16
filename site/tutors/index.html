@@ -285,10 +285,13 @@
            returning tutor with only the button written for strangers.
            `aria-label` carries the name once the text is visually hidden. -->
       <div class="nav-right">
+        <!-- d5 2026-10-16 — tutor log-in hidden until the founding partners are set up. RESTORE at d7 (before 2 Nov). -->
+        <!--
         <a class="nav-link" href="/tutors/app/" aria-label="Tutor log in" title="Tutor log in">
           <svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg>
           <span class="nav-label">Tutor log in</span>
         </a>
+        -->
         <a class="btn btn-coral" href="#talk" aria-label="Talk to us" title="Talk to us">
           <svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg>
           <span class="nav-label">Talk to us</span>
@@ -540,7 +543,7 @@
           </div>
           <h3>Phone or laptop</h3>
         </summary>
-        <div class="acc-body"><p>The same practice in your <a href="/tutors/app/" style="color:var(--sage);font-weight:600;">browser</a> — same sign-in, same data.</p></div>
+        <div class="acc-body"><p>The same practice in your browser — same sign-in, same data.</p></div>
       </details>
     </div>
     <div class="callout fade-in delay-2">
@@ -810,7 +813,7 @@
         <ul>
           <li><a href="/tutors/">Planur for Tutors</a></li>
           <li><a href="/tutors/download/">Get the tutor app</a></li>
-          <li><a href="/tutors/app/">Tutor log in</a></li>
+          <!-- d5 2026-10-16 — tutor log-in hidden until the founding partners are set up. RESTORE THIS BLOCK at d7 (before 2 Nov). Hiding the link stops DISCOVERY only; /tutors/app/ still answers, which is why new sign-ups are also off on the prod project (d6). -->
           <li><a href="/tutors/#talk">Talk to us</a></li>
           <li><a href="/tools/">Free tools</a></li>
         </ul>
