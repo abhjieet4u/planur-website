@@ -42,16 +42,16 @@
 <meta property="og:description" content="Classes, attendance, marks, fees and staff records in one place, and a school year that carries forward." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://theplanur.co.uk/schools/" />
-<meta property="og:image" content="https://theplanur.co.uk/assets/planur-og-card.png?v=20261014" />
+<meta property="og:image" content="https://theplanur.co.uk/assets/planur-og-card.png?v=20261018" />
 <meta property="og:site_name" content="Planur" />
 <meta name="twitter:card" content="summary_large_image" />
 <!-- planur:brand-icons:start -->
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png?v=20261014" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png?v=20261014" />
-  <link rel="apple-touch-icon" href="/assets/planur-apple-touch-icon.png?v=20261014" />
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png?v=20261018" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png?v=20261018" />
+  <link rel="apple-touch-icon" href="/assets/planur-apple-touch-icon.png?v=20261018" />
   <!-- planur:brand-icons:end -->
 <script>document.documentElement.className += ' js';</script>
-<link rel="stylesheet" href="/assets/planur.css?v=20261014" />
+<link rel="stylesheet" href="/assets/planur.css?v=20261018" />
 <style>
   /* ═══ THE SCHOOL PALETTE — sky, not sage ════════════════════════════════
      Owner, 2026-09-11: the school product should read as its own thing.
@@ -241,7 +241,7 @@
            nav log-in link.
            "Planur." is unchanged on purpose: it is the anchor, and this IS
            Planur. Only the lockup after it says which product. -->
-      <a class="logo logo-school" href="/schools/"><img class="logo-mark" src="/assets/planur-mark.png?v=20261014" alt="" width="192" height="192" />Planur<span>.</span><b>Schools</b></a>
+      <a class="logo logo-school" href="/schools/"><img class="logo-mark" src="/assets/planur-mark.png?v=20261018" alt="" width="192" height="192" />Planur<span>.</span><b>Schools</b></a>
       <!-- No call to action in the nav, deliberately. A head teacher reading
            this page is evaluating, not buying, and a nav pushing two buttons
            reads like a SaaS trial rather than a system you would hand children's
@@ -253,13 +253,10 @@
            It still takes the icon treatment below 420px so the three products'
            headers behave the same way on a phone. -->
       <div class="nav-right">
-        <!-- d5 2026-10-16 — tutor log-in hidden until the founding partners are set up. RESTORE at d7 (before 2 Nov). -->
-        <!--
         <a class="nav-link" href="/tutors/app/?for=school" aria-label="School log in" title="School log in">
           <svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg>
           <span class="nav-label">School log in</span>
         </a>
-        -->
       </div>
     </div>
   </div>
@@ -468,15 +465,24 @@
     <!-- 🔴 The honest half, kept — but as a sentence, not a second column with
          a "Being built" tag. The owner asked for a marketing page rather than a
          release ledger (2026-09-11). What must NOT happen is the honesty going
-         with the table: report cards and year-on-year promotion genuinely do
-         not exist, and a head teacher who discovers that after signing up has
-         been misled, whatever the tone was. Said plainly, in place, once. -->
+         with the table: a head teacher who discovers after signing up that
+         something does not exist has been misled, whatever the tone was. Said
+         plainly, in place, once.
+
+         ⚠️ CORRECTED 2026-10-18. This list said year-on-year PROMOTION was
+         still being built. It is not — promote_screen.dart ships, the route
+         /practice/:id/promote is registered, and three help articles document
+         it. A page that calls a finished feature unfinished is the mirror of
+         the fault this comment warns about: it is still a page that does not
+         match the product, and it loses a sale rather than a customer.
+         🔴 When something here ships, MOVE IT OUT in the same change. -->
     <div class="still-building fade-in delay-2">
-      <p><b>Being built with the schools joining now:</b> printed report cards on your board's grading
-        scale, records that carry forward so a class is promoted in one action rather than rebuilt
-        every June, and the class timetable appearing in each student's own planner. These are the
-        parts that only make sense once a full year has run through the system, and we would rather
-        shape them with a school than guess. Everything above is working today.</p>
+      <p><b>Being built with the schools joining now:</b> printed report cards on your board's
+        grading scale, and the class timetable appearing inside each student's own planner. These
+        are the parts that only make sense once a full year has run through the system, and we
+        would rather shape them with a school than guess. Everything else is working today —
+        including promoting a whole class into the next year in one action, which arrived with the
+        schools who asked for it.</p>
     </div>
   </div>
 </section>
@@ -637,7 +643,7 @@
         <h4>For schools</h4>
         <ul>
           <li><a href="/schools/">Planur for Schools</a></li>
-          <!-- d5 2026-10-16 — tutor log-in hidden until the founding partners are set up. RESTORE THIS BLOCK at d7 (before 2 Nov). Hiding the link stops DISCOVERY only; /tutors/app/ still answers, which is why new sign-ups are also off on the prod project (d6). -->
+          <li><a href="/tutors/app/?for=school">School log in</a></li>
           <li><a href="/schools/#talk">Talk to us</a></li>
           <li><a href="/tools/">Free tools</a></li>
         </ul>
@@ -662,7 +668,7 @@
   </div>
 </footer>
 
-<script src="/assets/planur.js?v=20261014"></script>
+<script src="/assets/planur.js?v=20261018"></script>
 <script>
   // Mirrors the /tutors enquiry form: same edge function, same spam checks, so it
   // works the day it deploys. The subject carries school, size and country so the

@@ -73,14 +73,8 @@
 #
 # No SPA rewrite is needed: the app uses hash routing (/tutors/app/#/practice/…),
 # so deep links never reach the server.
-#
-# 🔴 d5, 2026-10-16 — THESE FOUR ALIASES ARE OFF until the founding partners.
-# RESTORE at d7, before 2 Nov. They are commented, not deleted, so restoring is
-# uncommenting rather than remembering what the lines said.
-# ⚠️ /tutors/app/* at the bottom of this file STAYS: this hides the door, it
-# does not lock it. The lock is new sign-ups being off on the prod project (d6).
-# /tutors/login    /tutors/app/    301
-# /tutor-login     /tutors/app/    301
+/tutors/login    /tutors/app/    301
+/tutor-login     /tutors/app/    301
 
 # Student web app. Same courtesy as the tutor ones above: /app/ is the real
 # path, but nobody types a trailing slash and "login" is what people guess.
@@ -139,11 +133,9 @@
 # session unless it also carries its own persistSessionKey. Owner chose one
 # door, 2026-09-03.
 /school          /schools/                          301
-#
-# 🔴 d5, 2026-10-16 — off until the founding partners. RESTORE at d7.
-# /schools/login   /tutors/app/?for=school        301
-# /school-login    /tutors/app/?for=school        301
-# /schools/app/*   /tutors/app/:splat?for=school  301
+/schools/login   /tutors/app/?for=school        301
+/school-login    /tutors/app/?for=school        301
+/schools/app/*   /tutors/app/:splat?for=school  301
 
 # ═════════════════════════════════════════════════════════════════════════════
 # 🔴 SPA FALLBACKS — WITHOUT THESE, EVERY DEEP LINK INTO EITHER APP 404s.

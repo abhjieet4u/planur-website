@@ -83,18 +83,35 @@ tag = unmatte(im.crop(TAG))
 # must stay transparent or it renders as a white box in dark mode. The two
 # cases genuinely differ: one composites over a page we control, the other over
 # chrome we do not.
-square(glyph, 192).save(OUT + 'planur-mark.png')
-square(glyph, 192, pad=0.14, white=True).convert('RGB').save(OUT + 'planur-favicon-192.png')
-square(glyph, 512, pad=0.14, white=True).convert('RGB').save(OUT + 'planur-favicon-512.png')
-# iOS composites this on an opaque tile, so it keeps a white ground.
-square(glyph, 180, pad=0.14, white=True).convert('RGB').save(OUT + 'planur-apple-touch-icon.png')
-
-# 🔴 32px is the P ALONE. The full mark at 32px is mush: the rising line and
-# star push the P down to about 14px and the figure inside it disappears. A tab
-# icon nobody can read is not an updated tab icon. Larger sizes keep the whole
-# mark, which is ordinary responsive-favicon practice.
+# 🔴 EVERY SQUARE SLOT IS THE P ALONE — owner, 2026-10-18, after comparing
+# three crops: *"i liked the middle one as it was simple"*.
+#
+# The reasoning the 32px icon already carried, now applied consistently. The
+# mark is 394x293, so `square()` sizes its canvas on the WIDTH — which the
+# rising line sets, not the P. The P then fills a square it only reaches about
+# 74% of, before padding. That is exactly the reported fault: *"the Aero going
+# quite too far on the right making actual logo look very small"*.
+#
+# ⚠️ WE DID NOT SHORTEN THE LINE, and could not: the master is a JPEG with no
+# vector source (docs/brand/Planur-Logo_Oct2026.jpeg), and pixel-editing an
+# anti-aliased mark would look worse than leaving it. So the fix is to stop
+# letting the line decide how big the P renders, which is the same outcome.
+#
+# 🔴 THE NAV MARK IS THE WORST CASE, not an afterthought: `.logo-mark` renders
+# at 1.15em — roughly 18-20px, SMALLER than the 32px favicon this file already
+# calls mush. It was still using the full wide mark.
+#
+# The line and star are not lost: they survive wherever there is width for
+# them — the tutor lockup, planur-logo.svg and both OG cards below.
 p = glyph.crop((0, 0, 152, glyph.height))
-square(p.crop(p.getbbox()), 32, pad=0.06, white=True).convert('RGB').save(
+p = p.crop(p.getbbox())
+
+square(p, 192).save(OUT + 'planur-mark.png')
+square(p, 192, pad=0.10, white=True).convert('RGB').save(OUT + 'planur-favicon-192.png')
+square(p, 512, pad=0.10, white=True).convert('RGB').save(OUT + 'planur-favicon-512.png')
+# iOS composites this on an opaque tile, so it keeps a white ground.
+square(p, 180, pad=0.10, white=True).convert('RGB').save(OUT + 'planur-apple-touch-icon.png')
+square(p, 32, pad=0.06, white=True).convert('RGB').save(
     OUT + 'planur-favicon-32.png')
 
 # ── The tutor lockup, re-set horizontally ────────────────────────────────

@@ -36,7 +36,7 @@ import pathlib
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 # 🔴 Bump on any change to planur.css, planur.js or a brand image.
-STAMP = "20261014"
+STAMP = "20261018"
 
 # Marked regions: name -> partial file. A page opts in by carrying the markers;
 # a page without them is left alone, which is how /invite and the download

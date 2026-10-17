@@ -20,9 +20,9 @@
 <link rel="canonical" href="https://theplanur.co.uk/delete-account/" />
 <meta name="robots" content="all">
 <!-- planur:brand-icons:start -->
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png?v=20261014" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png?v=20261014" />
-  <link rel="apple-touch-icon" href="/assets/planur-apple-touch-icon.png?v=20261014" />
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png?v=20261018" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png?v=20261018" />
+  <link rel="apple-touch-icon" href="/assets/planur-apple-touch-icon.png?v=20261018" />
   <!-- planur:brand-icons:end -->
 <script>
   document.documentElement.className += ' js';
@@ -37,7 +37,7 @@
     document.documentElement.setAttribute('data-app', app);
   })();
 </script>
-<link rel="stylesheet" href="/assets/planur.css?v=20261014" />
+<link rel="stylesheet" href="/assets/planur.css?v=20261018" />
 <style>
   .steps{background:var(--sage-faint);border-radius:var(--radius-md);padding:18px 22px 18px 24px;
     margin:14px 0 18px;}
@@ -54,7 +54,7 @@
 <nav id="navbar">
   <div class="container">
     <div class="nav-bar">
-      <a class="logo" href="/tutors/"><img class="logo-mark" src="/assets/planur-mark.png?v=20261014" alt="" width="192" height="192" />Planur<span>.</span></a>
+      <a class="logo" href="/tutors/"><img class="logo-mark" src="/assets/planur-mark.png?v=20261018" alt="" width="192" height="192" />Planur<span>.</span></a>
     </div>
   </div>
 </nav>
@@ -131,6 +131,20 @@
     class materials you uploaded, the practice tests you generated, and your subscription record with
     our payment provider.</p>
 
+    <!-- Added 2026-10-18. The page said the subscription RECORD is deleted and
+         never that the billing stops, which is the thing anyone deleting a paid
+         account actually wants to know. 070 queues the subscription for
+         cancellation at period end when plan_source = 'stripe', and
+         tutor_deletion.ts sets that flag — so this is a statement of what the
+         code does, not a promise we hope to keep.
+         🔴 It is also the single most likely way to delete an account and go on
+         being charged (docs/tutor-account-deletion-plan.md §7.5), which is why
+         saying it out loud is worth a paragraph. -->
+    <p><strong>Your subscription is cancelled too.</strong> If you were on a paid plan, deleting your
+    account cancels it at the end of the period you have already paid for, so you are not charged
+    again. As set out in <a href="/terms/?app=tutor">our terms</a>, fees already paid are not
+    refunded — so if you are mid-period and want the rest of it, cancel first and delete afterwards.</p>
+
     <h2>What your students see</h2>
     <p>Every student connected to your practice is disconnected. Your classes, schedule and materials
     disappear from their planner. Their own account and their own planner are untouched — those belong
@@ -179,7 +193,7 @@
         <ul>
           <li><a href="/tutors/">Planur for Tutors</a></li>
           <li><a href="/tutors/download/">Get the tutor app</a></li>
-          <!-- d5 2026-10-16 — tutor log-in hidden until the founding partners are set up. RESTORE THIS BLOCK at d7 (before 2 Nov). Hiding the link stops DISCOVERY only; /tutors/app/ still answers, which is why new sign-ups are also off on the prod project (d6). -->
+          <li><a href="/tutors/app/">Tutor log in</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -202,7 +216,7 @@
   </div>
 </footer>
 
-<script src="/assets/planur.js?v=20261014"></script>
+<script src="/assets/planur.js?v=20261018"></script>
 <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
 </html>

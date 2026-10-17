@@ -20,9 +20,9 @@
 <link rel="canonical" href="https://theplanur.co.uk/support/" />
 <meta name="robots" content="all">
 <!-- planur:brand-icons:start -->
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png?v=20261014" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png?v=20261014" />
-  <link rel="apple-touch-icon" href="/assets/planur-apple-touch-icon.png?v=20261014" />
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png?v=20261018" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png?v=20261018" />
+  <link rel="apple-touch-icon" href="/assets/planur-apple-touch-icon.png?v=20261018" />
   <!-- planur:brand-icons:end -->
 <script>
   document.documentElement.className += ' js';
@@ -37,7 +37,7 @@
     document.documentElement.setAttribute('data-app', app);
   })();
 </script>
-<link rel="stylesheet" href="/assets/planur.css?v=20261014" />
+<link rel="stylesheet" href="/assets/planur.css?v=20261018" />
 <style>
   .support-hero{padding:56px 0 8px;}
   .support-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start;
@@ -65,7 +65,7 @@
 <nav id="navbar">
   <div class="container">
     <div class="nav-bar">
-      <a class="logo" href="/tutors/"><img class="logo-mark" src="/assets/planur-mark.png?v=20261014" alt="" width="192" height="192" />Planur<span>.</span></a>
+      <a class="logo" href="/tutors/"><img class="logo-mark" src="/assets/planur-mark.png?v=20261018" alt="" width="192" height="192" />Planur<span>.</span></a>
     </div>
   </div>
 </nav>
@@ -150,6 +150,18 @@
                 exists and we'll have students, batches and fees in place before you start.</p>
             </details>
             <details>
+              <summary>How do I cancel, and can I have a refund?</summary>
+              <p>Tutor plans are billed by us rather than by an app store, so cancelling happens in
+                Planur: Practice and plan, then <strong>Manage plan</strong>. You keep everything
+                until the end of the period you have already paid for, and you are not charged
+                again.</p>
+              <p>Fees already paid are not refunded — including part-used periods. We can say that
+                because you never have to pay to try Planur: the free plan needs no card and does not
+                expire, and the trial needs no card either. We will always put right a billing error
+                on our side, and we may make an exception where the circumstances warrant it — just
+                ask. The full wording is in <a href="/terms/?app=tutor">our terms</a>.</p>
+            </details>
+            <details>
               <summary>What happens if I hit a plan limit, or stop paying?</summary>
               <p><strong>Nothing is deleted.</strong> Limits stop you adding — another student,
                 another upload — they never remove what's already there. Your roster, register,
@@ -158,9 +170,9 @@
             <details>
               <summary>Can a teacher I add see my fees?</summary>
               <p>No. Fee data is restricted to the owner tier, enforced in the database rather than
-                hidden on a screen, so it holds regardless of what any part of the app shows. The flow
-                for <em>inviting</em> a colleague is the next thing we're building — until then, adding
-                someone is something we do with you.</p>
+                hidden on a screen, so it holds regardless of what any part of the app shows. You can
+                invite a colleague yourself from Team: you invite them, they accept, and you approve —
+                three separate steps, so nobody joins your practice by accident or by guessing a link.</p>
             </details>
             <details>
               <summary>Can I get my data out?</summary>
@@ -171,9 +183,9 @@
             </details>
             <details>
               <summary>Can I work from a laptop?</summary>
-              <p>Yes. You sign in with the same email and one-time code you use on your
-                phone — it's the same practice and the same data. An evening of invoicing is
-                simply easier with a keyboard.</p>
+              <p>Yes. Sign in at <a href="/tutors/app/">theplanur.co.uk/tutors/app</a> with the same
+                email and one-time code you use on your phone — it's the same practice and the same
+                data. An evening of invoicing is simply easier with a keyboard.</p>
               <p>One difference worth knowing: local class reminders are phone notifications, so you
                 won't get those in a browser tab.</p>
             </details>
@@ -279,7 +291,7 @@
         <ul>
           <li><a href="/tutors/">Planur for Tutors</a></li>
           <li><a href="/tutors/download/">Get the tutor app</a></li>
-          <!-- d5 2026-10-16 — tutor log-in hidden until the founding partners are set up. RESTORE THIS BLOCK at d7 (before 2 Nov). Hiding the link stops DISCOVERY only; /tutors/app/ still answers, which is why new sign-ups are also off on the prod project (d6). -->
+          <li><a href="/tutors/app/">Tutor log in</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -302,7 +314,7 @@
   </div>
 </footer>
 
-<script src="/assets/planur.js?v=20261014"></script>
+<script src="/assets/planur.js?v=20261018"></script>
 <script>
   document.getElementById('y').textContent = new Date().getFullYear();
 
