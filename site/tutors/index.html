@@ -679,6 +679,13 @@
       </ul>
       <p>If a product can't answer those, the cost isn't zero. It is deferred — and it is the
         families in your register who end up paying it.</p>
+      <!-- Added 2026-10-17 with the free tier. This section asks "free has to be paid for
+           somehow — by whom?", and as of today we have a free plan of our own, so the
+           question now points at us. Leaving it unanswered would read as the one thing
+           this whole block is written to avoid: a standard applied to everybody else. -->
+      <p><b>So, our answer.</b> Planur has a free plan too, and it is paid for by the tutors
+        on the paid ones — not by advertising, not by selling anything in your register, and
+        not by charging you to get your own data back out.</p>
     </div>
   </div>
 </section>
@@ -689,7 +696,7 @@
     <div class="cta-grid">
       <div class="fade-in">
         <span class="section-label">The ask</span>
-        <h2 class="section-title">Try it with one real batch. For one month.</h2>
+        <h2 class="section-title">Try it with one real batch. Free for 14 days.</h2>
         <div class="ask">
           <div class="ask-item"><div class="n">1</div><div>
             <h4>One batch you actually teach</h4>
@@ -701,8 +708,28 @@
             <h4>If it earns it, tell another tutor</h4>
             <p>That is our entire go-to-market. We'd rather earn it than buy it.</p></div></div>
         </div>
+        <!-- 🔴 WHAT IS ACTUALLY ON OFFER, which this page did not say until
+             2026-10-17. The heading above read "For one month" while the
+             product grants FOURTEEN DAYS (start_trial's p_days default), so
+             anyone accepting the offer expected roughly twice what the button
+             gives them. The free tier went unmentioned entirely, so the only
+             advertised way in was a conversation — while the thing that needs
+             no conversation stayed invisible.
+
+             ⚠️ NO PRICES HERE, deliberately: they are not published yet. Caps
+             are not prices, so "five students" is fine. When prices do go up,
+             two promises must come with them (docs/tutor-stripe-config.md):
+             the price you join on is the price you keep while you stay active,
+             and any rise is announced three months ahead.
+
+             ⬜ NO "start free" BUTTON YET — every link to the app is commented
+             out until d7, and a CTA that leads nowhere is worse than none.
+             Add one here when the links come back. -->
         <p style="font-size:.9rem;color:var(--text-mid);margin-top:22px;line-height:1.65;">
-          We're not quoting prices yet. One subscription covers your practice — never per student.</p>
+          The free plan covers five students and asks for no card, for as long as you want it.
+          The fourteen-day trial opens the rest — more students, file uploads, automated
+          reminders — and also asks for no card, so nothing starts charging on its own.
+          We're not quoting prices yet. One subscription covers your practice, never per student.</p>
       </div>
 
       <div class="form-card fade-in delay-1" id="tutor-form-card">
