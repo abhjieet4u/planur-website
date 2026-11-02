@@ -309,13 +309,35 @@
         <h1>Teaching,<br /><em>not admin.</em></h1>
         <p class="t-hero-sub">Your batches, register, class materials and fees in one place — and
           your students get a planner of their own, instead of a portal they'll never open twice.</p>
+        <!-- 🔴 "Start free" IS THE PRIMARY ACTION, added 2026-10-18 when the
+             log-in links came back (d7) — the placeholder comment further down
+             this file asked for exactly this.
+             Until then the primary button was "Talk to us", so the only
+             self-serve route was a small "Tutor log in" in the nav, which a
+             tutor who has never heard of us reads as FOR EXISTING CUSTOMERS.
+             Sharing the page with a group of tutors in that state converts an
+             interested audience into a handful of enquiries to chase.
+             ⚠️ The sub-line carries the terms of the offer, because a button
+             that says "free" without saying what free means invites the
+             suspicion it is trying to avoid. -->
         <div class="t-hero-btns">
-          <a class="btn btn-coral btn-lg" href="#talk">Talk to us</a>
-          <a class="btn btn-sage-outline btn-lg" href="#what">See what it does</a>
+          <a class="btn btn-coral btn-lg" href="/tutors/app/">Start free</a>
+          <a class="btn btn-sage-outline btn-lg" href="#talk">Talk to us</a>
         </div>
+        <p class="t-hero-note" style="margin-top:14px;font-size:.92rem;color:var(--text-mid);">
+          Five students, no card, no time limit. Or try a paid plan free for fourteen days —
+          also no card. <a href="#what" style="color:var(--sage);font-weight:600;">See what it
+          does</a> first if you'd rather.</p>
         <div class="facts">
-          <span class="fact"><svg class="ic ic-sm"><use href="#i-phone"/></svg> iPhone and Android at launch</span>
-          <span class="fact"><svg class="ic ic-sm"><use href="#i-laptop"/></svg> Works in a laptop browser</span>
+          <!-- ⚠️ CHANGED 2026-11-02. This said "iPhone and Android at launch".
+               The launch on 4 November is the WEB only, so "at launch" now
+               reads as "Wednesday" and is not true. The browser fact moves
+               first because it is the one that is true today.
+               🔴 The standing rule still holds (owner, 2026-08-17): iPhone and
+               Android arrive TOGETHER. Never write "Android today, iOS later"
+               anywhere, whatever the build states say. -->
+          <span class="fact"><svg class="ic ic-sm"><use href="#i-laptop"/></svg> Use it today in any browser</span>
+          <span class="fact"><svg class="ic ic-sm"><use href="#i-phone"/></svg> iPhone and Android apps coming soon</span>
           <span class="fact"><svg class="ic ic-sm"><use href="#i-cap"/></svg> Your students never pay to connect</span>
           <span class="fact"><svg class="ic ic-sm"><use href="#i-chat"/></svg> Support answered within 24 hours</span>
         </div>
@@ -711,10 +733,12 @@
              the price you join on is the price you keep while you stay active,
              and any rise is announced three months ahead.
 
-             ⬜ NO "start free" BUTTON YET — every link to the app is commented
-             out until d7, and a CTA that leads nowhere is worse than none.
-             Add one here when the links come back. -->
-        <p style="font-size:.9rem;color:var(--text-mid);margin-top:22px;line-height:1.65;">
+             ✅ DONE 2026-10-18 — the "Start free" buttons are in the hero and
+             in this band, now that /tutors/app/ is linked again. -->
+        <p style="margin-top:20px;">
+          <a class="btn btn-coral" href="/tutors/app/">Start free instead</a>
+        </p>
+        <p style="font-size:.9rem;color:var(--text-mid);margin-top:18px;line-height:1.65;">
           The free plan covers five students, with space for materials and a couple of AI practice
           tests a month, and asks for no card for as long as you want it. The fourteen-day trial
           opens the rest — many more students, far more room for files, and more practice tests —

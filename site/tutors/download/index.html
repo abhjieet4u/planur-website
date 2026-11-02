@@ -79,9 +79,10 @@
     <a class="logo" href="/tutors/"><img class="logo-lockup" src="/assets/planur-lockup-tutors.png?v=20261018" alt="Planur for Tutors" width="499" height="160" /></a>
 
     <h1 id="headline">Planur for Tutors isn't in the stores yet.</h1>
-    <p class="lead" id="lead">It's with a small number of tutors while we finish it, and iPhone and Android
-        launch together — so there's nothing to install from a store today. Getting in early is a
-        conversation rather than a download.</p>
+    <p class="lead" id="lead">iPhone and Android launch together, and they are not ready yet — so
+        there is nothing to install from a store today. <strong>You do not have to wait, though:
+        Planur runs in your browser right now</strong>, on a laptop or a phone, and it is the same
+        practice either way.</p>
 
     <!-- Static default = the honest one. JS only ever upgrades this. -->
     <div id="waiting">
@@ -90,11 +91,18 @@
         Not available yet
       </div>
       <div class="stores">
-        <span class="store-btn waiting">App&nbsp;Store <small>at launch</small></span>
-        <span class="store-btn waiting">Google&nbsp;Play <small>at launch</small></span>
+        <span class="store-btn waiting">App&nbsp;Store <small>coming soon</small></span>
+        <span class="store-btn waiting">Google&nbsp;Play <small>coming soon</small></span>
       </div>
 
-      <div class="cta"><a class="btn btn-coral btn-lg" href="/tutors/#talk">Talk to us about early access</a></div>
+      <!-- ⚠️ Added 2026-11-02. This page's only route was a conversation,
+           which was right while nothing was self-serve. The web app is open
+           now, so sending a tutor away to "talk to us" when they could simply
+           start is the same fault the /tutors hero had until 18 October. -->
+      <div class="cta">
+        <a class="btn btn-coral btn-lg" href="/tutors/app/">Start free in your browser</a>
+        <a class="btn btn-sage-outline btn-lg" href="/tutors/#talk">Talk to us</a>
+      </div>
 
       <p class="note">We'll get you set up ourselves — including loading your roster, so you're not
         typing in fifty students before you've taught anything.</p>
@@ -139,7 +147,7 @@
     } else {
       ios.removeAttribute('href');
       ios.className = 'store-btn waiting';
-      ios.innerHTML = 'App&nbsp;Store <small>at launch</small>';
+      ios.innerHTML = 'App&nbsp;Store <small>coming soon</small>';
     }
 
     var ua = navigator.userAgent || navigator.vendor || '';
