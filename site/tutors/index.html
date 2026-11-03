@@ -44,16 +44,16 @@
 <meta property="og:description" content="Your batches, register, materials and fees in one place. And your students get a planner of their own, not a portal." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://theplanur.co.uk/tutors/" />
-<meta property="og:image" content="https://theplanur.co.uk/assets/planur-og-card-tutors.png?v=20261018" />
+<meta property="og:image" content="https://theplanur.co.uk/assets/planur-og-card-tutors.png?v=20261103" />
 <meta property="og:site_name" content="Planur" />
 <meta name="twitter:card" content="summary_large_image" />
 <!-- planur:brand-icons:start -->
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png?v=20261018" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png?v=20261018" />
-  <link rel="apple-touch-icon" href="/assets/planur-apple-touch-icon.png?v=20261018" />
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png?v=20261103" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png?v=20261103" />
+  <link rel="apple-touch-icon" href="/assets/planur-apple-touch-icon.png?v=20261103" />
   <!-- planur:brand-icons:end -->
 <script>document.documentElement.className += ' js';</script>
-<link rel="stylesheet" href="/assets/planur.css?v=20261018" />
+<link rel="stylesheet" href="/assets/planur.css?v=20261103" />
 <style>
   /* ── Page-specific: /tutors ───────────────────────────────────────────── */
   .t-hero{padding:64px 0 60px;background:linear-gradient(160deg,#fff 0%,var(--mint) 58%,var(--lilac) 100%);
@@ -240,6 +240,43 @@
     .t-hero{padding:44px 0 50px;}
     .t-hero-btns .btn{width:100%;}
   }
+  /* ── Welcome strip — a small greeting under the hero, with the Get started
+       checklist ticking in on load (rest state is already ticked, so
+       reduced-motion / no-JS / the share thumbnail show it complete). ─────── */
+  .t-welcome{padding:0 0 8px;}
+  .welcome-strip{display:flex;align-items:center;gap:28px;flex-wrap:wrap;
+    background:var(--white);border:1px solid var(--neutral-mid);border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-sm);padding:22px 28px;}
+  .ws-intro{display:flex;align-items:center;gap:14px;flex:1 1 250px;min-width:230px;}
+  .ws-badge{flex:none;width:46px;height:46px;border-radius:13px;background:var(--sage-faint);
+    display:inline-flex;align-items:center;justify-content:center;}
+  .ws-badge svg{width:24px;height:24px;stroke:var(--sage-deep);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+  .ws-intro strong{display:block;font-size:1.02rem;font-weight:800;color:var(--text-dark);letter-spacing:-.2px;}
+  .ws-intro span{display:block;font-size:.86rem;color:var(--text-mid);margin-top:2px;}
+  .ws-list{display:flex;flex-wrap:wrap;gap:11px 22px;list-style:none;margin:0;padding:0;flex:2 1 340px;}
+  .ws-list li{display:flex;align-items:center;gap:10px;font-size:.9rem;font-weight:600;color:var(--text-dark);}
+  .ws-box{flex:none;width:22px;height:22px;border-radius:50%;background:var(--sage);
+    display:inline-flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(74,124,89,.3);}
+  .ws-box svg{width:14px;height:14px;display:block;}
+  .ws-box path{fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:0;}
+  .ws-link{flex:none;display:inline-flex;align-items:center;gap:7px;font-size:.9rem;font-weight:700;color:var(--sage-deep);white-space:nowrap;}
+  .ws-link svg{width:16px;height:16px;stroke:currentColor;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+  .ws-link:hover{color:var(--sage);}
+  @media (prefers-reduced-motion: no-preference){
+    .ws-box{animation:tws-pop .45s cubic-bezier(.34,1.56,.64,1) both;}
+    .ws-box path{animation:tws-draw .38s ease both;}
+    .ws-list li:nth-child(1) .ws-box{animation-delay:.45s;}
+    .ws-list li:nth-child(1) .ws-box path{animation-delay:.63s;}
+    .ws-list li:nth-child(2) .ws-box{animation-delay:.72s;}
+    .ws-list li:nth-child(2) .ws-box path{animation-delay:.90s;}
+    .ws-list li:nth-child(3) .ws-box{animation-delay:.99s;}
+    .ws-list li:nth-child(3) .ws-box path{animation-delay:1.17s;}
+    .ws-list li:nth-child(4) .ws-box{animation-delay:1.26s;}
+    .ws-list li:nth-child(4) .ws-box path{animation-delay:1.44s;}
+  }
+  @keyframes tws-pop{0%{transform:scale(.3);opacity:0;}60%{opacity:1;}100%{transform:scale(1);opacity:1;}}
+  @keyframes tws-draw{from{stroke-dashoffset:1;}to{stroke-dashoffset:0;}}
+  @media(max-width:760px){ .welcome-strip{gap:18px;padding:20px;} }
 </style>
 </head>
 <body>
@@ -277,7 +314,7 @@
 <nav id="navbar">
   <div class="container">
     <div class="nav-bar">
-      <a class="logo" href="/tutors/"><img class="logo-lockup" src="/assets/planur-lockup-tutors.png?v=20261018" alt="Planur for Tutors" width="499" height="160" /></a>
+      <a class="logo" href="/tutors/"><img class="logo-lockup" src="/assets/planur-lockup-tutors.png?v=20261103" alt="Planur for Tutors" width="499" height="160" /></a>
       <!-- Below 420px both of these collapse to icons rather than one being
            dropped (owner, 2026-10-10). Most phones in use are narrower than
            that — 360 to 412 covers the common Android and iPhone sizes — so the
@@ -364,6 +401,29 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- WELCOME — a greeting under the hero; the checklist ticks in, and it links
+     into the getting-started guide (/help). -->
+<section class="t-welcome">
+  <div class="container">
+    <div class="welcome-strip fade-in">
+      <div class="ws-intro">
+        <span class="ws-badge"><svg aria-hidden="true"><use href="#i-cap"/></svg></span>
+        <div>
+          <strong>Welcome to Planur</strong>
+          <span>Four steps and you're teaching — it takes minutes.</span>
+        </div>
+      </div>
+      <ul class="ws-list" aria-hidden="true">
+        <li><span class="ws-box"><svg viewBox="0 0 24 24"><path pathLength="1" d="M20 6L9 17l-5-5"/></svg></span>Create your practice</li>
+        <li><span class="ws-box"><svg viewBox="0 0 24 24"><path pathLength="1" d="M20 6L9 17l-5-5"/></svg></span>Add a class</li>
+        <li><span class="ws-box"><svg viewBox="0 0 24 24"><path pathLength="1" d="M20 6L9 17l-5-5"/></svg></span>Add your students</li>
+        <li><span class="ws-box"><svg viewBox="0 0 24 24"><path pathLength="1" d="M20 6L9 17l-5-5"/></svg></span>Draft an AI test</li>
+      </ul>
+      <a class="ws-link" href="/help/">See the full guide <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
     </div>
   </div>
 </section>
@@ -853,6 +913,7 @@
         <h4>For tutors</h4>
         <ul>
           <li><a href="/tutors/">Planur for Tutors</a></li>
+          <li><a href="/help/">Getting started</a></li>
           <li><a href="/tutors/download/">Get the tutor app</a></li>
           <li><a href="/tutors/app/">Tutor log in</a></li>
           <li><a href="/tutors/#talk">Talk to us</a></li>
@@ -879,7 +940,7 @@
   </div>
 </footer>
 
-<script src="/assets/planur.js?v=20261018"></script>
+<script src="/assets/planur.js?v=20261103"></script>
 <script>
   // ── Flip cards: hover is CSS; this is for touch and keyboard ─────────────
   document.querySelectorAll('.flip-btn').forEach(function (btn) {
