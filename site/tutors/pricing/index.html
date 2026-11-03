@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<!--
+  Planur for Tutors — pricing. Served at https://theplanur.co.uk/tutors/pricing/
+
+  🔴 OWNER DECISION, 2026-11-03: show prices on the website. This REVERSES the
+  standing "no prices on the website" rule (17 Aug) — kept here so a future
+  session does not "restore" the old no-prices posture by habit.
+
+  PRICES ARE AUTHORITATIVE as of 2026-11-03, read from the prod plan_limit table
+  and packages/tutor_core/lib/src/plan_prices.dart (the GBP block that feeds the
+  in-app plan cards). VAT-inclusive GBP:
+    Free      £0            5 students    2 tests/mo    100 MB   just you
+    Starter   £11.99 / £129  30 students   15 tests/mo   2 GB     just you
+    Pro       £19.99 / £219  75 students   30 tests/mo   5 GB     you + 1
+    Practice  £34.99 / £379  150 students  50 tests/mo   10 GB    up to 5
+    Bespoke   talk to us     150+          —             —        larger
+  🔴 If these change, change them in plan_limit / plan_prices.dart AND here, in
+  the same breath — a wrong price on a public page is worse than none.
+
+  COUNTRY: UK only sells today (the sales_country gate + the UK-only privacy
+  posture). Only GBP prices exist; EUR/INR are deliberately unset (plan_prices).
+  So the country control is a LABELLED STUB — "United Kingdom · GBP", built so a
+  real selector/currency can drop in once another country is opened.
+
+  No VAT wording: Planur Ltd is not VAT-registered yet, so the page states the
+  price as the total and claims neither "inc VAT" nor "ex VAT". No invented
+  users, no "saves X hours".
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pricing — Planur for Tutors</title>
+<meta name="description" content="Simple GBP pricing for Planur for Tutors. Start free with a small group of students, or move up as your practice grows. Every plan is the whole of Planur — register, fees, materials, marks and AI practice papers." />
+<link rel="canonical" href="https://theplanur.co.uk/tutors/pricing/" />
+<meta name="robots" content="all">
+<!-- planur:brand-icons:start -->
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png?v=20261103" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png?v=20261103" />
+  <link rel="apple-touch-icon" href="/assets/planur-apple-touch-icon.png?v=20261103" />
+  <!-- planur:brand-icons:end -->
+<script>document.documentElement.className += ' js';</script>
+<link rel="stylesheet" href="/assets/planur.css?v=20261103" />
+<style>
+  .pr-hero{padding:64px 0 10px;text-align:center;}
+  .pr-hero .section-title{margin:10px auto 14px;max-width:16ch;}
+  .pr-hero .section-lede{margin:0 auto;max-width:62ch;}
+
+  /* Controls: country stub + billing toggle */
+  .pr-controls{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+    gap:14px 28px;margin:30px 0 4px;}
+  .pr-country{display:inline-flex;align-items:center;gap:9px;font-size:.9rem;font-weight:600;
+    color:var(--text-dark);background:var(--white);border:1px solid var(--neutral-mid);
+    border-radius:var(--radius-pill);padding:9px 16px;}
+  .pr-country .dot{width:9px;height:9px;border-radius:50%;background:var(--sage);flex:none;}
+  .pr-country .muted{color:var(--text-light);font-weight:500;}
+  .pr-country svg{width:15px;height:15px;stroke:var(--text-light);stroke-width:2.2;fill:none;
+    stroke-linecap:round;stroke-linejoin:round;}
+  .pr-toggle{display:inline-flex;align-items:center;gap:0;background:var(--neutral);
+    border:1px solid var(--neutral-mid);border-radius:var(--radius-pill);padding:4px;}
+  .pr-toggle button{font-family:inherit;font-size:.86rem;font-weight:700;color:var(--text-mid);
+    background:transparent;border:none;border-radius:var(--radius-pill);padding:8px 16px;cursor:pointer;
+    transition:var(--transition);}
+  .pr-toggle button[aria-pressed="true"]{background:var(--sage);color:#fff;box-shadow:var(--shadow-sm);}
+  .pr-toggle .save{font-size:.72rem;font-weight:700;color:var(--sage-deep);margin-left:6px;}
+  .pr-note{text-align:center;font-size:.82rem;color:var(--text-light);margin:14px 0 0;}
+
+  /* Plan grid */
+  .plans{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding:34px 0 12px;align-items:stretch;}
+  .plan{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--neutral-mid);
+    border-radius:var(--radius-lg);padding:26px 24px;}
+  .plan.pop{border-color:var(--sage);box-shadow:var(--shadow-md);position:relative;}
+  .plan .tag{position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:.7rem;
+    font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#fff;background:var(--sage);
+    padding:5px 12px;border-radius:var(--radius-pill);white-space:nowrap;}
+  .plan h2{font-size:1.15rem;font-weight:800;color:var(--text-dark);margin:0;letter-spacing:-.2px;}
+  .plan .sub{font-size:.82rem;color:var(--text-light);margin:4px 0 16px;min-height:2.4em;}
+  .price{display:flex;align-items:baseline;gap:4px;margin-bottom:4px;}
+  .price .amount{font-size:2.2rem;font-weight:800;color:var(--text-dark);letter-spacing:-1px;}
+  .price .per{font-size:.88rem;color:var(--text-mid);font-weight:600;}
+  .price-foot{font-size:.78rem;color:var(--text-light);min-height:1.2em;margin-bottom:18px;}
+  .plan .cta{display:inline-flex;align-items:center;justify-content:center;gap:7px;width:100%;
+    font-weight:700;font-size:.92rem;border-radius:var(--radius-pill);padding:11px 16px;
+    transition:var(--transition);margin-bottom:18px;}
+  .cta.primary{background:var(--coral);color:#fff;box-shadow:0 4px 16px rgba(232,132,92,.3);}
+  .cta.primary:hover{background:var(--coral-dark);transform:translateY(-1px);}
+  .cta.ghost{background:var(--white);color:var(--sage-deep);border:1.5px solid var(--sage);}
+  .cta.ghost:hover{background:var(--sage-faint);}
+  .feat{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px;}
+  .feat li{display:flex;align-items:flex-start;gap:10px;font-size:.88rem;color:var(--text-mid);line-height:1.45;}
+  .feat li svg{flex:none;width:17px;height:17px;margin-top:1px;stroke:var(--sage);stroke-width:2.4;
+    fill:none;stroke-linecap:round;stroke-linejoin:round;}
+  .feat li b{color:var(--text-dark);font-weight:700;}
+
+  /* Included strip */
+  .included{margin:26px 0 0;background:var(--sage-faint);border-radius:var(--radius-lg);padding:26px 30px;}
+  .included h3{font-size:1.02rem;font-weight:800;color:var(--text-dark);margin:0 0 14px;}
+  .included ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:11px 24px;}
+  .included li{display:flex;align-items:center;gap:9px;font-size:.9rem;color:var(--text-dark);font-weight:600;}
+  .included li svg{flex:none;width:16px;height:16px;stroke:var(--sage-deep);stroke-width:2.4;fill:none;
+    stroke-linecap:round;stroke-linejoin:round;}
+
+  /* Close */
+  .pr-close{text-align:center;padding:44px 0 80px;}
+  .pr-close h2{font-size:1.5rem;font-weight:800;color:var(--text-dark);margin:0 0 10px;letter-spacing:-.3px;}
+  .pr-close p{font-size:1rem;color:var(--text-mid);line-height:1.7;max-width:56ch;margin:0 auto 22px;}
+  .pr-close .btn{margin:0 6px;}
+
+  @media(max-width:1000px){ .plans{grid-template-columns:repeat(2,1fr);} .included ul{grid-template-columns:repeat(2,1fr);} }
+  @media(max-width:560px){ .plans{grid-template-columns:1fr;} .included ul{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true" focusable="false">
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 14a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2.2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2.5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13"/><path d="M13 6.5l5.5 5.5L13 17.5"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9.5l6 6 6-6"/></symbol>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-bar">
+      <a class="logo" href="/tutors/"><img class="logo-lockup" src="/assets/planur-lockup-tutors.png?v=20261103" alt="Planur for Tutors" width="499" height="160" /></a>
+      <div class="nav-right">
+        <a class="nav-link" href="/tutors/app/" aria-label="Tutor log in" title="Tutor log in">
+          <svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg>
+          <span class="nav-label">Tutor log in</span>
+        </a>
+        <a class="btn btn-coral" href="/tutors/app/" aria-label="Start free" title="Start free">
+          <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg>
+          <span class="nav-label">Start free</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="pr-hero">
+    <div class="container">
+      <span class="section-label">Pricing</span>
+      <h1 class="section-title">One plan per size of practice</h1>
+      <p class="section-lede">Start free with a small group of students, and move up only as your practice grows. Every plan is the whole of Planur — nothing is locked behind a higher tier but more room. No card to start, and nothing to cancel on the free plan.</p>
+
+      <div class="pr-controls">
+        <!-- Country: a labelled STUB today. UK is the only market selling, and
+             only GBP prices exist — a real selector drops in when another
+             country opens. -->
+        <span class="pr-country" title="More countries coming soon">
+          <span class="dot"></span> United Kingdom <span class="muted">· GBP</span>
+          <svg aria-hidden="true"><use href="#i-chev"/></svg>
+        </span>
+        <div class="pr-toggle" role="group" aria-label="Billing period">
+          <button type="button" id="billMonthly" aria-pressed="true">Monthly</button>
+          <button type="button" id="billYearly" aria-pressed="false">Yearly<span class="save">save ~10%</span></button>
+        </div>
+      </div>
+      <p class="pr-note">Prices in GBP. The exact students, AI credits and storage on each plan are shown when you sign in. More countries and currencies are coming.</p>
+    </div>
+  </section>
+
+  <!-- PLANS -->
+  <section class="plans-wrap">
+    <div class="container">
+      <div class="plans">
+
+        <!-- Free -->
+        <article class="plan">
+          <h2>Free</h2>
+          <p class="sub">To get started, for as long as you like.</p>
+          <div class="price"><span class="amount">£0</span><span class="per">forever</span></div>
+          <p class="price-foot">No card, no time limit.</p>
+          <a class="cta primary" href="/tutors/app/">Start free</a>
+          <ul class="feat">
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>A <b>small group</b> of students</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>A few <b>AI practice papers</b> a month</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Space for your <b>class materials</b></span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Just you</span></li>
+          </ul>
+        </article>
+
+        <!-- Starter -->
+        <article class="plan">
+          <h2>Starter</h2>
+          <p class="sub">For a growing list of students.</p>
+          <div class="price" data-m="£11.99" data-y="£129"><span class="amount">£11.99</span><span class="per">/month</span></div>
+          <p class="price-foot">Or £129 a year.</p>
+          <a class="cta ghost" href="/tutors/app/">Try free for 14 days</a>
+          <ul class="feat">
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>More students</b> as you grow</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>More AI practice papers</b></span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>More storage</b> for materials</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Just you</span></li>
+          </ul>
+        </article>
+
+        <!-- Pro -->
+        <article class="plan pop">
+          <span class="tag">Most popular</span>
+          <h2>Pro</h2>
+          <p class="sub">For an established practice.</p>
+          <div class="price" data-m="£19.99" data-y="£219"><span class="amount">£19.99</span><span class="per">/month</span></div>
+          <p class="price-foot">Or £219 a year.</p>
+          <a class="cta primary" href="/tutors/app/">Try free for 14 days</a>
+          <ul class="feat">
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>A <b>bigger roster</b> of students</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>More AI papers</b> and storage</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Room to run more classes</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>You <b>+ a colleague</b></span></li>
+          </ul>
+        </article>
+
+        <!-- Practice -->
+        <article class="plan">
+          <h2>Practice</h2>
+          <p class="sub">For a small centre with staff.</p>
+          <div class="price" data-m="£34.99" data-y="£379"><span class="amount">£34.99</span><span class="per">/month</span></div>
+          <p class="price-foot">Or £379 a year.</p>
+          <a class="cta ghost" href="/tutors/app/">Try free for 14 days</a>
+          <ul class="feat">
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>A <b>full centre's roster</b></span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>The <b>most AI papers</b> and storage</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Materials for every class</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>A <b>small team</b></span></li>
+          </ul>
+        </article>
+
+      </div>
+
+      <!-- Bespoke -->
+      <div class="included" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 30px;margin-top:18px;">
+        <div>
+          <h3 style="margin:0 0 4px;">Running a larger centre?</h3>
+          <p style="margin:0;font-size:.9rem;color:var(--text-mid);line-height:1.6;max-width:62ch;">A larger centre gets a plan shaped around it — the student band, the team size and the support that fits. Tell us what you run and we'll price it with you.</p>
+        </div>
+        <a class="btn btn-sage" href="/support/?app=tutor" style="flex:none;">Talk to us</a>
+      </div>
+
+      <!-- Included everywhere -->
+      <div class="included">
+        <h3>Every plan is the whole of Planur</h3>
+        <ul>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg> Classes &amp; the register</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg> Fees, invoices &amp; receipts</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg> Class materials</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg> Marks &amp; trends</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg> AI practice papers</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg> Your students' own planner</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSE -->
+  <section class="pr-close" id="talk">
+    <div class="container">
+      <h2>Start free, today</h2>
+      <p>Free with a small group, no card, for as long as you like — or try a paid plan free for fourteen days, also no card and nothing to cancel. It all runs in your browser.</p>
+      <a class="btn btn-coral btn-lg" href="/tutors/app/">Start free</a>
+      <a class="btn btn-sage-outline btn-lg" href="/help/">See how it works</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="/tutors/">Planur<span>.</span></a>
+        <p>Your academic life, organised — and your teaching, without the paperwork.</p>
+      </div>
+      <div class="footer-col">
+        <h4>For students</h4>
+        <ul>
+          <li><a href="/students/">Planur student app</a></li>
+          <li><a href="/download/">Get the app</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>For tutors</h4>
+        <ul>
+          <li><a href="/tutors/">Planur for Tutors</a></li>
+          <li><a href="/tutors/pricing/">Pricing</a></li>
+          <li><a href="/help/">Getting started</a></li>
+          <li><a href="/tutors/app/">Tutor log in</a></li>
+          <li><a href="/tools/">Free tools</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/support/?app=tutor">Support</a></li>
+          <li><a href="/privacy/?app=tutor">Privacy</a></li>
+          <li><a href="/terms/?app=tutor">Terms for tutors</a></li>
+          <li><a href="/delete-account/?app=tutor">Delete account</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Planur. Made for the people who teach, and the students they teach.</p>
+      <p class="footer-copy">theplanur.co.uk</p>
+      <!-- planur:footer-legal:start -->
+      <p class="footer-legal">Planur Ltd is a company registered in England and Wales, company number 17350438. Registered office: Unit 29 Highcroft Industrial Estate, Enterprise Road, Horndean, Waterlooville, PO8 0BT, United Kingdom.</p>
+      <!-- planur:footer-legal:end -->
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/planur.js?v=20261103"></script>
+<script>
+  // Monthly / yearly toggle. Default is monthly (the at-rest state), so the page
+  // is correct with no JS. Free is always £0; Bespoke has no price node.
+  (function () {
+    var m = document.getElementById('billMonthly'),
+        y = document.getElementById('billYearly');
+    if (!m || !y) return;
+    function apply(yearly) {
+      document.querySelectorAll('.price[data-m]').forEach(function (p) {
+        p.querySelector('.amount').textContent = yearly ? p.dataset.y : p.dataset.m;
+        p.querySelector('.per').textContent = yearly ? '/year' : '/month';
+      });
+      m.setAttribute('aria-pressed', String(!yearly));
+      y.setAttribute('aria-pressed', String(yearly));
+    }
+    m.addEventListener('click', function () { apply(false); });
+    y.addEventListener('click', function () { apply(true); });
+  })();
+</script>
+</body>
+</html>
