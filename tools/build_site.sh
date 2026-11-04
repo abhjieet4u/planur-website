@@ -9,6 +9,12 @@
 # Output: dist/  — drag the CONTENTS of THIS folder into Netlify. Never drag
 # site/ on its own again.
 #
+# 🔴 FOR A DEPLOY, RUN tools/build_all.sh INSTEAD (2026-11-04). This script
+# assembles whatever app bundles are lying in the shared build folders and does
+# not check which database they talk to — so after a staging build it will
+# happily assemble a live dist/ pointed at staging. build_all.sh builds staging
+# first and prod LAST, and verifies each assembly against the right project.
+#
 # WHY THIS EXISTS
 # Two Flutter apps are served from the same domain — the tutor app at
 # /tutors/app/ and the student read-only app at /app/. Netlify's drag-and-drop
