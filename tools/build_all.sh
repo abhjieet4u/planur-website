@@ -94,9 +94,13 @@ verify_dist() {
       if [[ "$app" == "app" && "${SKIP_STUDENT:-0}" == "1" ]]; then continue; fi
       echo "  ✗ $dist/$app is missing"; ok=0; continue
     fi
+    # `|| true`: grep exits 1 on NO match — which for $forbid is the passing
+    # case — and under `set -euo pipefail` that killed the whole run, silently,
+    # right after "Verifying". `verify` mode never showed it because there the
+    # call sits in `|| rc=1`, which switches errexit off (found 2026-11-04).
     local bad good
-    bad=$(grep -rhoE "$forbid" "$dir" --include='*.js' 2>/dev/null | wc -l | tr -d ' ')
-    good=$(grep -rhoE "$want" "$dir" --include='*.js' 2>/dev/null | wc -l | tr -d ' ')
+    bad=$( { grep -rhoE "$forbid" "$dir" --include='*.js' 2>/dev/null || true; } | wc -l | tr -d ' ')
+    good=$( { grep -rhoE "$want" "$dir" --include='*.js' 2>/dev/null || true; } | wc -l | tr -d ' ')
     if [[ "$bad" != "0" ]]; then
       echo "  ✗ $dist/$app contains $bad reference(s) to the WRONG project ($forbid)"
       ok=0
