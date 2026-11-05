@@ -38,7 +38,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Planur for Tutors — teaching, not admin.</title>
-<meta name="description" content="Run your batches, register, class materials and fees in one app — and your students get a planner of their own instead of a portal they'll never open." />
+<meta name="description" content="For tutors and class teachers — tuition, music, art, dance, yoga, sport. Run your batches, register, class materials and fees in one app, and your students get a planner of their own." />
 <link rel="canonical" href="https://theplanur.co.uk/tutors/" />
 <meta property="og:title" content="Planur for Tutors — teaching, not admin." />
 <meta property="og:description" content="Your batches, register, materials and fees in one place. And your students get a planner of their own, not a portal." />
@@ -277,6 +277,30 @@
   @keyframes tws-pop{0%{transform:scale(.3);opacity:0;}60%{opacity:1;}100%{transform:scale(1);opacity:1;}}
   @keyframes tws-draw{from{stroke-dashoffset:1;}to{stroke-dashoffset:0;}}
   @media(max-width:760px){ .welcome-strip{gap:18px;padding:20px;} }
+
+  /* ── "Ask us this" — one question, one answer, every row alike ──────────── */
+  .ask-card{margin-top:22px;background:var(--white);border:1px solid var(--neutral-mid);
+    border-radius:var(--radius-md);padding:24px 26px;}
+  .ask-card h3{font-size:1.05rem;color:var(--text-dark);margin:0 0 4px;}
+  .ask-card .ask-intro{color:var(--text-mid);font-size:.92rem;margin:0 0 14px;}
+  .ask-list{margin:0;}
+  .ask-row{display:grid;grid-template-columns:minmax(0,260px) 1fr;gap:6px 24px;
+    padding:12px 0;border-top:1px solid var(--neutral-mid);}
+  .ask-row dt{font-weight:700;color:var(--text-dark);font-size:.92rem;}
+  .ask-row dd{margin:0;color:var(--text-mid);font-size:.92rem;line-height:1.6;}
+  .ask-row a{color:var(--sage-deep);text-decoration:underline;}
+  /* ── "Not just tuition" — the kinds of class it fits ─────────────────────── */
+  .fits{margin:0 0 26px;}
+  .fits-lead{color:var(--text-dark);font-size:1rem;margin:0 0 12px;}
+  .fits-list{list-style:none;padding:0;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:8px;}
+  .fits-list li{padding:6px 14px;border-radius:var(--radius-pill);background:var(--sage-faint);
+    color:var(--sage-deep);font-size:.88rem;font-weight:600;}
+  .fits-note{color:var(--text-mid);font-size:.9rem;line-height:1.6;max-width:72ch;margin:0;}
+
+  /* The verdict on the whole list, not a sixth row — so a gap, no rule. */
+  .ask-list .ask-row:last-child{padding-bottom:0;}
+  .ask-card .ask-close{margin:22px 0 0;color:var(--text-dark);font-size:.95rem;font-weight:600;}
+  @media(max-width:760px){ .ask-card{padding:20px;} .ask-row{grid-template-columns:1fr;} }
 </style>
 </head>
 <body>
@@ -342,7 +366,7 @@
   <div class="container">
     <div class="t-hero-inner">
       <div class="t-hero-copy fade-in">
-        <div class="hero-badge"><svg class="ic ic-sm"><use href="#i-cap"/></svg> For private tutors and small practices</div>
+        <div class="hero-badge"><svg class="ic ic-sm"><use href="#i-cap"/></svg> For tutors, coaches and small practices</div>
         <h1>Teaching,<br /><em>not admin.</em></h1>
         <p class="t-hero-sub">Your batches, register, class materials and fees in one place — and
           your students get a planner of their own, instead of a portal they'll never open twice.</p>
@@ -554,6 +578,27 @@
       <span class="section-label">What it does</span>
       <h2 class="section-title">The parts that cost you evenings.</h2>
     </div>
+    <!-- Owner, 2026-11-04: say plainly that this is not only for academic
+         tuition — art, dance, yoga, sport, any formal class.
+         ⚠️ Honest about the edge: marks and AI practice papers are built for
+         academic subjects. Everything else on this list is subject-blind. -->
+    <div class="fits fade-in delay-1">
+      <p class="fits-lead"><strong>Not just tuition.</strong> If you teach a class on a timetable,
+        with a register and a fee, it fits:</p>
+      <ul class="fits-list">
+        <li>Academic tuition</li>
+        <li>Art</li>
+        <li>Music</li>
+        <li>Dance</li>
+        <li>Yoga</li>
+        <li>Sports coaching</li>
+        <li>Drama</li>
+        <li>Languages</li>
+      </ul>
+      <p class="fits-note">Classes, the register, materials, fees and the student planner work the same
+        for every one of them. Marks and AI practice papers are built with academic subjects in
+        mind; use them where they fit.</p>
+    </div>
     <div class="acc-grid fade-in delay-1">
       <details class="acc">
         <summary>
@@ -742,22 +787,44 @@
       <p><strong>Tested, not asserted.</strong> An automated suite tries to break those three rules
         against the real database before anything ships — and if you stop paying,
         <strong>nothing is deleted</strong>.</p>
-      <p><strong>Ask us this. Then ask it of everything else you're considering.</strong> Free has to
-        be paid for somehow, and it is worth knowing by whom before a term's data is sitting in it.</p>
-      <ul>
-        <li><b>Who is accountable?</b> Planur Ltd, registered in England and Wales, company number
-          17350438 — and registered with the UK Information Commissioner's Office, number ZC275277.</li>
-        <li><b>Is there a written agreement covering the data?</b> Under UK GDPR there is supposed to
-          be one. Ask to see ours.</li>
-        <li><b>Where is it kept, and for how long after you leave?</b> In our
-          <a href="/privacy/?app=tutor">privacy notice</a>, with dates.</li>
-        <li><b>Can you get everything out?</b> Four spreadsheet exports — students, registers, marks,
-          invoices — whenever you like, without asking us.</li>
-        <li><b>So who pays for your free plan?</b> The tutors on the paid ones. Not advertising, and
-          not anything in your register.</li>
-      </ul>
-      <p>If a product cannot answer those, the cost is not zero. It is deferred — and it is the
-        families in your register who end up paying it.</p>
+    </div>
+
+    <!-- Owner, 2026-11-04: the agreement row used to end "Ask to see ours", which
+         invites a query per visitor. It now points at the agreement itself — the
+         controller/processor terms in Terms §21, which every practice accepts at
+         sign-up. (The separate schools DPA is still a draft; this page is tutors.) -->
+    <div class="ask-card fade-in delay-2">
+      <h3>Ask us this. Then ask it of everything else you're considering.</h3>
+      <p class="ask-intro">Free has to be paid for somehow, and it is worth knowing by whom before a
+        term's data is sitting in it.</p>
+      <dl class="ask-list">
+        <div class="ask-row">
+          <dt>Who is accountable?</dt>
+          <dd>Planur Ltd, registered in England and Wales (company 17350438) and with the UK
+            Information Commissioner's Office (ZC275277).</dd>
+        </div>
+        <div class="ask-row">
+          <dt>Is there a written agreement covering the data?</dt>
+          <dd>Yes, from the day you sign up. <a href="/terms/#controller">Section 21 of our Terms</a>
+            makes you the controller and us your processor: we use your students' data only to run
+            Planur for you, never for our own purposes.</dd>
+        </div>
+        <div class="ask-row">
+          <dt>Where is it kept, and for how long after you leave?</dt>
+          <dd>Set out, with dates, in our <a href="/privacy/?app=tutor">privacy notice</a>.</dd>
+        </div>
+        <div class="ask-row">
+          <dt>Can you get everything out?</dt>
+          <dd>Yes, whenever you like, without asking us: spreadsheet exports of students, registers,
+            marks and fees.</dd>
+        </div>
+        <div class="ask-row">
+          <dt>Who pays for the free plan?</dt>
+          <dd>The tutors on the paid plans. Not advertising, and nothing taken from your register.</dd>
+        </div>
+      </dl>
+      <p class="ask-close">If a product cannot answer those, the cost is not zero. It is deferred, and
+        it is the families in your register who end up paying it.</p>
     </div>
   </div>
 </section>
@@ -804,7 +871,8 @@
           tests a month, and asks for no card for as long as you want it. The fourteen-day trial
           opens the rest — many more students, far more room for files, and more practice tests —
           and asks for no card either, so nothing starts charging on its own.
-          We're not quoting prices yet. One subscription covers your practice, never per student.</p>
+          Prices are on our <a href="/tutors/pricing/">pricing page</a>. One subscription covers your
+          practice, never per student.</p>
       </div>
 
       <div class="form-card fade-in delay-1" id="tutor-form-card">
