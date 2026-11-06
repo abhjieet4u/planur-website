@@ -139,6 +139,17 @@
     border:1px solid rgba(0,0,0,.05);line-height:0;}
   .phone img{display:block;width:100%;height:auto;}
 
+  /* ── Worked example (tracker faq1) ────────────────────────────────────── */
+  .example{padding:20px 0 8px;scroll-margin-top:84px;}
+  .example .section-lede{max-width:64ch;margin-bottom:24px;}
+  .ex-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .ex-card{background:var(--white);border:1px solid var(--neutral-mid);border-radius:var(--radius-md);
+    padding:22px 24px;}
+  .ex-card h3{font-size:1.05rem;font-weight:800;color:var(--text-dark);margin:0 0 10px;}
+  .ex-card ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:7px;
+    font-size:.94rem;color:var(--text-mid);line-height:1.6;}
+  .ex-note{font-size:.9rem;color:var(--text-mid);margin:18px 0 0;max-width:70ch;}
+
   /* ── More help ────────────────────────────────────────────────────────── */
   .more{padding:48px 0 80px;}
   .more-card{background:var(--sage-faint);border-radius:var(--radius-lg);padding:40px;
@@ -162,6 +173,7 @@
     .step:nth-child(even) .step-copy{order:0;}
     .shot{max-width:270px;}
     .more-card{grid-template-columns:1fr;padding:28px;}
+    .ex-grid{grid-template-columns:1fr;}
   }
 </style>
 </head>
@@ -243,6 +255,7 @@
         <li><a href="#s4"><span class="num">4</span> Your dashboard</a></li>
         <li><a href="#s5"><span class="num">5</span> Draft an AI test</a></li>
         <li><a href="#s6"><span class="num">6</span> Read &amp; publish</a></li>
+        <li><a href="#example">Example: a one-to-one week</a></li>
       </ul>
     </div>
   </section>
@@ -348,6 +361,45 @@
         </div></div></figure>
       </article>
 
+    </div>
+  </section>
+
+  <!-- WORKED EXAMPLE (tracker faq1, 2026-11-06). A short version only: the
+       detailed answer lives in the in-app help seed as
+       `example-one-to-one-week`, which is authoritative. Keep the two in step;
+       no exact plan limits here. -->
+  <section class="example" id="example">
+    <div class="container">
+      <span class="section-label">Worked example</span>
+      <h2 class="section-title">A one-to-one tutor's week</h2>
+      <p class="section-lede">Say you teach one-to-one at 5, 6 and 7 pm, Monday to Friday: fifteen lessons a week. Here is how that looks in Planur.</p>
+      <div class="ex-grid">
+        <div class="ex-card">
+          <h3>Once</h3>
+          <ul>
+            <li>Add your students, or import a list with the parents' details.</li>
+            <li>Create a one-to-one class for each student. It is named after them, and their fee sits on it.</li>
+            <li>Add a 60-minute session at their time and tick <strong>Repeats weekly</strong>. Twice a week? Add two.</li>
+          </ul>
+        </div>
+        <div class="ex-card">
+          <h3>Every week</h3>
+          <ul>
+            <li>The Calendar shows the week. <strong>Subscribe in your calendar</strong> puts it on your phone.</li>
+            <li>Take the register after each lesson: present, absent or authorised.</li>
+            <li>Share worksheets, and draft an AI practice test when it helps. You read it before you publish it.</li>
+          </ul>
+        </div>
+        <div class="ex-card">
+          <h3>Every month</h3>
+          <ul>
+            <li><strong>Bill a class</strong> creates each student's invoice for the period.</li>
+            <li><strong>Record payment</strong> when the money arrives, and send the receipt.</li>
+            <li>Overdue fees show on the Fees page, with a reminder ready to send.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="ex-note">A full timetable like this needs a paid plan. The 14-day free trial lets you set it all up first, with no card. Step-by-step detail is in Account &rsaquo; Help inside Planur.</p>
     </div>
   </section>
 
