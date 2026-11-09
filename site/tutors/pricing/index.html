@@ -35,12 +35,12 @@
 <link rel="canonical" href="https://theplanur.co.uk/tutors/pricing/" />
 <meta name="robots" content="all">
 <!-- planur:brand-icons:start -->
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png?v=20261103" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png?v=20261103" />
-  <link rel="apple-touch-icon" href="/assets/planur-apple-touch-icon.png?v=20261103" />
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png?v=20261109" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png?v=20261109" />
+  <link rel="apple-touch-icon" href="/assets/planur-apple-touch-icon.png?v=20261109" />
   <!-- planur:brand-icons:end -->
 <script>document.documentElement.className += ' js';</script>
-<link rel="stylesheet" href="/assets/planur.css?v=20261103" />
+<link rel="stylesheet" href="/assets/planur.css?v=20261109" />
 <style>
   .pr-hero{padding:64px 0 10px;text-align:center;}
   .pr-hero .section-title{margin:10px auto 14px;max-width:16ch;}
@@ -125,7 +125,7 @@
 <nav id="navbar">
   <div class="container">
     <div class="nav-bar">
-      <a class="logo" href="/tutors/"><img class="logo-lockup" src="/assets/planur-lockup-tutors.png?v=20261103" alt="Planur for Tutors" width="499" height="160" /></a>
+      <a class="logo" href="/tutors/"><img class="logo-lockup" src="/assets/planur-lockup-tutors.png?v=20261109" alt="Planur for Tutors" width="499" height="160" /></a>
       <div class="nav-right">
         <a class="nav-link" href="/tutors/app/" aria-label="Tutor log in" title="Tutor log in">
           <svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg>
@@ -136,6 +136,31 @@
           <span class="nav-label">Start free</span>
         </a>
       </div>
+      <!-- planur:site-menu:start -->
+      <details class="site-menu">
+        <summary aria-label="Menu" title="Menu">
+          <svg class="menu-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </summary>
+        <div class="menu-panel">
+          <p class="menu-head">For tutors</p>
+          <ul>
+            <li><a href="/tutors/">Planur for Tutors</a></li>
+            <li><a href="/help/">Getting started</a></li>
+            <li><a href="/tools/">Free tools</a></li>
+            <li><a href="/faq/">FAQ</a></li>
+            <li><a href="/tutors/pricing/">Pricing</a></li>
+          </ul>
+          <p class="menu-head">Company</p>
+          <ul>
+            <li><a href="/support/?app=tutor">Contact us</a></li>
+            <li><a href="/about/">About us</a></li>
+            <li><a href="/countries/">Countries we serve</a></li>
+          </ul>
+          <!-- Privacy and Terms live in the footer, not here (owner, 2026-11-09).
+               "Tutor log in" is not here either: it is already in the header.
+               A student & parent link is planned for later. -->
+        </div>
+      </details>      <!-- planur:site-menu:end -->
     </div>
   </div>
 </nav>
@@ -191,7 +216,7 @@
           <h2>Starter</h2>
           <p class="sub">For a growing list of students.</p>
           <div class="price" data-m="£11.99" data-y="£129"><span class="amount">£11.99</span><span class="per">/month</span></div>
-          <p class="price-foot">Or £129 a year.</p>
+          <p class="price-foot" data-bill>Billed monthly.</p>
           <a class="cta ghost" href="/tutors/app/">Try free for 14 days</a>
           <ul class="feat">
             <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>More students</b> as you grow</span></li>
@@ -207,7 +232,7 @@
           <h2>Pro</h2>
           <p class="sub">For an established practice.</p>
           <div class="price" data-m="£19.99" data-y="£219"><span class="amount">£19.99</span><span class="per">/month</span></div>
-          <p class="price-foot">Or £219 a year.</p>
+          <p class="price-foot" data-bill>Billed monthly.</p>
           <a class="cta primary" href="/tutors/app/">Try free for 14 days</a>
           <ul class="feat">
             <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>A <b>bigger roster</b> of students</span></li>
@@ -222,7 +247,7 @@
           <h2>Practice</h2>
           <p class="sub">For a small centre with staff.</p>
           <div class="price" data-m="£34.99" data-y="£379"><span class="amount">£34.99</span><span class="per">/month</span></div>
-          <p class="price-foot">Or £379 a year.</p>
+          <p class="price-foot" data-bill>Billed monthly.</p>
           <a class="cta ghost" href="/tutors/app/">Try free for 14 days</a>
           <ul class="feat">
             <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>A <b>full centre's roster</b></span></li>
@@ -299,6 +324,9 @@
         <h4>Company</h4>
         <ul>
           <li><a href="/support/?app=tutor">Support</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/about/">About us</a></li>
+          <li><a href="/countries/">Countries we serve</a></li>
           <li><a href="/privacy/?app=tutor">Privacy</a></li>
           <li><a href="/terms/?app=tutor">Terms for tutors</a></li>
           <li><a href="/delete-account/?app=tutor">Delete account</a></li>
@@ -315,7 +343,7 @@
   </div>
 </footer>
 
-<script src="/assets/planur.js?v=20261103"></script>
+<script src="/assets/planur.js?v=20261109"></script>
 <script>
   // Monthly / yearly toggle. Default is monthly (the at-rest state), so the page
   // is correct with no JS. Free is always £0; Bespoke has no price node.
@@ -327,6 +355,12 @@
       document.querySelectorAll('.price[data-m]').forEach(function (p) {
         p.querySelector('.amount').textContent = yearly ? p.dataset.y : p.dataset.m;
         p.querySelector('.per').textContent = yearly ? '/year' : '/month';
+      });
+      // The line under each price says how it is billed and never a price, so a
+      // tab shows only its own figure (feedback fb6: the monthly tab used to
+      // show the annual price too, and the yearly tab repeated it).
+      document.querySelectorAll('.price-foot[data-bill]').forEach(function (f) {
+        f.textContent = yearly ? 'Billed once a year.' : 'Billed monthly.';
       });
       m.setAttribute('aria-pressed', String(!yearly));
       y.setAttribute('aria-pressed', String(yearly));

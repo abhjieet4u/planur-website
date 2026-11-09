@@ -453,6 +453,44 @@ footer{background:var(--text-dark);padding:52px 0 30px;position:relative;z-index
 .nav-right .nav-link{display:inline-flex;align-items:center;gap:6px;}
 .nav-right .btn .ic{width:15px;height:15px;margin-right:6px;vertical-align:-2px;}
 
+/* ── Site menu — the hamburger (fb5, 2026-11-09) ─────────────────────────────
+   One control at the right end of every header: Contact, About, Countries,
+   Privacy, Terms and the main tutor pages, reachable from anywhere. The markup
+   is shared (partials/site-menu.html); each page's own nav is untouched.
+
+   Native <details>, like the "What it does" cards: it opens and closes with
+   JavaScript off and is keyboard-operable for free. planur.js only adds
+   close-on-outside-click, Escape, and marking the current page.
+
+   A 40px square matches the icon-only log-in / talk-to-us controls below 420px,
+   so on a phone the three read as one row of equal targets. */
+.site-menu{position:relative;margin-left:auto;flex-shrink:0;}
+.nav-right + .site-menu{margin-left:0;}
+.site-menu summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;
+  justify-content:center;width:40px;height:40px;border:1px solid var(--neutral-mid);
+  border-radius:10px;background:var(--white);color:var(--text-mid);
+  transition:color var(--transition),border-color var(--transition);}
+.site-menu summary::-webkit-details-marker{display:none;}
+.site-menu summary:hover,.site-menu[open] summary{color:var(--sage);
+  border-color:rgba(74,124,89,.4);}
+.site-menu summary:focus-visible{outline:3px solid var(--lavender);outline-offset:2px;}
+.menu-ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;
+  stroke-linecap:round;display:block;}
+.menu-panel{position:absolute;right:0;top:calc(100% + 12px);z-index:110;
+  width:min(300px,calc(100vw - 32px));max-height:calc(100vh - 100px);overflow-y:auto;
+  background:var(--white);border:1px solid var(--neutral-mid);border-radius:var(--radius-md);
+  box-shadow:var(--shadow-lg);padding:6px 8px 10px;}
+.menu-head{margin:0;padding:12px 12px 4px;font-size:.68rem;font-weight:700;
+  letter-spacing:.9px;text-transform:uppercase;color:var(--text-light);}
+.menu-panel ul{list-style:none;margin:0;padding:0;}
+.menu-panel a{display:block;padding:10px 12px;border-radius:var(--radius-sm);
+  font-size:.95rem;font-weight:600;color:var(--text-dark);text-decoration:none;}
+.menu-panel a:hover,.menu-panel a:focus-visible,
+.menu-panel a[aria-current="page"]{background:var(--sage-faint);color:var(--sage-deep);}
+/* Below 720px the header wraps and gives .nav-right order 2; the menu follows it
+   (same order, later in the document) rather than jumping ahead of the logo. */
+@media(max-width:720px){.site-menu{order:2;}}
+
 .app-scope.school{background:var(--sky-faint);color:#3B6E8F;border-color:rgba(59,110,143,.28);}
 
 /* ═══════════════════════════════════════════════════════════════════════════

@@ -19,14 +19,15 @@
   are provisioned (not self-served) and the student app is not on prod, so
   neither belongs here yet.
 
-  SCREENSHOTS. Real phone captures of the web app, supplied by the owner
-  (2026-11-03), using a DEMO practice ("Oliver's") — no real student, parent or
-  tutor names; the one capture that showed a class teacher's email was NOT used.
-  They are portrait, so they sit in a phone frame. The six are:
+  SCREENSHOTS REMOVED, 2026-11-09. Owner: no screenshots of the app on the public
+  website. The six captures (demo practice, supplied 2026-11-03) are NOT referenced
+  any more:
     help-01-getstarted · help-02-createclass · help-03-addstudent
     help-04-dashboard  · help-05-aitest      · help-06-publish
-  Named .jpg (not .jpeg) so sync_partials stamps them with the cache version.
-  To swap one, replace the file and bump the ?v= stamp via tools/sync_partials.py.
+  🔴 The files are still in site/assets/ and so still ship in dist/, reachable by
+  direct URL. Moving them out of site/ is a deletion-shaped step and was left for
+  the owner to approve. The .shot/.phone CSS below is unused but kept, so restoring
+  a screenshot is one <figure> and a grid-template-columns change.
 
   COPY RULES (same as /tutors): no prices, no roadmap, no invented users, no
   "download the app" (web launch). Free tier + 14-day trial may be stated. Caps
@@ -41,12 +42,12 @@
 <link rel="canonical" href="https://theplanur.co.uk/help/" />
 <meta name="robots" content="all">
 <!-- planur:brand-icons:start -->
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png?v=20261103" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png?v=20261103" />
-  <link rel="apple-touch-icon" href="/assets/planur-apple-touch-icon.png?v=20261103" />
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png?v=20261109" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png?v=20261109" />
+  <link rel="apple-touch-icon" href="/assets/planur-apple-touch-icon.png?v=20261109" />
   <!-- planur:brand-icons:end -->
 <script>document.documentElement.className += ' js';</script>
-<link rel="stylesheet" href="/assets/planur.css?v=20261103" />
+<link rel="stylesheet" href="/assets/planur.css?v=20261109" />
 <style>
   /* ── Hero ─────────────────────────────────────────────────────────────── */
   .help-hero{padding:64px 0 24px;}
@@ -112,7 +113,7 @@
 
   /* ── Steps ────────────────────────────────────────────────────────────── */
   .steps{padding:28px 0 20px;}
-  .step{display:grid;grid-template-columns:1fr 320px;gap:52px;align-items:center;
+  .step{display:grid;grid-template-columns:minmax(0,760px);gap:52px;align-items:center;
     padding:44px 0;border-top:1px solid var(--neutral-mid);scroll-margin-top:84px;}
   .step:first-child{border-top:none;}
   .step:nth-child(even) .step-copy{order:2;}
@@ -198,7 +199,7 @@
 <nav id="navbar">
   <div class="container">
     <div class="nav-bar">
-      <a class="logo" href="/tutors/"><img class="logo-lockup" src="/assets/planur-lockup-tutors.png?v=20261103" alt="Planur for Tutors" width="499" height="160" /></a>
+      <a class="logo" href="/tutors/"><img class="logo-lockup" src="/assets/planur-lockup-tutors.png?v=20261109" alt="Planur for Tutors" width="499" height="160" /></a>
       <div class="nav-right">
         <a class="nav-link" href="/tutors/app/" aria-label="Tutor log in" title="Tutor log in">
           <svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg>
@@ -209,6 +210,31 @@
           <span class="nav-label">Talk to us</span>
         </a>
       </div>
+      <!-- planur:site-menu:start -->
+      <details class="site-menu">
+        <summary aria-label="Menu" title="Menu">
+          <svg class="menu-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </summary>
+        <div class="menu-panel">
+          <p class="menu-head">For tutors</p>
+          <ul>
+            <li><a href="/tutors/">Planur for Tutors</a></li>
+            <li><a href="/help/">Getting started</a></li>
+            <li><a href="/tools/">Free tools</a></li>
+            <li><a href="/faq/">FAQ</a></li>
+            <li><a href="/tutors/pricing/">Pricing</a></li>
+          </ul>
+          <p class="menu-head">Company</p>
+          <ul>
+            <li><a href="/support/?app=tutor">Contact us</a></li>
+            <li><a href="/about/">About us</a></li>
+            <li><a href="/countries/">Countries we serve</a></li>
+          </ul>
+          <!-- Privacy and Terms live in the footer, not here (owner, 2026-11-09).
+               "Tutor log in" is not here either: it is already in the header.
+               A student & parent link is planned for later. -->
+        </div>
+      </details>      <!-- planur:site-menu:end -->
     </div>
   </div>
 </nav>
@@ -276,9 +302,6 @@
           <p>You land on a <strong>Get started</strong> checklist that walks you through the first four things: a class, your students, your sessions, and inviting students to the app.</p>
           <span class="where"><svg aria-hidden="true"><use href="#i-arrow"/></svg> Open Planur &rsaquo; sign in &rsaquo; name your practice</span>
         </div>
-        <figure class="shot"><div class="phone"><div class="screen">
-          <img src="/assets/help-01-getstarted.jpg?v=20261103" alt="The Get started checklist after creating a practice: create a batch, add students, schedule sessions, invite students." loading="lazy" />
-        </div></div></figure>
       </article>
 
       <!-- 2 -->
@@ -292,9 +315,6 @@
           <p>Create a batch — a group who study together, or a one-to-one named after the student. Give it a name like <em>“Year 6 — 11+ Prep”</em> and a subject, and it is ready for students and sessions.</p>
           <span class="where"><svg aria-hidden="true"><use href="#i-arrow"/></svg> Classes &amp; teaching &rsaquo; New batch</span>
         </div>
-        <figure class="shot"><div class="phone"><div class="screen">
-          <img src="/assets/help-02-createclass.jpg?v=20261103" alt="The New batch sheet: choose group or one-to-one, name it, pick a subject." loading="lazy" />
-        </div></div></figure>
       </article>
 
       <!-- 3 -->
@@ -308,9 +328,6 @@
           <p>Add each student with as much or as little as you have — a name is enough to start. Parent name, email and phone are optional, and you set the billing cycle per student. A student can link their own Planur account later with a join code, but you can run everything without waiting for them to.</p>
           <span class="where"><svg aria-hidden="true"><use href="#i-arrow"/></svg> Students &rsaquo; New student</span>
         </div>
-        <figure class="shot"><div class="phone"><div class="screen">
-          <img src="/assets/help-03-addstudent.jpg?v=20261103" alt="The New student sheet: name, year, optional parent contact, and a billing cycle." loading="lazy" />
-        </div></div></figure>
       </article>
 
       <!-- 4 -->
@@ -324,9 +341,6 @@
           <p>The dashboard leads with what you do most — <strong>take a register</strong>, add a student, draft an AI test, or <strong>record a payment</strong>. Below that: your next class, how many registers are still to mark, your student count, and anything left unpaid.</p>
           <span class="where"><svg aria-hidden="true"><use href="#i-arrow"/></svg> Dashboard</span>
         </div>
-        <figure class="shot"><div class="phone"><div class="screen">
-          <img src="/assets/help-04-dashboard.jpg?v=20261103" alt="The dashboard: quick actions and tiles for the next class, registers to mark, students and fees outstanding." loading="lazy" />
-        </div></div></figure>
       </article>
 
       <!-- 5 -->
@@ -340,9 +354,6 @@
           <p>Tell it what to cover, the subject, year group, difficulty and how many questions — it drafts the paper in seconds. The AI only ever sees those few words you typed. <strong>No student name, mark, register or uploaded file is sent with the request.</strong></p>
           <span class="where"><svg aria-hidden="true"><use href="#i-arrow"/></svg> Tests &amp; marks &rsaquo; New AI practice test</span>
         </div>
-        <figure class="shot"><div class="phone"><div class="screen">
-          <img src="/assets/help-05-aitest.jpg?v=20261103" alt="The AI practice-test form: topic, subject, year group, difficulty, number of questions." loading="lazy" />
-        </div></div></figure>
       </article>
 
       <!-- 6 -->
@@ -356,9 +367,6 @@
           <p>Every question comes with its marked answer and a worked explanation, for you to check. <strong>Nothing reaches a student until you press Publish</strong> — you read it first, always. Edit any question, or regenerate, before it goes out.</p>
           <span class="where"><svg aria-hidden="true"><use href="#i-arrow"/></svg> review the paper &rsaquo; Publish</span>
         </div>
-        <figure class="shot"><div class="phone"><div class="screen">
-          <img src="/assets/help-06-publish.jpg?v=20261103" alt="A drafted paper with each answer marked and explained, and a Publish button — you review before students see it." loading="lazy" />
-        </div></div></figure>
       </article>
 
     </div>
@@ -453,6 +461,9 @@
         <h4>Company</h4>
         <ul>
           <li><a href="/support/?app=tutor">Support</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/about/">About us</a></li>
+          <li><a href="/countries/">Countries we serve</a></li>
           <li><a href="/privacy/?app=tutor">Privacy</a></li>
           <li><a href="/terms/?app=tutor">Terms for tutors</a></li>
           <li><a href="/delete-account/?app=tutor">Delete account</a></li>
@@ -469,6 +480,6 @@
   </div>
 </footer>
 
-<script src="/assets/planur.js?v=20261103"></script>
+<script src="/assets/planur.js?v=20261109"></script>
 </body>
 </html>

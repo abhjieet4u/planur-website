@@ -75,6 +75,24 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://theplanur.co.uk/faq/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://theplanur.co.uk/about/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://theplanur.co.uk/countries/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://theplanur.co.uk/support/</loc>
     <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>

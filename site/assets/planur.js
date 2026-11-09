@@ -109,6 +109,30 @@
     onScroll();
   }
 
+  /* ── Site menu (hamburger) ───────────────────────────────────────────────────
+     <details> already opens and closes; this adds what it lacks: close on an
+     outside click or Escape, and mark the link for the page you are on. */
+  function initSiteMenu() {
+    var menu = document.querySelector('.site-menu');
+    if (!menu) return;
+    // The bare domain is served from /tutors/ by a rewrite, so "/" is that page.
+    var norm = function (p) { p = p.replace(/\/+$/, ''); return p === '' ? '/tutors' : p; };
+    var here = norm(location.pathname);
+    menu.querySelectorAll('a[href]').forEach(function (a) {
+      if (norm(a.pathname) === here) a.setAttribute('aria-current', 'page');
+    });
+    document.addEventListener('click', function (e) {
+      if (menu.open && !menu.contains(e.target)) menu.open = false;
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && menu.open) {
+        menu.open = false;
+        var s = menu.querySelector('summary');
+        if (s) s.focus();
+      }
+    });
+  }
+
   /* ── Reveal-on-scroll ────────────────────────────────────────────────────── */
   function initFadeIn() {
     var targets = document.querySelectorAll('.fade-in');
@@ -162,6 +186,9 @@
       else if (h.indexOf('school') !== -1) want = 'school';
       else if (h.indexOf('tutor') !== -1) want = 'tutor';
       if (has(want)) return want;
+      // Schools are served by the tutor product, so with no school tab a school
+      // link belongs on the tutor view rather than the student one.
+      if (want === 'school' && has('tutor')) return 'tutor';
       return has('student') ? 'student' : buttons[0].dataset.app;
     }
 
@@ -221,6 +248,7 @@
   /* ── Boot ────────────────────────────────────────────────────────────────── */
   function boot() {
     initNav();
+    initSiteMenu();
     initFadeIn();
     initAppSwitch();
     document.querySelectorAll('form[data-live-clear]').forEach(wireLiveClear);

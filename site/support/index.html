@@ -20,9 +20,9 @@
 <link rel="canonical" href="https://theplanur.co.uk/support/" />
 <meta name="robots" content="all">
 <!-- planur:brand-icons:start -->
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png?v=20261103" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png?v=20261103" />
-  <link rel="apple-touch-icon" href="/assets/planur-apple-touch-icon.png?v=20261103" />
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png?v=20261109" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png?v=20261109" />
+  <link rel="apple-touch-icon" href="/assets/planur-apple-touch-icon.png?v=20261109" />
   <!-- planur:brand-icons:end -->
 <script>
   document.documentElement.className += ' js';
@@ -37,7 +37,7 @@
     document.documentElement.setAttribute('data-app', app);
   })();
 </script>
-<link rel="stylesheet" href="/assets/planur.css?v=20261103" />
+<link rel="stylesheet" href="/assets/planur.css?v=20261109" />
 <style>
   .support-hero{padding:56px 0 8px;}
   .support-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start;
@@ -65,7 +65,32 @@
 <nav id="navbar">
   <div class="container">
     <div class="nav-bar">
-      <a class="logo" href="/tutors/"><img class="logo-mark" src="/assets/planur-mark.png?v=20261103" alt="" width="192" height="192" />Planur<span>.</span></a>
+      <a class="logo" href="/tutors/"><img class="logo-mark" src="/assets/planur-mark.png?v=20261109" alt="" width="192" height="192" />Planur<span>.</span></a>
+      <!-- planur:site-menu:start -->
+      <details class="site-menu">
+        <summary aria-label="Menu" title="Menu">
+          <svg class="menu-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </summary>
+        <div class="menu-panel">
+          <p class="menu-head">For tutors</p>
+          <ul>
+            <li><a href="/tutors/">Planur for Tutors</a></li>
+            <li><a href="/help/">Getting started</a></li>
+            <li><a href="/tools/">Free tools</a></li>
+            <li><a href="/faq/">FAQ</a></li>
+            <li><a href="/tutors/pricing/">Pricing</a></li>
+          </ul>
+          <p class="menu-head">Company</p>
+          <ul>
+            <li><a href="/support/?app=tutor">Contact us</a></li>
+            <li><a href="/about/">About us</a></li>
+            <li><a href="/countries/">Countries we serve</a></li>
+          </ul>
+          <!-- Privacy and Terms live in the footer, not here (owner, 2026-11-09).
+               "Tutor log in" is not here either: it is already in the header.
+               A student & parent link is planned for later. -->
+        </div>
+      </details>      <!-- planur:site-menu:end -->
     </div>
   </div>
 </nav>
@@ -143,53 +168,10 @@
                 always hit. Reporting from inside the app is fastest: it carries the app version and
                 screen automatically, so we aren't debugging from a description.</p>
             </details>
-            <details>
-              <summary>Can you help me get my roster in?</summary>
-              <p>Yes, and we'd rather do it than watch you type fifty students in by hand. Spreadsheet
-                import is on the roadmap; until it lands, send us your list in whatever shape it
-                exists and we'll have students, batches and fees in place before you start.</p>
-            </details>
-            <details>
-              <summary>How do I cancel, and can I have a refund?</summary>
-              <p>Tutor plans are billed by us rather than by an app store, so cancelling happens in
-                Planur: Practice and plan, then <strong>Manage plan</strong>. You keep everything
-                until the end of the period you have already paid for, and you are not charged
-                again.</p>
-              <p>Fees already paid are not refunded — including part-used periods. We can say that
-                because you never have to pay to try Planur: the free plan needs no card and does not
-                expire, and the trial needs no card either. We will always put right a billing error
-                on our side, and we may make an exception where the circumstances warrant it — just
-                ask. The full wording is in <a href="/terms/?app=tutor">our terms</a>.</p>
-            </details>
-            <details>
-              <summary>What happens if I hit a plan limit, or stop paying?</summary>
-              <p><strong>Nothing is deleted.</strong> Limits stop you adding — another student,
-                another upload — they never remove what's already there. Your roster, register,
-                invoices and files all stay until you delete them.</p>
-            </details>
-            <details>
-              <summary>Can a teacher I add see my fees?</summary>
-              <p>No. Fee data is restricted to the owner tier, enforced in the database rather than
-                hidden on a screen, so it holds regardless of what any part of the app shows. You can
-                invite a colleague yourself from Team: you invite them, they accept, and you approve —
-                three separate steps, so nobody joins your practice by accident or by guessing a link.</p>
-            </details>
-            <details>
-              <summary>Can I get my data out?</summary>
-              <p>A one-tap export is on the roadmap and isn't there yet. In the meantime, ask us and
-                we'll get your roster, register and invoices out for you — before you delete anything,
-                because deletion is immediate. See <a href="/delete-account/?app=tutor">the deletion
-                page</a>.</p>
-            </details>
-            <details>
-              <summary>Can I work from a laptop?</summary>
-              <p>Yes. Sign in at <a href="/tutors/app/">theplanur.co.uk/tutors/app</a> with the same
-                email and one-time code you use on your phone — it's the same practice and the same
-                data. An evening of invoicing is simply easier with a keyboard.</p>
-              <p>One difference worth knowing: local class reminders are phone notifications, so you
-                won't get those in a browser tab.</p>
-            </details>
           </div>
+          <p style="margin-top:18px;font-size:.93rem;color:var(--text-mid);line-height:1.7;">Questions about
+            plans, payment, the free trial or your data are answered in the <a href="/faq/">FAQ</a>, and
+            how to use Planur is in the <a href="/help/">Help centre</a>.</p>
         </div>
 
         <div class="callout" style="margin-top:26px;">
@@ -300,6 +282,9 @@
         <h4>Company</h4>
         <ul>
           <li><a href="/support/">Support &amp; contact</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/about/">About us</a></li>
+          <li><a href="/countries/">Countries we serve</a></li>
           <li><a href="/privacy/">Privacy</a></li>
           <li><a href="/terms/">Terms</a></li>
           <li><a href="/delete-account/">Delete account</a></li>
@@ -316,7 +301,7 @@
   </div>
 </footer>
 
-<script src="/assets/planur.js?v=20261103"></script>
+<script src="/assets/planur.js?v=20261109"></script>
 <script>
   document.getElementById('y').textContent = new Date().getFullYear();
 

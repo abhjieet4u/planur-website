@@ -36,7 +36,7 @@ import pathlib
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 # 🔴 Bump on any change to planur.css, planur.js or a brand image.
-STAMP = "20261103"
+STAMP = "20261109"
 
 # Marked regions: name -> partial file. A page opts in by carrying the markers;
 # a page without them is left alone, which is how /invite and the download
@@ -44,6 +44,11 @@ STAMP = "20261103"
 REGIONS = {
     "brand-icons":  ROOT / "partials" / "brand-icons.html",
     "footer-legal": ROOT / "partials" / "footer-legal.html",
+    # The hamburger menu (fb5, 2026-11-09). It sits INSIDE each page's own
+    # .nav-bar — the navs themselves stay per-page (see the note above); only
+    # this one control, identical everywhere, is shared. A page opts in by
+    # carrying the markers, so /invite and the download landers stay bare.
+    "site-menu":    ROOT / "partials" / "site-menu.html",
 }
 
 STAMPED = re.compile(r'(/assets/[A-Za-z0-9._-]+\.(?:css|js|png|svg|jpg))\?v=[0-9A-Za-z._-]*')
