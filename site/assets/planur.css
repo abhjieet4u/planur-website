@@ -135,7 +135,7 @@ html:not(.js) .fade-in{opacity:1;transform:none;}
   border-bottom:1px solid rgba(74,124,89,0.08);padding:13px 0;
   transition:box-shadow var(--transition);}
 #navbar.scrolled{box-shadow:var(--shadow-sm);}
-.nav-bar{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.nav-bar{display:flex;align-items:center;gap:20px;flex-wrap:nowrap;}
 .logo{font-size:1.5rem;font-weight:800;color:var(--sage);letter-spacing:-.5px;
   text-decoration:none;flex-shrink:0;
   display:inline-flex;align-items:center;gap:.4em;}
@@ -402,12 +402,8 @@ footer{background:var(--text-dark);padding:52px 0 30px;position:relative;z-index
   .footer-brand{grid-column:1 / -1;}
 }
 @media(max-width:720px){
-  /* Tabs drop to their own full-width line under the brand and actions. */
   .nav-bar{gap:10px 14px;}
-  .nav-tabs{order:3;width:100%;padding-left:0;border-left:0;gap:22px;
-    padding-top:9px;border-top:1px solid rgba(74,124,89,.08);}
-  .nav-tabs a.current::after{bottom:-4px;}
-  .nav-right{order:2;gap:14px;}
+  .nav-right{gap:14px;}
 }
 @media(max-width:640px){
   .container,.container-narrow{padding:0 20px;}
