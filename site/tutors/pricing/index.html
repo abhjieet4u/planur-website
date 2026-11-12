@@ -172,7 +172,7 @@
           <select id="prCountry" aria-label="Your country">
             <option value="gbp" data-sym="£">United Kingdom (GBP)</option>
             <option value="usd" data-sym="$">United States (USD)</option>
-            <option value="eur" data-sym="£">Europe (GBP)*</option>
+            <option value="eur" data-sym="€">Europe (EUR)</option>
             <option value="inr" data-sym="₹">India (INR)</option>
             <option value="pkr" data-sym="Rs ">Pakistan (PKR)</option>
             <option value="bdt" data-sym="৳">Bangladesh (BDT)</option>
@@ -427,8 +427,8 @@
     yBtn.setAttribute('aria-pressed', String(yearly));
 
     note.textContent = isFallback
-      ? 'Prices shown in GBP. You’ll be charged in your local currency at checkout.'
-      : 'Prices shown in local currency. The exact amount is confirmed at checkout.';
+      ? ‘Prices shown in GBP. You’ll be charged in your local currency at checkout. These prices are indicative and the final amount may differ.’
+      : ‘Prices are indicative and shown in local currency. The exact amount is confirmed at checkout.’;
   }
 
   // Guess country from timezone.
