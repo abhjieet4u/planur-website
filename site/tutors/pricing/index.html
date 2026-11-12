@@ -6,21 +6,13 @@
   standing "no prices on the website" rule (17 Aug) — kept here so a future
   session does not "restore" the old no-prices posture by habit.
 
-  PRICES ARE AUTHORITATIVE as of 2026-11-03, read from the prod plan_limit table
-  and packages/tutor_core/lib/src/plan_prices.dart (the GBP block that feeds the
-  in-app plan cards). VAT-inclusive GBP:
-    Free      £0            5 students    2 tests/mo    100 MB   just you
-    Starter   £11.99 / £129  30 students   15 tests/mo   2 GB     just you
-    Pro       £19.99 / £219  75 students   30 tests/mo   5 GB     you + 1
-    Practice  £34.99 / £379  150 students  50 tests/mo   10 GB    up to 5
-    Bespoke   talk to us     150+          —             —        larger
-  🔴 If these change, change them in plan_limit / plan_prices.dart AND here, in
-  the same breath — a wrong price on a public page is worse than none.
+  PRICES ARE AUTHORITATIVE as of 2026-11-12, read from
+  packages/tutor_core/lib/src/plan_prices.dart. 🔴 If these change, change them
+  in plan_prices.dart AND here, in the same breath.
 
-  COUNTRY: UK only sells today (the sales_country gate + the UK-only privacy
-  posture). Only GBP prices exist; EUR/INR are deliberately unset (plan_prices).
-  So the country control is a LABELLED STUB — "United Kingdom · GBP", built so a
-  real selector/currency can drop in once another country is opened.
+  COUNTRY: dynamic selector driven by the PRICES object in the script below.
+  Visitor's timezone is used to guess a default; GBP is the fallback for any
+  country not explicitly priced. Stripe Managed Payments converts at checkout.
 
   No VAT wording: Planur Ltd is not VAT-registered yet, so the page states the
   price as the total and claims neither "inc VAT" nor "ex VAT". No invented
@@ -31,7 +23,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Pricing — Planur for Tutors</title>
-<meta name="description" content="Simple GBP pricing for Planur for Tutors. Start free with a small group of students, or move up as your practice grows. Every plan is the whole of Planur — register, fees, materials, marks and AI practice papers." />
+<meta name="description" content="Pricing for Planur for Tutors in your local currency. Start free with a small group of students, or move up as your practice grows. Every plan is the whole of Planur — register, fees, materials, marks and AI practice papers." />
 <link rel="canonical" href="https://theplanur.co.uk/tutors/pricing/" />
 <meta name="robots" content="all">
 <!-- planur:brand-icons:start -->
@@ -51,11 +43,11 @@
     gap:14px 28px;margin:30px 0 4px;}
   .pr-country{display:inline-flex;align-items:center;gap:9px;font-size:.9rem;font-weight:600;
     color:var(--text-dark);background:var(--white);border:1px solid var(--neutral-mid);
-    border-radius:var(--radius-pill);padding:9px 16px;}
+    border-radius:var(--radius-pill);padding:9px 16px;cursor:pointer;}
   .pr-country .dot{width:9px;height:9px;border-radius:50%;background:var(--sage);flex:none;}
-  .pr-country .muted{color:var(--text-light);font-weight:500;}
-  .pr-country svg{width:15px;height:15px;stroke:var(--text-light);stroke-width:2.2;fill:none;
-    stroke-linecap:round;stroke-linejoin:round;}
+  .pr-country select{font-family:inherit;font-size:.9rem;font-weight:600;color:var(--text-dark);
+    background:transparent;border:none;cursor:pointer;padding-right:4px;}
+  .pr-country select:focus{outline:none;}
   .pr-toggle{display:inline-flex;align-items:center;gap:0;background:var(--neutral);
     border:1px solid var(--neutral-mid);border-radius:var(--radius-pill);padding:4px;}
   .pr-toggle button{font-family:inherit;font-size:.86rem;font-weight:700;color:var(--text-mid);
@@ -175,19 +167,36 @@
       <p class="section-lede">Start free with a small group of students, and move up only as your practice grows. Every plan is the whole of Planur — nothing is locked behind a higher tier but more room. No card to start, and nothing to cancel on the free plan.</p>
 
       <div class="pr-controls">
-        <!-- Country: a labelled STUB today. UK is the only market selling, and
-             only GBP prices exist — a real selector drops in when another
-             country opens. -->
-        <span class="pr-country" title="More countries coming soon">
-          <span class="dot"></span> United Kingdom <span class="muted">· GBP</span>
-          <svg aria-hidden="true"><use href="#i-chev"/></svg>
-        </span>
+        <label class="pr-country">
+          <span class="dot"></span>
+          <select id="prCountry" aria-label="Your country">
+            <option value="gbp" data-sym="£">United Kingdom (GBP)</option>
+            <option value="usd" data-sym="$">United States (USD)</option>
+            <option value="eur" data-sym="£">Europe (GBP)*</option>
+            <option value="inr" data-sym="₹">India (INR)</option>
+            <option value="pkr" data-sym="Rs ">Pakistan (PKR)</option>
+            <option value="bdt" data-sym="৳">Bangladesh (BDT)</option>
+            <option value="lkr" data-sym="Rs ">Sri Lanka (LKR)</option>
+            <option value="npr" data-sym="Rs ">Nepal (NPR)</option>
+            <option value="php" data-sym="₱">Philippines (PHP)</option>
+            <option value="idr" data-sym="Rp ">Indonesia (IDR)</option>
+            <option value="thb" data-sym="฿">Thailand (THB)</option>
+            <option value="vnd" data-sym="₫">Vietnam (VND)</option>
+            <option value="zar" data-sym="R ">South Africa (ZAR)</option>
+            <option value="ngn" data-sym="₦">Nigeria (NGN)</option>
+            <option value="kes" data-sym="KSh ">Kenya (KES)</option>
+            <option value="ghs" data-sym="GH₵ ">Ghana (GHS)</option>
+            <option value="egp" data-sym="E£ ">Egypt (EGP)</option>
+            <option value="other" data-sym="£">Other (GBP)*</option>
+          </select>
+        </label>
         <div class="pr-toggle" role="group" aria-label="Billing period">
           <button type="button" id="billMonthly" aria-pressed="true">Monthly</button>
           <button type="button" id="billYearly" aria-pressed="false">Yearly<span class="save">save ~10%</span></button>
         </div>
       </div>
-      <p class="pr-note">Prices in GBP. The exact students, AI credits and storage on each plan are shown when you sign in. More countries and currencies are coming.</p>
+      <p class="pr-note" id="prNote">The exact students, AI credits and storage on each plan are shown when you sign in.</p>
+      <p class="pr-note" style="margin-top:6px;"><strong>Your plan is linked to the country you set when you sign up.</strong> It does not transfer across countries.</p>
     </div>
   </section>
 
@@ -345,29 +354,111 @@
 
 <script src="/assets/planur.js?v=20261109"></script>
 <script>
-  // Monthly / yearly toggle. Default is monthly (the at-rest state), so the page
-  // is correct with no JS. Free is always £0; Bespoke has no price node.
-  (function () {
-    var m = document.getElementById('billMonthly'),
-        y = document.getElementById('billYearly');
-    if (!m || !y) return;
-    function apply(yearly) {
-      document.querySelectorAll('.price[data-m]').forEach(function (p) {
-        p.querySelector('.amount').textContent = yearly ? p.dataset.y : p.dataset.m;
-        p.querySelector('.per').textContent = yearly ? '/year' : '/month';
-      });
-      // The line under each price says how it is billed and never a price, so a
-      // tab shows only its own figure (feedback fb6: the monthly tab used to
-      // show the annual price too, and the yearly tab repeated it).
-      document.querySelectorAll('.price-foot[data-bill]').forEach(function (f) {
-        f.textContent = yearly ? 'Billed once a year.' : 'Billed monthly.';
-      });
-      m.setAttribute('aria-pressed', String(!yearly));
-      y.setAttribute('aria-pressed', String(yearly));
+(function () {
+  // Mirrors packages/tutor_core/lib/src/plan_prices.dart — display only.
+  // Minor units; decimals = 0 for zero-decimal currencies (IDR, VND).
+  var P = {
+    gbp:  { d:2, starter:[1199,12900], pro:[1999,21900], prac:[3499,37900] },
+    usd:  { d:2, starter:[1199,12900], pro:[1999,21900], prac:[3499,37900] },
+    inr:  { d:2, starter:[35900,359900], pro:[59900,599900], prac:[99900,999900] },
+    pkr:  { d:2, starter:[99900,999900], pro:[169900,1699900], prac:[279900,2799900] },
+    bdt:  { d:2, starter:[39900,399900], pro:[69900,699900], prac:[109900,1099900] },
+    lkr:  { d:2, starter:[99900,999900], pro:[169900,1699900], prac:[279900,2799900] },
+    npr:  { d:2, starter:[49900,499900], pro:[79900,799900], prac:[139900,1399900] },
+    php:  { d:2, starter:[29900,299900], pro:[49900,499900], prac:[79900,799900] },
+    idr:  { d:0, starter:[59000,590000], pro:[99000,990000], prac:[159000,1590000] },
+    thb:  { d:2, starter:[15900,159900], pro:[26900,269900], prac:[44900,449900] },
+    vnd:  { d:0, starter:[69000,690000], pro:[119000,1190000], prac:[199000,1990000] },
+    zar:  { d:2, starter:[9900,99900], pro:[16900,169900], prac:[27900,279900] },
+    ngn:  { d:2, starter:[199900,1999900], pro:[349900,3499900], prac:[599900,5999900] },
+    kes:  { d:2, starter:[49900,499900], pro:[79900,799900], prac:[139900,1399900] },
+    ghs:  { d:2, starter:[4900,49900], pro:[7900,79900], prac:[13900,139900] },
+    egp:  { d:2, starter:[19900,199900], pro:[34900,349900], prac:[59900,599900] }
+  };
+
+  function commas(n) {
+    var s = String(n), b = '';
+    for (var i = 0; i < s.length; i++) {
+      if (i > 0 && (s.length - i) % 3 === 0) b += ',';
+      b += s[i];
     }
-    m.addEventListener('click', function () { apply(false); });
-    y.addEventListener('click', function () { apply(true); });
-  })();
+    return b;
+  }
+
+  function fmt(minor, dec, sym) {
+    if (dec === 0) return sym + commas(minor);
+    var major = Math.floor(minor / 100), rem = minor % 100;
+    return sym + commas(major) + (rem ? '.' + String(rem).padStart(2, '0') : '');
+  }
+
+  var sel = document.getElementById('prCountry');
+  var mBtn = document.getElementById('billMonthly');
+  var yBtn = document.getElementById('billYearly');
+  var note = document.getElementById('prNote');
+  if (!sel || !mBtn || !yBtn) return;
+
+  var cards = document.querySelectorAll('.price[data-m]');
+  var planKeys = ['starter', 'pro', 'prac'];
+  var yearly = false;
+
+  function render() {
+    var cur = sel.value;
+    var isFallback = (cur === 'eur' || cur === 'other' || !P[cur]);
+    var prices = P[isFallback ? 'gbp' : cur];
+    var opt = sel.options[sel.selectedIndex];
+    var sym = opt ? opt.getAttribute('data-sym') : '£';
+
+    cards.forEach(function (el, i) {
+      var key = planKeys[i];
+      if (!key || !prices[key]) return;
+      var m = prices[key][0], y = prices[key][1];
+      el.setAttribute('data-m', fmt(m, prices.d, sym));
+      el.setAttribute('data-y', fmt(y, prices.d, sym));
+      el.querySelector('.amount').textContent = yearly ? fmt(y, prices.d, sym) : fmt(m, prices.d, sym);
+      el.querySelector('.per').textContent = yearly ? '/year' : '/month';
+    });
+
+    document.querySelectorAll('.price-foot[data-bill]').forEach(function (f) {
+      f.textContent = yearly ? 'Billed once a year.' : 'Billed monthly.';
+    });
+
+    mBtn.setAttribute('aria-pressed', String(!yearly));
+    yBtn.setAttribute('aria-pressed', String(yearly));
+
+    note.textContent = isFallback
+      ? 'Prices shown in GBP. You’ll be charged in your local currency at checkout.'
+      : 'Prices shown in local currency. The exact amount is confirmed at checkout.';
+  }
+
+  // Guess country from timezone.
+  var tzMap = {
+    'Asia/Kolkata': 'inr', 'Asia/Calcutta': 'inr',
+    'Asia/Karachi': 'pkr', 'Asia/Dhaka': 'bdt',
+    'Asia/Colombo': 'lkr', 'Asia/Kathmandu': 'npr',
+    'Asia/Manila': 'php', 'Asia/Jakarta': 'idr',
+    'Asia/Bangkok': 'thb', 'Asia/Ho_Chi_Minh': 'vnd',
+    'Africa/Johannesburg': 'zar', 'Africa/Lagos': 'ngn',
+    'Africa/Nairobi': 'kes', 'Africa/Accra': 'ghs',
+    'Africa/Cairo': 'egp', 'America/New_York': 'usd',
+    'America/Chicago': 'usd', 'America/Denver': 'usd',
+    'America/Los_Angeles': 'usd'
+  };
+  try {
+    var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    var guess = tzMap[tz];
+    if (!guess && tz && tz.indexOf('Europe/') === 0) guess = 'eur';
+    if (guess) {
+      for (var i = 0; i < sel.options.length; i++) {
+        if (sel.options[i].value === guess) { sel.selectedIndex = i; break; }
+      }
+    }
+  } catch (e) {}
+
+  sel.addEventListener('change', render);
+  mBtn.addEventListener('click', function () { yearly = false; render(); });
+  yBtn.addEventListener('click', function () { yearly = true; render(); });
+  render();
+})();
 </script>
 </body>
 </html>
