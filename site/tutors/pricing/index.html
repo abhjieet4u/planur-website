@@ -373,7 +373,8 @@
     ngn:  { d:2, starter:[199900,1999900], pro:[349900,3499900], prac:[599900,5999900] },
     kes:  { d:2, starter:[49900,499900], pro:[79900,799900], prac:[139900,1399900] },
     ghs:  { d:2, starter:[4900,49900], pro:[7900,79900], prac:[13900,139900] },
-    egp:  { d:2, starter:[19900,199900], pro:[34900,349900], prac:[59900,599900] }
+    egp:  { d:2, starter:[19900,199900], pro:[34900,349900], prac:[59900,599900] },
+    eur:  { d:2, starter:[1299,14290], pro:[2299,25290], prac:[4199,46190] }
   };
 
   function commas(n) {
@@ -403,7 +404,7 @@
 
   function render() {
     var cur = sel.value;
-    var isFallback = (cur === 'eur' || cur === 'other' || !P[cur]);
+    var isFallback = (cur === 'other' || !P[cur]);
     var prices = P[isFallback ? 'gbp' : cur];
     var opt = sel.options[sel.selectedIndex];
     var sym = opt ? opt.getAttribute('data-sym') : '£';
