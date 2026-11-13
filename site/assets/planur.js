@@ -301,6 +301,7 @@
       'font-size:.88rem;font-weight:700;cursor:pointer;transition:transform .15s;}' +
       '#planur-cookies .cc-btn:hover{transform:translateY(-1px);}' +
       '#planur-cookies .cc-accept{background:var(--sage,#6b9e7e);color:#fff;}' +
+      '#planur-cookies .cc-reject{background:rgba(255,255,255,.12);color:#fff;}' +
       '#planur-cookies .cc-necessary{background:rgba(255,255,255,.12);color:#fff;}';
 
     var style = document.createElement('style');
@@ -326,6 +327,7 @@
         '</div>' +
         '<div class="cc-btns">' +
           '<button class="cc-btn cc-accept" id="cc-all">Accept all</button>' +
+          '<button class="cc-btn cc-reject" id="cc-reject">Reject all</button>' +
           '<button class="cc-btn cc-necessary" id="cc-save">Save my choices</button>' +
         '</div>' +
       '</div>';
@@ -336,9 +338,35 @@
       saveConsent(true);
       dismissBanner();
     });
+    document.getElementById('cc-reject').addEventListener('click', function () {
+      saveConsent(false);
+      dismissBanner();
+    });
     document.getElementById('cc-save').addEventListener('click', function () {
       saveConsent(document.getElementById('cc-mkt').checked);
       dismissBanner();
+    });
+  }
+
+  function resetCookies() {
+    try { localStorage.removeItem(CONSENT_KEY); } catch (_) {}
+    injectBanner();
+  }
+
+  function injectManageCookiesLink() {
+    document.querySelectorAll('footer').forEach(function (f) {
+      if (f.querySelector('.cc-manage')) return;
+      var p = document.createElement('p');
+      p.className = 'footer-legal cc-manage';
+      p.style.cssText = 'margin-top:8px;font-size:.82rem;';
+      var a = document.createElement('a');
+      a.href = '#';
+      a.textContent = 'Manage cookies';
+      a.style.cssText = 'color:inherit;text-decoration:underline;cursor:pointer;';
+      a.addEventListener('click', function (e) { e.preventDefault(); resetCookies(); });
+      p.appendChild(a);
+      var container = f.querySelector('.container') || f;
+      container.appendChild(p);
     });
   }
 
@@ -349,6 +377,7 @@
     initFadeIn();
     initAppSwitch();
     injectBanner();
+    injectManageCookiesLink();
     document.querySelectorAll('form[data-live-clear]').forEach(wireLiveClear);
   }
 
@@ -366,6 +395,7 @@
     wireLiveClear: wireLiveClear,
     initModal: initModal,
     initAppSwitch: initAppSwitch,
-    marketingOk: marketingOk
+    marketingOk: marketingOk,
+    resetCookies: resetCookies
   };
 })();
