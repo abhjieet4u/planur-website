@@ -187,6 +187,7 @@
             <option value="kes" data-sym="KSh ">Kenya (KES)</option>
             <option value="ghs" data-sym="GH₵ ">Ghana (GHS)</option>
             <option value="egp" data-sym="E£ ">Egypt (EGP)</option>
+            <option value="brl" data-sym="R$ ">Brazil (BRL)</option>
             <option value="other" data-sym="£">Other (GBP)*</option>
           </select>
         </label>
@@ -209,7 +210,7 @@
         <article class="plan">
           <h2>Free</h2>
           <p class="sub">To get started, for as long as you like.</p>
-          <div class="price"><span class="amount">£0</span><span class="per">forever</span></div>
+          <div class="price"><span class="amount">Free</span><span class="per">forever</span></div>
           <p class="price-foot">No card, no time limit.</p>
           <a class="cta primary" href="/tutors/app/">Start free</a>
           <ul class="feat">
@@ -374,7 +375,8 @@
     kes:  { d:2, starter:[49900,499900], pro:[79900,799900], prac:[139900,1399900] },
     ghs:  { d:2, starter:[4900,49900], pro:[7900,79900], prac:[13900,139900] },
     egp:  { d:2, starter:[19900,199900], pro:[34900,349900], prac:[59900,599900] },
-    eur:  { d:2, starter:[1299,14290], pro:[2299,25290], prac:[4199,46190] }
+    eur:  { d:2, starter:[1299,14290], pro:[2299,25290], prac:[4199,46190] },
+    brl:  { d:2, starter:[4900,49900], pro:[7900,79900], prac:[13900,139900] }
   };
 
   function commas(n) {
@@ -442,7 +444,8 @@
     'Africa/Nairobi': 'kes', 'Africa/Accra': 'ghs',
     'Africa/Cairo': 'egp', 'America/New_York': 'usd',
     'America/Chicago': 'usd', 'America/Denver': 'usd',
-    'America/Los_Angeles': 'usd'
+    'America/Los_Angeles': 'usd',
+    'America/Sao_Paulo': 'brl'
   };
   try {
     var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
