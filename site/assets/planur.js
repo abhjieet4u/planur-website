@@ -245,12 +245,110 @@
     return { open: open, close: close };
   }
 
+  /* ── Cookie consent ───────────────────────────────────────────────────────
+     Two categories: "necessary" (always on) and "marketing" (opt-in).
+     Consent stored in localStorage; checked by Planur.marketingOk() before
+     any future marketing script (FB pixel, Google Ads tag) loads.           */
+  var CONSENT_KEY = 'planur_cookie_consent';
+
+  function getConsent() {
+    try { var v = localStorage.getItem(CONSENT_KEY); return v ? JSON.parse(v) : null; }
+    catch (_) { return null; }
+  }
+
+  function saveConsent(marketing) {
+    try { localStorage.setItem(CONSENT_KEY, JSON.stringify({ marketing: !!marketing, t: Date.now() })); }
+    catch (_) { /* private browsing */ }
+  }
+
+  function marketingOk() {
+    var c = getConsent();
+    return !!(c && c.marketing);
+  }
+
+  function dismissBanner() {
+    var el = document.getElementById('planur-cookies');
+    if (el) el.remove();
+  }
+
+  function injectBanner() {
+    if (getConsent()) return;
+
+    var css =
+      '#planur-cookies{position:fixed;bottom:0;left:0;right:0;z-index:9999;' +
+      'display:flex;justify-content:center;padding:16px;pointer-events:none;}' +
+      '#planur-cookies .cc-box{pointer-events:auto;background:var(--text-dark,#1a2332);' +
+      'color:#fff;border-radius:16px;padding:22px 26px;max-width:520px;width:100%;' +
+      'box-shadow:0 8px 32px rgba(0,0,0,.25);font-family:inherit;line-height:1.6;}' +
+      '#planur-cookies h3{margin:0 0 4px;font-size:1.05rem;font-weight:800;}' +
+      '#planur-cookies .cc-lead{font-size:.88rem;color:rgba(255,255,255,.78);margin:0 0 14px;}' +
+      '#planur-cookies .cc-toggle{display:flex;align-items:center;gap:10px;' +
+      'font-size:.86rem;margin:0 0 16px;color:rgba(255,255,255,.85);}' +
+      '#planur-cookies .cc-toggle label{cursor:pointer;display:flex;align-items:center;gap:8px;}' +
+      '#planur-cookies .cc-pill{display:inline-block;font-size:.72rem;font-weight:700;' +
+      'background:rgba(255,255,255,.13);padding:2px 8px;border-radius:99px;margin-left:6px;' +
+      'color:rgba(255,255,255,.5);}' +
+      '#planur-cookies .cc-switch{position:relative;width:38px;height:22px;flex-shrink:0;}' +
+      '#planur-cookies .cc-switch input{opacity:0;width:0;height:0;}' +
+      '#planur-cookies .cc-switch span{position:absolute;inset:0;background:rgba(255,255,255,.2);' +
+      'border-radius:22px;transition:background .2s;cursor:pointer;}' +
+      '#planur-cookies .cc-switch span::after{content:"";position:absolute;left:3px;top:3px;' +
+      'width:16px;height:16px;background:#fff;border-radius:50%;transition:transform .2s;}' +
+      '#planur-cookies .cc-switch input:checked+span{background:var(--sage,#6b9e7e);}' +
+      '#planur-cookies .cc-switch input:checked+span::after{transform:translateX(16px);}' +
+      '#planur-cookies .cc-btns{display:flex;gap:10px;flex-wrap:wrap;}' +
+      '#planur-cookies .cc-btn{border:none;border-radius:10px;padding:10px 20px;' +
+      'font-size:.88rem;font-weight:700;cursor:pointer;transition:transform .15s;}' +
+      '#planur-cookies .cc-btn:hover{transform:translateY(-1px);}' +
+      '#planur-cookies .cc-accept{background:var(--sage,#6b9e7e);color:#fff;}' +
+      '#planur-cookies .cc-necessary{background:rgba(255,255,255,.12);color:#fff;}';
+
+    var style = document.createElement('style');
+    style.textContent = css;
+    document.head.appendChild(style);
+
+    var wrap = document.createElement('div');
+    wrap.id = 'planur-cookies';
+    wrap.setAttribute('role', 'dialog');
+    wrap.setAttribute('aria-label', 'Cookie preferences');
+    wrap.innerHTML =
+      '<div class="cc-box">' +
+        '<h3>🍪 We baked some cookies</h3>' +
+        '<p class="cc-lead">The essential ones keep the site running — they’re not optional, ' +
+          'a bit like homework. The marketing ones help us show you relevant ads, ' +
+          'and you’re the boss of those.</p>' +
+        '<div class="cc-toggle">' +
+          '<span>Necessary</span><span class="cc-pill">always on</span>' +
+        '</div>' +
+        '<div class="cc-toggle">' +
+          '<label class="cc-switch"><input type="checkbox" id="cc-mkt"><span></span></label>' +
+          '<span>Marketing — <em>help us find more tutors like you</em></span>' +
+        '</div>' +
+        '<div class="cc-btns">' +
+          '<button class="cc-btn cc-accept" id="cc-all">Accept all</button>' +
+          '<button class="cc-btn cc-necessary" id="cc-save">Save my choices</button>' +
+        '</div>' +
+      '</div>';
+
+    document.body.appendChild(wrap);
+
+    document.getElementById('cc-all').addEventListener('click', function () {
+      saveConsent(true);
+      dismissBanner();
+    });
+    document.getElementById('cc-save').addEventListener('click', function () {
+      saveConsent(document.getElementById('cc-mkt').checked);
+      dismissBanner();
+    });
+  }
+
   /* ── Boot ────────────────────────────────────────────────────────────────── */
   function boot() {
     initNav();
     initSiteMenu();
     initFadeIn();
     initAppSwitch();
+    injectBanner();
     document.querySelectorAll('form[data-live-clear]').forEach(wireLiveClear);
   }
 
@@ -267,6 +365,7 @@
     looksAutomated: looksAutomated,
     wireLiveClear: wireLiveClear,
     initModal: initModal,
-    initAppSwitch: initAppSwitch
+    initAppSwitch: initAppSwitch,
+    marketingOk: marketingOk
   };
 })();
