@@ -13,6 +13,17 @@
 # Then: drag dist-staging/ to the STAGING Netlify site, check it, and only then
 # drag dist/ to the LIVE one. Full flow: ../planur-app/docs/tutor-web-deploy.md
 #
+# 🔴 BOTH BUILDS USE THE MERGED BRANCH, NOT THE WORKING TREE
+# The static site pages (site/) are checked out from origin/main into a
+# temporary git worktree — for BOTH staging and prod. This guarantees the
+# same code is tested on staging and deployed to prod, and prevents
+# uncommitted or unmerged work from another session silently shipping.
+# Workflow: commit → merge to main → push → build staging → test → build
+# prod → deploy.
+# The Flutter app builds (tutor_app, student app) always run from the current
+# tree — they live in planur-app, not this repo, and are verified by project
+# ref after assembly.
+#
 # 🔴 WHY THE ORDER IS FIXED, AND WHY THIS SCRIPT EXISTS
 # Both environments build into the SAME folders — planur-app/tutor_app/build/web
 # and planur-app/build/web — and build_site.sh assembles whatever is in them. It
@@ -124,17 +135,52 @@ build_apps() {
   fi
 }
 
+# 🔴 Both staging and prod build the static site from the MERGED main branch,
+# never the working tree. This guarantees the same code is tested on staging
+# and deployed to prod, and prevents uncommitted work from shipping silently.
+# The Flutter app builds still run from the current tree (they live in
+# planur-app, not this repo, and are verified by project ref after assembly).
+MAIN_BRANCH="main"
+
+# Sets SITE_WORKTREE to the temp worktree path. Caller must clean up.
+setup_site_worktree() {
+  local label="$1"
+  SITE_WORKTREE="$(mktemp -d "${TMPDIR:-/tmp}/planur-${label}-site.XXXXXX")"
+
+  echo
+  echo "▸ $label site: checking out $MAIN_BRANCH into temp worktree"
+
+  git fetch origin "$MAIN_BRANCH" --quiet 2>/dev/null || true
+
+  git worktree add --quiet "$SITE_WORKTREE" "origin/$MAIN_BRANCH" 2>/dev/null || {
+    echo "✗ Could not create worktree from origin/$MAIN_BRANCH."
+    echo "  Merge your changes to $MAIN_BRANCH and push before building."
+    rm -rf "$SITE_WORKTREE"
+    exit 1
+  }
+
+  local wt_head
+  wt_head="$(git -C "$SITE_WORKTREE" log --oneline -1)"
+  echo "  Building from: $wt_head"
+}
+
+cleanup_site_worktree() {
+  git worktree remove --force "$SITE_WORKTREE" 2>/dev/null || rm -rf "$SITE_WORKTREE"
+}
+
 build_staging() {
+  setup_site_worktree staging
   build_apps staging
-  FLAVOUR=staging ./tools/build_site.sh
+  FLAVOUR=staging SITE_OVERRIDE="$SITE_WORKTREE" ./tools/build_site.sh
+  cleanup_site_worktree
   verify_dist dist-staging "$STAGING_REF" "$PROD_REF" staging
 }
 
 build_prod() {
-  # Prod is built from SCRATCH every time — never assembled from app folders
-  # some earlier step may have left holding staging bundles.
+  setup_site_worktree prod
   build_apps prod
-  ./tools/build_site.sh
+  SITE_OVERRIDE="$SITE_WORKTREE" ./tools/build_site.sh
+  cleanup_site_worktree
   verify_dist dist "$PROD_REF" "$STAGING_REF" prod
 }
 

@@ -59,17 +59,38 @@ fi
 # proves they are all in step before anything is assembled. Deploys are a
 # metered, finite resource here — spending one on a site where a single page
 # still points at last month's logo is the failure this prevents.
-echo "▸ Checking shared blocks"
-python3 tools/sync_partials.py --check || {
-  echo
-  echo "✗ Refusing to assemble. Run tools/sync_partials.py and rebuild."
-  exit 1
-}
+#
+# When building from a worktree (SITE_OVERRIDE), the check runs against the
+# worktree's copy — cd there so ROOT resolves to it.
+if [[ -n "${SITE_OVERRIDE:-}" ]]; then
+  echo "▸ Checking shared blocks (from worktree)"
+  ( cd "$SITE_OVERRIDE" && python3 tools/sync_partials.py --check ) || {
+    echo
+    echo "✗ Refusing to assemble. The merged branch has drifted partials."
+    exit 1
+  }
+else
+  echo "▸ Checking shared blocks"
+  python3 tools/sync_partials.py --check || {
+    echo
+    echo "✗ Refusing to assemble. Run tools/sync_partials.py and rebuild."
+    exit 1
+  }
+fi
 
-echo "▸ Assembling $DIST"
+# SITE_OVERRIDE lets build_all.sh point at a worktree's site/ for prod builds,
+# so the static pages come from the merged branch, not the working tree.
+SITE_SRC="${SITE_OVERRIDE:+${SITE_OVERRIDE}/site}"
+SITE_SRC="${SITE_SRC:-site}"
+if [[ ! -d "$SITE_SRC" ]]; then
+  echo "✗ Site source not found: $SITE_SRC"
+  exit 1
+fi
+
+echo "▸ Assembling $DIST (from ${SITE_SRC})"
 rm -rf "$DIST"
 mkdir -p "$DIST"
-cp -R site/. "$DIST"/
+cp -R "$SITE_SRC/." "$DIST"/
 
 if [[ ! -d "$TUTOR_BUILD" ]]; then
   echo
