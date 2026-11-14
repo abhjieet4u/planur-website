@@ -37,16 +37,24 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Planur for Tutors — teaching, not admin.</title>
-<meta name="description" content="For tutors and class teachers — tuition, music, art, dance, yoga, sport. Run your batches, register, class materials and fees in one app, and your students get a planner of their own." />
+<title>Tutor Management App — Fees, Attendance &amp; Lessons | Planur</title>
+<meta name="description" content="Tutoring software for tutors and coaches: track tuition fees, take attendance, share class materials and plan lessons in one app. Free for up to five students." />
 <link rel="canonical" href="https://theplanur.co.uk/tutors/" />
-<meta property="og:title" content="Planur for Tutors — teaching, not admin." />
+<meta property="og:title" content="Planur for Tutors — the tutor app for fees, attendance and lessons" />
 <meta property="og:description" content="Your batches, register, materials and fees in one place. And your students get a planner of their own, not a portal." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://theplanur.co.uk/tutors/" />
 <meta property="og:image" content="https://theplanur.co.uk/assets/planur-og-card-tutors.png?v=20261109" />
 <meta property="og:site_name" content="Planur" />
 <meta name="twitter:card" content="summary_large_image" />
+<!-- SEO 2026-11-14: structured data. Only the free plan is priced here; paid
+     prices live on /tutors/pricing/ so there is one place to keep in step. -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"Organization","name":"Planur Ltd","url":"https://theplanur.co.uk/","logo":"https://theplanur.co.uk/assets/planur-favicon-192.png","identifier":"Company number 17350438 (England and Wales)"},
+ {"@type":"SoftwareApplication","name":"Planur for Tutors","applicationCategory":"BusinessApplication","operatingSystem":"Web, Android, iOS","url":"https://theplanur.co.uk/tutors/","description":"Tutoring software for fees, attendance, class materials and lesson planning.","offers":{"@type":"Offer","price":"0","priceCurrency":"GBP","description":"Free plan for up to five students"},"publisher":{"@type":"Organization","name":"Planur Ltd"}}
+]}
+</script>
 <!-- planur:brand-icons:start -->
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png?v=20261109" />
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png?v=20261109" />
@@ -66,6 +74,10 @@
   .t-hero h1{font-size:clamp(2.2rem,4.8vw,3.5rem);font-weight:800;line-height:1.1;
     letter-spacing:-1.6px;margin-bottom:18px;}
   .t-hero h1 em{font-style:normal;color:var(--sage);}
+  /* SEO 2026-11-14: the search phrase sits inside the H1 as a small kicker so
+     the slogan keeps its look. Visible text, not hidden — keep it that way. */
+  .t-hero h1 .h1-kicker{display:block;font-size:.95rem;font-weight:700;letter-spacing:.2px;
+    line-height:1.4;color:var(--sage);margin-bottom:10px;}
   .t-hero-sub{font-size:1.08rem;color:var(--text-mid);line-height:1.66;max-width:56ch;
     margin-bottom:28px;}
   .t-hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px;}
@@ -429,7 +441,7 @@
     <div class="t-hero-inner">
       <div class="t-hero-copy fade-in">
         <div class="hero-badge"><svg class="ic ic-sm"><use href="#i-cap"/></svg> For tutors, coaches and small practices</div>
-        <h1>Teaching,<br /><em>not admin.</em></h1>
+        <h1><span class="h1-kicker">The tutor app for fees, attendance and lessons</span>Teaching,<br /><em>not admin.</em></h1>
         <p class="t-hero-sub">Your batches, register, class materials and fees in one place — and
           your students get a planner of their own, instead of a portal they'll never open twice.</p>
         <!-- 🔴 "Start free" IS THE PRIMARY ACTION, added 2026-10-18 when the
@@ -638,7 +650,7 @@
   <div class="container">
     <div class="band-head fade-in">
       <span class="section-label">What it does</span>
-      <h2 class="section-title">The parts that cost you evenings.</h2>
+      <h2 class="section-title">Fees, attendance and class materials — the parts that cost you evenings.</h2>
     </div>
     <!-- Owner, 2026-11-04: say plainly that this is not only for academic
          tuition — art, dance, yoga, sport, any formal class.
