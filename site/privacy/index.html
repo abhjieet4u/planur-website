@@ -79,6 +79,16 @@
             <li><a href="/faq/">FAQ</a></li>
             <li><a href="/tutors/pricing/">Pricing</a></li>
           </ul>
+          <p class="menu-head">For students</p>
+          <ul>
+            <li><a href="/app/">Student log in</a></li>
+            <li><a href="/students/">The student app</a></li>
+          </ul>
+          <p class="menu-head">For parents</p>
+          <ul>
+            <li><a href="/parents/app/">Parent log in</a></li>
+            <li><a href="/parents/">The parent portal</a></li>
+          </ul>
           <p class="menu-head">Company</p>
           <ul>
             <li><a href="/support/?app=tutor">Contact us</a></li>
@@ -86,7 +96,10 @@
           </ul>
           <!-- Privacy and Terms live in the footer, not here (owner, 2026-11-09).
                "Tutor log in" is not here either: it is already in the header.
-               A student & parent link is planned for later. -->
+               "For students" links the stable /app/ path; build_site.sh turns it
+               into a redirect to student.theplanur.co.uk once STUDENT_SUBDOMAIN=1.
+               "For parents" (2026-11-15): until /parents/app/ is deployed, its
+               log-in link shows the "Coming soon" 404 page — see site/parents/. -->
         </div>
       </details>      <!-- planur:site-menu:end -->
     </div>
@@ -97,7 +110,7 @@
 <div class="container-narrow">
 
   <h1>Privacy Notice</h1>
-  <p class="doc-date">Last updated: 13 November 2026</p>
+  <p class="doc-date">Last updated: 16 November 2026</p>
 
   <div class="switch-row">
     <div class="app-switch" role="group" aria-label="Choose which Planur product this applies to">
@@ -270,9 +283,11 @@
   months of inactivity (§12), there is nothing left to restore from.</p>
 
   <p><strong>Planur in a browser.</strong> There is a read-only student view at
-  <strong>theplanur.co.uk/app</strong> where you can check your timetable, assignments and exam
-  dates. It <strong>stores nothing in your browser</strong> — no planner, no cached copy of your
-  work — and it cannot change anything: it reads what it needs each time and keeps none of it. The
+  <strong>theplanur.co.uk/app</strong> where you can check your calendar — timetable, tutor
+  classes, assignments and exam dates. It <strong>keeps none of your work in your browser</strong>
+  — no planner, no cached copy — only your sign-in and one display setting (whether "Coming up"
+  shows 3 or 7 days), and both are removed when you sign out. It cannot change anything: it reads
+  what it needs each time and keeps none of it. The
   encrypted database described above is on your phone, and that is still the only copy of your
   planner held on any device. Signing out of the browser therefore leaves nothing behind, which
   matters if you use a school or library computer.</p>

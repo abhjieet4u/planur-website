@@ -166,3 +166,6 @@
 # ═════════════════════════════════════════════════════════════════════════════
 /tutors/app/*  /tutors/app/index.html  200
 /app/*         /app/index.html         200
+# Parent portal (179) lives on parent.theplanur.co.uk. NO rule here on purpose:
+# build_site.sh appends `/parents/app/* → <subdomain>` only once it is live,
+# and until then /parents/app/ falls through to 404.html ("Coming soon").

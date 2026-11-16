@@ -8,7 +8,27 @@
 #   ./tools/build_all.sh verify     → builds NOTHING; checks the existing
 #                                     dist-staging/ and dist/ point where they say
 #
-#   SKIP_STUDENT=1 ./tools/build_all.sh   → leave the student web app out
+#   SKIP_STUDENT=1 ./tools/build_all.sh       → leave the student web app out
+#   PARENT_LIVE=1 ./tools/build_all.sh        → parent portal live on PROD
+#   STUDENT_SUBDOMAIN=1 ./tools/build_all.sh  → student app moves to its subdomain
+#
+# ── WHERE EACH APP LIVES (owner, 2026-11-16) ───────────────────────────────
+#   theplanur.co.uk            marketing site + staff app at /tutors/app/
+#   parent.theplanur.co.uk     parent portal   → dist-parent/   (own Netlify site)
+#   student.theplanur.co.uk    student web app → dist-student/  (own Netlify site,
+#                              once STUDENT_SUBDOMAIN=1; until then it stays
+#                              embedded at theplanur.co.uk/app/ exactly as before)
+# Subdomains are split by WHO SIGNS IN, not provider type: a nursery's or a
+# school's parents use parent., their students student., staff the staff app.
+#
+# The main site keeps linking to /parents/app/ and /app/; build_site.sh adds the
+# redirect to a subdomain only when it is live, so a link never lands on a
+# hostname that does not exist yet — it lands on the "Coming soon" 404 instead.
+#
+# 🔴 PARENT_LIVE=1 only once migrations 179–182 have run on prod. Staging always
+# gets the parent site. For the STAGING main site to redirect to the staging
+# subdomain sites, export PARENT_STAGING_URL / STUDENT_STAGING_URL (their
+# *.netlify.app hosts); unset, staging's /parents/app/ shows Coming soon.
 #
 # Then: drag dist-staging/ to the STAGING Netlify site, check it, and only then
 # drag dist/ to the LIVE one. Full flow: ../planur-app/docs/tutor-web-deploy.md
@@ -97,12 +117,13 @@ done
 # Only the APP bundles are checked. The marketing site's planur.js names both
 # refs on purpose — it picks one by host at run time — so it is not evidence.
 verify_dist() {
+  # verify_dist <dist> <want-ref> <forbid-ref> <label> <app dir under dist>...
   local dist="$1" want="$2" forbid="$3" label="$4" ok=1
+  shift 4
   echo "▸ Verifying $dist ($label)"
-  for app in tutors/app app; do
+  for app in "$@"; do
     local dir="$SITE_DIR/$dist/$app"
     if [[ ! -d "$dir" ]]; then
-      if [[ "$app" == "app" && "${SKIP_STUDENT:-0}" == "1" ]]; then continue; fi
       echo "  ✗ $dist/$app is missing"; ok=0; continue
     fi
     # `|| true`: grep exits 1 on NO match — which for $forbid is the passing
@@ -125,14 +146,67 @@ verify_dist() {
   [[ $ok == 1 ]] || { echo "✗ $dist FAILED verification — do NOT deploy it."; return 1; }
 }
 
+# The app folders the MAIN site must carry for this environment.
+main_site_apps() {
+  echo "tutors/app"
+  if [[ "${SKIP_STUDENT:-0}" != "1" && "${STUDENT_SUBDOMAIN:-0}" != "1" ]]; then echo "app"; fi
+}
+
+# 1 when this environment's site should carry the parent portal.
+include_parent() {
+  if [[ "$1" == "staging" || "${PARENT_LIVE:-0}" == "1" ]]; then echo 1; else echo 0; fi
+}
+
+student_on_subdomain() { [[ "${SKIP_STUDENT:-0}" != "1" && "${STUDENT_SUBDOMAIN:-0}" == "1" ]]; }
+
+# The subdomain URL the MAIN site should redirect to, or empty (no redirect).
+parent_url() {
+  if [[ "$(include_parent "$1")" != "1" ]]; then echo ""; return; fi
+  if [[ "$1" == "prod" ]]; then echo "https://parent.theplanur.co.uk/"; else echo "${PARENT_STAGING_URL:-}"; fi
+}
+student_url() {
+  if ! student_on_subdomain; then echo ""; return; fi
+  if [[ "$1" == "prod" ]]; then echo "https://student.theplanur.co.uk/"; else echo "${STUDENT_STAGING_URL:-}"; fi
+}
+
+# Folder suffix: dist-parent-staging/ vs dist-parent/.
+sfx() { [[ "$1" == "staging" ]] && echo "-staging" || echo ""; }
+
 build_apps() {
   local env="$1"
   echo
-  echo "════ Building both apps for $env ════"
+  echo "════ Building the web apps for $env ════"
   ( cd "$TUTOR_DIR" && ./tools/build_web.sh "$env" /tutors/app/ )
+
   if [[ "${SKIP_STUDENT:-0}" != "1" ]]; then
-    ( cd "$APP_DIR" && ./tools/build_web.sh "$env" /app/ )
+    if student_on_subdomain; then
+      ( cd "$APP_DIR" && ./tools/build_web.sh "$env" / )
+      ./tools/build_app_site.sh "$APP_DIR/build/web" "dist-student$(sfx "$env")" "$env" "read-only view"
+    else
+      ( cd "$APP_DIR" && ./tools/build_web.sh "$env" /app/ )
+    fi
   fi
+
+  if [[ "$(include_parent "$env")" == "1" ]]; then
+    ( cd "$APP_DIR/parent_app" && ./tools/build_web.sh "$env" / )
+    ./tools/build_app_site.sh "$APP_DIR/parent_app/build/web" "dist-parent$(sfx "$env")" "$env" "Planur for Parents"
+  else
+    echo "▸ Parent portal left out of $env (set PARENT_LIVE=1 once 179–182 are on prod)"
+  fi
+}
+
+# Verify every folder this environment produced.
+verify_env() {
+  local env="$1" want="$2" forbid="$3" rc=0
+  # shellcheck disable=SC2046
+  verify_dist "dist$(sfx "$env")" "$want" "$forbid" "$env" $(main_site_apps) || rc=1
+  if [[ "$(include_parent "$env")" == "1" ]]; then
+    verify_dist "dist-parent$(sfx "$env")" "$want" "$forbid" "$env" . || rc=1
+  fi
+  if student_on_subdomain; then
+    verify_dist "dist-student$(sfx "$env")" "$want" "$forbid" "$env" . || rc=1
+  fi
+  return $rc
 }
 
 # 🔴 Both staging and prod build the static site from the MERGED main branch,
@@ -171,24 +245,28 @@ cleanup_site_worktree() {
 build_staging() {
   setup_site_worktree staging
   build_apps staging
-  FLAVOUR=staging SITE_OVERRIDE="$SITE_WORKTREE" ./tools/build_site.sh
+  PARENT_SITE_URL="$(parent_url staging)" STUDENT_SITE_URL="$(student_url staging)" \
+    STUDENT_ON_SUBDOMAIN="$(student_on_subdomain && echo 1 || echo 0)" \
+    FLAVOUR=staging SITE_OVERRIDE="$SITE_WORKTREE" ./tools/build_site.sh
   cleanup_site_worktree
-  verify_dist dist-staging "$STAGING_REF" "$PROD_REF" staging
+  verify_env staging "$STAGING_REF" "$PROD_REF"
 }
 
 build_prod() {
   setup_site_worktree prod
   build_apps prod
-  SITE_OVERRIDE="$SITE_WORKTREE" ./tools/build_site.sh
+  PARENT_SITE_URL="$(parent_url prod)" STUDENT_SITE_URL="$(student_url prod)" \
+    STUDENT_ON_SUBDOMAIN="$(student_on_subdomain && echo 1 || echo 0)" \
+    SITE_OVERRIDE="$SITE_WORKTREE" ./tools/build_site.sh
   cleanup_site_worktree
-  verify_dist dist "$PROD_REF" "$STAGING_REF" prod
+  verify_env prod "$PROD_REF" "$STAGING_REF"
 }
 
 case "$MODE" in
   verify)
     rc=0
-    [[ -d dist-staging ]] && { verify_dist dist-staging "$STAGING_REF" "$PROD_REF" staging || rc=1; }
-    [[ -d dist ]] && { verify_dist dist "$PROD_REF" "$STAGING_REF" prod || rc=1; }
+    [[ -d dist-staging ]] && { verify_env staging "$STAGING_REF" "$PROD_REF" || rc=1; }
+    [[ -d dist ]] && { verify_env prod "$PROD_REF" "$STAGING_REF" || rc=1; }
     exit $rc
     ;;
   staging) build_staging ;;
@@ -198,8 +276,17 @@ esac
 
 echo
 echo "✓ Done."
-[[ "$MODE" == "all" || "$MODE" == "staging" ]] && \
-  echo "  1. Drag the CONTENTS of dist-staging/ into the STAGING Netlify site and check it."
-[[ "$MODE" == "all" || "$MODE" == "prod" ]] && \
-  echo "  2. Then drag the CONTENTS of dist/ into the LIVE Netlify site."
+if [[ "$MODE" == "all" || "$MODE" == "staging" ]]; then
+  echo "  1. STAGING — drag the CONTENTS of each folder into its own staging Netlify site:"
+  echo "       dist-staging/          → staging main site"
+  [[ -d dist-parent-staging ]]  && echo "       dist-parent-staging/   → staging parent site"
+  [[ -d dist-student-staging ]] && student_on_subdomain && echo "       dist-student-staging/  → staging student site"
+  echo "     Check each one before going further."
+fi
+if [[ "$MODE" == "all" || "$MODE" == "prod" ]]; then
+  echo "  2. PROD — the subdomain sites FIRST, the main site LAST (its redirects point at them):"
+  [[ "$(include_parent prod)" == "1" ]] && echo "       dist-parent/   → parent.theplanur.co.uk"
+  student_on_subdomain && echo "       dist-student/  → student.theplanur.co.uk"
+  echo "       dist/          → theplanur.co.uk"
+fi
 echo "  The app build folders now hold $([[ $MODE == staging ]] && echo STAGING || echo PROD) bundles."

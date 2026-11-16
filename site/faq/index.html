@@ -81,6 +81,16 @@
             <li><a href="/faq/">FAQ</a></li>
             <li><a href="/tutors/pricing/">Pricing</a></li>
           </ul>
+          <p class="menu-head">For students</p>
+          <ul>
+            <li><a href="/app/">Student log in</a></li>
+            <li><a href="/students/">The student app</a></li>
+          </ul>
+          <p class="menu-head">For parents</p>
+          <ul>
+            <li><a href="/parents/app/">Parent log in</a></li>
+            <li><a href="/parents/">The parent portal</a></li>
+          </ul>
           <p class="menu-head">Company</p>
           <ul>
             <li><a href="/support/?app=tutor">Contact us</a></li>
@@ -88,7 +98,10 @@
           </ul>
           <!-- Privacy and Terms live in the footer, not here (owner, 2026-11-09).
                "Tutor log in" is not here either: it is already in the header.
-               A student & parent link is planned for later. -->
+               "For students" links the stable /app/ path; build_site.sh turns it
+               into a redirect to student.theplanur.co.uk once STUDENT_SUBDOMAIN=1.
+               "For parents" (2026-11-15): until /parents/app/ is deployed, its
+               log-in link shows the "Coming soon" 404 page — see site/parents/. -->
         </div>
       </details>      <!-- planur:site-menu:end -->
     </div>

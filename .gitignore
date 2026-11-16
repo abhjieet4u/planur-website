@@ -23,3 +23,8 @@ dist-staging/
 
 # Local Netlify folder
 .netlify
+# Subdomain app sites (build_app_site.sh)
+dist-parent/
+dist-parent-staging/
+dist-student/
+dist-student-staging/

@@ -128,7 +128,12 @@ rm -f "$DIST/tutors/app/_redirects" "$DIST/tutors/app/_headers"
 
 # ── Student web app (read-only) ─────────────────────────────────────────────
 STUDENT_LINE="    student web app →  (not included)"
-if [[ "${SKIP_STUDENT:-0}" == "1" ]]; then
+if [[ "${STUDENT_ON_SUBDOMAIN:-0}" == "1" ]]; then
+  # Lives on its own subdomain (build_app_site.sh); this site only redirects —
+  # or, with no URL for this environment, leaves /app/ to the Coming soon page.
+  echo "▸ Student web app is on its own subdomain — not embedded at /app/"
+  STUDENT_LINE="    student web app →  ${STUDENT_SITE_URL:-(subdomain URL not set — /app/ shows Coming soon)}"
+elif [[ "${SKIP_STUDENT:-0}" == "1" ]]; then
   echo "▸ Skipping the student web app (SKIP_STUDENT=1)"
 elif [[ ! -d "$STUDENT_BUILD" ]]; then
   echo
@@ -163,6 +168,36 @@ else
   STUDENT_LINE="    student web app →  $DIST/app/"
 fi
 
+# ── Apps on their own subdomain: this site only REDIRECTS to them ──────────
+# parent.theplanur.co.uk (parent_app) and, once switched, student.theplanur.co.uk
+# are separate Netlify sites assembled by build_app_site.sh. Pages here keep
+# linking to the stable paths /parents/app/ and /app/; the redirect is written
+# only when build_all.sh passes the subdomain's URL, i.e. once it is live.
+# Until then /parents/app/ has no file and no rule, so Netlify serves 404.html —
+# the "Coming soon" page with Contact us (owner, 2026-11-15) — never a dead
+# hostname.
+PARENT_LINE="    parent portal   →  /parents/app/ shows Coming soon (not live)"
+if [[ -n "${PARENT_SITE_URL:-}" ]]; then
+  printf '\n# Parent portal → its own subdomain (added by build_site.sh)\n/parents/app/*  %s:splat  301\n' \
+    "${PARENT_SITE_URL%/}/" >> "$DIST/_redirects"
+  PARENT_LINE="    parent portal   →  redirect /parents/app/* → $PARENT_SITE_URL"
+fi
+if [[ "${STUDENT_ON_SUBDOMAIN:-0}" == "1" ]]; then
+  # Drop the SPA fallback for the embedded app (first match wins, so it would
+  # swallow the redirect), then send /app/* to the subdomain.
+  python3 - "$DIST/_redirects" <<'PY'
+import re, sys
+p = sys.argv[1]
+lines = open(p).read().splitlines()
+open(p, "w").write("\n".join(l for l in lines
+                            if not re.match(r"^/app/\*\s+/app/index\.html\s+200", l)) + "\n")
+PY
+  if [[ -n "${STUDENT_SITE_URL:-}" ]]; then
+    printf '\n# Student web app → its own subdomain (added by build_site.sh)\n/app/*  %s:splat  301\n' \
+      "${STUDENT_SITE_URL%/}/" >> "$DIST/_redirects"
+  fi
+fi
+
 # ── 🔴 The staging site must never be indexed ───────────────────────────────
 # It is a BYTE-FOR-BYTE copy of the marketing pages on a second host. Left
 # crawlable, it competes with the real site for its own search terms — two of
@@ -195,6 +230,7 @@ echo "✓ $DIST ready  ($(du -sh "$DIST" | cut -f1))"
 echo "    marketing site  →  $DIST/"
 echo "    tutor web app   →  $DIST/tutors/app/"
 echo "$STUDENT_LINE"
+echo "$PARENT_LINE"
 echo
 echo "  Drag the CONTENTS of $DIST into Netlify."
 if [[ "$FLAVOUR" == "staging" ]]; then

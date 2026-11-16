@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<!--
+  Planur — the parent portal, explained. Served at https://theplanur.co.uk/parents/
+  The portal itself is the Flutter web app at /parents/app/ (planur-app/parent_app).
+
+  Safe to publish before the portal is live: until /parents/app/ is deployed
+  (PARENT_LIVE=1 in build_all.sh, after migrations 179–182 on prod), "Parent log
+  in" lands on 404.html, which reads "Coming soon" with a Contact us button
+  (owner, 2026-11-15).
+
+  Copy rules: no prices, nothing attributed to a customer, nothing promised
+  that the portal does not do today (owner rules — see planur-app memory).
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parent portal — Planur</title>
+<meta name="description" content="See your child's classes, marks, attendance, materials and bills from their tutor — and how to pay them — in the Planur parent portal." />
+<link rel="canonical" href="https://theplanur.co.uk/parents/" />
+<meta property="og:title" content="The Planur parent portal" />
+<meta property="og:description" content="Your child's classes, marks, attendance, materials and bills from their tutor, in one place." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://theplanur.co.uk/parents/" />
+<meta property="og:image" content="https://theplanur.co.uk/assets/planur-og-card.png?v=20261109" />
+<meta property="og:site_name" content="Planur" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="robots" content="all">
+<!-- planur:brand-icons:start -->
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png?v=20261109" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png?v=20261109" />
+  <link rel="apple-touch-icon" href="/assets/planur-apple-touch-icon.png?v=20261109" /><!-- planur:brand-icons:end -->
+<link rel="stylesheet" href="/assets/planur.css?v=20261109" />
+<style>
+  .parents-hero{padding:56px 0 8px;}
+  .parents-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:18px 0 8px;}
+  .parents-card{border:1px solid var(--neutral-mid);border-radius:14px;padding:20px;background:#fff;}
+  .parents-card h3{font-size:1rem;font-weight:800;margin:0 0 6px;color:var(--text-dark);}
+  .parents-card p{font-size:.92rem;color:var(--text-mid);line-height:1.65;margin:0;}
+  .parents-steps{counter-reset:s;list-style:none;padding:0;margin:8px 0 0;}
+  .parents-steps li{counter-increment:s;position:relative;padding:0 0 16px 44px;
+    font-size:.95rem;color:var(--text-mid);line-height:1.65;}
+  .parents-steps li::before{content:counter(s);position:absolute;left:0;top:0;width:30px;height:30px;
+    border-radius:50%;background:var(--sage);color:#fff;font-weight:800;display:flex;
+    align-items:center;justify-content:center;font-size:.9rem;}
+  .parents-steps strong{color:var(--text-dark);}
+  .parents-safe{border-left:4px solid var(--sage);background:var(--neutral);padding:16px 20px;
+    border-radius:8px;font-size:.93rem;color:var(--text-mid);line-height:1.65;margin:8px 0 64px;}
+  @media(max-width:900px){.parents-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-bar">
+      <a class="logo" href="/tutors/"><img class="logo-mark" src="/assets/planur-mark.png?v=20261109" alt="" width="192" height="192" />Planur<span>.</span></a>
+      <!-- planur:site-menu:start -->
+      <details class="site-menu">
+        <summary aria-label="Menu" title="Menu">
+          <svg class="menu-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </summary>
+        <div class="menu-panel">
+          <p class="menu-head">For tutors</p>
+          <ul>
+            <li><a href="/tutors/">Planur for Tutors</a></li>
+            <li><a href="/help/">Getting started</a></li>
+            <li><a href="/tools/">Free tools</a></li>
+            <li><a href="/faq/">FAQ</a></li>
+            <li><a href="/tutors/pricing/">Pricing</a></li>
+          </ul>
+          <p class="menu-head">For students</p>
+          <ul>
+            <li><a href="/app/">Student log in</a></li>
+            <li><a href="/students/">The student app</a></li>
+          </ul>
+          <p class="menu-head">For parents</p>
+          <ul>
+            <li><a href="/parents/app/">Parent log in</a></li>
+            <li><a href="/parents/">The parent portal</a></li>
+          </ul>
+          <p class="menu-head">Company</p>
+          <ul>
+            <li><a href="/support/?app=tutor">Contact us</a></li>
+            <li><a href="/about/">About us</a></li>
+          </ul>
+          <!-- Privacy and Terms live in the footer, not here (owner, 2026-11-09).
+               "Tutor log in" is not here either: it is already in the header.
+               "For students" links the stable /app/ path; build_site.sh turns it
+               into a redirect to student.theplanur.co.uk once STUDENT_SUBDOMAIN=1.
+               "For parents" (2026-11-15): until /parents/app/ is deployed, its
+               log-in link shows the "Coming soon" 404 page — see site/parents/. -->
+        </div>
+      </details>      <!-- planur:site-menu:end -->
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<section class="parents-hero">
+  <div class="container">
+    <h1 class="section-title" style="margin-bottom:12px;">The Planur parent portal</h1>
+    <p class="section-lede">If your child's tutor uses Planur, you can see their classes, marks,
+      attendance, materials and bills in one place — and how to pay.</p>
+    <p style="margin-top:22px;">
+      <a class="btn btn-sage btn-lg" href="/parents/app/">Parent log in</a>
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="parents-grid">
+      <div class="parents-card">
+        <h3>Classes and materials</h3>
+        <p>Upcoming lessons, and the worksheets, links and notes the tutor shares with your
+          child's classes.</p>
+      </div>
+      <div class="parents-card">
+        <h3>Marks and attendance</h3>
+        <p>Each mark next to the class average, once ten or more have sat the test — never
+          another child's mark. Students aged 16 and over can choose to keep these private.</p>
+      </div>
+      <div class="parents-card">
+        <h3>Bills and receipts</h3>
+        <p>What is due, how the tutor would like to be paid, and every confirmed payment,
+          grouped by child.</p>
+      </div>
+    </div>
+
+    <h2 class="section-title" style="font-size:1.4rem;margin:48px 0 12px;">How to get started</h2>
+    <ol class="parents-steps">
+      <li><strong>Ask your child's tutor for a parent code.</strong> It is not the code your
+        child uses — every child has a separate one for parents.</li>
+      <li><strong>Sign in at <a href="/parents/app/">theplanur.co.uk/parents/app</a></strong> with
+        your email address. We send you a code; there is no password.</li>
+      <li><strong>Enter the parent code.</strong> Your tutor approves the request, and your
+        child's page appears. Children with more than one tutor, or brothers and sisters, can
+        all be added to the same account.</li>
+    </ol>
+
+    <div class="parents-safe">
+      <strong>Paying safely.</strong> Payments go straight to your tutor — Planur never handles
+      the money. Before you pay a tutor for the first time, and whenever their payment details
+      change, the portal asks you to confirm the details with them directly. Planur and your
+      tutor will never send you new bank details by email, text or WhatsApp: only trust what
+      the portal shows.
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="/tutors/">Planur<span>.</span></a>
+        <p>Your academic life, organised — and your teaching, without the paperwork.</p>
+      </div>
+      <div class="footer-col">
+        <h4>For parents</h4>
+        <ul>
+          <li><a href="/parents/">The parent portal</a></li>
+          <li><a href="/parents/app/">Parent log in</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>For tutors</h4>
+        <ul>
+          <li><a href="/tutors/">Planur for Tutors</a></li>
+          <li><a href="/tutors/app/">Tutor log in</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/support/">Support &amp; contact</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+          <li><a href="/terms/">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© <span id="y">2026</span> Planur Ltd. All rights reserved.</p>
+      <p class="footer-copy">theplanur.co.uk</p>
+      <!-- planur:footer-legal:start -->
+      <p class="footer-legal">Planur Ltd is a company registered in England and Wales, company number 17350438. Registered office: Unit 29 Highcroft Industrial Estate, Enterprise Road, Horndean, Waterlooville, PO8 0BT, United Kingdom.</p>      <!-- planur:footer-legal:end -->
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/planur.js?v=20261109"></script>
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>
