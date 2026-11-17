@@ -16,7 +16,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://theplanur.co.uk/tutors/</loc>
-    <lastmod>2026-11-14</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -88,13 +88,13 @@
   </url>
   <url>
     <loc>https://theplanur.co.uk/help/</loc>
-    <lastmod>2026-11-14</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://theplanur.co.uk/tutors/pricing/</loc>
-    <lastmod>2026-11-14</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -106,7 +106,7 @@
   </url>
   <url>
     <loc>https://theplanur.co.uk/download/</loc>
-    <lastmod>2026-11-14</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -118,20 +118,32 @@
   </url>
   <url>
     <loc>https://theplanur.co.uk/privacy/</loc>
-    <lastmod>2026-11-14</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://theplanur.co.uk/terms/</loc>
-    <lastmod>2026-11-14</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://theplanur.co.uk/delete-account/</loc>
-    <lastmod>2026-11-14</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://theplanur.co.uk/parents/</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://theplanur.co.uk/countries/</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>
