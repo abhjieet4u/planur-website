@@ -113,6 +113,19 @@
      <details> already opens and closes; this adds what it lacks: close on an
      outside click or Escape, and mark the link for the page you are on. */
   function initSiteMenu() {
+    // The log-in dropdown (2026-11-17) closes the same way as the menu.
+    document.querySelectorAll('.login-more').forEach(function (d) {
+      document.addEventListener('click', function (e) {
+        if (d.open && !d.contains(e.target)) d.open = false;
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && d.open) {
+          d.open = false;
+          var s = d.querySelector('summary');
+          if (s) s.focus();
+        }
+      });
+    });
     var menu = document.querySelector('.site-menu');
     if (!menu) return;
     // The bare domain is served from /tutors/ by a rewrite, so "/" is that page.

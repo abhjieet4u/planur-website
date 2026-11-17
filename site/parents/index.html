@@ -71,14 +71,9 @@
             <li><a href="/faq/">FAQ</a></li>
             <li><a href="/tutors/pricing/">Pricing</a></li>
           </ul>
-          <p class="menu-head">For students</p>
+          <p class="menu-head">For students &amp; parents</p>
           <ul>
-            <li><a href="/app/">Student log in</a></li>
             <li><a href="/students/">The student app</a></li>
-          </ul>
-          <p class="menu-head">For parents</p>
-          <ul>
-            <li><a href="/parents/app/">Parent log in</a></li>
             <li><a href="/parents/">The parent portal</a></li>
           </ul>
           <p class="menu-head">Company</p>
@@ -88,10 +83,9 @@
           </ul>
           <!-- Privacy and Terms live in the footer, not here (owner, 2026-11-09).
                "Tutor log in" is not here either: it is already in the header.
-               "For students" links the stable /app/ path; build_site.sh turns it
-               into a redirect to student.theplanur.co.uk once STUDENT_SUBDOMAIN=1.
-               "For parents" (2026-11-15): until /parents/app/ is deployed, its
-               log-in link shows the "Coming soon" 404 page — see site/parents/. -->
+               Student and parent LOG-INS are not here either (owner, 2026-11-17):
+               they sit behind the arrow on the header's Tutor log in button,
+               never openly. This section only links the product pages. -->
         </div>
       </details>      <!-- planur:site-menu:end -->
     </div>
@@ -106,7 +100,7 @@
     <p class="section-lede">If your child's tutor uses Planur, you can see their classes, marks,
       attendance, materials and bills in one place — and how to pay.</p>
     <p style="margin-top:22px;">
-      <a class="btn btn-sage btn-lg" href="/parents/app/">Parent log in</a>
+      <a class="btn btn-sage btn-lg" href="https://parent.theplanur.co.uk/">Parent log in</a>
     </p>
   </div>
 </section>
@@ -135,7 +129,7 @@
     <ol class="parents-steps">
       <li><strong>Ask your child's tutor for a parent code.</strong> It is not the code your
         child uses — every child has a separate one for parents.</li>
-      <li><strong>Sign in at <a href="/parents/app/">theplanur.co.uk/parents/app</a></strong> with
+      <li><strong>Sign in at <a href="https://parent.theplanur.co.uk/">parent.theplanur.co.uk</a></strong> with
         your email address. We send you a code; there is no password.</li>
       <li><strong>Enter the parent code.</strong> Your tutor approves the request, and your
         child's page appears. Children with more than one tutor, or brothers and sisters, can
@@ -165,7 +159,7 @@
         <h4>For parents</h4>
         <ul>
           <li><a href="/parents/">The parent portal</a></li>
-          <li><a href="/parents/app/">Parent log in</a></li>
+          <li><a href="https://parent.theplanur.co.uk/">Parent log in</a></li>
         </ul>
       </div>
       <div class="footer-col">

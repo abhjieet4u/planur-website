@@ -449,6 +449,36 @@ footer{background:var(--text-dark);padding:52px 0 30px;position:relative;z-index
 .nav-right .nav-link{display:inline-flex;align-items:center;gap:6px;}
 .nav-right .btn .ic{width:15px;height:15px;margin-right:6px;vertical-align:-2px;}
 
+/* ── Log-in split button (owner, 2026-11-17) ──────────────────────────────────
+   "Tutor log in" is a visible outlined button; the arrow on its right opens
+   Student log in and Parent log in. Students and parents are never offered a
+   log-in openly in the header or the menu. Native <details>, like the menu:
+   works without JavaScript; planur.js adds outside-click and Escape. */
+.login-split{position:relative;display:inline-flex;align-items:stretch;
+  border:1px solid var(--neutral-mid);border-radius:10px;background:var(--white);}
+.login-split .login-main{padding:8px 12px;border-radius:10px 0 0 10px;color:var(--text-dark);}
+.login-split .login-main:hover{color:var(--sage);}
+.login-more summary{list-style:none;cursor:pointer;display:flex;align-items:center;
+  justify-content:center;width:34px;height:100%;border-left:1px solid var(--neutral-mid);
+  border-radius:0 10px 10px 0;color:var(--text-mid);transition:color var(--transition);}
+.login-more summary::-webkit-details-marker{display:none;}
+.login-more summary:hover,.login-more[open] summary{color:var(--sage);}
+.login-more summary:focus-visible{outline:3px solid var(--lavender);outline-offset:2px;}
+.login-more .caret{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.2;
+  stroke-linecap:round;stroke-linejoin:round;transition:transform var(--transition);}
+.login-more[open] .caret{transform:rotate(180deg);}
+.login-panel{position:absolute;right:0;top:calc(100% + 10px);z-index:110;min-width:190px;
+  background:var(--white);border:1px solid var(--neutral-mid);border-radius:var(--radius-md);
+  box-shadow:var(--shadow-lg);padding:6px;}
+.login-panel a{display:block;padding:10px 12px;border-radius:var(--radius-sm);white-space:nowrap;
+  font-size:.92rem;font-weight:600;color:var(--text-dark);text-decoration:none;}
+.login-panel a:hover,.login-panel a:focus-visible{background:var(--sage-faint);color:var(--sage-deep);}
+/* Phones (≤420px, icon-only header): the lock square keeps the split's border. */
+@media(max-width:420px){
+  .nav-right .login-split .nav-link{border:0;border-radius:10px 0 0 10px;width:38px;height:38px;}
+  .login-more summary{width:28px;}
+}
+
 /* ── Site menu — the hamburger (fb5, 2026-11-09) ─────────────────────────────
    One control at the right end of every header: Contact, About, Countries,
    Privacy, Terms and the main tutor pages, reachable from anywhere. The markup

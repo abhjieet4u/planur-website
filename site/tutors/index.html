@@ -226,6 +226,34 @@
     .flip-btn:focus-visible .flip-front{opacity:0;}
   }
 
+  /* ── Comparison table ──────────────────────────────────────────────────── */
+  .cmp{padding:74px 0;background:var(--white);}
+  .cmp-intro{max-width:62ch;margin-bottom:12px;font-size:.95rem;color:var(--text-mid);line-height:1.65;}
+  .cmp-group{margin-bottom:32px;}
+  .cmp-group h3{font-size:.76rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+    color:var(--sage-deep);margin-bottom:4px;}
+  .cmp-group .cmp-why{font-size:.88rem;color:var(--text-mid);margin-bottom:12px;max-width:68ch;}
+  .cmp-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .cmp-tbl{width:100%;border-collapse:collapse;font-size:.88rem;min-width:620px;}
+  .cmp-tbl thead th{text-align:left;padding:10px 14px;font-size:.72rem;font-weight:700;
+    letter-spacing:.6px;text-transform:uppercase;color:var(--text-light);
+    border-bottom:2px solid var(--neutral-mid);white-space:nowrap;}
+  .cmp-tbl thead th:first-child{min-width:200px;}
+  .cmp-tbl thead th.col-planur{color:var(--sage-deep);}
+  .cmp-tbl tbody td{padding:10px 14px;border-bottom:1px solid var(--neutral-mid);
+    vertical-align:top;color:var(--text-mid);line-height:1.5;}
+  .cmp-tbl tbody td:first-child{font-weight:600;color:var(--text-dark);}
+  .cmp-tbl tbody td:nth-child(2){color:var(--sage-deep);font-weight:600;}
+  .cmp-tbl .y{color:var(--sage-deep);}
+  .cmp-tbl .n{color:var(--coral-dark);}
+  .cmp-tbl .soon{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.5px;
+    text-transform:uppercase;padding:2px 8px;border-radius:var(--radius-pill);
+    background:var(--amber-faint);color:var(--amber);}
+  @media(max-width:760px){
+    .cmp-tbl{font-size:.82rem;}
+    .cmp-tbl thead th,.cmp-tbl tbody td{padding:8px 10px;}
+  }
+
   /* CTA */
   .cta-band{padding:80px 0;background:linear-gradient(160deg,var(--lilac) 0%,var(--mint) 100%);}
   .cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
@@ -396,10 +424,23 @@
            returning tutor with only the button written for strangers.
            `aria-label` carries the name once the text is visually hidden. -->
       <div class="nav-right">
-        <a class="nav-link" href="/tutors/app/" aria-label="Tutor log in" title="Tutor log in">
-          <svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg>
-          <span class="nav-label">Tutor log in</span>
-        </a>
+        <!-- Tutor log in is the visible button; students and parents are one
+             click away behind the arrow, never shown openly (owner, 2026-11-17). -->
+        <div class="login-split">
+          <a class="nav-link login-main" href="/tutors/app/" aria-label="Tutor log in" title="Tutor log in">
+            <svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg>
+            <span class="nav-label">Tutor log in</span>
+          </a>
+          <details class="login-more">
+            <summary aria-label="Student or parent log in" title="Student or parent log in">
+              <svg class="caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </summary>
+            <div class="login-panel">
+              <a href="https://student.theplanur.co.uk/">Student log in</a>
+              <a href="https://parent.theplanur.co.uk/">Parent log in</a>
+            </div>
+          </details>
+        </div>
         <a class="btn btn-coral" href="#talk" aria-label="Talk to us" title="Talk to us">
           <svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg>
           <span class="nav-label">Talk to us</span>
@@ -419,14 +460,9 @@
             <li><a href="/faq/">FAQ</a></li>
             <li><a href="/tutors/pricing/">Pricing</a></li>
           </ul>
-          <p class="menu-head">For students</p>
+          <p class="menu-head">For students &amp; parents</p>
           <ul>
-            <li><a href="/app/">Student log in</a></li>
             <li><a href="/students/">The student app</a></li>
-          </ul>
-          <p class="menu-head">For parents</p>
-          <ul>
-            <li><a href="/parents/app/">Parent log in</a></li>
             <li><a href="/parents/">The parent portal</a></li>
           </ul>
           <p class="menu-head">Company</p>
@@ -436,10 +472,9 @@
           </ul>
           <!-- Privacy and Terms live in the footer, not here (owner, 2026-11-09).
                "Tutor log in" is not here either: it is already in the header.
-               "For students" links the stable /app/ path; build_site.sh turns it
-               into a redirect to student.theplanur.co.uk once STUDENT_SUBDOMAIN=1.
-               "For parents" (2026-11-15): until /parents/app/ is deployed, its
-               log-in link shows the "Coming soon" 404 page — see site/parents/. -->
+               Student and parent LOG-INS are not here either (owner, 2026-11-17):
+               they sit behind the arrow on the header's Tutor log in button,
+               never openly. This section only links the product pages. -->
         </div>
       </details>      <!-- planur:site-menu:end -->
     </div>
@@ -912,6 +947,179 @@
       </dl>
       <p class="ask-close">If a product cannot answer those, the cost is not zero. It is deferred, and
         it is the families in your register who end up paying it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW PLANUR COMPARES -->
+<section class="cmp" id="compare">
+  <div class="container">
+    <div class="band-head fade-in">
+      <span class="section-label">How Planur compares</span>
+      <h2 class="section-title">What you get that a spreadsheet, a typical tutor app or a school system doesn't.</h2>
+    </div>
+    <p class="cmp-intro fade-in">Every ✓ below is shipped and working today. "Coming soon" means it's built but not yet switched on.</p>
+
+    <!-- Setup & pricing -->
+    <div class="cmp-group fade-in">
+      <h3>Setup &amp; pricing</h3>
+      <p class="cmp-why">Most tutor software charges per staff member. Add a second teacher and your bill doubles, even if your student count stays the same.</p>
+      <div class="cmp-wrap">
+      <table class="cmp-tbl">
+        <thead><tr><th>Feature</th><th class="col-planur">Planur</th><th>Typical tutor app</th><th>School software</th><th>Spreadsheets</th></tr></thead>
+        <tbody>
+          <tr><td>Free forever for small tutors (no card, no time limit)</td><td class="y">✓ up to 5 students</td><td class="n">✗ Trial only</td><td class="n">✗</td><td>✓ (no features)</td></tr>
+          <tr><td>14-day trial of paid plans, no card</td><td class="y">✓</td><td>Varies</td><td class="n">✗</td><td>n/a</td></tr>
+          <tr><td>Priced per student band, not per staff</td><td class="y">✓</td><td class="n">✗ Per staff</td><td class="n">✗ Per school</td><td>n/a</td></tr>
+          <tr><td>No password — email code sign-in</td><td class="y">✓</td><td class="n">✗</td><td class="n">✗</td><td>n/a</td></tr>
+          <tr><td>Works on phone, tablet and laptop</td><td class="y">✓</td><td>Varies</td><td>Desktop only</td><td>✓</td></tr>
+          <tr><td>Multi-currency pricing (GBP, EUR, INR and more)</td><td class="y">✓</td><td class="n">✗ One currency</td><td class="n">✗ One currency</td><td>n/a</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <!-- Students & classes -->
+    <div class="cmp-group fade-in">
+      <h3>Students &amp; classes</h3>
+      <p class="cmp-why">A one-to-one tutor and a group class need different setups. Most tools handle one or the other.</p>
+      <div class="cmp-wrap">
+      <table class="cmp-tbl">
+        <thead><tr><th>Feature</th><th class="col-planur">Planur</th><th>Typical tutor app</th><th>School software</th><th>Spreadsheets</th></tr></thead>
+        <tbody>
+          <tr><td>One-to-one and group classes</td><td class="y">✓</td><td>Varies</td><td>Groups only</td><td>Manual</td></tr>
+          <tr><td>Import students from CSV</td><td class="y">✓</td><td>✓</td><td>✓</td><td>Manual</td></tr>
+          <tr><td>Parent contact required for under-18s</td><td class="y">✓</td><td class="n">✗</td><td>Varies</td><td>Manual</td></tr>
+          <tr><td>Sibling detection (reuse parent details)</td><td class="y">✓</td><td class="n">✗</td><td class="n">✗</td><td>Manual</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <!-- Attendance -->
+    <div class="cmp-group fade-in">
+      <h3>Attendance</h3>
+      <p class="cmp-why">Knowing who turned up is table stakes. Knowing who is slipping — and why — is what matters.</p>
+      <div class="cmp-wrap">
+      <table class="cmp-tbl">
+        <thead><tr><th>Feature</th><th class="col-planur">Planur</th><th>Typical tutor app</th><th>School software</th><th>Spreadsheets</th></tr></thead>
+        <tbody>
+          <tr><td>Class register (present, absent, late)</td><td class="y">✓</td><td>✓</td><td>✓</td><td>Manual</td></tr>
+          <tr><td>Authorised vs unauthorised absences</td><td class="y">✓</td><td class="n">✗</td><td>Varies</td><td class="n">✗</td></tr>
+          <tr><td>At-risk student detection (streaks, &lt;90%, unauthorised runs)</td><td class="y">✓</td><td class="n">✗</td><td class="n">✗</td><td class="n">✗</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <!-- Fees & billing -->
+    <div class="cmp-group fade-in">
+      <h3>Fees &amp; billing</h3>
+      <p class="cmp-why">Real tutoring is messier than a flat monthly fee — per lesson, lesson packs, free trials, quarterly billing.</p>
+      <div class="cmp-wrap">
+      <table class="cmp-tbl">
+        <thead><tr><th>Feature</th><th class="col-planur">Planur</th><th>Typical tutor app</th><th>School software</th><th>Spreadsheets</th></tr></thead>
+        <tbody>
+          <tr><td>Monthly, quarterly and termly billing</td><td class="y">✓</td><td>Monthly only</td><td>Varies</td><td>Manual</td></tr>
+          <tr><td>Charge per lesson or sell lesson packs</td><td class="y">✓</td><td class="n">✗</td><td class="n">✗</td><td>Manual</td></tr>
+          <tr><td>Free trial lessons (not charged, not counted)</td><td class="y">✓</td><td class="n">✗</td><td class="n">✗</td><td>Manual</td></tr>
+          <tr><td>Bill everyone due in one tap</td><td class="y">✓</td><td>Varies</td><td>✓</td><td class="n">✗</td></tr>
+          <tr><td>PDF invoices and receipts</td><td class="y">✓</td><td>Varies</td><td>✓</td><td class="n">✗</td></tr>
+          <tr><td>Chase all overdue (WhatsApp, SMS or copy)</td><td class="y">✓</td><td class="n">✗</td><td class="n">✗</td><td>Manual</td></tr>
+          <tr><td>Joining fee on first invoice</td><td class="y">✓</td><td class="n">✗</td><td>Varies</td><td>Manual</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <!-- Lessons & calendar -->
+    <div class="cmp-group fade-in">
+      <h3>Lessons &amp; calendar</h3>
+      <p class="cmp-why">A moved lesson that nobody hears about is worse than a cancelled one everyone knows about.</p>
+      <div class="cmp-wrap">
+      <table class="cmp-tbl">
+        <thead><tr><th>Feature</th><th class="col-planur">Planur</th><th>Typical tutor app</th><th>School software</th><th>Spreadsheets</th></tr></thead>
+        <tbody>
+          <tr><td>Weekly lesson series with end dates</td><td class="y">✓</td><td>Varies</td><td>✓</td><td>Manual</td></tr>
+          <tr><td>Move, cancel or delete individual lessons</td><td class="y">✓</td><td>Varies</td><td>Varies</td><td>Manual</td></tr>
+          <tr><td>Calendar feed (Google, Outlook, iPhone)</td><td class="y">✓</td><td class="n">✗</td><td class="n">✗</td><td class="n">✗</td></tr>
+          <tr><td>Notify class after a change (in-app + WhatsApp/SMS)</td><td class="y">✓</td><td class="n">✗</td><td class="n">✗</td><td>Manual</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <!-- Files & resources -->
+    <div class="cmp-group fade-in">
+      <h3>Files &amp; resources</h3>
+      <p class="cmp-why">Sharing a worksheet should not mean finding the right WhatsApp group.</p>
+      <div class="cmp-wrap">
+      <table class="cmp-tbl">
+        <thead><tr><th>Feature</th><th class="col-planur">Planur</th><th>Typical tutor app</th><th>School software</th><th>Spreadsheets</th></tr></thead>
+        <tbody>
+          <tr><td>Upload files before any class exists</td><td class="y">✓</td><td class="n">✗</td><td class="n">✗</td><td>n/a</td></tr>
+          <tr><td>Share with a class, one student, or everyone</td><td class="y">✓</td><td class="n">✗</td><td>Varies</td><td>n/a</td></tr>
+          <tr><td>Folders (up to 5 levels deep)</td><td class="y">✓</td><td class="n">✗</td><td>Varies</td><td>n/a</td></tr>
+          <tr><td>Send a 7-day link to a parent without the app</td><td class="y">✓</td><td class="n">✗</td><td class="n">✗</td><td>n/a</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <!-- AI practice tests -->
+    <div class="cmp-group fade-in">
+      <h3>AI practice tests</h3>
+      <p class="cmp-why">No other tutor app generates exam papers. School software doesn't either.</p>
+      <div class="cmp-wrap">
+      <table class="cmp-tbl">
+        <thead><tr><th>Feature</th><th class="col-planur">Planur</th><th>Typical tutor app</th><th>School software</th><th>Spreadsheets</th></tr></thead>
+        <tbody>
+          <tr><td>AI-generated practice papers (topic, board, country-aware)</td><td class="y">✓</td><td class="n">✗</td><td class="n">✗</td><td class="n">✗</td></tr>
+          <tr><td>Reuse a test across classes (free, unlimited)</td><td class="y">✓</td><td class="n">✗</td><td class="n">✗</td><td class="n">✗</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <!-- Student app -->
+    <div class="cmp-group fade-in">
+      <h3>Your students get their own app</h3>
+      <p class="cmp-why">Your students get a planner — not a login to your back office.</p>
+      <div class="cmp-wrap">
+      <table class="cmp-tbl">
+        <thead><tr><th>Feature</th><th class="col-planur">Planur</th><th>Typical tutor app</th><th>School software</th><th>Spreadsheets</th></tr></thead>
+        <tbody>
+          <tr><td>Student-facing app (a planner, not a portal)</td><td class="y">✓</td><td class="n">✗</td><td class="n">✗</td><td class="n">✗</td></tr>
+          <tr><td>Student sees their marks, attendance and files</td><td class="y">✓</td><td class="n">✗</td><td class="n">✗</td><td class="n">✗</td></tr>
+          <tr><td>Students never see each other's marks</td><td class="y">✓</td><td>n/a</td><td>Varies</td><td>n/a</td></tr>
+          <tr><td>Parent link with approval</td><td class="y">✓</td><td class="n">✗</td><td>Varies</td><td class="n">✗</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <!-- Data, privacy & your voice -->
+    <div class="cmp-group fade-in">
+      <h3>Data, privacy &amp; your voice</h3>
+      <p class="cmp-why">You are handing over your roster, register and fees. Ask who can see them — and whether you can shape what gets built next.</p>
+      <div class="cmp-wrap">
+      <table class="cmp-tbl">
+        <thead><tr><th>Feature</th><th class="col-planur">Planur</th><th>Typical tutor app</th><th>School software</th><th>Spreadsheets</th></tr></thead>
+        <tbody>
+          <tr><td>CSV export (students, attendance, marks, fees)</td><td class="y">✓</td><td>Varies</td><td>✓</td><td>✓</td></tr>
+          <tr><td>Role-based access (owner / teacher separation)</td><td class="y">✓</td><td>Varies</td><td>✓</td><td class="n">✗</td></tr>
+          <tr><td>Teachers cannot see fees or salaries</td><td class="y">✓</td><td>Varies</td><td>Varies</td><td class="n">✗</td></tr>
+          <tr><td>Submit feedback and feature requests from the app</td><td class="y">✓</td><td class="n">✗</td><td class="n">✗</td><td class="n">✗</td></tr>
+          <tr><td>Track your reports and see what was acted on</td><td class="y">✓</td><td class="n">✗</td><td class="n">✗</td><td class="n">✗</td></tr>
+          <tr><td>Automatic reminders to parents</td><td><span class="soon">Coming soon</span></td><td>Varies</td><td>✓</td><td class="n">✗</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="callout fade-in" style="margin-top:8px;">
+      <p>Every ✓ above links to a real feature, checked against the code. We don't list what we
+        haven't built, and we don't claim what we can't show you.</p>
     </div>
   </div>
 </section>
