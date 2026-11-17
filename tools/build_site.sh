@@ -198,6 +198,42 @@ PY
   fi
 fi
 
+# ── 🔴 Staging pages must link to the STAGING app sites ─────────────────────
+# Pages link straight to https://parent.theplanur.co.uk/ and
+# https://student.theplanur.co.uk/ (the Tutor log in ▾ menu, the Parents page).
+# Left as they are on staging, a tester follows them onto PROD and signs in
+# against the live database. On staging, point them at the staging sites — or,
+# when those are not set, at the local paths, which show "Coming soon". The
+# embedded apps are not touched. Found 2026-11-17.
+if [[ "$FLAVOUR" == "staging" ]]; then
+  python3 - "$DIST" "${PARENT_SITE_URL:-}" "${STUDENT_SITE_URL:-}" <<'PY'
+import sys, pathlib
+dist, parent, student = sys.argv[1], sys.argv[2], sys.argv[3]
+swaps = [('href="https://parent.theplanur.co.uk/',
+          'href="' + (parent.rstrip('/') + '/' if parent else '/parents/app/')),
+         ('href="https://student.theplanur.co.uk/',
+          'href="' + (student.rstrip('/') + '/' if student else '/app/'))]
+changed = 0
+for f in pathlib.Path(dist).rglob('*.html'):
+    rel = f.relative_to(dist).as_posix()
+    if rel.startswith(('app/', 'tutors/app/', 'parents/app/')):
+        continue
+    s = f.read_text(encoding='utf-8')
+    t = s
+    for old, new in swaps:
+        t = t.replace(old, new)
+    if t != s:
+        f.write_text(t, encoding='utf-8')
+        changed += 1
+print(f"  staging: parent/student log-in links → staging sites in {changed} pages")
+PY
+  if grep -rlE 'href="https://(parent|student)\.theplanur\.co\.uk' --include='*.html' \
+       --exclude-dir=app "$DIST" >/dev/null 2>&1; then
+    echo "✗ A staging page still links to a PROD parent/student site." >&2
+    exit 1
+  fi
+fi
+
 # ── 🔴 The staging site must never be indexed ───────────────────────────────
 # It is a BYTE-FOR-BYTE copy of the marketing pages on a second host. Left
 # crawlable, it competes with the real site for its own search terms — two of
