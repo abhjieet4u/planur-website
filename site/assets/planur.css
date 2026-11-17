@@ -604,7 +604,11 @@ footer{background:var(--text-dark);padding:52px 0 30px;position:relative;z-index
    Driven by /assets/campaigns.js, which sets data-campaign / data-campaign-
    theme on <html> only inside a campaign's dates. Outside them none of this
    applies. A new season = a new .promo-<theme> block and a new theme block.  */
-.promo-bar{position:relative;z-index:101;font-size:.88rem;line-height:1.45;}
+/* Stays on screen while the page scrolls, until closed (owner, 2026-11-17).
+   The header sticks just below it: campaigns.js keeps --promo-h at the
+   banner's height, and sets it back to 0 when the banner is closed. */
+.promo-bar{position:sticky;top:0;z-index:101;font-size:.88rem;line-height:1.45;}
+html[data-promo="on"] #navbar{top:var(--promo-h,0px);}
 .promo-inner{display:flex;align-items:center;justify-content:space-between;gap:10px 18px;
   flex-wrap:wrap;padding-top:9px;padding-bottom:9px;}
 .promo-text{margin:0;min-width:0;}
@@ -621,7 +625,29 @@ footer{background:var(--text-dark);padding:52px 0 30px;position:relative;z-index
 .promo-close:hover{opacity:1;}
 .promo-copy:focus-visible,.promo-cta:focus-visible,.promo-close:focus-visible{
   outline:3px solid var(--lavender);outline-offset:2px;}
-@media(max-width:640px){.promo-inner{padding-top:8px;padding-bottom:8px;}.promo-note{display:block;}}
+@media(max-width:640px){.promo-inner{padding-top:8px;padding-bottom:8px;}.promo-note{display:block;}
+  .promo-compact .promo-note{display:none;}
+  .promo-compact .promo-inner{padding-top:6px;padding-bottom:6px;}}
+
+/* Twinkling stars (Christmas, on the pages in `starsOn`). A page-tall layer above
+   the page but below the header; it never takes a click. */
+.campaign-stars{position:absolute;top:0;left:0;width:100%;pointer-events:none;z-index:99;overflow:hidden;}
+/* Five-, six- and eight-pointed stars, mixed (owner, 2026-11-17). */
+.campaign-stars i::before{content:"\2605";}            /* ★ */
+.campaign-stars i.s6::before{content:"\2736";}         /* ✶ */
+.campaign-stars i.s8::before{content:"\2738";}         /* ✸ */
+.campaign-stars i{position:absolute;font-style:normal;line-height:1;color:#E2A72E;
+  -webkit-text-stroke:.6px #8A5A08;   /* a darker gold edge keeps the shape crisp on light bands */
+  text-shadow:0 0 6px rgba(226,167,46,.75);opacity:.25;
+  animation:planur-twinkle var(--d,3s) ease-in-out var(--delay,0s) infinite;}
+html[data-campaign-theme="christmas"] .campaign-stars i{color:#F3D58A;-webkit-text-stroke:.6px #B8892A;
+  text-shadow:0 0 8px rgba(243,213,138,.9);}
+/* The cookie pop-up reads --text-dark for its background, which the themes
+   turn light. Keep it dark and readable inside a campaign theme. */
+html[data-campaign-theme="blackfriday"] #planur-cookies .cc-box{background:#000;border:1px solid #30323A;}
+html[data-campaign-theme="christmas"] #planur-cookies .cc-box{background:#0A1F15;border:1px solid #2E5A43;}
+@keyframes planur-twinkle{0%,100%{opacity:.2;transform:scale(.7) rotate(0deg);}50%{opacity:1;transform:scale(1.15) rotate(20deg);filter:brightness(1.35);}}
+@media (prefers-reduced-motion:reduce){.campaign-stars i{animation:none;opacity:.45;}}
 
 /* Black Friday: black bar, gold code. */
 .promo-blackfriday{background:#0B0B0D;color:#F5F5F5;}

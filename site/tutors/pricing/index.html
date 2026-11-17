@@ -29,7 +29,7 @@
 <meta property="og:description" content="Start free with five students — no card, no time limit. Grow into a paid plan in your own currency, with 14 days free to try it." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://theplanur.co.uk/tutors/pricing/" />
-<meta property="og:image" content="https://theplanur.co.uk/assets/planur-og-card-tutors.png?v=20261117" />
+<meta property="og:image" content="https://theplanur.co.uk/assets/planur-og-card-tutors.png?v=20261117b" />
 <meta property="og:site_name" content="Planur" />
 <meta name="twitter:card" content="summary_large_image" />
 <!-- SEO 2026-11-14: GBP prices mirror the plan cards below. 🔴 Change both together. -->
@@ -45,12 +45,12 @@
 </script>
 <meta name="robots" content="all">
 <!-- planur:brand-icons:start -->
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png?v=20261117" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png?v=20261117" />
-  <link rel="apple-touch-icon" href="/assets/planur-apple-touch-icon.png?v=20261117" />
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png?v=20261117b" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/planur-favicon-192.png?v=20261117b" />
+  <link rel="apple-touch-icon" href="/assets/planur-apple-touch-icon.png?v=20261117b" />
   <!-- planur:brand-icons:end -->
 <script>document.documentElement.className += ' js';</script>
-<link rel="stylesheet" href="/assets/planur.css?v=20261117" />
+<link rel="stylesheet" href="/assets/planur.css?v=20261117b" />
 <style>
   .pr-hero{padding:64px 0 10px;text-align:center;}
   .pr-hero .section-title{margin:10px auto 14px;max-width:16ch;}
@@ -118,6 +118,29 @@
 
   @media(max-width:1000px){ .plans{grid-template-columns:repeat(2,1fr);} .included ul{grid-template-columns:repeat(2,1fr);} }
   @media(max-width:560px){ .plans{grid-template-columns:1fr;} .included ul{grid-template-columns:1fr;} }
+  /* ── Comparison table ──────────────────────────────────────────────────── */
+  .cmp{padding:24px 0 8px;}
+  .cmp-title{font-size:1.5rem;font-weight:800;color:var(--text-dark);margin:0 0 14px;letter-spacing:-.3px;}
+  .cmp-intro{max-width:62ch;margin-bottom:12px;font-size:.95rem;color:var(--text-mid);line-height:1.65;}
+  .cmp-group{margin-bottom:12px;}
+  .cmp-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .cmp-tbl{width:100%;border-collapse:collapse;font-size:.88rem;min-width:620px;}
+  .cmp-tbl thead th{text-align:left;padding:10px 14px;font-size:.72rem;font-weight:700;
+    letter-spacing:.6px;text-transform:uppercase;color:var(--text-light);
+    border-bottom:2px solid var(--neutral-mid);white-space:nowrap;}
+  .cmp-tbl thead th:first-child{min-width:200px;}
+  .cmp-tbl thead th.col-planur{color:var(--sage-deep);}
+  .cmp-tbl tbody td{padding:10px 14px;border-bottom:1px solid var(--neutral-mid);
+    vertical-align:top;color:var(--text-mid);line-height:1.5;}
+  .cmp-tbl tbody td:first-child{font-weight:600;color:var(--text-dark);}
+  .cmp-tbl tbody td:nth-child(2){color:var(--sage-deep);font-weight:600;}
+  .cmp-tbl .y{color:var(--sage-deep);}
+  .cmp-tbl .n{color:var(--coral-dark);}
+  @media(max-width:760px){
+    .cmp-tbl{font-size:.82rem;}
+    .cmp-tbl thead th,.cmp-tbl tbody td{padding:8px 10px;}
+  }
+
 </style>
 </head>
 <body>
@@ -135,7 +158,7 @@
 <nav id="navbar">
   <div class="container">
     <div class="nav-bar">
-      <a class="logo" href="/tutors/"><img class="logo-lockup" src="/assets/planur-lockup-tutors.png?v=20261117" alt="Planur for Tutors" width="499" height="160" /></a>
+      <a class="logo" href="/tutors/"><img class="logo-lockup" src="/assets/planur-lockup-tutors.png?v=20261117b" alt="Planur for Tutors" width="499" height="160" /></a>
       <div class="nav-right">
         <!-- Tutor log in is the visible button; students and parents are one
              click away behind the arrow, never shown openly (owner, 2026-11-17). -->
@@ -330,6 +353,34 @@
     </div>
   </section>
 
+  <!-- HOW PLANUR COMPARES — owner, 2026-11-17: beside the price table, at most
+       8–10 rows, every ✓ live today. Moved here from /tutors, which links to it. -->
+  <section class="cmp" id="compare">
+    <div class="container">
+      <h2 class="cmp-title">How Planur compares</h2>
+      <div class="cmp-group fade-in">
+      <div class="cmp-wrap">
+      <table class="cmp-tbl">
+        <thead><tr><th>Feature</th><th class="col-planur">Planur</th><th>Typical tutor app</th><th>WhatsApp &amp; notebooks</th></tr></thead>
+        <tbody>
+          <tr><td>Free for up to 5 students, with no card and no time limit</td><td class="y">✓</td><td class="n">✗ Trial only</td><td>Free, but scattered</td></tr>
+          <tr><td>Priced by number of students, not per staff member</td><td class="y">✓</td><td class="n">✗ Per staff</td><td>n/a</td></tr>
+          <tr><td>One-to-one and group classes in one place</td><td class="y">✓</td><td>Varies</td><td>Separate chats</td></tr>
+          <tr><td>Per-lesson, lesson-pack and termly billing, with PDF invoices</td><td class="y">✓</td><td>Monthly only</td><td>Manual</td></tr>
+          <tr><td>Register that flags students who are slipping</td><td class="y">✓</td><td class="n">✗</td><td class="n">✗</td></tr>
+          <tr><td>Calendar feed, and the class told when a lesson moves</td><td class="y">✓</td><td class="n">✗</td><td>One message at a time</td></tr>
+          <tr><td>AI-generated practice papers for your board and topic</td><td class="y">✓</td><td class="n">✗</td><td class="n">✗</td></tr>
+          <tr><td>Students get their own planner; parents link with approval</td><td class="y">✓</td><td class="n">✗</td><td class="n">✗</td></tr>
+          <tr><td>Progress charts for each student, against the class average</td><td class="y">✓</td><td>Varies</td><td class="n">✗</td></tr>
+          <tr><td>Request an enhancement and track it</td><td class="y">✓</td><td class="n">✗</td><td>n/a</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+      <p class="cmp-intro">Every ✓ is live today. You can export everything, whenever you like.</p>
+    </div>
+  </section>
+
   <!-- CLOSE -->
   <section class="pr-close" id="talk">
     <div class="container">
@@ -389,8 +440,8 @@
   </div>
 </footer>
 
-<script src="/assets/campaigns.js?v=20261117"></script>
-<script src="/assets/planur.js?v=20261117"></script>
+<script src="/assets/campaigns.js?v=20261117b"></script>
+<script src="/assets/planur.js?v=20261117b"></script>
 <script>
 (function () {
   // Mirrors packages/tutor_core/lib/src/plan_prices.dart — display only.
