@@ -130,7 +130,7 @@ rm -f "$DIST/tutors/app/_redirects" "$DIST/tutors/app/_headers"
 STUDENT_LINE="    student web app →  (not included)"
 if [[ "${STUDENT_ON_SUBDOMAIN:-0}" == "1" ]]; then
   # Lives on its own subdomain (build_app_site.sh); this site only redirects —
-  # or, with no URL for this environment, leaves /app/ to the Coming soon page.
+  # or, with no URL for this environment, leaves /app/ to the not-found page (404.html).
   echo "▸ Student web app is on its own subdomain — not embedded at /app/"
   STUDENT_LINE="    student web app →  ${STUDENT_SITE_URL:-(subdomain URL not set — /app/ shows Coming soon)}"
 elif [[ "${SKIP_STUDENT:-0}" == "1" ]]; then
@@ -176,7 +176,7 @@ fi
 # Until then /parents/app/ has no file and no rule, so Netlify serves 404.html —
 # the "Coming soon" page with Contact us (owner, 2026-11-15) — never a dead
 # hostname.
-PARENT_LINE="    parent portal   →  /parents/app/ shows Coming soon (not live)"
+PARENT_LINE="    parent portal   →  /parents/app/ shows the not-found page (not live)"
 if [[ -n "${PARENT_SITE_URL:-}" ]]; then
   printf '\n# Parent portal → its own subdomain (added by build_site.sh)\n/parents/app/*  %s:splat  301\n' \
     "${PARENT_SITE_URL%/}/" >> "$DIST/_redirects"

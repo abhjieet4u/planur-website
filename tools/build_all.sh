@@ -23,7 +23,7 @@
 #
 # The main site keeps linking to /parents/app/ and /app/; build_site.sh adds the
 # redirect to a subdomain only when it is live, so a link never lands on a
-# hostname that does not exist yet — it lands on the "Coming soon" 404 instead.
+# hostname that does not exist yet — it lands on the not-found page (404.html) instead.
 #
 # 🔴 PARENT_LIVE=1 only once migrations 179–182 have run on prod. Staging always
 # gets the parent site. For the STAGING main site to redirect to the staging

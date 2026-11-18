@@ -35,8 +35,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Planur for Schools — one system, every class, every year.</title>
-<meta name="description" content="Classes, attendance, marks, fees and staff records in one place — with a school year that carries forward instead of being rebuilt every June." />
+<title>Planur for Schools — not open yet | Planur</title>
+<!-- Owner, 2026-11-18: schools are parked. This page is a holding page, kept
+     out of search and the sitemap, with no way to sign in. The previous school
+     marketing page is in git history (before this commit) for when schools open. -->
+<meta name="robots" content="noindex, nofollow" />
+<meta name="description" content="Planur for Schools is not open yet. We are not accepting school sign-ins at the moment." />
 <link rel="canonical" href="https://theplanur.co.uk/schools/" />
 <meta property="og:title" content="Planur for Schools — one system, every class, every year." />
 <meta property="og:description" content="Classes, attendance, marks, fees and staff records in one place, and a school year that carries forward." />
@@ -253,9 +257,8 @@
            It still takes the icon treatment below 420px so the three products'
            headers behave the same way on a phone. -->
       <div class="nav-right">
-        <a class="nav-link" href="/tutors/app/?for=school" aria-label="School log in" title="School log in">
-          <svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg>
-          <span class="nav-label">School log in</span>
+        <a class="nav-link" href="/tutors/" aria-label="Planur for Tutors" title="Planur for Tutors">
+          <span class="nav-label">Planur for Tutors</span>
         </a>
       </div>
       <!-- planur:site-menu:start -->
@@ -295,363 +298,19 @@
 
 <main id="main">
 
-<!-- HERO -->
 <section class="s-hero">
   <div class="container">
     <div class="s-hero-inner fade-in">
       <div class="hero-badge"><svg class="ic ic-sm"><use href="#i-cap"/></svg> For schools</div>
-      <h1>One system. <em>Every class, every year.</em></h1>
-      <p class="s-hero-sub">Classes, attendance, marks, fees, receipts and staff records in one
-        place — on a phone or a laptop, for every teacher, with your school's own name and crest on
-        it.</p>
-      <div class="facts">
-        <div class="fact"><svg class="ic ic-sm"><use href="#i-phone"/></svg> Any phone, any laptop</div>
-        <div class="fact"><svg class="ic ic-sm"><use href="#i-book"/></svg> Students get their own planner</div>
-        <div class="fact"><svg class="ic ic-sm"><use href="#i-lock"/></svg> Your records stay yours</div>
-        <div class="fact"><svg class="ic ic-sm"><use href="#i-check"/></svg> Set up for you, not left to you</div>
-      </div>
+      <h1>Planur for Schools isn't open yet.</h1>
+      <p class="s-hero-sub">We're not accepting school sign-ins at the moment. We're focusing on
+        tutors first, and schools will follow.</p>
+      <p class="s-hero-sub">If you teach or run a tutoring practice,
+        <a href="/tutors/">Planur for Tutors</a> is open today. For anything else,
+        <a href="/support/">contact us</a>.</p>
     </div>
   </div>
 </section>
-
-<section class="cta-band" id="talk">
-  <div class="container">
-    <div class="cta-grid">
-      <div class="fade-in">
-        <span class="section-label">Getting started</span>
-        <h2 class="section-title">Your school, running in a week.</h2>
-        <div class="ask">
-          <div class="ask-item"><div class="n">1</div><div>
-            <h4>We set the school up for you</h4>
-            <p>Your name, your crest, your classes and your year groups — Class 1 to 12, or Year 7 to 13,
-              whichever your school uses. You sign in to a system that already knows what it is.</p></div></div>
-          <div class="ask-item"><div class="n">2</div><div>
-            <h4>Try it with one class first</h4>
-            <p>One class, one term, real students — enough for your teachers to judge it properly
-              without a week of data entry. When it earns its place, extend it to the whole school.</p></div></div>
-          <div class="ask-item"><div class="n">3</div><div>
-            <h4>You keep deciding how it works</h4>
-            <p>Admission numbers, fee heads, the financial year, who on your staff sees what. These are
-              settings you control, not requests you file.</p></div></div>
-        </div>
-        <p style="font-size:.9rem;color:var(--text-mid);margin-top:22px;line-height:1.65;">
-          Every school is set up by us, not handed a blank account and a manual — your classes, your
-          year groups and your fee structure are in place before your staff sign in for the first
-          time. Write to us and we will tell you what that would look like for your school.</p>
-      </div>
-
-      <div class="form-card fade-in delay-1" id="school-form-card">
-        <form id="school-form" data-live-clear novalidate>
-          <div class="form-row">
-            <div class="form-group" id="sgrp-name">
-              <label for="sname">Your name <span style="color:var(--coral)">*</span></label>
-              <input type="text" id="sname" name="name" autocomplete="name" placeholder="e.g. Anita Rao" required />
-              <span class="error-msg">Please enter your name.</span>
-            </div>
-            <div class="form-group" id="sgrp-email">
-              <label for="semail">Email address <span style="color:var(--coral)">*</span></label>
-              <input type="email" id="semail" name="email" autocomplete="email" placeholder="you@school.edu" required />
-              <span class="error-msg">Please enter a valid email address.</span>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group" id="sgrp-school">
-              <label for="sschool">School <span style="color:var(--coral)">*</span></label>
-              <input type="text" id="sschool" placeholder="Your school's name" required />
-              <span class="error-msg">Please tell us which school.</span>
-            </div>
-            <div class="form-group" id="sgrp-role">
-              <label for="srole">Your role <span class="form-hint">optional</span></label>
-              <input type="text" id="srole" placeholder="e.g. Principal, Head of IT" />
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group" id="sgrp-country">
-              <label for="scountry">Country <span style="color:var(--coral)">*</span></label>
-              <select id="scountry" required>
-                <option value="">Select country</option>
-                <option>India</option>
-                <option>United Kingdom</option>
-                <option>Ireland</option>
-                <option>United Arab Emirates</option>
-                <option>Singapore</option>
-                <option>Nigeria</option>
-                <option>South Africa</option>
-                <option>Other</option>
-              </select>
-              <span class="error-msg">Please select your country.</span>
-            </div>
-            <div class="form-group" id="sgrp-students">
-              <label for="sstudents">Roughly how many students <span style="color:var(--coral)">*</span></label>
-              <select id="sstudents" required>
-                <option value="">Select</option>
-                <option>Under 200</option>
-                <option>200–500</option>
-                <option>500–1,000</option>
-                <option>1,000–2,000</option>
-                <option>More than 2,000</option>
-              </select>
-              <span class="error-msg">Please choose a range.</span>
-            </div>
-          </div>
-          <div class="form-group" id="sgrp-notes">
-            <label for="snotes">What would you need it to do <span class="form-hint">optional</span></label>
-            <textarea id="snotes" rows="3" placeholder="The parts of your year that cost you the most time"></textarea>
-          </div>
-
-          <!-- Honeypot: never shown to a person, never in the tab order. -->
-          <div class="hp" aria-hidden="true">
-            <label for="surl">Website</label>
-            <input type="text" id="surl" name="website" tabindex="-1" autocomplete="off" />
-          </div>
-
-          <button type="submit" class="btn btn-sage btn-submit" id="school-submit">Talk to us →</button>
-          <p class="form-footnote">We read every message and reply personally, usually within one
-            working day. No newsletter, no list — see our <a href="/privacy/?app=school">privacy notice</a>.</p>
-        </form>
-        <div class="success-msg" id="school-success" hidden>
-          <div class="success-emoji">💚</div>
-          <p>Thanks — that's with us. We'll come back to you within one working day, from a real
-            person. If it's urgent, email <a href="mailto:support@theplanur.co.uk">support@theplanur.co.uk</a>.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HONESTY — first thing after the hero, deliberately. -->
-<section class="band">
-  <div class="container">
-    <div class="callout warn fade-in">
-      <p><strong>Where we are.</strong> The day-to-day of running a school works today — classes,
-        registers, student and staff records, the timetable, marks, fees and receipts. The reporting
-        that sits on top of a full school year is being built with the schools joining now. The split
-        below says exactly which is which, and there is no date against anything we have not finished,
-        because we would rather agree one with you than publish one.</p>
-    </div>
-  </div>
-</section>
-
-<!-- PROBLEM -->
-<section class="band tint">
-  <div class="container">
-    <div class="band-head fade-in">
-      <span class="section-label">The problem</span>
-      <h2 class="section-title">Four systems that never speak to each other.</h2>
-      <p class="section-lede">Each is someone's careful work. None can answer a question the other
-        three hold half of.</p>
-    </div>
-    <div class="grid-4 fade-in delay-1">
-      <div class="prob"><svg class="ic"><use href="#i-book"/></svg><h4>The register</h4><div class="prob-now">A paper book</div></div>
-      <div class="prob"><svg class="ic"><use href="#i-grid"/></svg><h4>Marks</h4><div class="prob-now">A sheet per teacher</div></div>
-      <div class="prob"><svg class="ic"><use href="#i-note"/></svg><h4>Fees</h4><div class="prob-now">A separate ledger</div></div>
-      <div class="prob"><svg class="ic"><use href="#i-chat"/></svg><h4>Notices</h4><div class="prob-now">A group chat</div></div>
-    </div>
-    <div class="callout fade-in delay-2" style="margin-top:26px;">
-      <p>School software tends to be built for large institutions and priced for them — heavy to run,
-        and it hands students a <strong>portal</strong> they never open.</p>
-    </div>
-  </div>
-</section>
-
-<!-- READY / BEING BUILT -->
-<section class="band" id="ready">
-  <div class="container">
-    <div class="band-head fade-in">
-      <span class="section-label">What you would be getting</span>
-      <h2 class="section-title">A school day, from the register to the receipt.</h2>
-    </div>
-    <div class="prose-cols fade-in delay-1">
-      <div>
-        <p><b>Classes and the register.</b> Attendance taken on a phone, in the room, in the time it
-          takes to read the names. Counted the moment it is saved.</p>
-
-        <p><b>One record per child.</b> Admission number, year group, address, guardians, marks. The
-          admission number is issued by the school in an unbroken series.</p>
-
-        <p><b>Fees without a second ledger.</b> Your fee heads, your amounts, bills per cycle, tracked
-          to paid. Receipts numbered in one gapless series against your financial year.</p>
-      </div>
-      <div>
-        <p><b>Staff, and who sees what.</b> Teachers reach their own classes. The office reaches
-          students. Whoever keeps the books reaches the money, not the children.</p>
-
-        <!-- 🔴 DO NOT PUT "students see their own copy on their phone" BACK until
-             the student app actually reads it. Migration 119's RLS does let a
-             student read timetable_period / timetable_slot — but nothing reads
-             them. The student app's only timetable path is
-             StudentReadRepository.upcomingEvents(), which reads that student's
-             own `events` table, and 119's own comment puts the student read RPC
-             in "Phase 3". A permission is not a feature, and of everything on
-             this page it is the claim a head teacher is likeliest to test in a
-             demo. Moved to the being-built paragraph below. -->
-        <p><b>The week and the year.</b> A timetable per class, exams beside it, holidays that stop a
-          closed day showing as a lesson.</p>
-
-        <p><b>It looks like your school.</b> Your crest, your name, your typeface — on every screen a
-          teacher opens and every receipt a parent is handed.</p>
-      </div>
-    </div>
-
-    <!-- 🔴 The honest half, kept — but as a sentence, not a second column with
-         a "Being built" tag. The owner asked for a marketing page rather than a
-         release ledger (2026-09-11). What must NOT happen is the honesty going
-         with the table: a head teacher who discovers after signing up that
-         something does not exist has been misled, whatever the tone was. Said
-         plainly, in place, once.
-
-         ⚠️ CORRECTED 2026-10-18. This list said year-on-year PROMOTION was
-         still being built. It is not — promote_screen.dart ships, the route
-         /practice/:id/promote is registered, and three help articles document
-         it. A page that calls a finished feature unfinished is the mirror of
-         the fault this comment warns about: it is still a page that does not
-         match the product, and it loses a sale rather than a customer.
-         🔴 When something here ships, MOVE IT OUT in the same change. -->
-    <div class="still-building fade-in delay-2">
-      <p><b>Being built with the schools joining now:</b> printed report cards on your board's
-        grading scale, and the class timetable appearing inside each student's own planner. These
-        are the parts that only make sense once a full year has run through the system, and we
-        would rather shape them with a school than guess. Everything else is working today —
-        including promoting a whole class into the next year in one action, which arrived with the
-        schools who asked for it.</p>
-    </div>
-  </div>
-</section>
-
-<!-- INCLUDED / ADD-ONS -->
-<section class="band sky">
-  <div class="container">
-    <div class="band-head fade-in">
-      <span class="section-label">No hidden extras</span>
-      <h2 class="section-title">Most of it is simply included.</h2>
-      <p class="section-lede">A few things cost us money that scales with how much you use them. Those
-        are priced separately rather than loaded onto every school.</p>
-    </div>
-    <div class="addon-grid fade-in delay-1">
-      <div class="addon">
-        <div class="ic-tile tile-lav"><svg class="ic"><use href="#i-lock"/></svg></div>
-        <h4>Secure student documents</h4>
-        <p>Grant and reservation paperwork, encrypted with a key your school holds — so we cannot read
-          the files even if asked to.</p>
-      </div>
-      <div class="addon">
-        <div class="ic-tile tile-sage"><svg class="ic"><use href="#i-clip"/></svg></div>
-        <h4>Year-end export and custody</h4>
-        <p>A full year of records handed to you as files for your own storage, verified against the
-          source before anything is removed.</p>
-      </div>
-      <div class="addon">
-        <div class="ic-tile tile-coral"><svg class="ic"><use href="#i-send"/></svg></div>
-        <h4>Text messages at volume</h4>
-        <p>Notices reach parents in the app and by email, both included. Text messages cost us per
-          message, so heavy SMS use is charged on.</p>
-      </div>
-      <div class="addon">
-        <div class="ic-tile tile-lav"><svg class="ic"><use href="#i-grid"/></svg></div>
-        <h4>Payroll handover</h4>
-        <p>We hold your staff attendance and leave; your payroll provider runs the payroll. We send
-          them the days, in the format they take. We do not run payroll ourselves — that is a
-          regulated job, and it should be done by people who do only that.</p>
-      </div>
-      <div class="addon">
-        <div class="ic-tile tile-sage"><svg class="ic"><use href="#i-clipboard"/></svg></div>
-        <h4>Extended retention</h4>
-        <p>Holding records for longer than we keep as standard, where your board or local rules
-          require it.</p>
-      </div>
-    </div>
-    <div class="callout fade-in delay-2" style="margin-top:26px;">
-      <p><strong>These are being built alongside the list above, not available today</strong> — they
-        are here so you can see what will and will not be included, rather than discover it later.
-        And we do not quote prices on a website: what a school pays depends on its size and which of
-        these it wants, which is a conversation rather than a table.</p>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING — "not yet", said out loud.
-     Owner, 2026-09-11. A school checks the price early and leaves when it
-     cannot find one; silence reads as "expensive" or as "they have not thought
-     about it". Saying it is unset, and that early schools are free while it is
-     unset, is both true and the strongest thing we can say right now.
-     🔴 NO NUMBERS until the plan exists. An invented figure here is a promise
-     we would have to break, to the one audience least likely to forgive it. -->
-<section class="band" id="pricing">
-  <div class="container">
-    <div class="band-head fade-in">
-      <span class="section-label">Price</span>
-      <h2 class="section-title">Free while we build it with you.</h2>
-      <p class="band-sub">There is no school price yet, and we would rather say so than invent one.
-        Here is exactly where you would stand.</p>
-    </div>
-    <div class="ask fade-in delay-1">
-      <div class="ask-item"><div class="n">1</div><div>
-        <h4>The first months cost nothing</h4>
-        <p>No card, no trial clock, no feature held back. You are using the product, not evaluating a
-          cut-down version of it.</p></div></div>
-      <div class="ask-item"><div class="n">2</div><div>
-        <h4>You see the price before it applies</h4>
-        <p>When we set one, you get it in writing, with what it covers and when it would start.
-          Nothing begins charging on its own.</p></div></div>
-      <div class="ask-item"><div class="n">3</div><div>
-        <h4>If it does not suit you, you leave with your records</h4>
-        <!-- 🔴 "Export it in full and go" was a promise this page CONTRADICTED
-             four sections above, where "Year-end export and custody" sits in the
-             list marked "not available today" — and there is no export anywhere
-             in the product: no screen in tutor_app/lib/features/, no script in
-             supabase/ops/. Doing it by hand is honest and, at this number of
-             schools, true. A self-serve button is not, and this is the sentence
-             a school's DPA counsel reads. Restore the stronger wording when the
-             export ships, not before. -->
-        <p>Your data is not the thing keeping you here. Ask, and we hand your records back as files —
-          today we do that for you rather than hand you a button, and it is a commitment worth
-          reading our <a href="/privacy/?app=school">privacy notice</a> against.</p></div></div>
-    </div>
-  </div>
-</section>
-
-
-<!-- TRUST -->
-<section class="band tint">
-  <div class="container">
-    <div class="band-head fade-in">
-      <span class="section-label">The fair question</span>
-      <h2 class="section-title">You'd be handing us children's records.</h2>
-      <p class="section-lede">So here is what is decided and enforced below the app, where a bug in a
-        screen cannot undo it.</p>
-    </div>
-    <div class="trust-grid fade-in delay-1">
-      <div class="tcard">
-        <div class="ic-tile tile-sage"><svg class="ic"><use href="#i-shield"/></svg></div>
-        <h3>The school is the data controller</h3>
-        <p>You decide what is collected and for how long; we process it on your instructions. For Indian
-          schools that makes you the Data Fiduciary under the DPDP Act and us your Processor — set out
-          in a data processing agreement we sign with you at onboarding. The public summary of it is in our
-          <a href="/privacy/?app=school">privacy notice</a>.</p>
-      </div>
-      <div class="tcard">
-        <div class="ic-tile tile-lav"><svg class="ic"><use href="#i-eyeoff"/></svg></div>
-        <h3>Students keep a planner of their own</h3>
-        <p>Planur began as a teenager's own planner. The school sees its classes, attendance and the
-          results it sets. A student's homework, revision and private notes stay theirs.</p>
-      </div>
-      <div class="tcard">
-        <div class="ic-tile tile-coral"><svg class="ic"><use href="#i-lock"/></svg></div>
-        <h3>Fees and staff data are permission-gated</h3>
-        <p>A class teacher does not see the fee ledger or another teacher's leave record. That is
-          enforced in the database, not by hiding a screen.</p>
-      </div>
-      <div class="tcard">
-        <div class="ic-tile tile-sage"><svg class="ic"><use href="#i-split"/></svg></div>
-        <h3>Your records leave with you</h3>
-        <p>If you stop, your data is exported to you rather than held or quietly deleted. These rules
-          are covered by an automated test suite that tries to break them before anything ships.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- THE ASK + FORM -->
 
 </main>
 
@@ -674,8 +333,7 @@
         <h4>For schools</h4>
         <ul>
           <li><a href="/schools/">Planur for Schools</a></li>
-          <li><a href="/tutors/app/?for=school">School log in</a></li>
-          <li><a href="/schools/#talk">Talk to us</a></li>
+          <li><a href="/support/">Contact us</a></li>
           <li><a href="/tools/">Free tools</a></li>
         </ul>
       </div>

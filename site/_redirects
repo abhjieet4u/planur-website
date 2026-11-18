@@ -133,9 +133,12 @@
 # session unless it also carries its own persistSessionKey. Owner chose one
 # door, 2026-09-03.
 /school          /schools/                          301
-/schools/login   /tutors/app/?for=school        301
-/school-login    /tutors/app/?for=school        301
-/schools/app/*   /tutors/app/:splat?for=school  301
+# Owner, 2026-11-18: schools are parked and closed to sign-ins. Every school
+# entry point lands on the /schools/ holding page, never on a sign-in screen.
+# Restore the three lines below (git history) when schools open.
+/schools/login   /schools/                      301
+/school-login    /schools/                      301
+/schools/app/*   /schools/                      301
 
 # ═════════════════════════════════════════════════════════════════════════════
 # 🔴 SPA FALLBACKS — WITHOUT THESE, EVERY DEEP LINK INTO EITHER APP 404s.

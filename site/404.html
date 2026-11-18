@@ -16,7 +16,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Coming soon — Planur</title>
+<title>Page not found — Planur</title>
 <meta name="robots" content="noindex">
 <!-- planur:brand-icons:start -->
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/planur-favicon-32.png?v=20261117b" />
@@ -60,26 +60,24 @@
       </svg>
     </div>
 
-    <!-- Owner, 2026-11-15: a missing page reads as COMING SOON, not as broken.
-         It doubles as the launch fallback: a link to something not deployed
-         yet (the parent portal at /parents/app/, before launch) lands here
-         and is told it is on its way, rather than shown an error. -->
-    <h1>Coming soon.</h1>
-    <p class="lede">What you're looking for isn't ready yet — we're adding to Planur steadily,
-      and this is on its way. If a link brought you here, check back shortly. In the
-      meantime, here's where most people are heading:</p>
+    <!-- Owner, 2026-11-15: a missing page must not read as broken. It doubles
+         as the launch fallback: a link to something not deployed yet (the
+         parent portal at /parents/app/, before launch) lands here.
+         Owner, 2026-11-17: but a mistyped address was told "Coming soon",
+         which promised a feature that does not exist. It now says the page
+         was not found FIRST, and only then that it may be on its way — true
+         for both cases. Sentences kept short (SEO house rule). -->
+    <h1>We couldn't find that page.</h1>
+    <p class="lede">The link may be mistyped, or the page may not exist yet. Some of what
+      we're building is just around the corner. Meanwhile, here's where most people are
+      heading:</p>
 
-    <!-- All three products, tutors first: it is the promoted one, and "/" now
-         opens it. Schools was missing here entirely, so a mistyped /school
-         link offered a head teacher two routes, neither of them theirs. -->
+    <!-- Tutors first: it is the promoted one, and "/" opens it. Schools are
+         parked and hidden everywhere (owner, 2026-11-18). -->
     <div class="paths">
       <a class="path" href="/tutors/">
         <b>Planur for Tutors →</b>
         <span>Batches, register, class materials and fees in one place.</span>
-      </a>
-      <a class="path" href="/schools/">
-        <b>Planur for Schools →</b>
-        <span>Staff, students, timetable, attendance and fees for a whole school.</span>
       </a>
       <a class="path" href="/students/">
         <b>Planur for students →</b>
@@ -96,10 +94,11 @@
     </p>
 
     <p class="more">Looking for something specific? Try
-      <a href="/support/">support</a>, the
-      <a href="/privacy/">privacy notice</a> or the
-      <a href="/terms/">terms</a> — or just
-      <a href="/support/#main">ask us</a> and we'll point you at it.</p>
+      <a href="/tutors/pricing/">pricing</a>, the
+      <a href="/help/">getting started guide</a>,
+      <a href="/support/">support</a> or the
+      <a href="/privacy/">privacy notice</a>. Or just
+      <a href="/support/#main">ask us</a> and we'll point you to it.</p>
   </div>
 </div>
 
